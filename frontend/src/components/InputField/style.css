@@ -1,0 +1,22 @@
+.input-container{
+    display: flex;
+    flex-direction: column;
+    margin: 0px
+
+}
+
+.input-container label {
+    text-align: start;
+    color: #999999;
+    font-family: sans-serif;
+    font-size:smaller;
+    margin: 5px;
+}
+
+.input-container input {
+    height: 2.5rem;
+    padding-inline-start: 10px;
+    border-radius: 10px;
+    border: 2px solid #ADAFB3;
+}
+
