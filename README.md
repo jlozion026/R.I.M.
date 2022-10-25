@@ -32,16 +32,15 @@ yarn install
 
 Note: Make sure you installed all of the required dependencies
 
-* Frontend:
-  ```bash
-  cd frontend
-  yarn start
-  ```
+1.Frontend:
+```bash
+cd frontend
+yarn start
+```
 
-* Server:
-  ```bash
-  cd server
-  yarn watch
-  yarn dev
-  ```
-
+2.Server:
+```bash
+cd server
+yarn watch
+yarn dev
+```
