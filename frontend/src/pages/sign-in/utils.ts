@@ -7,7 +7,8 @@ export const LoginProps = [
         type: 'email',
         auto: true,
         id: 'email-input',
-        forinput: 'email-input'
+        forinput: 'email-input',
+        require:true
    },
 
 
@@ -20,6 +21,7 @@ export const LoginProps = [
         type: 'password',
         auto: false,
         id:'password-input',
-        forinput: 'password-input'
+        forinput: 'password-input',
+        require:true
    }
 ]
