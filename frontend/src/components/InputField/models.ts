@@ -8,5 +8,6 @@ export interface input {
     placeholder: string;
     forinput:string;
     id:string;
+    required: boolean;
     getData(e: React.ChangeEvent<HTMLInputElement>): any;
 }
