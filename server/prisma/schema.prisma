@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator typegraphql {
+  provider = "typegraphql-prisma"
+  output   = "../prisma/generated/type-graphql"
+}
+
+enum AccType {
+  NORMAL
+  ADMIN
+}
+
+model Account {
+  acc_id   String   @id @unique @default(cuid())
+  email    String   @unique @db.VarChar(180)
+  password String
+  acc_type AccType
+  reports  Report[]
+}
+
+model Report {
+  report_id   String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  published   Boolean
+  location    String   @db.VarChar()
+  description String   @db.VarChar(250)
+  reporter    Account? @relation(fields: [reporter_id], references: [acc_id])
+  reporter_id String?
+
+  city_porject CityProject?
+  incident     Incident?
+}
+
+model CityProject {
+  project_id       String   @id @default(cuid())
+  project_name     String   @db.VarChar(150)
+  contractor_name  String   @db.VarChar(150)
+  date_started     DateTime @db.Date
+  date_ended       DateTime @db.Date
+  source_fund      String   @db.VarChar(150)
+  project_ammount  Float    @db.DoublePrecision
+  contract_ammount Float    @db.DoublePrecision
+  report           Report   @relation(fields: [reports_id], references: [report_id])
+  reports_id       String   @unique
+}
+
+model Incident {
+  incident_id   String   @id @default(cuid())
+  incident_type String   @db.VarChar(110)
+  date_started  DateTime @db.Date
+  date_ended    DateTime @db.Date
+  report        Report   @relation(fields: [reports_id], references: [report_id])
+  reports_id    String   @unique
+}

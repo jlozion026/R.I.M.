@@ -1,0 +1,12 @@
+export { AggregateIncidentArgs } from "./AggregateIncidentArgs";
+export { CreateManyIncidentArgs } from "./CreateManyIncidentArgs";
+export { CreateOneIncidentArgs } from "./CreateOneIncidentArgs";
+export { DeleteManyIncidentArgs } from "./DeleteManyIncidentArgs";
+export { DeleteOneIncidentArgs } from "./DeleteOneIncidentArgs";
+export { FindFirstIncidentArgs } from "./FindFirstIncidentArgs";
+export { FindManyIncidentArgs } from "./FindManyIncidentArgs";
+export { FindUniqueIncidentArgs } from "./FindUniqueIncidentArgs";
+export { GroupByIncidentArgs } from "./GroupByIncidentArgs";
+export { UpdateManyIncidentArgs } from "./UpdateManyIncidentArgs";
+export { UpdateOneIncidentArgs } from "./UpdateOneIncidentArgs";
+export { UpsertOneIncidentArgs } from "./UpsertOneIncidentArgs";
