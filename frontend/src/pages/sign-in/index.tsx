@@ -7,6 +7,7 @@ import Button from "../../components/Button";
 import wave from "../../Assets/svg/wave.svg";
 import things from "../../Assets/svg/things.svg";
 import QCLOGO from "../../Assets/svg/QCLOGO.svg";
+import wave2 from "../../Assets/svg/wave2.svg";
 
 
 const SignIn: FC = () => {
@@ -61,6 +62,7 @@ const SignIn: FC = () => {
                                         getData = {getCred}
                                         required />
                                         <div className="validation">*Required</div>
+                                       
                                     </div>                          
                                 );})}
                                 
@@ -81,9 +83,14 @@ const SignIn: FC = () => {
                             </form>
                         </div>
                     </div>
+          
             <div className="wave-container"><img src={wave} alt="test" /></div>
+            <div className="mobile-container"><img src={wave2} alt="wave" /></div>
             <div className="svg-container">
-                <div className="header"><img src={QCLOGO} alt="logo" /></div>
+                <div className="header"><img src={QCLOGO} alt="logo" />
+                <label className="qcFont">Quezon City</label>
+                </div>
+                
                 <div className="svg"><img src={things} alt="hello" /></div>
           </div>
         </div>
