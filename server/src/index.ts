@@ -1,34 +1,40 @@
 import 'reflect-metadata';
-import { buildSchema } from "type-graphql";
+import { buildSchema, NonEmptyArray } from "type-graphql";
 import { PrismaClient } from '@prisma/client';
 import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
-
 import { ApolloServer } from 'apollo-server-express';
 import express, { Express } from 'express';
-
 import {
   FindManyAccountResolver,
   FindUniqueAccountResolver,
-  CreateOneAccountResolver
+  CreateOneAccountResolver,
+  FindFirstAccountResolver
 } from '../prisma/generated/type-graphql';
+import { AccountResolver } from './custom_resolver/account/AccountResolver';
+
 
 interface Context {
   prisma: PrismaClient;
 }
 
-const main = async () => {
 
+const main = async () => {
+  const resolver =  [
+    FindManyAccountResolver,
+    FindUniqueAccountResolver,
+    CreateOneAccountResolver,
+    AccountResolver,
+    FindFirstAccountResolver
+    ] as NonEmptyArray<Function>
+    resolver.concat(AccountResolver) as NonEmptyArray<Function>
   const schema = await buildSchema({
-    resolvers: [
-      FindManyAccountResolver,
-      FindUniqueAccountResolver,
-      CreateOneAccountResolver
-    ],
+    resolvers: resolver,
     emitSchemaFile: true,
     validate: false
   })
 
   const prisma = new PrismaClient();
+  
   await prisma.$connect();
 
   const server = new ApolloServer({
@@ -50,3 +56,5 @@ const main = async () => {
 main().catch((err) => {
   console.log(err);
 })
+
+
