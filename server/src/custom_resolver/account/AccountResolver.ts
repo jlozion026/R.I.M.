@@ -46,14 +46,14 @@ export class AccountResolver {
 
             /* Else if the account is not available, then throw this error */
             if (!account) {
-                throw new ApolloError("Invalid credentials")
+                throw new ApolloError("Invalid Credentials")
             }
             /* The isValid will decrypt the hashed password created by argon 2 and check it to the database 
             NOTE!: The <string | Buffer > typecast the args.where?.password?.equals*/
-            const isValid = argon2.verify(account.password, (<string | Buffer>args.where?.password?.equals)); 
+            const isValid = await argon2.verify(account.password, (<string | Buffer>args.where?.password?.equals)); 
             /* Else if the password is not equal, then throw this error */
             if(!isValid){
-                throw new ApolloError("Invalid credentials");
+                throw new ApolloError("Invalid Credentials");
             }
             
             return account;
