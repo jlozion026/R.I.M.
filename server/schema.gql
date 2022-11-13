@@ -193,6 +193,8 @@ input IncidentWhereUniqueInput {
 
 type Mutation {
   createOneAccount(data: AccountCreateInput!): Account!
+  login(cursor: AccountWhereUniqueInput, distinct: [AccountScalarFieldEnum!], orderBy: [AccountOrderByWithRelationInput!], skip: Int, take: Int, where: AccountWhereInput): Account!
+  register(data: AccountCreateInput!): Account!
 }
 
 input NestedBoolFilter {
@@ -260,6 +262,7 @@ input NestedStringNullableFilter {
 type Query {
   account(where: AccountWhereUniqueInput!): Account
   accounts(cursor: AccountWhereUniqueInput, distinct: [AccountScalarFieldEnum!], orderBy: [AccountOrderByWithRelationInput!], skip: Int, take: Int, where: AccountWhereInput): [Account!]!
+  findFirstAccount(cursor: AccountWhereUniqueInput, distinct: [AccountScalarFieldEnum!], orderBy: [AccountOrderByWithRelationInput!], skip: Int, take: Int, where: AccountWhereInput): Account
 }
 
 enum QueryMode {
