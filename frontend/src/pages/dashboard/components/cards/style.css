@@ -1,0 +1,50 @@
+
+.cardData{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.cardTitle{
+    font-size: 0.6em;
+    color:#6F6F6F;
+}
+.cValue{
+    font-size: 2em;
+    font-weight: bold;
+}
+.imgBG{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:30%;
+    height:30%;
+    border-radius: 15%;
+}
+.rcColor,.conColor,.acColor,.hazColor,.eColor{
+
+    height: 75%;
+    width: 20%;
+    border-radius: 50%;
+}
+.rcColor{
+    background-color: #FA976C;
+
+}
+.conColor{
+    background-color: #FFC845;
+}
+.acColor{
+    background-color: #DFE15B;
+}
+.hazColor{
+    background-color: #FFE683;
+}
+.eColor{
+    background-color: #89D4DC;
+}
+.cIcons{
+
+    width: 100%;
+    height: 100%;
+}
