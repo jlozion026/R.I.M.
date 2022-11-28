@@ -23,6 +23,24 @@ input AccountCreateInput {
   reports: ReportCreateNestedManyWithoutReporterInput
 }
 
+input AccountCreateNestedOneWithoutReportsInput {
+  connect: AccountWhereUniqueInput
+  connectOrCreate: AccountCreateOrConnectWithoutReportsInput
+  create: AccountCreateWithoutReportsInput
+}
+
+input AccountCreateOrConnectWithoutReportsInput {
+  create: AccountCreateWithoutReportsInput!
+  where: AccountWhereUniqueInput!
+}
+
+input AccountCreateWithoutReportsInput {
+  acc_id: String
+  acc_type: AccType!
+  email: String!
+  password: String!
+}
+
 input AccountOrderByWithRelationInput {
   acc_id: SortOrder
   acc_type: SortOrder
@@ -69,6 +87,30 @@ input BoolFilter {
   not: NestedBoolFilter
 }
 
+type CityProject {
+  contract_ammount: Float!
+  contractor_name: String!
+  date_ended: DateTime!
+  date_started: DateTime!
+  project_ammount: Float!
+  project_id: String!
+  project_name: String!
+  reports_id: String!
+  source_fund: String!
+}
+
+input CityProjectCreateInput {
+  contract_ammount: Float!
+  contractor_name: String!
+  date_ended: DateTime!
+  date_started: DateTime!
+  project_ammount: Float!
+  project_id: String
+  project_name: String!
+  report: ReportCreateNestedOneWithoutCity_porjectInput!
+  source_fund: String!
+}
+
 input CityProjectCreateNestedOneWithoutReportInput {
   connect: CityProjectWhereUniqueInput
   connectOrCreate: CityProjectCreateOrConnectWithoutReportInput
@@ -91,9 +133,34 @@ input CityProjectCreateWithoutReportInput {
   source_fund: String!
 }
 
+input CityProjectOrderByWithRelationInput {
+  contract_ammount: SortOrder
+  contractor_name: SortOrder
+  date_ended: SortOrder
+  date_started: SortOrder
+  project_ammount: SortOrder
+  project_id: SortOrder
+  project_name: SortOrder
+  report: ReportOrderByWithRelationInput
+  reports_id: SortOrder
+  source_fund: SortOrder
+}
+
 input CityProjectRelationFilter {
   is: CityProjectWhereInput
   isNot: CityProjectWhereInput
+}
+
+enum CityProjectScalarFieldEnum {
+  contract_ammount
+  contractor_name
+  date_ended
+  date_started
+  project_ammount
+  project_id
+  project_name
+  reports_id
+  source_fund
 }
 
 input CityProjectWhereInput {
@@ -151,6 +218,22 @@ input FloatFilter {
   notIn: [Float!]
 }
 
+type Incident {
+  date_ended: DateTime!
+  date_started: DateTime!
+  incident_id: String!
+  incident_type: String!
+  reports_id: String!
+}
+
+input IncidentCreateInput {
+  date_ended: DateTime!
+  date_started: DateTime!
+  incident_id: String
+  incident_type: String!
+  report: ReportCreateNestedOneWithoutIncidentInput!
+}
+
 input IncidentCreateNestedOneWithoutReportInput {
   connect: IncidentWhereUniqueInput
   connectOrCreate: IncidentCreateOrConnectWithoutReportInput
@@ -169,9 +252,26 @@ input IncidentCreateWithoutReportInput {
   incident_type: String!
 }
 
+input IncidentOrderByWithRelationInput {
+  date_ended: SortOrder
+  date_started: SortOrder
+  incident_id: SortOrder
+  incident_type: SortOrder
+  report: ReportOrderByWithRelationInput
+  reports_id: SortOrder
+}
+
 input IncidentRelationFilter {
   is: IncidentWhereInput
   isNot: IncidentWhereInput
+}
+
+enum IncidentScalarFieldEnum {
+  date_ended
+  date_started
+  incident_id
+  incident_type
+  reports_id
 }
 
 input IncidentWhereInput {
@@ -191,9 +291,15 @@ input IncidentWhereUniqueInput {
   reports_id: String
 }
 
+type LoginResponse {
+  accessToken: String!
+}
+
 type Mutation {
-  createOneAccount(data: AccountCreateInput!): Account!
-  login(cursor: AccountWhereUniqueInput, distinct: [AccountScalarFieldEnum!], orderBy: [AccountOrderByWithRelationInput!], skip: Int, take: Int, where: AccountWhereInput): Account!
+  createOneCityProject(data: CityProjectCreateInput!): CityProject!
+  createOneIncident(data: IncidentCreateInput!): Incident!
+  createOneReport(data: ReportCreateInput!): Report!
+  login(cursor: AccountWhereUniqueInput, distinct: [AccountScalarFieldEnum!], orderBy: [AccountOrderByWithRelationInput!], skip: Int, take: Int, where: AccountWhereInput): LoginResponse
   register(data: AccountCreateInput!): Account!
 }
 
@@ -260,14 +366,37 @@ input NestedStringNullableFilter {
 }
 
 type Query {
-  account(where: AccountWhereUniqueInput!): Account
   accounts(cursor: AccountWhereUniqueInput, distinct: [AccountScalarFieldEnum!], orderBy: [AccountOrderByWithRelationInput!], skip: Int, take: Int, where: AccountWhereInput): [Account!]!
-  findFirstAccount(cursor: AccountWhereUniqueInput, distinct: [AccountScalarFieldEnum!], orderBy: [AccountOrderByWithRelationInput!], skip: Int, take: Int, where: AccountWhereInput): Account
+  cityProjects(cursor: CityProjectWhereUniqueInput, distinct: [CityProjectScalarFieldEnum!], orderBy: [CityProjectOrderByWithRelationInput!], skip: Int, take: Int, where: CityProjectWhereInput): [CityProject!]!
+  incidents(cursor: IncidentWhereUniqueInput, distinct: [IncidentScalarFieldEnum!], orderBy: [IncidentOrderByWithRelationInput!], skip: Int, take: Int, where: IncidentWhereInput): [Incident!]!
+  reports(cursor: ReportWhereUniqueInput, distinct: [ReportScalarFieldEnum!], orderBy: [ReportOrderByWithRelationInput!], skip: Int, take: Int, where: ReportWhereInput): [Report!]!
 }
 
 enum QueryMode {
   default
   insensitive
+}
+
+type Report {
+  createdAt: DateTime!
+  description: String!
+  location: String!
+  published: Boolean!
+  report_id: String!
+  reporter_id: String
+  updatedAt: DateTime!
+}
+
+input ReportCreateInput {
+  city_porject: CityProjectCreateNestedOneWithoutReportInput
+  createdAt: DateTime
+  description: String!
+  incident: IncidentCreateNestedOneWithoutReportInput
+  location: String!
+  published: Boolean!
+  report_id: String
+  reporter: AccountCreateNestedOneWithoutReportsInput
+  updatedAt: DateTime
 }
 
 input ReportCreateManyReporterInput {
@@ -291,9 +420,53 @@ input ReportCreateNestedManyWithoutReporterInput {
   createMany: ReportCreateManyReporterInputEnvelope
 }
 
+input ReportCreateNestedOneWithoutCity_porjectInput {
+  connect: ReportWhereUniqueInput
+  connectOrCreate: ReportCreateOrConnectWithoutCity_porjectInput
+  create: ReportCreateWithoutCity_porjectInput
+}
+
+input ReportCreateNestedOneWithoutIncidentInput {
+  connect: ReportWhereUniqueInput
+  connectOrCreate: ReportCreateOrConnectWithoutIncidentInput
+  create: ReportCreateWithoutIncidentInput
+}
+
+input ReportCreateOrConnectWithoutCity_porjectInput {
+  create: ReportCreateWithoutCity_porjectInput!
+  where: ReportWhereUniqueInput!
+}
+
+input ReportCreateOrConnectWithoutIncidentInput {
+  create: ReportCreateWithoutIncidentInput!
+  where: ReportWhereUniqueInput!
+}
+
 input ReportCreateOrConnectWithoutReporterInput {
   create: ReportCreateWithoutReporterInput!
   where: ReportWhereUniqueInput!
+}
+
+input ReportCreateWithoutCity_porjectInput {
+  createdAt: DateTime
+  description: String!
+  incident: IncidentCreateNestedOneWithoutReportInput
+  location: String!
+  published: Boolean!
+  report_id: String
+  reporter: AccountCreateNestedOneWithoutReportsInput
+  updatedAt: DateTime
+}
+
+input ReportCreateWithoutIncidentInput {
+  city_porject: CityProjectCreateNestedOneWithoutReportInput
+  createdAt: DateTime
+  description: String!
+  location: String!
+  published: Boolean!
+  report_id: String
+  reporter: AccountCreateNestedOneWithoutReportsInput
+  updatedAt: DateTime
 }
 
 input ReportCreateWithoutReporterInput {
@@ -317,9 +490,32 @@ input ReportOrderByRelationAggregateInput {
   _count: SortOrder
 }
 
+input ReportOrderByWithRelationInput {
+  city_porject: CityProjectOrderByWithRelationInput
+  createdAt: SortOrder
+  description: SortOrder
+  incident: IncidentOrderByWithRelationInput
+  location: SortOrder
+  published: SortOrder
+  report_id: SortOrder
+  reporter: AccountOrderByWithRelationInput
+  reporter_id: SortOrder
+  updatedAt: SortOrder
+}
+
 input ReportRelationFilter {
   is: ReportWhereInput
   isNot: ReportWhereInput
+}
+
+enum ReportScalarFieldEnum {
+  createdAt
+  description
+  location
+  published
+  report_id
+  reporter_id
+  updatedAt
 }
 
 input ReportWhereInput {
