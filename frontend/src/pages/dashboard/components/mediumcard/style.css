@@ -1,0 +1,55 @@
+.mcltitle,.medCardTitle,.hcltitle{
+    font-size: .7em;
+    padding: 2em;
+    color: #777777;
+    font-weight: bold;
+    margin-bottom: 2em;
+
+}
+.cardFlex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.year{
+    font-size: .5em;
+    font-weight: bold;
+    color:#777777;
+    margin-left: 1.25em;
+    margin-bottom: 1em  ;
+}
+.mclPercent{
+    font-size: 1.5em;
+    font-weight: bold;
+   
+}
+.percentLevel{
+    font-size: 2.3em;
+    font-weight: bold;
+}
+.medCardData,.decreaseLevel{
+    display: flex;
+    justify-content: center;
+    justify-items:center ;
+}
+.pLeveltitle{
+    font-size: .5em;
+    color: #37B9F1;
+
+}
+.pLevel{
+    font-weight: bold;
+    color: #37B9F1;
+    font-size: 1em;
+}
+.decreaseLevel{
+    display: flex;  
+    flex-direction: column;
+    align-items: center;
+    padding-left: 1em;
+ 
+}
+.decreaseIcon{
+    display: flex;
+}
