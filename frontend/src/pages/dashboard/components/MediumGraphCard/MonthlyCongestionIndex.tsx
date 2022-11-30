@@ -3,9 +3,9 @@ import Card from "components/Card";
 import './style.css';
 import 'pages/dashboard/style.css';
 import { mediumCardItems } from "./models";
-import { mediumCardProps } from "../cards/utils";
+import {  mediumCardProps } from "../utils";
 
-const CardCategories3: FC<mediumCardItems> = ({ cardSize }) => {
+const MonthlyCongestionLvl: FC<mediumCardItems>=({cardSize})=> {
 
   return (
 
@@ -32,4 +32,4 @@ const CardCategories3: FC<mediumCardItems> = ({ cardSize }) => {
   )
 }
 
-export default CardCategories3;
+export default MonthlyCongestionLvl;

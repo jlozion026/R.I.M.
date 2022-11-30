@@ -1,7 +1,8 @@
 import React, {FC} from 'react';
 import './App.css'; 
 // import SignIn from './pages/sign-in';
- import Dashboard from './pages/dashboard';
+import Dashboard from './pages/dashboard';
+// import Logs from './pages/dashboard';
 
 
 const App:FC = () =>{
@@ -9,6 +10,7 @@ const App:FC = () =>{
     <>
       {/* <SignIn/> */}
       {Dashboard}
+      {/* {Logs}  */}
     </>
   );
 }
@@ -16,3 +18,4 @@ const App:FC = () =>{
 
 // export default App;
 export default Dashboard;
+// export default Logs

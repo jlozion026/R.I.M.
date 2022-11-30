@@ -3,7 +3,7 @@ import "./style.css";
 import { CardInterface } from "./models";
 
 
-const SIZES = ["card--large", "card--medium", "card--small","card--long","card--nav"]
+const SIZES = ["card--large", "card--medium", "card--small","card--long","card--nav","mobile--nav","mobile--small"]
 
 
 

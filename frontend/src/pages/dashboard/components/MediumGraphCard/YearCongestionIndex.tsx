@@ -5,7 +5,7 @@ import'../../../dashboard/style.css';
 import { mediumCardItems } from "./models";
 import arrowdown from '../../../../Assets/svg/arrowdown.svg'
 
-const CardCategories6: FC<mediumCardItems>=({cardSize})=> {
+const YearCongestionlvl: FC<mediumCardItems>=({cardSize})=> {
 
         return(
            
@@ -26,4 +26,4 @@ const CardCategories6: FC<mediumCardItems>=({cardSize})=> {
         )
     }
 
-export default CardCategories6;
+export default YearCongestionlvl;

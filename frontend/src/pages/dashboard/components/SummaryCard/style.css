@@ -1,6 +1,11 @@
-.longCardFlex{
+
+.LongCardFlex{
     display: flex;
-    padding: 1em;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
 }
 .wrapperlong{
     display: flex;
@@ -20,9 +25,9 @@
     font-weight: bold;
 }
 .ellipse {
-    width: .5em;
-    height: .5em;
-    border-radius: .25em;
+    width: .8em;
+    height: .8em;
+    border-radius: .4em;
     background-color: #3781F1;
 }
 .datacln{
@@ -39,4 +44,19 @@
 }
 .color3{
     background-color:#E3E3E8;
+}
+@media only screen and (max-width:500px){
+
+    .LongCardFlex{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+        height: 100%;
+    }
+    .percentageData{
+        font-size: 2.5em;
+        font-weight: bold;
+    }
 }
