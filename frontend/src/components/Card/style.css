@@ -1,3 +1,4 @@
+
 .cardBox{
     background-color: white;
     overflow: hidden;
@@ -10,30 +11,75 @@
 /*card sizes*/
 
 .card--large{
-    width: 535px;
+    width: 34rem;
     height: 380px;
     border-radius: 10px;
 
 }
 .card--medium{
-    width: 280px;
+    width: 17.5rem;
     height: 380px;
     border-radius: 10px;
 }
 .card--small{
-    width: 269px;
-    height: 65px;
+    width: 17rem;
+    height: 4.1em;
     border-radius: 10px;
 
 }
 .card--long{
-    width: 840px;
+    width: 53rem;
     height: 65px;
     border-radius: 10px;
 
 }
 .card--nav{
-    width: 65px;
+    width: 4rem;
     height: 270px;
     border-radius: 10px;
+}
+.mobile--small{
+    width: 17rem;
+    height: 4.1em;
+    border-radius: 10px;    
+}
+
+
+@media only screen and (max-width:500px){
+    .card--large,.card--medium{
+        width: 19rem;
+        height: 23rem;
+        border-radius: 20px;
+
+    
+    }
+   
+    .card--small{
+        width: 8.5rem;
+        height: 4rem;
+        border-radius: 12px;
+    
+    }
+    .card--long{
+        width: 19rem;
+        height: 23rem;
+        border-radius: 20px;
+    
+    }
+  
+    .mobile--nav{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top:91vh;
+        box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.2);
+    }
+    .mobile--small{
+        width:100%;
+        height: 4rem;
+        border-radius: 12px;
+    
+    }
+   
 }

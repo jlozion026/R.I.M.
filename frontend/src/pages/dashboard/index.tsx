@@ -1,58 +1,89 @@
 import React, { FC } from "react";
 import './style.css';
-import { CardProps } from "./components/cards/utils";
-import CardCategories from "./components/cards";
-import CardCategories2 from "./components/longcard";
-import CardCategories3 from "./components/mediumcard";
-import CardCategories4 from "../../components/Navbar";
-import CardCategories5 from "./components/largecard";
-import CardCategories6 from "./components/mediumcard/index1";
+import { CardProps } from "./components/utils";
+import { EventProp } from "./components/utils";
+import CardCategories from "./components/CongestionCards";
+import Summary from "./components/SummaryCard";
+import MonthlyCongestionLvl from "./components/MediumGraphCard/MonthlyCongestionIndex";
+import NavBar from "components/Navbar";
+import HourlyCongestionLvl from "./components/LargeGraphCard";
+import YearCongestionlvl from "./components/MediumGraphCard/YearCongestionIndex";
+
 
 const Dashboard: FC = () => {
-  return (
-    <div className="mainGrid">
-      <div className="navContainer">
-        <div className="navCard">
-          <CardCategories4 cardSize="card--nav" />
-        </div>
+    return(
+        <div className= "mainGrid">
+            <div className="navContainer">
+                 <div className="navCard">
+                    <NavBar cardSize="card--nav"/>
+                </div>
+                 <div className="mob-nav">
 
-      </div>
-      <div className="cardContainer">
-        <div className="cards">
+                    <NavBar cardSize="mobile--nav"/>
+                </div>
 
-          {CardProps.map((val, key) => {
-            return (
-              <div className="wrapper" key={key}>
-                <CardCategories
-                  cardSize={val.cardSize}
-                  cardTitle={val.cardTitle}
-                  cardIcon={val.cardIcon}
-                  cardValue={val.cardValue}
-                  imgColor={val.imgColor}
-                />
-              </div>
-            );
-          })}
-          <div className="longCard">
-            <CardCategories2 cardSize="card--long" />
-          </div>
+
+            </div>
+            <div className="cardContainer"> 
+            <div className="cardCon">
+                <div className="cards">
+                    
+                    {CardProps.map((val,key)=> {
+                    return(
+                        <div className="wrapper" key={key}>
+                             <CardCategories
+                             cardSize={val.cardSize}
+                             cardTitle={val.cardTitle}
+                             cardIcon={val.cardIcon}
+                             cardValue={val.cardValue}
+                             imgColor={val.imgColor}
+                             />
+                        </div>
+                         );
+
+                     })}
+                     {EventProp.map((val,key)=> {
+                    return(
+                        <div className="event" key={key}>
+                             <CardCategories
+                             cardSize={val.cardSize}
+                             cardTitle={val.cardTitle}
+                             cardIcon={val.cardIcon}
+                             cardValue={val.cardValue}
+                             imgColor={val.imgColor}
+                             />
+                        </div>
+                         );
+
+                     })}
+                     <div className="longCard">
+                     <Summary cardSize="card--long"/>
+                     </div>  
+                     
+            </div>
+            </div>
+            </div>
+            <div className="graphContainer">
+                <div className="graphsWrap">
+
+                    <div className="medCard">
+                    <YearCongestionlvl cardSize="card--medium"/>
+                    </div>
+                     <div className="largeCard">
+                    <HourlyCongestionLvl cardSize="card--large"/>
+                    </div>
+                   <div className="medCard">
+                    <MonthlyCongestionLvl cardSize="card--medium"/>
+                    </div>
+                    <div className="mobileLongCard">
+                     <Summary cardSize="card--long"/>
+                     </div>  
+                </div>
+            
+            </div>
 
         </div>
-      </div>
-      <div className="graphContainer">
-        <div className="medCard">
-          <CardCategories6 cardSize="card--medium" />
-        </div>
-        <div className="largeCard">
-          <CardCategories5 cardSize="card--large" />
-        </div>
-        <div className="medCard">
-          <CardCategories3 cardSize="card--medium" />
-        </div>
-
-      </div>
-
-    </div>
-  )
+        
+    )
 }
 export default Dashboard;
