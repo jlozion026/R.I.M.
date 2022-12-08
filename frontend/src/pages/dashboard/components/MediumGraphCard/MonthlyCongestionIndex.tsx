@@ -1,9 +1,12 @@
 import { FC } from "react";
-import Card from "components/Card";
-import './style.css';
-import 'pages/dashboard/style.css';
+
+import Card from "@/components/Card";
+
 import { mediumCardItems } from "./models";
 import {  mediumCardProps } from "../utils";
+
+import './style.css';
+import '@/pages/dashboard/style.css';
 
 const MonthlyCongestionLvl: FC<mediumCardItems>=({cardSize})=> {
 

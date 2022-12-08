@@ -15,14 +15,3 @@ opacity: .7;
 a:active{
     opacity: 1;
 }
-@media only screen and (max-width:600px){
-  
-    .vectorContainer{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        padding:1em;
-    }
-
-
-}
