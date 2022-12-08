@@ -1,5 +1,5 @@
 import {FC} from "react";
-import Card from "components/Card";
+import Card from "@/components/Card";
 import './style.css';
 import { cardItems } from "./models";
 

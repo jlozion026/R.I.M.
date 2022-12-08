@@ -1,14 +1,21 @@
 import React, { FC, ChangeEvent, useState } from "react";
-import './style.css';
+
+import { useLoginMutation, LoginMutation, LoginMutationVariables} from '@/generated/graphql'
+
+import graphqlRequestClient from '@/lib/client/graphqlRequestClient';
+
+import InputField from "@/components/InputField";
+import Button from "@/components/Button";
+
+import QCLOGO from "@/Assets/svg/QCLOGO.svg";
+import wave from "@/Assets/svg/wave.svg";
+import things from "@/Assets/svg/things.svg";
+import wave2 from "@/Assets/svg/wave2.svg";
+
 import { credentials } from "./models";
 import { LoginProps } from "./utils";
-import InputField from "../../components/InputField";
-import Button from "../../components/Button";
-import wave from "../../Assets/svg/wave.svg";
-import things from "../../Assets/svg/things.svg";
-import QCLOGO from "../../Assets/svg/QCLOGO.svg";
-import wave2 from "../../Assets/svg/wave2.svg";
 
+import './style.css';
 
 const SignIn: FC = () => {
 
@@ -25,22 +32,26 @@ const SignIn: FC = () => {
     })
   }
 
-
-  const valicred = {
-    email: "test@gmail.com",
-    password: "testpass123"
-  }
-
+  
+  const {mutate} = useLoginMutation<Error>(graphqlRequestClient, {
+      onSuccess:(data: LoginMutation) =>{
+          return console.log('data: ', data.login);
+      },
+      onError:(error:Error) =>{
+          const res: string[] = error.message.split(":",1);
+          setErrMsg(res[0]);
+        }
+    })
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (data.email === valicred.email && data.password === valicred.password) {
-      setErrMsg("");
-      console.log(data);
-    } else {
-      setErrMsg("*Wrong Email or Password!");
-    }
 
+    console.log(data.email + "\n" + data.password);
+
+    mutate({where: {
+      email:{equals: data.email},
+      password:{equals: data.password}
+    }})
   }
 
   return (

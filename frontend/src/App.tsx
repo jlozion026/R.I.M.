@@ -1,21 +1,22 @@
-import React, {FC} from 'react';
-import './App.css'; 
-// import SignIn from './pages/sign-in';
-import Dashboard from './pages/dashboard';
-// import Logs from './pages/dashboard';
+import { FC } from 'react';
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-const App:FC = () =>{
+import SignIn from '@/pages/sign-in';
+//import Dashboard from '@/pages/dashboard';
+//import Test from 'pages/test';
+
+import './App.css';
+
+const queryClient = new QueryClient();
+
+const App: FC = () => {
   return (
-    <>
-      {/* <SignIn/> */}
-      {Dashboard}
-      {/* {Logs}  */}
-    </>
+    <QueryClientProvider client={queryClient}>
+      <SignIn />
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
-
-
-// export default App;
-export default Dashboard;
-// export default Logs
+export default App;

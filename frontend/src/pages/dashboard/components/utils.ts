@@ -1,8 +1,8 @@
-import Accident from "Assets/svg/Accident.svg";
-import Event from "Assets/svg/Event.svg";
-import Hazzard from "Assets/svg/Hazzard.svg";
-import roadclosure from "Assets/svg/roadclosure.svg";
-import Constructions from "Assets/svg/Constructions.svg";
+import Accident from "@/Assets/svg/Accident.svg";
+import Event from "@/Assets/svg/Event.svg";
+import Hazzard from "@/Assets/svg/Hazzard.svg";
+import roadclosure from "@/Assets/svg/roadclosure.svg";
+import Constructions from "@/Assets/svg/Constructions.svg";
 
 
 
@@ -47,7 +47,7 @@ export const EventProp =[
         cardIcon:Event,
         cardTitle:"Events",
         cardValue:0,
-        cardSize:"mobile--small",
+        cardSize:"card--small",
         imgColor:"eColor",
         className:"event"
 

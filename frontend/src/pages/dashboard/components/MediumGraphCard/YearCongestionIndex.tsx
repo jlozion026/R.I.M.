@@ -1,29 +1,30 @@
-import React,{FC} from "react";
-import Card from "../../../../components/Card";
-import './style.css';
-import'../../../dashboard/style.css';
+import { FC } from "react";
+
+import Card from "@/components/Card";
+
 import { mediumCardItems } from "./models";
-import arrowdown from '../../../../Assets/svg/arrowdown.svg'
+import arrowdown from '@/Assets/svg/arrowdown.svg'
 
-const YearCongestionlvl: FC<mediumCardItems>=({cardSize})=> {
+import './style.css';
+import '@/pages/dashboard/style.css';
 
-        return(
-           
-          <Card cardSize={cardSize}>
-            <p className="medCardTitle">CONGESTION LEVEL 2021</p>
-            <div className="medCardData">
-              <p className="percentLevel">43%</p>
-              <div className="decreaseLevel">
-                <div className="decreaseIcon">
-                  <img src={arrowdown} alt="arrow"/>
-                  <p className="pLevel">10%</p>
-                </div>
-              <p className="pLeveltitle">Decrease since 2020</p>
-              </div>
-            </div>
-          </Card>
+const YearCongestionlvl: FC<mediumCardItems> = ({ cardSize }) => {
+  return (
+    <Card cardSize={cardSize}>
+      <p className="medCardTitle">CONGESTION LEVEL 2021</p>
+      <div className="medCardData">
+        <p className="percentLevel">43%</p>
+        <div className="decreaseLevel">
+          <div className="decreaseIcon">
+            <img src={arrowdown} alt="arrow" />
+            <p className="pLevel">10%</p>
+          </div>
+          <p className="pLeveltitle">Decrease since 2020</p>
+        </div>
+      </div>
+    </Card>
 
-        )
-    }
+  )
+}
 
 export default YearCongestionlvl;
