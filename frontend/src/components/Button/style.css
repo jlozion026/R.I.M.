@@ -1,50 +1,93 @@
 :root {
-    --primary: #0C85FF;
-    --secondary: #37B9F1;
-    --white: #ffffff;
+  --primary: #0c85ff;
+  --secondary: #37b9f1;
+  --white: #ffffff;
+}
+
+button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-img {
+  height: 20%;
+  width: 20%;
+  margin-right: 10px;
 }
 
 .btn {
-    font-family: "Roboto", sans-serif;
-    font-weight: 500;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-
 .btn:hover {
-    transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 /* Button Colors and Styles */
 
 .btn--primary {
-    background-color: var(--primary);
-    color: var(--white);
-    border: none;
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
 }
 
 .btn--secondary {
-    background-color: var(--secondary);
-    color: var(--white);
-    border: none;
+  background-color: var(--secondary);
+  color: var(--white);
+  border: none;
 }
 
+.btn--categories {
+  background-color: var(--white);
+  color: var(--grey);
+  border: none;
+}
+
+.btn--selector {
+  background-color: var(--white);
+  color: var(--white);
+  border: none;
+}
 
 /* Button Sizes */
 
-.btn--large{
-    padding: 20px 40px;
-    font-size: 24px;
+.btn--large {
+  padding: 20px 40px;
+  font-size: 24px;
 }
 
 .btn--medium {
-    padding: 10px;
-    font-size: 18px;
+  padding: 10px;
+  font-size: 18px;
 }
 
-.btn--small{
-    padding: 8px;
-    font-size: 12px;
+.btn--small {
+  padding: 5px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.for-icons {
+  margin: 0;
+  padding: 0;
+}
+
+.btn--next {
+  padding-left: 45px;
+  padding-right: 45px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.for-icons img {
+  width: 0%;
+  margin-right: 0px;
 }
