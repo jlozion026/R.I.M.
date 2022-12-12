@@ -1,6 +1,6 @@
-import React, { FC, ChangeEvent, useState } from "react";
+import React, { FC, ChangeEvent, useState, useContext } from "react";
 
-import { useLoginMutation, LoginMutation, LoginMutationVariables } from '@/generated/graphql'
+import { useLoginMutation, LoginMutation } from '@/generated/graphql'
 
 import graphqlRequestClient from '@/lib/client/graphqlRequestClient';
 
@@ -16,12 +16,14 @@ import wave2 from "@/Assets/svg/wave2.svg";
 import { credentials } from "./models";
 import { LoginProps } from "./utils";
 
-import { setToken } from '@/lib//auth'
 
 import './style.css';
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { AuthContext } from "@/setup/context-manager/authContext";
+import { AuthContextType } from "@/setup/context-manager/model";
 
 const SignIn: FC = () => {
+  const {auth, setAccToken} = useContext(AuthContext) as AuthContextType
 
   const [errMsg, setErrMsg] = useState("");
   const [signInData, setData] = useState<credentials>({
@@ -34,9 +36,7 @@ const SignIn: FC = () => {
     onSuccess: (data: LoginMutation) => {
       console.table(data.login);
 
-      if(data && data.login){
-          setToken(data.login?.accessToken);
-      }
+      if (data.login?.accessToken) setAccToken();
     },
 
     onError: (error: Error) => {
@@ -66,12 +66,13 @@ const SignIn: FC = () => {
     })
   }
 
+  if(auth){ return <Navigate to="/" replace /> }
+
   return (
     <div className="main-grid">
       <div className="login-container">
         <div className="wrap-container">
           <div className="title"><h1>LOGIN</h1></div>
-          <Link to="/dashboard">main</Link>
           <form className="login" onSubmit={e => onSubmit(e)}>
             {LoginProps.map((val, key) => {
               return (

@@ -1,7 +1,13 @@
 import { FC } from "react"
+import Navbar from '@/components/Navbar'
 
 const Main:FC = () =>{
-  return <div>main page</div>
+  return (
+    <Navbar cardSize="card--nav"/>
+    
+    
+
+  );
 
 }
 
