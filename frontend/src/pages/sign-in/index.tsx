@@ -1,11 +1,12 @@
 import React, { FC, ChangeEvent, useState } from "react";
 
-import { useLoginMutation, LoginMutation, LoginMutationVariables} from '@/generated/graphql'
+import { useLoginMutation, LoginMutation, LoginMutationVariables } from '@/generated/graphql'
 
 import graphqlRequestClient from '@/lib/client/graphqlRequestClient';
 
 import InputField from "@/components/InputField";
 import Button from "@/components/Button";
+import { btnType } from "@/components/Button/models"
 
 import QCLOGO from "@/Assets/svg/QCLOGO.svg";
 import wave from "@/Assets/svg/wave.svg";
@@ -15,43 +16,54 @@ import wave2 from "@/Assets/svg/wave2.svg";
 import { credentials } from "./models";
 import { LoginProps } from "./utils";
 
+import { setToken } from '@/lib//auth'
+
 import './style.css';
+import { Link } from "react-router-dom";
 
 const SignIn: FC = () => {
 
   const [errMsg, setErrMsg] = useState("");
-  const [data, setData] = useState<credentials>({
+  const [signInData, setData] = useState<credentials>({
     email: "",
     password: "",
   })
 
-  const getCred = (val: ChangeEvent<HTMLInputElement>) => {
-    setData({
-      ...data,
-      [val.target.name]: val.target.value
-    })
-  }
+  const { mutate } = useLoginMutation<Error>(graphqlRequestClient, {
 
-  
-  const {mutate} = useLoginMutation<Error>(graphqlRequestClient, {
-      onSuccess:(data: LoginMutation) =>{
-          return console.log('data: ', data.login);
-      },
-      onError:(error:Error) =>{
-          const res: string[] = error.message.split(":",1);
-          setErrMsg(res[0]);
-        }
-    })
+    onSuccess: (data: LoginMutation) => {
+      console.table(data.login);
+
+      if(data && data.login){
+          setToken(data.login?.accessToken);
+      }
+    },
+
+    onError: (error: Error) => {
+      const res: string[] = error.message.split(":", 1);
+      setErrMsg(res[0]);
+    },
+    cacheTime: 5000
+  })
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(data.email + "\n" + data.password);
+    //console.log(signInData.email + "\n" + signInData.password);
 
-    mutate({where: {
-      email:{equals: data.email},
-      password:{equals: data.password}
-    }})
+    mutate({
+      where: {
+        email: { equals: signInData.email },
+        password: { equals: signInData.password }
+      }
+    })
+  }
+
+  const getCred = (val: ChangeEvent<HTMLInputElement>) => {
+    setData({
+      ...signInData,
+      [val.target.name]: val.target.value
+    })
   }
 
   return (
@@ -59,6 +71,7 @@ const SignIn: FC = () => {
       <div className="login-container">
         <div className="wrap-container">
           <div className="title"><h1>LOGIN</h1></div>
+          <Link to="/dashboard">main</Link>
           <form className="login" onSubmit={e => onSubmit(e)}>
             {LoginProps.map((val, key) => {
               return (
@@ -74,7 +87,6 @@ const SignIn: FC = () => {
                     getData={getCred}
                     required />
                   <div className="validation">*Required</div>
-
                 </div>
               );
             })}
@@ -87,11 +99,14 @@ const SignIn: FC = () => {
             </div>
             <div className="btn-container">
               <Button
-                type={"submit"}
+                svg=""
+                icon=""
+                type={btnType.Submit}
                 buttonStyle={"btn--primary"}
                 onClick={onSubmit}
-                buttonSize={"btn--medium"}
-                children={"Login"} ></Button>
+                buttonSize={"btn--medium"} >
+                SignIn
+              </Button>
             </div>
           </form>
         </div>
