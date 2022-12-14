@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import "./style.css";
 import { ButtonProps } from "./models";
 
@@ -26,23 +26,20 @@ const Button: FC<ButtonProps> = ({
   buttonStyle,
   buttonSize,
 }) => {
-  const checkButtonStyle = STYLES.includes(buttonStyle)
-    ? buttonStyle
-    : STYLES[0];
+
+  const checkButtonStyle = STYLES.includes(buttonStyle) ? buttonStyle : STYLES[0];
 
   const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
 
   return (
-    <button
-      className={`btn ${checkButtonStyle} ${checkButtonSize}`}
-      onClick={onClick}
-      type={"button"}
-    >
+    <button className={`btn ${checkButtonStyle} ${checkButtonSize}`}
+      onClick={onClick} type={type}>
       {svg ? <img src={svg} alt="icon" className="btn-img" /> : ""}
       {icon}
       {children}
     </button>
   );
-};
+}
+
 
 export default Button;

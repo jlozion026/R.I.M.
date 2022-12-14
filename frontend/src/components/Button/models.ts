@@ -1,9 +1,16 @@
+export enum btnType {
+  Button = "button",
+  Submit = "submit",
+  Reset = "reset"
+
+}
+
 export interface ButtonProps {
   icon: string;
-  svg: string;
+  svg: string
   children: string;
-  type: string;
+  type: btnType;
   buttonStyle: string;
   buttonSize: string;
-  onClick(e: any): any;
+  onClick(e: any): void;
 }

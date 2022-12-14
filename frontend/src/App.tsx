@@ -3,18 +3,17 @@ import { FC } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-import SignIn from '@/pages/sign-in';
-//import Dashboard from '@/pages/dashboard';
-//import Test from 'pages/test';
+import { Views } from './setup/routes-manager';
 
 import './App.css';
 
 const queryClient = new QueryClient();
 
 const App: FC = () => {
+
   return (
     <QueryClientProvider client={queryClient}>
-      <SignIn />
+      <Views />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
