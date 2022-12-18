@@ -1,12 +1,12 @@
 import React, { FC, ChangeEvent, useState, useContext } from "react";
 
-import { useLoginMutation, LoginMutation } from '@/generated/graphql'
+import { useLoginMutation, LoginMutation } from "@/generated/graphql";
 
-import graphqlRequestClient from '@/lib/client/graphqlRequestClient';
+import graphqlRequestClient from "@/lib/client/graphqlRequestClient";
 
 import InputField from "@/components/InputField";
 import Button from "@/components/Button";
-import { btnType } from "@/components/Button/models"
+import { btnType } from "@/components/Button/models";
 
 import QCLOGO from "@/Assets/svg/QCLOGO.svg";
 import wave from "@/Assets/svg/wave.svg";
@@ -16,23 +16,21 @@ import wave2 from "@/Assets/svg/wave2.svg";
 import { credentials } from "./models";
 import { LoginProps } from "./utils";
 
-
-import './style.css';
+import "./style.css";
 import { Link, Navigate } from "react-router-dom";
 import { AuthContext } from "@/setup/context-manager/authContext";
 import { AuthContextType } from "@/setup/context-manager/model";
 
 const SignIn: FC = () => {
-  const {auth, setAccToken} = useContext(AuthContext) as AuthContextType
+  const { auth, setAccToken } = useContext(AuthContext) as AuthContextType;
 
   const [errMsg, setErrMsg] = useState("");
   const [signInData, setData] = useState<credentials>({
     email: "",
     password: "",
-  })
+  });
 
   const { mutate } = useLoginMutation<Error>(graphqlRequestClient, {
-
     onSuccess: (data: LoginMutation) => {
       console.table(data.login);
 
@@ -43,8 +41,8 @@ const SignIn: FC = () => {
       const res: string[] = error.message.split(":", 1);
       setErrMsg(res[0]);
     },
-    cacheTime: 5000
-  })
+    cacheTime: 5000,
+  });
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -54,26 +52,30 @@ const SignIn: FC = () => {
     mutate({
       where: {
         email: { equals: signInData.email },
-        password: { equals: signInData.password }
-      }
-    })
-  }
+        password: { equals: signInData.password },
+      },
+    });
+  };
 
   const getCred = (val: ChangeEvent<HTMLInputElement>) => {
     setData({
       ...signInData,
-      [val.target.name]: val.target.value
-    })
-  }
+      [val.target.name]: val.target.value,
+    });
+  };
 
-  if(auth){ return <Navigate to="/" replace /> }
+  if (auth) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <div className="main-grid">
       <div className="login-container">
         <div className="wrap-container">
-          <div className="title"><h1>LOGIN</h1></div>
-          <form className="login" onSubmit={e => onSubmit(e)}>
+          <div className="title">
+            <h1>LOGIN</h1>
+          </div>
+          <form className="login" onSubmit={(e) => onSubmit(e)}>
             {LoginProps.map((val, key) => {
               return (
                 <div className="wrapper" key={key}>
@@ -86,7 +88,9 @@ const SignIn: FC = () => {
                     name={val.name}
                     auto={val.auto}
                     getData={getCred}
-                    required />
+                    required
+                    readonly={false}
+                  />
                   <div className="validation">*Required</div>
                 </div>
               );
@@ -105,7 +109,8 @@ const SignIn: FC = () => {
                 type={btnType.Submit}
                 buttonStyle={"btn--primary"}
                 onClick={onSubmit}
-                buttonSize={"btn--medium"} >
+                buttonSize={"btn--medium"}
+              >
                 SignIn
               </Button>
             </div>
@@ -113,17 +118,24 @@ const SignIn: FC = () => {
         </div>
       </div>
 
-      <div className="wave-container"><img src={wave} alt="test" /></div>
-      <div className="mobile-container"><img src={wave2} alt="wave" /></div>
+      <div className="wave-container">
+        <img src={wave} alt="test" />
+      </div>
+      <div className="mobile-container">
+        <img src={wave2} alt="wave" />
+      </div>
       <div className="svg-container">
-        <div className="header"><img src={QCLOGO} alt="logo" />
+        <div className="header">
+          <img src={QCLOGO} alt="logo" />
           <label className="qcFont">Quezon City</label>
         </div>
 
-        <div className="svg"><img src={things} alt="hello" /></div>
+        <div className="svg">
+          <img src={things} alt="hello" />
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default SignIn;

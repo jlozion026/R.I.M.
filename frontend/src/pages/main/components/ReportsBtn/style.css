@@ -1,0 +1,11 @@
+.btn-reports-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 70%;
+  top: 3%;
+  right: 90%;
+  left: 28%;
+  gap: 10px;
+}

@@ -1,15 +1,16 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
+body {
   min-height: 100vh;
   min-width: 100vw;
 }
 
-#root{
+#root {
   min-height: 100vh;
   min-width: 100vw;
+  overflow: hidden;
 }

@@ -1,0 +1,54 @@
+.contractor-container {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    padding: 10px;
+    justify-content: space-between;
+    gap: 5px;
+    margin-bottom: 10%;
+    font-family: sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+
+.finance-container{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    padding: 10px;
+    justify-content: space-between;
+    gap: 5px;
+    font-family: sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.programAmount-container{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    padding: 10px;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.contractorAmount-container{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    padding: 10px;
+    justify-content: space-between;
+    gap: 5px;
+    margin-bottom: 5%;
+}
+
+.btn-container-submit{ 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 0px;
+    gap: 10px;
+    width: 70%;
+    margin-bottom: 5%;
+}
