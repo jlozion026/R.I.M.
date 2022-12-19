@@ -1,0 +1,95 @@
+.location-container {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  padding: 10px;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.date-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1.2em;
+}
+
+.calendar-icon {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1.2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendarElement {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  top: 100%;
+  border: 1px solid #205eff;
+  z-index: 10;
+}
+
+.date-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  padding: 0.5rem;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.autocomplete-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.date-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .wrapper {
+  display: flex;
+  flex-direction: column;
+} */
+
+input {
+  height: 2.5em;
+  padding-inline-start: 10px;
+  border-radius: 10px;
+  border: 2px solid #adafb3;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  padding: 10px;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+textarea {
+  border-radius: 10px;
+  border: 2px solid #205eff;
+  padding-inline-start: 10px;
+  padding-top: 10px;
+}
+
+.description textarea {
+  resize: none;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0px;
+  gap: 10px;
+  width: 70%;
+}

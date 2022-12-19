@@ -1,39 +1,41 @@
-.cardBox{
-    background-color: white;
-    overflow: hidden;
-    box-shadow: 0px 0px 4px -5px;
-    transition: 0.3s;
-    animation: ease-in;
+.cardBox {
+  background-color: #ffffff;
+  overflow: hidden;
+  box-shadow: 0px 0px 4px -5px;
+  transition: 0.3s;
+  animation: ease-in;
 }
-
 
 /*card sizes*/
 
-.card--large{
-    width: 535px;
-    height: 380px;
-    border-radius: 10px;
+.card--large {
+  width: 535px;
+  height: 380px;
+  border-radius: 10px;
+}
+.card--medium {
+  width: 280px;
+  height: 380px;
+  border-radius: 10px;
+}
+.card--small {
+  width: 269px;
+  height: 65px;
+  border-radius: 10px;
+}
+.card--long {
+  width: 840px;
+  height: 65px;
+  border-radius: 10px;
+}
+.card--nav {
+  width: 65px;
+  height: 270px;
+  border-radius: 10px;
+}
 
-}
-.card--medium{
-    width: 280px;
-    height: 380px;
-    border-radius: 10px;
-}
-.card--small{
-    width: 269px;
-    height: 65px;
-    border-radius: 10px;
-
-}
-.card--long{
-    width: 840px;
-    height: 65px;
-    border-radius: 10px;
-
-}
-.card--nav{
-    width: 65px;
-    height: 270px;
-    border-radius: 10px;
+.card--main-nav {
+  width: 60%;
+  height: 100%;
+  border-radius: 10px;
 }

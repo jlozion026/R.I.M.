@@ -1,0 +1,70 @@
+.progress-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 150px;
+  margin: 0 auto;
+}
+
+.step {
+  text-align: center;
+}
+
+.circle {
+  border: 1px solid #d1d3d6;
+  height: 24px;
+  width: 24px;
+  border-radius: 100%;
+  color: #205eff;
+  font-family: "Poppins";
+  font-weight: 700;
+  font-size: 15px;
+  background: #d1d3d6;
+  display: inline-block;
+  position: relative;
+  transition: background-color 500ms;
+  line-height: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.selected.circle {
+  color: white;
+  background-color: #205eff;
+  border: 1px solid #205eff;
+  transition: all 1s ease-out;
+}
+
+.completed.circle {
+  color: white;
+  background-color: #205eff;
+  
+}
+
+.uncomplete.circle::after {
+  content: "";
+  position: absolute;
+  right: -48px;
+  bottom: 10px;
+  height: 2px;
+  width: 45px;
+  background-color: #d1d3d6;
+}
+
+.completed.circle::after {
+  content: "";
+  position: absolute;
+  right: -48px;
+  bottom: 10px;
+  height: 2px;
+  width: 45px;
+  background-color: #205eff;
+  transition: all 1s ease-out;
+}
+
+.circle-text {
+  margin-top: 10px;
+  color: #8e939a;
+  font-family: sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+}
