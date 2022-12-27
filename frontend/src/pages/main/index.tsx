@@ -1,4 +1,4 @@
-import { FC, useCallback, useRef, useState } from "react";
+import { FC, memo, useCallback, useRef, useState } from "react";
 
 import { GoogleMap, useLoadScript } from "@react-google-maps/api";
 
@@ -78,4 +78,4 @@ const Main: FC = () => {
   );
 };
 
-export default Main;
+export default memo(Main);

@@ -1,11 +1,10 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 
 import { IForm2 } from "../../models";
 
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 
-import "./style.css";
 import Page1 from "./components/page1";
 import Page2 from "./components/Page2";
 
@@ -22,11 +21,19 @@ const Form2: FC<IForm2> = ({
   StartDate,
   EndDate,
   page,
+  SetFrom,
+  SetTo,
+  SetToCoord,
+  SetFromCoord
 }) => {
   return (
     <>
       {!page ? (
         <Page1
+          SetTo={SetTo}
+          SetFrom={SetFrom}
+          SetToCoord={SetToCoord}
+          SetFromCoord={SetFromCoord}
           GetFormData={GetFormData}
           HandleStartDate={HandleStartDate}
           HandleEndDate={HandleEndDate}

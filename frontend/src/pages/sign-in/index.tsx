@@ -17,7 +17,7 @@ import { credentials } from "./models";
 import { LoginProps } from "./utils";
 
 import "./style.css";
-import { Link, Navigate } from "react-router-dom";
+import {  Navigate } from "react-router-dom";
 import { AuthContext } from "@/setup/context-manager/authContext";
 import { AuthContextType } from "@/setup/context-manager/model";
 

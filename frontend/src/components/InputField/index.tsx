@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { input } from "./models";
 import "./style.css";
 
@@ -12,6 +12,7 @@ const InputField: FC<input> = ({
   name,
   forinput,
   required,
+  value,
   getData,
 }) => {
   return (
@@ -23,6 +24,7 @@ const InputField: FC<input> = ({
         type={type}
         placeholder={placeholder}
         autoFocus={auto}
+        value={value}
         name={name}
         required={required}
         onChange={getData}
