@@ -1,8 +1,12 @@
+import { FC } from "react";
+
 import Button from "@/components/Button";
 import InputField from "@/components/InputField";
-import { FC } from "react";
+
 import { Ipage2 } from "../../../../models";
+
 import "./style.css";
+import {btnType} from '@/components/Button/models'
 
 const Page2: FC<Ipage2> = ({ GetFormData, Submit }) => {
   return (
@@ -71,7 +75,7 @@ const Page2: FC<Ipage2> = ({ GetFormData, Submit }) => {
         <Button
           icon={""}
           svg={""}
-          type={"submit"}
+          type={btnType.Submit}
           buttonStyle={"btn--secondary"}
           onClick={Submit}
           buttonSize={"btn--next"}

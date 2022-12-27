@@ -1,12 +1,17 @@
+import { FC } from "react";
+
 import Button from "@/components/Button";
 import InputField from "@/components/InputField";
-import { Autocomplete } from "@react-google-maps/api";
-import { FC } from "react";
+import Search from "@/pages/main/components/Search";
+
 import { Calendar } from "react-date-range";
+
 import { FaCalendarAlt } from "react-icons/fa";
+
 import { IPage1 } from "../../../../models";
 
 import "./style.css";
+import {btnType} from "@/components/Button/models"
 
 const Page1: FC<IPage1> = ({
   GetFormData,
@@ -19,39 +24,29 @@ const Page1: FC<IPage1> = ({
   CalendarStart,
   EndDate,
   CalendarEnd,
+  SetFrom,
+  SetTo,
+  SetToCoord,
+  SetFromCoord
 }) => {
   return (
     <>
       <div className="location-container">
-        <Autocomplete className="autocomplete-wrapper">
-          <InputField
-            label={"Location"}
-            type={"text"}
-            auto={false}
-            name={"from"}
-            placeholder={"From"}
-            forinput={""}
-            id={""}
-            required={false}
-            getData={GetFormData}
-            readonly={false}
-          />
-        </Autocomplete>
+        <Search 
+          SetCoordinates={SetFromCoord}  
+          SetPlace={SetFrom}
+          Name={"From"}
+          PlaceHolder={"From"}
+          Label={"Location"}
+        />
 
-        <Autocomplete className="autocomplete-wrapper">
-          <InputField
-            label={""}
-            type={"text"}
-            auto={false}
-            name={"to"}
-            placeholder={"To"}
-            forinput={""}
-            id={""}
-            required={false}
-            getData={GetFormData}
-            readonly={false}
-          />
-        </Autocomplete>
+        <Search 
+          SetCoordinates={SetToCoord}  
+          SetPlace={SetTo}
+          Name={"To"}
+          PlaceHolder={"to"}
+          Label={""}
+        />
       </div>
 
       <div className="date-container">
@@ -130,7 +125,7 @@ const Page1: FC<IPage1> = ({
         <Button
           icon={""}
           svg={""}
-          type={"submit"}
+          type={btnType.Submit}
           buttonStyle={"btn--secondary"}
           onClick={Next}
           buttonSize={"btn--next"}

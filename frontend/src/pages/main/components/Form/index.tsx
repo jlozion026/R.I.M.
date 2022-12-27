@@ -8,7 +8,7 @@ import { FaArrowLeft } from "react-icons/fa";
 
 import format from "date-fns/format";
 
-import { IDefaultFormData, IForm, IForm2Data } from "./models";
+import { IDefaultFormData, IForm, IForm2Data, LatLngLiteral } from "./models";
 
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -23,10 +23,22 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title }) => {
   const [startDate, setStartDate] = useState("mm/dd/yyyy");
   const [endDate, setEndDate] = useState("mm/dd/yyyy");
 
+  // coordinates 
+  const [fromPos, setFromPos] = useState<LatLngLiteral | null>(null);
+  const [toPos, setToPos] = useState<LatLngLiteral | null>(null);
+  // place
+  const [from, setFrom] = useState<string>("");
+  const [to, setTo] = useState<string>("");
+
+  const setToPlace = (place:string) => setTo(place)
+  const setFromPlace = (place:string) => setFrom(place)
+  const setToCoord = (position: google.maps.LatLngLiteral) => setToPos(position)
+  const setFromCoord = (position: google.maps.LatLngLiteral) => setFromPos(position)
+
   //Todo state of origin and destination Form2Data.
   const [form2Data, setForm2Data] = useState<IForm2Data>({
-    from: "",
-    to: "",
+    from: null,
+    to: null,
     startDate: "",
     endDate: "",
     description: "",
@@ -38,8 +50,8 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title }) => {
 
   //Todo state of origin and destination DefaultFromData.
   const [defaultFormData, setDefaultFormData] = useState<IDefaultFormData>({
-    from: "",
-    to: "",
+    from: null,
+    to: null,
     startDate: "",
     endDate: "",
     description: "",
@@ -52,14 +64,20 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title }) => {
   const SubmitForm2Data = () => {
     form2Data["startDate"] = startDate;
     form2Data["endDate"] = endDate;
+    form2Data["to"] = toPos;
+    form2Data["from"] = fromPos;
     console.table(form2Data);
+    console.table([from, to]);
     PopUp();
   };
 
   const SubmitDefaultFormData = () => {
     defaultFormData["startDate"] = startDate;
     defaultFormData["endDate"] = endDate;
+    defaultFormData["to"] = toPos;
+    defaultFormData["from"] = fromPos;
     console.table(defaultFormData);
+    console.table([from, to]);
     PopUp();
   };
 
@@ -125,6 +143,10 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title }) => {
 
       {!FormType ? (
         <DefaultForm
+          SetTo={setToPlace}
+          SetFrom={setFromPlace}
+          SetToCoord={setToCoord}
+          SetFromCoord={setFromCoord}
           GetFormData={getDefaultFormData}
           HandleStartDate={handleStartDate}
           HandleEndDate={handleEndDate}
@@ -140,6 +162,10 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title }) => {
         />
       ) : (
         <Form2
+          SetTo={setToPlace}
+          SetFrom={setFromPlace}
+          SetToCoord={setToCoord}
+          SetFromCoord={setFromCoord}
           GetFormData={getForm2Data}
           HandleStartDate={handleStartDate}
           HandleEndDate={handleEndDate}

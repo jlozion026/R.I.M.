@@ -2,16 +2,18 @@ import { FC } from "react";
 
 import InputField from "@/components/InputField";
 import Button from "@/components/Button";
+import Search from "@/pages/main/components/Search";
 
 import { FaCalendarAlt } from "react-icons/fa";
 import { Calendar } from "react-date-range";
 
-import { Autocomplete } from "@react-google-maps/api";
-
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 
+import { btnType } from "@/components/Button/models"
+
 import "./style.css";
+
 import { IDefaultForm } from "../../models";
 
 const DefaultForm: FC<IDefaultForm> = ({
@@ -25,39 +27,30 @@ const DefaultForm: FC<IDefaultForm> = ({
   CalendarEnd,
   StartDate,
   EndDate,
+  SetFrom,
+  SetTo,
+  SetToCoord,
+  SetFromCoord
 }) => {
   return (
     <>
       <div className="location-container">
-        <Autocomplete className="autocomplete-wrapper">
-          <InputField
-            label={"Location"}
-            type={"text"}
-            auto={false}
-            name={"from"}
-            placeholder={"From"}
-            forinput={""}
-            id={""}
-            required={false}
-            getData={GetFormData}
-            readonly={false}
-          />
-        </Autocomplete>
+        <Search 
+          SetCoordinates={SetFromCoord}  
+          SetPlace={SetFrom}
+          Name={"From"}
+          PlaceHolder={"From"}
+          Label={"Location"}
+        />
 
-        <Autocomplete className="autocomplete-wrapper">
-          <InputField
-            label={""}
-            type={"text"}
-            auto={false}
-            name={"to"}
-            placeholder={"To"}
-            forinput={""}
-            id={""}
-            required={false}
-            getData={GetFormData}
-            readonly={false}
-          />
-        </Autocomplete>
+        <Search 
+          SetCoordinates={SetToCoord}  
+          SetPlace={SetTo}
+          Name={"To"}
+          PlaceHolder={"to"}
+          Label={""}
+        />
+
       </div>
 
       <div className="date-container">
@@ -72,7 +65,7 @@ const DefaultForm: FC<IDefaultForm> = ({
               forinput={"calendar"}
               id={"start-date"}
               required={true}
-              getData={() => {}}
+              getData={() => { }}
               readonly={true}
             />
           </div>
@@ -101,7 +94,7 @@ const DefaultForm: FC<IDefaultForm> = ({
               forinput={"end-date"}
               id={""}
               required={false}
-              getData={() => {}}
+              getData={() => { }}
               readonly={true}
             />
           </div>
@@ -136,7 +129,7 @@ const DefaultForm: FC<IDefaultForm> = ({
         <Button
           icon={""}
           svg={""}
-          type={"submit"}
+          type={btnType.Submit}
           buttonStyle={"btn--secondary"}
           onClick={Submit}
           buttonSize={"btn--next"}

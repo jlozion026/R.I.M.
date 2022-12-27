@@ -50,7 +50,7 @@ const main = async () => {
 
   app.post("/refresh_token", async (req, res) => {
     const token = req.cookies.jid
-    console.log(token);
+    
     if (!token) {
       return res.send({ ok: false, accessToken: "" })
     }

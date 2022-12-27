@@ -1,6 +1,8 @@
+export type LatLngLiteral = google.maps.LatLngLiteral;
+
 export interface IDefaultFormData {
-  from: string;
-  to: string;
+  from: LatLngLiteral|null;
+  to: LatLngLiteral|null;
   startDate: string;
   endDate: string;
   description: string;
@@ -32,6 +34,10 @@ export interface IForm {
 }
 
 export interface IPage extends IGetFormData {
+  SetFrom(place: string): void;
+  SetTo(place: string): void;
+  SetFromCoord(position: google.maps.LatLngLiteral): void;
+  SetToCoord(position: google.maps.LatLngLiteral): void;
   HandleStartDate(date: Date): void;
   HandleEndDate(date: Date): void;
   ClickCalendarStart(): void;
