@@ -1,32 +1,38 @@
-import { FC, memo, useCallback, useRef, useState } from "react";
+import { FC, memo, useCallback, useMemo, useRef, useState } from "react";
 
-import { GoogleMap, useLoadScript } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  Circle,
+  MarkerClusterer,
+  InfoWindow,
+} from "@react-google-maps/api";
+
+import {
+  closeOptions,
+  defaultOptions,
+  farOptions,
+  middleOptions,
+} from "./utils";
 
 import ReportsBtn from "./components/ReportsBtn";
 import Navbar from "@/components/Navbar";
 
-import "./style.css";
+import GenerateCoordinates from "./components/GenerateCoordinates";
+
+import { MarkerData } from "./components/GenerateCoordinates/models";
+
 import Zoom from "./components/Zoom";
 
-const mapContainerStyle = {
-  width: "100%",
-  height: "100%",
-};
+import Constructions from "@/Assets/svg/Constructions.svg";
 
-// Default Center
-const center: google.maps.LatLngLiteral = {
-  lat: 14.6444,
-  lng: 121.0335,
-};
+import "./style.css";
+
+type MapOptions = google.maps.MapOptions;
+type LatLngLiteral = google.maps.LatLngLiteral;
 
 const mapId = "753af1df20893fcc";
-
-const options: google.maps.MapOptions = {
-  mapId: mapId,
-  disableDefaultUI: true,
-  zoomControl: false,
-  clickableIcons: false,
-};
 
 const libraries: (
   | "drawing"
@@ -36,43 +42,138 @@ const libraries: (
   | "visualization"
 )[] = ["places"];
 
+// Default Center of GoogleMap
+const defaultCenter = {
+  lat: 14.676,
+  lng: 121.0437,
+};
+
 const Main: FC = () => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
 
-  const mapRef = useRef();
-
-  const onMapLoad = useCallback((map: any) => {
-    mapRef.current = map;
-  }, []);
+  const [selectedMarker, setSelectedMarker] = useState<MarkerData | null>(null);
 
   // Zoom Control Button
-  const [zoom, setZoom] = useState(15);
+  const [zoom, setZoom] = useState(13);
 
   const zoomIn = () => setZoom(zoom + 1);
   const zoomOut = () => setZoom(zoom - 1);
 
-  const onUnmount = useCallback((map: any) => (mapRef.current = map), []);
+  // options of GoogleMap
+  const options = useMemo<MapOptions>(
+    () => ({
+      mapId: mapId,
+      disableDefaultUI: true,
+      zoomControl: false,
+      clickableIcons: false,
+    }),
+    []
+  );
+  //center of Circles
+  const center = useMemo<LatLngLiteral>(
+    () => ({ lat: 14.676, lng: 121.0437 }),
+    []
+  );
 
-  if (loadError) return <>"Error Loading Maps"</>;
-  if (!isLoaded) return <>"Loading Maps........"</>;
+  // dummy coordinates to generate multiple markers
+  const coordinates = useMemo(() => GenerateCoordinates(center), [center]);
+
+  const mapRef = useRef<google.maps.Map | null>(null);
+
+  // This function when the Map Loads it prevent from generate a
+  //new version every time the component renders
+  const onMapLoad = useCallback((map: google.maps.Map): void => {
+    mapRef.current = map;
+  }, []);
+
+  // This function called when the Map needs to clean up
+  const onUnMount = (map: google.maps.Map): void => {
+    mapRef.current = map;
+  };
+
+  //recenter the Map when we clicked the Target Sign in the Map
+  const panToQC = (): void => {
+    if (mapRef.current) {
+      mapRef.current?.panTo(center);
+    }
+  };
+
+  if (loadError) return <div>"Error Loading Maps"</div>;
+  if (!isLoaded) return <div>"Loading Maps........"</div>;
 
   return (
     <div className="map-container">
       <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        center={center}
+        mapContainerClassName="mapContainerStyle"
+        center={defaultCenter}
         zoom={zoom}
         options={options}
         onLoad={onMapLoad}
-        onUnmount={onUnmount}
-      ></GoogleMap>
+        onUnmount={onUnMount}
+      >
+        {zoom <= 15 ? (
+          <>
+            <Marker position={center} />
+            <Circle center={center} radius={2500} options={defaultOptions} />
+            <Circle center={center} radius={4500} options={closeOptions} />
+            <Circle center={center} radius={6500} options={middleOptions} />
+            <Circle center={center} radius={8000} options={farOptions} />
+          </>
+        ) : null}
+
+        <MarkerClusterer>
+          {(clusterer) => (
+            <>
+              {coordinates.map((marker, index) => (
+                <Marker
+                  key={index}
+                  position={marker}
+                  icon={marker.icons}
+                  clusterer={clusterer}
+                  onClick={() => {
+                    setSelectedMarker(marker);
+                  }}
+                />
+              ))}
+            </>
+          )}
+        </MarkerClusterer>
+
+        {selectedMarker ? (
+          <InfoWindow
+            position={{
+              lat: selectedMarker.lat,
+              lng: selectedMarker.lng,
+            }}
+            onCloseClick={() => {
+              setSelectedMarker(null);
+            }}
+          >
+            <div className="info-window-container">
+              <div className="iw-icons-bg">
+                <img className="window-icons" src={Constructions}></img>
+              </div>
+              <h1 className="window-title">Project Title</h1>
+              <hr className="iw-line" />
+              <h3 className="address-title">Address</h3>
+              <h5 className="latlng-container">
+                {"Lat: " + selectedMarker.lat}
+              </h5>
+              <h5 className="latlng-container">
+                {"Lng: " + selectedMarker.lng}
+              </h5>
+            </div>
+          </InfoWindow>
+        ) : null}
+      </GoogleMap>
+
       <div className="nav-container">
         <Navbar cardSize="card--main-nav" />
       </div>
-      <Zoom zoomIn={zoomIn} zoomOut={zoomOut} />
+      <Zoom zoomIn={zoomIn} zoomOut={zoomOut} PanTo={panToQC} />
       <ReportsBtn />
     </div>
   );

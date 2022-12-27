@@ -1,13 +1,9 @@
-import { FC, useState } from "react";
+import { FC } from "react";
+import { StepsInt } from "./models";
 
 import "./style.css";
 
-export interface StepsInt {
-  page: boolean;
-}
-
 const Steps: FC<StepsInt> = ({ page }) => {
-  
   return (
     <>
       <div className="progress-container">
