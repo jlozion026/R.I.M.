@@ -10,8 +10,9 @@ import { FaCalendarAlt } from "react-icons/fa";
 
 import { IPage1 } from "../../../../models";
 
+import { btnType } from "@/components/Button/models";
+
 import "./style.css";
-import {btnType} from "@/components/Button/models"
 
 const Page1: FC<IPage1> = ({
   GetFormData,
@@ -27,21 +28,21 @@ const Page1: FC<IPage1> = ({
   SetFrom,
   SetTo,
   SetToCoord,
-  SetFromCoord
+  SetFromCoord,
 }) => {
   return (
     <>
       <div className="location-container">
-        <Search 
-          SetCoordinates={SetFromCoord}  
+        <Search
+          SetCoordinates={SetFromCoord}
           SetPlace={SetFrom}
           Name={"From"}
           PlaceHolder={"From"}
           Label={"Location"}
         />
 
-        <Search 
-          SetCoordinates={SetToCoord}  
+        <Search
+          SetCoordinates={SetToCoord}
           SetPlace={SetTo}
           Name={"To"}
           PlaceHolder={"to"}
@@ -129,8 +130,9 @@ const Page1: FC<IPage1> = ({
           buttonStyle={"btn--secondary"}
           onClick={Next}
           buttonSize={"btn--next"}
-          children={"Next"}
-        ></Button>
+        >
+          Next
+        </Button>
       </div>
     </>
   );

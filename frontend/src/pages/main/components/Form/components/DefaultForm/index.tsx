@@ -10,7 +10,7 @@ import { Calendar } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 
-import { btnType } from "@/components/Button/models"
+import { btnType } from "@/components/Button/models";
 
 import "./style.css";
 
@@ -30,27 +30,26 @@ const DefaultForm: FC<IDefaultForm> = ({
   SetFrom,
   SetTo,
   SetToCoord,
-  SetFromCoord
+  SetFromCoord,
 }) => {
   return (
     <>
       <div className="location-container">
-        <Search 
-          SetCoordinates={SetFromCoord}  
+        <Search
+          SetCoordinates={SetFromCoord}
           SetPlace={SetFrom}
           Name={"From"}
           PlaceHolder={"From"}
           Label={"Location"}
         />
 
-        <Search 
-          SetCoordinates={SetToCoord}  
+        <Search
+          SetCoordinates={SetToCoord}
           SetPlace={SetTo}
           Name={"To"}
           PlaceHolder={"to"}
           Label={""}
         />
-
       </div>
 
       <div className="date-container">
@@ -65,7 +64,7 @@ const DefaultForm: FC<IDefaultForm> = ({
               forinput={"calendar"}
               id={"start-date"}
               required={true}
-              getData={() => { }}
+              getData={() => {}}
               readonly={true}
             />
           </div>
@@ -94,7 +93,7 @@ const DefaultForm: FC<IDefaultForm> = ({
               forinput={"end-date"}
               id={""}
               required={false}
-              getData={() => { }}
+              getData={() => {}}
               readonly={true}
             />
           </div>
@@ -125,7 +124,7 @@ const DefaultForm: FC<IDefaultForm> = ({
         />
       </div>
 
-      <div className="btn-container">
+      <div className="default-btn-container">
         <Button
           icon={""}
           svg={""}
@@ -133,8 +132,9 @@ const DefaultForm: FC<IDefaultForm> = ({
           buttonStyle={"btn--secondary"}
           onClick={Submit}
           buttonSize={"btn--next"}
-          children={"Submit"}
-        ></Button>
+        >
+          Submit
+        </Button>
       </div>
     </>
   );

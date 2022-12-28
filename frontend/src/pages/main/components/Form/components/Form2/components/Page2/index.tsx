@@ -6,7 +6,7 @@ import InputField from "@/components/InputField";
 import { Ipage2 } from "../../../../models";
 
 import "./style.css";
-import {btnType} from '@/components/Button/models'
+import { btnType } from "@/components/Button/models";
 
 const Page2: FC<Ipage2> = ({ GetFormData, Submit }) => {
   return (
@@ -25,7 +25,7 @@ const Page2: FC<Ipage2> = ({ GetFormData, Submit }) => {
           readonly={false}
         />
       </div>
-      
+
       <div className="finance-container">
         <InputField
           label={"Finance"}
@@ -55,7 +55,7 @@ const Page2: FC<Ipage2> = ({ GetFormData, Submit }) => {
           readonly={false}
         />
       </div>
-      
+
       <div className="contractorAmount-container">
         <InputField
           label={""}
@@ -79,8 +79,9 @@ const Page2: FC<Ipage2> = ({ GetFormData, Submit }) => {
           buttonStyle={"btn--secondary"}
           onClick={Submit}
           buttonSize={"btn--next"}
-          children={"Submit"}
-        ></Button>
+        >
+          Submit
+        </Button>
       </div>
     </>
   );

@@ -2,14 +2,14 @@ import { FC } from "react";
 import { counts } from "./models";
 
 import { MdZoomIn, MdZoomOut } from "react-icons/md";
-import {BiTargetLock} from "react-icons/bi";
+import { BiTargetLock } from "react-icons/bi";
 
 import "./style.css";
 
-const Zoom: FC<counts> = ({ zoomIn, zoomOut }) => {
+const Zoom: FC<counts> = ({ zoomIn, zoomOut, PanTo }) => {
   return (
     <div className="zoom">
-      <p className="find-target" onClick={()=>{}}>
+      <p className="find-target" onClick={PanTo}>
         <BiTargetLock size={25} />
       </p>
       <p className="add-btn" onClick={zoomIn}>

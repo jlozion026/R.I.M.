@@ -3,11 +3,12 @@ import Construction from "@/Assets/svg/Constructions.svg";
 import Hazzard from "@/Assets/svg/Hazzard.svg";
 import Accident from "@/Assets/svg/Accident.svg";
 import Event from "@/Assets/svg/Event.svg";
+import { btnType } from "@/components/Button/models";
 
 export const ReportsBtnProps = [
   {
     id: "City Project Form",
-    type: "button",
+    type: btnType.Button,
     svg: Hazzard,
     icon: "",
     children: "City Project Form",
@@ -18,7 +19,7 @@ export const ReportsBtnProps = [
 
   {
     id: "Road Closure Form",
-    type: "button",
+    type: btnType.Button,
     svg: roadclosure,
     icon: "",
     children: "Road Closure",
@@ -29,7 +30,7 @@ export const ReportsBtnProps = [
 
   {
     id: "Road Constraction Form",
-    type: "button",
+    type: btnType.Button,
     svg: Construction,
     icon: "",
     children: "Road Constraction",
@@ -40,7 +41,7 @@ export const ReportsBtnProps = [
 
   {
     id: "Road Accident Form",
-    type: "button",
+    type: btnType.Button,
     svg: Accident,
     icon: "",
     children: "Road Accident",
@@ -51,7 +52,7 @@ export const ReportsBtnProps = [
 
   {
     id: "Road Event Form",
-    type: "button",
+    type: btnType.Button,
     svg: Event,
     icon: "",
     children: "Road Event",
@@ -62,7 +63,7 @@ export const ReportsBtnProps = [
 
   {
     id: "Road Hazzard Form",
-    type: "button",
+    type: btnType.Button,
     svg: Hazzard,
     icon: "",
     children: "Road Hazzard",

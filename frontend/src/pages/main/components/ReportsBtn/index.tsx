@@ -4,9 +4,10 @@ import Button from "@/components/Button";
 import { ReportsBtnProps } from "./utils";
 import "./models";
 
-import "./style.css";
 import PopUp from "../PopUp";
 import Form from "../Form";
+
+import "./style.css";
 
 const ReportsBtn: FC = () => {
   const [trigger, setTrigger] = useState<boolean>(false);

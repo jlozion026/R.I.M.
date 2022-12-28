@@ -1,26 +1,27 @@
-import { ChangeEvent, FC } from 'react';
+import { ChangeEvent, FC } from "react";
 
-import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete'
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete";
 
 import useOnclickOutside from "react-cool-onclickoutside";
 
-import { MdOutlinePinDrop } from 'react-icons/md'
+import { MdOutlinePinDrop } from "react-icons/md";
 
-import { ISearch } from './models'
+import { ISearch } from "./models";
 
-import './style.css'
+import "./style.css";
 
-
-import InputField from '@/components/InputField';
+import InputField from "@/components/InputField";
 
 const Search: FC<ISearch> = ({
   SetCoordinates,
   SetPlace,
   Name,
   PlaceHolder,
-  Label
+  Label,
 }) => {
-
   const {
     value,
     suggestions: { status, data },
@@ -36,9 +37,12 @@ const Search: FC<ISearch> = ({
     clearSuggestions();
   });
 
-  const handleInput = (e: ChangeEvent<HTMLInputElement>) => { setValue(e.target.value); };
+  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
 
-  const handleSelect = ({ description }: google.maps.places.AutocompletePrediction) =>
+  const handleSelect =
+    ({ description }: google.maps.places.AutocompletePrediction) =>
     () => {
       // When user selects a place, we can replace the keyword without request data from API
       // by setting the second parameter to "false"
@@ -49,7 +53,7 @@ const Search: FC<ISearch> = ({
       // Get latitude and longitude via utility functions
       getGeocode({ address: description }).then((results) => {
         const { lat, lng } = getLatLng(results[0]);
-        SetCoordinates({ lat, lng })
+        SetCoordinates({ lat, lng });
       });
     };
 
@@ -61,19 +65,22 @@ const Search: FC<ISearch> = ({
       } = suggestion;
 
       return (
-        <li className='search-item' key={place_id} onClick={handleSelect(suggestion)}>
+        <li
+          className="search-item"
+          key={place_id}
+          onClick={handleSelect(suggestion)}
+        >
           <MdOutlinePinDrop />
           <div className="search-word">
-            <strong>{main_text}</strong> 
+            <strong>{main_text}</strong>
             <small>{secondary_text}</small>
           </div>
         </li>
       );
     });
 
-
   return (
-    <div className='search-cont' ref={ref}>
+    <div className="search-cont" ref={ref}>
       <InputField
         type={"text"}
         label={Label}
@@ -88,8 +95,10 @@ const Search: FC<ISearch> = ({
         id={""}
       />
       {/* We can use the "status" to decide whether we should display the dropdown or not */}
-      {status === "OK" && <ul className='search-results'>{renderSuggestions()}</ul>}
+      {status === "OK" && (
+        <ul className="search-results">{renderSuggestions()}</ul>
+      )}
     </div>
   );
-}
+};
 export default Search;
