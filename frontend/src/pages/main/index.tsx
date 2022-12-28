@@ -23,14 +23,13 @@ import GenerateCoordinates from "./components/GenerateCoordinates";
 
 import { MarkerData } from "./components/GenerateCoordinates/models";
 
+import { MapOptions, LatLngLiteral } from "./models";
+
 import Zoom from "./components/Zoom";
 
 import Constructions from "@/Assets/svg/Constructions.svg";
 
 import "./style.css";
-
-type MapOptions = google.maps.MapOptions;
-type LatLngLiteral = google.maps.LatLngLiteral;
 
 const mapId = "753af1df20893fcc";
 
@@ -43,7 +42,7 @@ const libraries: (
 )[] = ["places"];
 
 // Default Center of GoogleMap
-const defaultCenter = {
+const defaultCenter: LatLngLiteral = {
   lat: 14.676,
   lng: 121.0437,
 };
@@ -62,24 +61,18 @@ const Main: FC = () => {
   const zoomIn = () => setZoom(zoom + 1);
   const zoomOut = () => setZoom(zoom - 1);
 
-  // options of GoogleMap
-  const options = useMemo<MapOptions>(
-    () => ({
-      mapId: mapId,
-      disableDefaultUI: true,
-      zoomControl: false,
-      clickableIcons: false,
-    }),
-    []
-  );
-  //center of Circles
-  const center = useMemo<LatLngLiteral>(
-    () => ({ lat: 14.676, lng: 121.0437 }),
-    []
-  );
+  const options: MapOptions = {
+    mapId: mapId,
+    disableDefaultUI: true,
+    zoomControl: false,
+    clickableIcons: false,
+  };
 
   // dummy coordinates to generate multiple markers
-  const coordinates = useMemo(() => GenerateCoordinates(center), [center]);
+  const coordinates = useMemo(
+    () => GenerateCoordinates(defaultCenter),
+    [defaultCenter]
+  );
 
   const mapRef = useRef<google.maps.Map | null>(null);
 
@@ -97,7 +90,7 @@ const Main: FC = () => {
   //recenter the Map when we clicked the Target Sign in the Map
   const panToQC = (): void => {
     if (mapRef.current) {
-      mapRef.current?.panTo(center);
+      mapRef.current?.panTo(defaultCenter);
     }
   };
 
@@ -114,13 +107,25 @@ const Main: FC = () => {
         onLoad={onMapLoad}
         onUnmount={onUnMount}
       >
-        {zoom <= 15 ? (
+        {zoom <= 14 ? (
           <>
-            <Marker position={center} />
-            <Circle center={center} radius={2500} options={defaultOptions} />
-            <Circle center={center} radius={4500} options={closeOptions} />
-            <Circle center={center} radius={6500} options={middleOptions} />
-            <Circle center={center} radius={8000} options={farOptions} />
+            <Marker position={defaultCenter} />
+            <Circle
+              center={defaultCenter}
+              radius={2500}
+              options={defaultOptions}
+            />
+            <Circle
+              center={defaultCenter}
+              radius={4500}
+              options={closeOptions}
+            />
+            <Circle
+              center={defaultCenter}
+              radius={6500}
+              options={middleOptions}
+            />
+            <Circle center={defaultCenter} radius={8000} options={farOptions} />
           </>
         ) : null}
 
