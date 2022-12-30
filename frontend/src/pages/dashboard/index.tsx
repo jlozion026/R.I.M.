@@ -13,12 +13,11 @@ const Dashboard: FC = () => {
     <div className="mainGrid">
       <div className="navContainer">
         <div className="navCard">
-          <NavBar cardSize="card--nav" />
+          <NavBar cardSize="card" />
         </div>
         <div className="mob-nav">
           <NavBar cardSize="mobile--nav" />
         </div>
-
 
       </div>
       <div className="cardContainer">
@@ -40,7 +39,7 @@ const Dashboard: FC = () => {
 
                      })}
                      <div className="longCard">
-                     <Summary cardSize="card--long"/>
+                     <Summary cardSize="card"/>
                      </div>  
                      
             </div>
@@ -51,16 +50,16 @@ const Dashboard: FC = () => {
                   <div className="graphs">
 
           <div className="medCard">
-            <YearCongestionlvl cardSize="card--medium" />
+            <YearCongestionlvl cardSize="card" />
           </div>
           <div className="largeCard">
-            <HourlyCongestionLvl cardSize="card--large" />
+            <HourlyCongestionLvl cardSize="card" />
           </div>
           <div className="medCard">
-            <MonthlyCongestionLvl cardSize="card--medium" />
+            <MonthlyCongestionLvl cardSize="card" />
           </div>
           <div className="mobileLongCard">
-            <Summary cardSize="card--long" />
+            <Summary cardSize="card" />
           </div>
                 </div>
         </div>

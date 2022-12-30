@@ -8,7 +8,7 @@
 
 /*card sizes*/
 
-.card--large,.card--medium,.card--small,.card--long,.mobile--small,.card--nav{
+.card{
     min-width: 100%;
     min-height: 100%;
     border-radius: 1vw;
@@ -21,7 +21,7 @@
 
 @media only screen and (max-width: 60em){
 
-  .card--large,.card--medium,.card--small,.card--long,.mobile--small,.card--nav{
+  .card{
     border-radius: 3.5vw;
 }
     .mobile--nav{

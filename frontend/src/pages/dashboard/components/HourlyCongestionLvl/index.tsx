@@ -1,12 +1,12 @@
 import { FC } from "react";
 import Card from "@/components/Card";
 import './style.css';
-import { HrlyConItems } from "./models";
+import { GraphItems } from "../../models";
 import { HrlyConProps } from "../utils";
 
 
 
-const HourlyCongestionLvl: FC<HrlyConItems> =({cardSize}) => {
+const HourlyCongestionLvl: FC<GraphItems> =({cardSize}) => {
 
     return(
         <Card cardSize={cardSize}>

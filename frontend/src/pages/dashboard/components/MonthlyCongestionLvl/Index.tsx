@@ -1,10 +1,10 @@
 import { FC } from "react";
 import Card from "@/components/Card";
 import './style.css';
-import { MonthlyConItems } from "./models";
+import { GraphItems } from "../../models";
 import {  MonthlyConProps } from "../utils";
 
-const MonthlyCongestionLvl: FC<MonthlyConItems>=({cardSize})=> {
+const MonthlyCongestionLvl: FC<GraphItems>=({cardSize})=> {
 
   return (
 

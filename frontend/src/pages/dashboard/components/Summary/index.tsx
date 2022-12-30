@@ -1,10 +1,10 @@
 import { FC } from "react";
 import Card from "@/components/Card";
 import './style.css';
-import { SummaryItems } from "./models";
+import { GraphItems } from "../../models";
 import { SummaryProps } from "../utils";
 
-const Summary: FC<SummaryItems>=({cardSize})=> {
+const Summary: FC<GraphItems>=({cardSize})=> {
 
         return(
            
