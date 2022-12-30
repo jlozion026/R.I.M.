@@ -3,12 +3,11 @@ import "./style.css";
 import { CardInterface } from "./models";
 
 
-const SIZES = ["card--large", "card--medium", "card--small","card--long","card--nav","card--main-nav"]
-
+const SIZES = ["card--large", "card--medium", "card--small","card--long","card--nav","mobile--nav","mobile--small","mobile--nav","card--main-nav"]
 
 
 const Card: FC<CardInterface> = ({
-    cardSize,
+    cardSize,       
     children
    
 

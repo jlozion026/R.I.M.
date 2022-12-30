@@ -1,14 +1,10 @@
 import { FC } from "react";
-
 import Card from "@/components/Card";
-
-import { mediumCardItems } from "./models";
-import {  mediumCardProps } from "../utils";
-
 import './style.css';
-import '@/pages/dashboard/style.css';
+import { MonthlyConItems } from "./models";
+import {  MonthlyConProps } from "../utils";
 
-const MonthlyCongestionLvl: FC<mediumCardItems>=({cardSize})=> {
+const MonthlyCongestionLvl: FC<MonthlyConItems>=({cardSize})=> {
 
   return (
 
@@ -17,7 +13,7 @@ const MonthlyCongestionLvl: FC<mediumCardItems>=({cardSize})=> {
         <p>MONTHLY CONGESTION LEVEL</p>
       </div>
       <div className="cardFlex">
-        {mediumCardProps.map((val, key) => {
+        {MonthlyConProps.map((val, key) => {
           return (
             <div className="wrappermedium" key={key}>
               <p className="year">{val.year}</p>

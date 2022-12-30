@@ -1,20 +1,16 @@
 import { FC } from "react";
-
 import Card from "@/components/Card";
-
-import { longCardItems } from "./models";
-import { longCardProps } from "../utils";
-
 import './style.css';
-import '@/pages/dashboard/style.css';
+import { SummaryItems } from "./models";
+import { SummaryProps } from "../utils";
 
-const Summary: FC<longCardItems>=({cardSize})=> {
+const Summary: FC<SummaryItems>=({cardSize})=> {
 
         return(
            
           <Card cardSize={cardSize}>
             <div className="LongCardFlex">
-              {longCardProps.map((val,key)=>{
+              {SummaryProps.map((val,key)=>{
                 return(
                   <div className="wrapperlong" key={key}>
                     <div className="ellipse" ></div>

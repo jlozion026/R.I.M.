@@ -13,7 +13,7 @@
     justify-items: center;
 }
 .cnl,.dataTitle{
-    font-size: 0.5em;
+    font-size: 0.8vw;
     font-weight: bold;
     color:black;
     text-align: center;
@@ -21,13 +21,13 @@
 }
 
 .percentageData{
-    font-size: 1.5em;
+    font-size: 1.5vw;
     font-weight: bold;
 }
 .ellipse {
-    width: .8em;
-    height: .8em;
-    border-radius: .4em;
+    width: .8vw;
+    height: .8vw;
+    border-radius: .4vw;
     background-color: #3781F1;
 }
 .datacln{
@@ -36,27 +36,21 @@
     align-items: center;
     justify-content: center;
 }
-.color1{
-    background-color:#3781F1;
-}
-.color2{
-    background-color:#52CFFF;
-}
-.color3{
-    background-color:#E3E3E8;
-}
-@media only screen and (max-width:500px){
+@media only screen and (max-width:60em){
 
     .LongCardFlex{
         display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: space-around;
-        width: 100%;
-        height: 100%;
+    }
+    .cnl,.dataTitle{
+        font-size: 2.5vw;
     }
     .percentageData{
-        font-size: 2.5em;
-        font-weight: bold;
+        font-size: 12vw;
+    }
+    .ellipse {
+        width: 2vw;
+        height: 2vw;
+        border-radius: .8vw;
     }
 }

@@ -7,6 +7,7 @@
 .main-grid{
     display: grid;
     grid-template-columns: 0.7fr 0fr 1fr ;
+    grid-template-areas: "log wave svg";
     height: 100vh;
 }
 
@@ -16,6 +17,7 @@
     width: 100%;
     align-items: center;
     background-color: #FFFFFF;
+    grid-area: log;
 }
 
 .wrap-container{
@@ -99,6 +101,7 @@
     flex-direction: row;
     height: 100vh;
     background-color: #F0F0F9;
+    grid-area: wave;
 }
 .mobile-container{
     width: 50%;
@@ -111,6 +114,7 @@
     justify-content: center;
     align-items: center;
     background-color: #F0F0F9;
+    grid-area: svg;
 
 }
 
@@ -120,11 +124,18 @@
     justify-content: flex-end;
     align-items: left;
 }
-
-
+.logo{
+    width: 4vw;
+    height:4vh;
+}
+.qcPic{
+    width: fit-content;
+    height: 5em;
+    
+}
 .qcFont{
     
-    font-size: 24px;
+    font-size: 2vw;
     font-weight: bold;
     color:rgb(12, 133, 255);
     margin-right: 50px;
@@ -238,7 +249,8 @@ input:invalid ~ .validation{
          grid-area: end;
    }
    .wave2{
-    display:flex;   
+    display:flex;
+    width: fit-content;   
    }
 
    .header{
@@ -268,12 +280,11 @@ input:invalid ~ .validation{
         opacity: 0;
         font-size: 14px;
 
-    color:#f85d438c ;
-    font-weight: bolder;
-    font-family: "Varela Round", sans-serif;
-
-    transition: all 0.35s;
-    
+        color:#f85d438c ;
+        font-weight: bolder;
+        font-family: "Varela Round", sans-serif;
+        transition: all 0.35s;
+        
 }
 
 

@@ -11,7 +11,7 @@ import { isAuth } from "./middleware/isAuth";
 export class RegisterResolver {
 
     @Mutation(() => Account) 
-    @UseMiddleware(isAuth)
+    //@UseMiddleware(isAuth)
     async register(
         @Args() args: CreateOneAccountArgs,
         @Ctx() ctx: Context

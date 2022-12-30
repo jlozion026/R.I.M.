@@ -1,15 +1,15 @@
-import Accident from "@/Assets/svg/Accident.svg";
-import Event from "@/Assets/svg/Event.svg";
-import Hazzard from "@/Assets/svg/Hazzard.svg";
-import roadclosure from "@/Assets/svg/roadclosure.svg";
-import Constructions from "@/Assets/svg/Constructions.svg";
-
+import Roadclosure from '@/Assets/svg/Roadclosure.svg'
+import Constructions from '@/Assets/svg/Constructions.svg'
+import Accident from '@/Assets/svg/Accident.svg'
+import Hazzard from '@/Assets/svg/Hazzard.svg'
+import Cityproject from '@/Assets/svg/Cityproject.svg'
+import testEvent from '@/Assets/svg/testEvent.svg'
 
 
 
 export const CardProps =[
     {
-        cardIcon: roadclosure,
+        cardIcon: Roadclosure,
         cardTitle:"Road Closure",
         cardValue:0,
         cardSize:"card--small",
@@ -40,20 +40,25 @@ export const CardProps =[
         imgColor:"hazColor"
 
     },
-
-]
-export const EventProp =[
     {
-        cardIcon:Event,
+        cardIcon:testEvent,
         cardTitle:"Events",
         cardValue:0,
         cardSize:"card--small",
-        imgColor:"eColor",
-        className:"event"
+        imgColor:"eventColor"
 
-    }
+    },
+    {
+        cardIcon:Cityproject,
+        cardTitle:"City Project",
+        cardValue:0,
+        cardSize:"card--small",
+        imgColor:"cprojColor"
+
+    },
+
 ]
-export const longCardProps =[
+export const SummaryProps =[
     {   
    
         cnl:"CONGESTION LEVEL NOW",
@@ -78,7 +83,7 @@ export const longCardProps =[
     }
 ]
 
-export const mediumCardProps=[
+export const MonthlyConProps=[
     {
         year:"2021",
         mclPercentage:"40%",
@@ -96,7 +101,7 @@ export const mediumCardProps=[
     }
 ]
 
-export const largeCardProps=[
+export const HrlyConProps=[
     {
         hcyear:"Live",
         hcPercentage:"92%",
