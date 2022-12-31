@@ -1,16 +1,11 @@
 import { FC } from "react";
-
 import NavBar from "@/components/Navbar";
-
 import { CardProps } from "./components/utils";
-import { EventProp } from "./components/utils";
-
 import CardCategories from "./components/CongestionCards";
-import Summary from "./components/SummaryCard";
-import MonthlyCongestionLvl from "./components/MediumGraphCard/MonthlyCongestionIndex";
-import HourlyCongestionLvl from "./components/LargeGraphCard";
-import YearCongestionlvl from "./components/MediumGraphCard/YearCongestionIndex";
-
+import Summary from "./components/Summary";
+import MonthlyCongestionLvl from "./components/MonthlyCongestionLvl/Index";
+import HourlyCongestionLvl from "./components/HourlyCongestionLvl";
+import YearCongestionlvl from "./components/YearCongestionlvl/Index";
 import './style.css';
 
 const Dashboard: FC = () => {
@@ -18,13 +13,11 @@ const Dashboard: FC = () => {
     <div className="mainGrid">
       <div className="navContainer">
         <div className="navCard">
-          <NavBar cardSize="card--nav" />
+          <NavBar cardSize="card" />
         </div>
         <div className="mob-nav">
-
           <NavBar cardSize="mobile--nav" />
         </div>
-
 
       </div>
       <div className="cardContainer">
@@ -44,42 +37,31 @@ const Dashboard: FC = () => {
                 </div>
               );
 
-            })}
-            {EventProp.map((val, key) => {
-              return (
-                <div className="event" key={key}>
-                  <CardCategories
-                    cardSize={val.cardSize}
-                    cardTitle={val.cardTitle}
-                    cardIcon={val.cardIcon}
-                    cardValue={val.cardValue}
-                    imgColor={val.imgColor}
-                  />
-                </div>
-              );
-            })}
-            <div className="longCard">
-              <Summary cardSize="card--long" />
+                     })}
+                     <div className="longCard">
+                     <Summary cardSize="card"/>
+                     </div>  
+                     
             </div>
-
-          </div>
-        </div>
-      </div>
-      <div className="graphContainer">
-        <div className="graphsWrap">
+            </div>
+            </div>
+            <div className="graphContainer">
+                <div className="graphsWrap">
+                  <div className="graphs">
 
           <div className="medCard">
-            <YearCongestionlvl cardSize="card--medium" />
+            <YearCongestionlvl cardSize="card" />
           </div>
           <div className="largeCard">
-            <HourlyCongestionLvl cardSize="card--large" />
+            <HourlyCongestionLvl cardSize="card" />
           </div>
           <div className="medCard">
-            <MonthlyCongestionLvl cardSize="card--medium" />
+            <MonthlyCongestionLvl cardSize="card" />
           </div>
           <div className="mobileLongCard">
-            <Summary cardSize="card--long" />
+            <Summary cardSize="card" />
           </div>
+                </div>
         </div>
 
       </div>

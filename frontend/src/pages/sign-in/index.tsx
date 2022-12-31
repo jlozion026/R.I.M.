@@ -12,7 +12,6 @@ import QCLOGO from "@/Assets/svg/QCLOGO.svg";
 import wave from "@/Assets/svg/wave.svg";
 import things from "@/Assets/svg/things.svg";
 import wave2 from "@/Assets/svg/wave2.svg";
-
 import { credentials } from "./models";
 import { LoginProps } from "./utils";
 
@@ -119,14 +118,14 @@ const SignIn: FC = () => {
       </div>
 
       <div className="wave-container">
-        <img src={wave} alt="test" />
+        <img src={wave} className="wave1" alt="test" />
       </div>
       <div className="mobile-container">
-        <img src={wave2} alt="wave" />
+        <img src={wave2} className="wave2" alt="wave" />
       </div>
       <div className="svg-container">
         <div className="header">
-          <img src={QCLOGO} alt="logo" />
+          <img src={QCLOGO} className="qcPic" alt="logo" />
           <label className="qcFont">Quezon City</label>
         </div>
 

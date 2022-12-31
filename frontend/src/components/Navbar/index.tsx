@@ -1,31 +1,28 @@
 import { FC } from "react";
-
 import Card from "@/components/Card";
-
 import { navCardItems } from "./models";
 
-import Vector1 from "@/Assets/svg/Vector1.svg";
-import Vector2 from "@/Assets/svg/Vector2.svg";
-import Vector3 from "@/Assets/svg/Vector3.svg";
+import {MdOutlineSpaceDashboard, MdOutlinePinDrop} from "react-icons/md";
+import {CgProfile} from "react-icons/cg"
 
 import "./style.css";
 import { Link } from "react-router-dom";
 
-const CardCategories4: FC<navCardItems> = ({ cardSize }) => {
+const Navbar: FC<navCardItems> = ({ cardSize }) => {
   return (
     <Card cardSize={cardSize}>
       <nav className="vectorContainer">
-        <Link to="/" className="nav-icon">
-          <img src={Vector1} alt="main icon" />
-        </Link>
-        <Link to="/signin" className="nav-icon">
-          <img src={Vector2} alt="prifile icon" />
+      <Link to="/signin" className="nav-icon">
+        <p><MdOutlinePinDrop/></p>
         </Link>
         <Link to="/dashboard" className="nav-icon">
-          <img src={Vector3} alt="dashboard icon" />
+         <p><MdOutlineSpaceDashboard/></p> 
+        </Link>
+        <Link to="/" className="nav-icon">
+        <p><CgProfile/></p>
         </Link>
       </nav>
     </Card>
   );
 };
-export default CardCategories4;
+export default Navbar;

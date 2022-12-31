@@ -1,5 +1,5 @@
 .mcltitle,.medCardTitle,.hcltitle{
-    font-size: .7em;
+    font-size: 1vw;
     padding: 2em;
     color: #777777;
     font-weight: bold;
@@ -13,19 +13,19 @@
     align-items: center;
 }
 .year{
-    font-size: .5em;
+    font-size: .8vw;
     font-weight: bold;
     color:#777777;
     margin-left: 1.25em;
     margin-bottom: 1em  ;
 }
 .mclPercent{
-    font-size: 1.5em;
+    font-size: 2vw;
     font-weight: bold;
    
 }
 .percentLevel{
-    font-size: 2.3em;
+    font-size: 2.3vw;
     font-weight: bold;
 }
 .medCardData,.decreaseLevel{
@@ -34,14 +34,14 @@
     justify-items:center ;
 }
 .pLeveltitle{
-    font-size: .5em;
+    font-size: .8vw;
     color: #37B9F1;
 
 }
 .pLevel{
     font-weight: bold;
     color: #37B9F1;
-    font-size: 1em;
+    font-size: 1vw;
 }
 .decreaseLevel{
     display: flex;  
@@ -52,4 +52,33 @@
 }
 .decreaseIcon{
     display: flex;
+    align-items:center;
+    justify-content: center;
 }
+.arrow{
+    width: 1vw;
+}
+
+@media only screen and (max-width:60em){
+    .mcltitle,.medCardTitle,.hcltitle{
+        font-size: 4vw;
+    }
+    .year{
+        font-size: 3vw;
+    }
+    .mclPercent{
+        font-size: 7vw;
+    }
+    .percentLevel{
+        font-size: 10vw;
+
+    }
+    .pLeveltitle{
+        font-size: 2vw;
+    
+    }
+    .pLevel{
+        font-size: 4vw;
+    }
+   
+  }

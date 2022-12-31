@@ -6,5 +6,3 @@ export interface cardItems{
     imgColor:string;
 }
 
-    
-       
