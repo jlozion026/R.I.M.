@@ -306,7 +306,7 @@ function applyTypeClassEnhanceConfig<
 }
 
 const modelsInfo = {
-  Account: ["acc_id", "email", "password", "acc_type"],
+  Account: ["acc_id", "email", "acc_type"],
   Report: ["report_id", "createdAt", "updatedAt", "published", "location", "description", "reporter_id"],
   CityProject: ["project_id", "project_name", "contractor_name", "date_started", "date_ended", "source_fund", "project_ammount", "contract_ammount", "reports_id"],
   Incident: ["incident_id", "incident_type", "date_started", "date_ended", "reports_id"]
