@@ -40,7 +40,7 @@ const main = async () => {
 
   const { app } = await createExpress();
 
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ app, cors: false });
 
   const PORT = process.env.PORT || 4000;
   app.listen(PORT, () =>

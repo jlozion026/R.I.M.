@@ -26,11 +26,10 @@ export async function createExpress() {
     app.use(cookieParser())
     app.post("/refresh_token", async (req, res) => {
     const token = req.cookies.jid 
-    console.log(token);
-        if (!token) {
-            return res.send({ ok: false, accessToken: "" }) 
-        }
-
+    if (!token) {
+        return res.send({ ok: false, accessToken: "" }) 
+    }
+    
     let payload: any = null;
     try {
         payload = verify(token, process.env.REFRESH_TOKEN_SECRET!)
