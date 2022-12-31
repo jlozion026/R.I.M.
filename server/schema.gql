@@ -8,7 +8,6 @@ type Account {
   acc_id: String!
   acc_type: AccType!
   email: String!
-  password: String!
 }
 
 type AccountCount {
@@ -61,6 +60,14 @@ enum AccountScalarFieldEnum {
   password
 }
 
+input AccountUpdateInput {
+  acc_id: StringFieldUpdateOperationsInput
+  acc_type: EnumAccTypeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  reports: ReportUpdateManyWithoutReporterNestedInput
+}
+
 input AccountWhereInput {
   acc_id: StringFilter
   acc_type: EnumAccTypeFilter
@@ -82,6 +89,10 @@ enum AccType {
   NORMAL
 }
 
+input BoolFieldUpdateOperationsInput {
+  set: Boolean
+}
+
 input BoolFilter {
   equals: Boolean
   not: NestedBoolFilter
@@ -96,18 +107,6 @@ type CityProject {
   project_id: String!
   project_name: String!
   reports_id: String!
-  source_fund: String!
-}
-
-input CityProjectCreateInput {
-  contract_ammount: Float!
-  contractor_name: String!
-  date_ended: DateTime!
-  date_started: DateTime!
-  project_ammount: Float!
-  project_id: String
-  project_name: String!
-  report: ReportCreateNestedOneWithoutCity_porjectInput!
   source_fund: String!
 }
 
@@ -163,6 +162,32 @@ enum CityProjectScalarFieldEnum {
   source_fund
 }
 
+input CityProjectUpdateOneWithoutReportNestedInput {
+  connect: CityProjectWhereUniqueInput
+  connectOrCreate: CityProjectCreateOrConnectWithoutReportInput
+  create: CityProjectCreateWithoutReportInput
+  delete: Boolean
+  disconnect: Boolean
+  update: CityProjectUpdateWithoutReportInput
+  upsert: CityProjectUpsertWithoutReportInput
+}
+
+input CityProjectUpdateWithoutReportInput {
+  contract_ammount: FloatFieldUpdateOperationsInput
+  contractor_name: StringFieldUpdateOperationsInput
+  date_ended: DateTimeFieldUpdateOperationsInput
+  date_started: DateTimeFieldUpdateOperationsInput
+  project_ammount: FloatFieldUpdateOperationsInput
+  project_id: StringFieldUpdateOperationsInput
+  project_name: StringFieldUpdateOperationsInput
+  source_fund: StringFieldUpdateOperationsInput
+}
+
+input CityProjectUpsertWithoutReportInput {
+  create: CityProjectCreateWithoutReportInput!
+  update: CityProjectUpdateWithoutReportInput!
+}
+
 input CityProjectWhereInput {
   AND: [CityProjectWhereInput!]
   contract_ammount: FloatFilter
@@ -189,6 +214,10 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 """
 scalar DateTime
 
+input DateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
 input DateTimeFilter {
   equals: DateTime
   gt: DateTime
@@ -200,11 +229,23 @@ input DateTimeFilter {
   notIn: [DateTime!]
 }
 
+input EnumAccTypeFieldUpdateOperationsInput {
+  set: AccType
+}
+
 input EnumAccTypeFilter {
   equals: AccType
   in: [AccType!]
   not: NestedEnumAccTypeFilter
   notIn: [AccType!]
+}
+
+input FloatFieldUpdateOperationsInput {
+  decrement: Float
+  divide: Float
+  increment: Float
+  multiply: Float
+  set: Float
 }
 
 input FloatFilter {
@@ -224,14 +265,6 @@ type Incident {
   incident_id: String!
   incident_type: String!
   reports_id: String!
-}
-
-input IncidentCreateInput {
-  date_ended: DateTime!
-  date_started: DateTime!
-  incident_id: String
-  incident_type: String!
-  report: ReportCreateNestedOneWithoutIncidentInput!
 }
 
 input IncidentCreateNestedOneWithoutReportInput {
@@ -274,6 +307,28 @@ enum IncidentScalarFieldEnum {
   reports_id
 }
 
+input IncidentUpdateOneWithoutReportNestedInput {
+  connect: IncidentWhereUniqueInput
+  connectOrCreate: IncidentCreateOrConnectWithoutReportInput
+  create: IncidentCreateWithoutReportInput
+  delete: Boolean
+  disconnect: Boolean
+  update: IncidentUpdateWithoutReportInput
+  upsert: IncidentUpsertWithoutReportInput
+}
+
+input IncidentUpdateWithoutReportInput {
+  date_ended: DateTimeFieldUpdateOperationsInput
+  date_started: DateTimeFieldUpdateOperationsInput
+  incident_id: StringFieldUpdateOperationsInput
+  incident_type: StringFieldUpdateOperationsInput
+}
+
+input IncidentUpsertWithoutReportInput {
+  create: IncidentCreateWithoutReportInput!
+  update: IncidentUpdateWithoutReportInput!
+}
+
 input IncidentWhereInput {
   AND: [IncidentWhereInput!]
   date_ended: DateTimeFilter
@@ -291,16 +346,18 @@ input IncidentWhereUniqueInput {
   reports_id: String
 }
 
-type LoginResponse {
+type LoginResponseSuccess {
   accessToken: String!
+  account: Account!
 }
 
 type Mutation {
-  createOneCityProject(data: CityProjectCreateInput!): CityProject!
-  createOneIncident(data: IncidentCreateInput!): Incident!
+  createOneAccount(data: AccountCreateInput!): Account!
   createOneReport(data: ReportCreateInput!): Report!
-  login(cursor: AccountWhereUniqueInput, distinct: [AccountScalarFieldEnum!], orderBy: [AccountOrderByWithRelationInput!], skip: Int, take: Int, where: AccountWhereInput): LoginResponse
-  register(data: AccountCreateInput!): Account!
+  login(cursor: AccountWhereUniqueInput, distinct: [AccountScalarFieldEnum!], orderBy: [AccountOrderByWithRelationInput!], skip: Int, take: Int, where: AccountWhereInput): LoginResponseSuccess
+  logout: Boolean!
+  registerOneAccount(data: AccountCreateInput!): Account!
+  updateAccount(data: AccountUpdateInput!, where: AccountWhereUniqueInput!): Account
 }
 
 input NestedBoolFilter {
@@ -420,53 +477,9 @@ input ReportCreateNestedManyWithoutReporterInput {
   createMany: ReportCreateManyReporterInputEnvelope
 }
 
-input ReportCreateNestedOneWithoutCity_porjectInput {
-  connect: ReportWhereUniqueInput
-  connectOrCreate: ReportCreateOrConnectWithoutCity_porjectInput
-  create: ReportCreateWithoutCity_porjectInput
-}
-
-input ReportCreateNestedOneWithoutIncidentInput {
-  connect: ReportWhereUniqueInput
-  connectOrCreate: ReportCreateOrConnectWithoutIncidentInput
-  create: ReportCreateWithoutIncidentInput
-}
-
-input ReportCreateOrConnectWithoutCity_porjectInput {
-  create: ReportCreateWithoutCity_porjectInput!
-  where: ReportWhereUniqueInput!
-}
-
-input ReportCreateOrConnectWithoutIncidentInput {
-  create: ReportCreateWithoutIncidentInput!
-  where: ReportWhereUniqueInput!
-}
-
 input ReportCreateOrConnectWithoutReporterInput {
   create: ReportCreateWithoutReporterInput!
   where: ReportWhereUniqueInput!
-}
-
-input ReportCreateWithoutCity_porjectInput {
-  createdAt: DateTime
-  description: String!
-  incident: IncidentCreateNestedOneWithoutReportInput
-  location: String!
-  published: Boolean!
-  report_id: String
-  reporter: AccountCreateNestedOneWithoutReportsInput
-  updatedAt: DateTime
-}
-
-input ReportCreateWithoutIncidentInput {
-  city_porject: CityProjectCreateNestedOneWithoutReportInput
-  createdAt: DateTime
-  description: String!
-  location: String!
-  published: Boolean!
-  report_id: String
-  reporter: AccountCreateNestedOneWithoutReportsInput
-  updatedAt: DateTime
 }
 
 input ReportCreateWithoutReporterInput {
@@ -518,6 +531,69 @@ enum ReportScalarFieldEnum {
   updatedAt
 }
 
+input ReportScalarWhereInput {
+  AND: [ReportScalarWhereInput!]
+  createdAt: DateTimeFilter
+  description: StringFilter
+  location: StringFilter
+  NOT: [ReportScalarWhereInput!]
+  OR: [ReportScalarWhereInput!]
+  published: BoolFilter
+  report_id: StringFilter
+  reporter_id: StringNullableFilter
+  updatedAt: DateTimeFilter
+}
+
+input ReportUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  location: StringFieldUpdateOperationsInput
+  published: BoolFieldUpdateOperationsInput
+  report_id: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ReportUpdateManyWithoutReporterNestedInput {
+  connect: [ReportWhereUniqueInput!]
+  connectOrCreate: [ReportCreateOrConnectWithoutReporterInput!]
+  create: [ReportCreateWithoutReporterInput!]
+  createMany: ReportCreateManyReporterInputEnvelope
+  delete: [ReportWhereUniqueInput!]
+  deleteMany: [ReportScalarWhereInput!]
+  disconnect: [ReportWhereUniqueInput!]
+  set: [ReportWhereUniqueInput!]
+  update: [ReportUpdateWithWhereUniqueWithoutReporterInput!]
+  updateMany: [ReportUpdateManyWithWhereWithoutReporterInput!]
+  upsert: [ReportUpsertWithWhereUniqueWithoutReporterInput!]
+}
+
+input ReportUpdateManyWithWhereWithoutReporterInput {
+  data: ReportUpdateManyMutationInput!
+  where: ReportScalarWhereInput!
+}
+
+input ReportUpdateWithoutReporterInput {
+  city_porject: CityProjectUpdateOneWithoutReportNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  incident: IncidentUpdateOneWithoutReportNestedInput
+  location: StringFieldUpdateOperationsInput
+  published: BoolFieldUpdateOperationsInput
+  report_id: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ReportUpdateWithWhereUniqueWithoutReporterInput {
+  data: ReportUpdateWithoutReporterInput!
+  where: ReportWhereUniqueInput!
+}
+
+input ReportUpsertWithWhereUniqueWithoutReporterInput {
+  create: ReportCreateWithoutReporterInput!
+  update: ReportUpdateWithoutReporterInput!
+  where: ReportWhereUniqueInput!
+}
+
 input ReportWhereInput {
   AND: [ReportWhereInput!]
   city_porject: CityProjectRelationFilter
@@ -541,6 +617,10 @@ input ReportWhereUniqueInput {
 enum SortOrder {
   asc
   desc
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
 }
 
 input StringFilter {

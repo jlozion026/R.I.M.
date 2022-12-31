@@ -23,6 +23,7 @@ enum AccType {
 model Account {
   acc_id   String   @id @unique @default(cuid())
   email    String   @unique @db.VarChar(180)
+  /// @TypeGraphQL.omit(output: true)
   password String
   acc_type AccType
   reports  Report[]

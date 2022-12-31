@@ -1,29 +1,43 @@
 import { NonEmptyArray } from "type-graphql";
 
-import { RegisterResolver } from "./custom_resolver/account/RegisterResolver";
-import { LoginResolver } from "./custom_resolver/account/LoginResolver";
+import {
+  CreateOneAccountResolver,
+  CreateOneCityProjectResolver,
+  CreateOneIncidentResolver,
+  CreateOneReportResolver,
+  FindManyAccountResolver,
+  FindManyCityProjectResolver,
+  FindManyIncidentResolver,
+  FindManyReportResolver,
+} from "../prisma/generated/type-graphql";
+import { LoginResolver } from "./customResolver/account/LoginResolver";
+import { LogoutResolver } from "./customResolver/account/LogoutResolver";
+import { RegisterOneAccountResolver } from "./customResolver/account/RegisterOneAccountResolver";
+import { UpdateAccountResolver } from "./customResolver/account/UpdateRegOneAccountResolver";
 
 
-import { CreateOneCityProjectResolver, 
-    CreateOneIncidentResolver, 
-    CreateOneReportResolver, 
-    FindManyAccountResolver, 
-    FindManyCityProjectResolver, 
-    FindManyIncidentResolver, 
-    FindManyReportResolver } from "../prisma/generated/type-graphql";
+export const resolver = [
+  // *Login Resolvers
+  LoginResolver,
+  LogoutResolver,
 
+  // *Create
+  CreateOneAccountResolver,
+  RegisterOneAccountResolver,
+  CreateOneReportResolver,
+  // CreateOneCityProjectResolver,
+  // CreateOneIncidentResolver,
 
-export const resolver =  [
-    FindManyAccountResolver,
-    RegisterResolver,
-    LoginResolver,
+  // *Read
+  FindManyAccountResolver,
+  FindManyReportResolver,
+  FindManyCityProjectResolver,
+  FindManyIncidentResolver,
 
-    FindManyCityProjectResolver,
-    CreateOneCityProjectResolver,
+  // *Update
+  // ! Having a problem on Validation 
+  // 
+  UpdateAccountResolver,
 
-    FindManyIncidentResolver,
-    CreateOneIncidentResolver,
-
-    FindManyReportResolver, 
-    CreateOneReportResolver,
-    ] as NonEmptyArray<Function>
+  // *Delete
+] as NonEmptyArray<Function>;
