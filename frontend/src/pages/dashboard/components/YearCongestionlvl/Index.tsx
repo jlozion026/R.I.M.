@@ -1,10 +1,10 @@
 import React,{FC} from "react";
 import Card from "../../../../components/Card";
 import'../../../dashboard/style.css';
-import { YearlyConItems } from "./models";
+import { GraphItems } from "../../models";
 import arrowdown from "@/Assets/svg/arrowdown.svg";
 
-const YearCongestionlvl: FC<YearlyConItems>=({cardSize})=> {
+const YearCongestionlvl: FC<GraphItems>=({cardSize})=> {
 
         return(
            
