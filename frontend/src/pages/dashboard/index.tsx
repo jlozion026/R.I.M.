@@ -13,12 +13,8 @@ const Dashboard: FC = () => {
     <div className="mainGrid">
       <div className="navContainer">
         <div className="navCard">
-          <NavBar cardSize="card" />
+          <NavBar cardSize="nav--bar" />
         </div>
-        <div className="mob-nav">
-          <NavBar cardSize="mobile--nav" />
-        </div>
-
       </div>
       <div className="cardContainer">
         <div className="cardCon">
