@@ -7,6 +7,7 @@ import MonthlyCongestionLvl from "./components/MonthlyCongestionLvl/Index";
 import HourlyCongestionLvl from "./components/HourlyCongestionLvl";
 import YearCongestionlvl from "./components/YearCongestionlvl/Index";
 import './style.css';
+import { Outlet } from "react-router-dom";
 
 const Dashboard: FC = () => {
   return (
@@ -33,31 +34,31 @@ const Dashboard: FC = () => {
                 </div>
               );
 
-                     })}
-                     <div className="longCard">
-                     <Summary cardSize="card"/>
-                     </div>  
-                     
+            })}
+            <div className="longCard">
+              <Summary cardSize="card" />
             </div>
-            </div>
-            </div>
-            <div className="graphContainer">
-                <div className="graphsWrap">
-                  <div className="graphs">
 
-          <div className="medCard">
-            <YearCongestionlvl cardSize="card" />
           </div>
-          <div className="largeCard">
-            <HourlyCongestionLvl cardSize="card" />
+        </div>
+      </div>
+      <div className="graphContainer">
+        <div className="graphsWrap">
+          <div className="graphs">
+
+            <div className="medCard">
+              <YearCongestionlvl cardSize="card" />
+            </div>
+            <div className="largeCard">
+              <HourlyCongestionLvl cardSize="card" />
+            </div>
+            <div className="medCard">
+              <MonthlyCongestionLvl cardSize="card" />
+            </div>
+            <div className="mobileLongCard">
+              <Summary cardSize="card" />
+            </div>
           </div>
-          <div className="medCard">
-            <MonthlyCongestionLvl cardSize="card" />
-          </div>
-          <div className="mobileLongCard">
-            <Summary cardSize="card" />
-          </div>
-                </div>
         </div>
 
       </div>

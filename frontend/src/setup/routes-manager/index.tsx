@@ -10,6 +10,8 @@ import NotFound from '@/pages/notfound';
 
 import { AuthContext } from '../context-manager/authContext';
 import { AuthContextType } from '../context-manager/model';
+import Logs from '@/pages/Logs Page';
+import LogInfo from '@/pages/logs_info';
 
 export const Views: FC = () => {
   const { setAccToken } = useContext(AuthContext) as AuthContextType;
@@ -23,7 +25,7 @@ export const Views: FC = () => {
       credentials: "include"
     }).then(async res => {
       const { accessToken } = await res.json();
-      if(accessToken){
+      if (accessToken) {
         setAccToken();
       }
       console.log("app: ", accessToken);
@@ -31,7 +33,7 @@ export const Views: FC = () => {
     setLoading(false);
   }, [])
 
-  if(loading) return <div>loading...</div>
+  if (loading) return <div>loading...</div>
 
   return (
 
@@ -40,6 +42,8 @@ export const Views: FC = () => {
       <Route element={<ProtectedRoutes />}>
         <Route path='/' element={<Main />} />
         <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/logs' element={<Logs />} />
+        <Route path='/info' element={<LogInfo />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>

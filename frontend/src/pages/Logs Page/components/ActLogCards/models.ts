@@ -1,8 +1,7 @@
-export interface logsItems{
-    cardIcon:string;
-    cardSize:string;
-    city:string;
-    address:string;
-    
-   
+export interface logsItems {
+  reportType: string;
+  cardIcon: string;
+  cardSize: string;
+  city: string;
+  address: string;
 }
