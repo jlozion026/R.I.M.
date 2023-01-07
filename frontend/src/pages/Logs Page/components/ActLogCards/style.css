@@ -1,0 +1,47 @@
+*{
+    margin:0;
+    padding: 0;
+    font-family: sans-serif;
+}
+body{
+    background-color: #F0F0F9;
+}
+.cardData{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    padding-left:6%;
+    background: #FFFFFF;
+   
+}
+
+.city{
+    font-size: 1em;
+    color:#6F6F6F;
+    font-weight: bold;
+}
+.address{
+    font-size: 1em;
+    color:#6F6F6F;
+    
+}
+.iconsImg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:5em;
+    width: 5em;
+    padding-right: 1.5em;
+}
+.addressContainer{
+
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.activitylog{
+display: flex;
+    flex-direction: column;
+}
