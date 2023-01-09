@@ -1,4 +1,4 @@
-import Roadclosure from "@/Assets/svg/RoadClosure.svg";
+import RoadClosure from "@/Assets/svg/RoadClosure.svg";
 import Constructions from "@/Assets/svg/Constructions.svg";
 import Accident from "@/Assets/svg/Accident.svg";
 import Hazzard from "@/Assets/svg/Hazzard.svg";
@@ -7,7 +7,7 @@ import Event from "@/Assets/svg/Event.svg";
 
 export const CardProps = [
   {
-    cardIcon: Roadclosure,
+    cardIcon: RoadClosure,
     cardTitle: "Road Closure",
     cardValue: 0,
     cardSize: "card--small",
