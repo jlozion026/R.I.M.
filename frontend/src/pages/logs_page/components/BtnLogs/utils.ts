@@ -4,7 +4,7 @@ import Hazzard from "@/Assets/svg/Hazzard.svg";
 import Accident from "@/Assets/svg/Accident.svg";
 import Event from "@/Assets/svg/Event.svg";
 
-export const ReportsBtnProps = [
+export const LogsReportsBtnProps = [
   
   {
     id: "All",
@@ -43,7 +43,7 @@ export const ReportsBtnProps = [
     icon: "",
     children: "City Project btn",
     buttonStyle: "btn--categories",
-    buttonSize: "btn--small",
+    buttonSize: "btn--logs",
     onclick: () => {},
   },
 
@@ -65,7 +65,7 @@ export const ReportsBtnProps = [
     icon: "",
     children: "Road Construction",
     buttonStyle: "btn--categories",
-    buttonSize: "btn--small",
+    buttonSize: "btn--logs",
     onclick: () => {},
   },
 
@@ -76,7 +76,7 @@ export const ReportsBtnProps = [
     icon: "",
     children: "Road Accident",
     buttonStyle: "btn--categories",
-    buttonSize: "btn--small",
+    buttonSize: "btn--logs",
     onclick: () => {},
   },
 
@@ -87,7 +87,7 @@ export const ReportsBtnProps = [
     icon: "",
     children: "Road Event",
     buttonStyle: "btn--categories",
-    buttonSize: "btn--small",
+    buttonSize: "btn--logs",
     onclick: () => {},
   },
 
@@ -98,71 +98,8 @@ export const ReportsBtnProps = [
     icon: "",
     children: "Road Hazzard",
     buttonStyle: "btn--categories",
-    buttonSize: "btn--small",
-    onclick: () => {},
-  },
-
-];
-
-export const MobileReportsBtnProps = [
- 
-  {
-    id: "All",
-    type: "button",
-    svg: "",
-    icon: "",
-    children: "All",
-    buttonStyle: "btn--categories",
     buttonSize: "btn--logs",
     onclick: () => {},
   },
- 
-  {
-    id: "City Project Form",
-    type: "button",
-    svg: Hazzard,
-    icon: "",
-    children: "City Project Form",
-    buttonStyle: "btn--categories",
-    buttonSize: "btn--small",
-    onclick: () => {},
-  },
-
-  {
-    id: "Road Closure Form",
-    type: "button",
-    svg: roadclosure,
-    icon: "",
-    children: "Road Closure",
-    buttonStyle: "btn--categories",
-    buttonSize: "btn--small",
-    onclick: () => {},
-  },
-
-  {
-    id: "Road Constraction Form",
-    type: "button",
-    svg: Construction,
-    icon: "",
-    children: "Road Constraction",
-    buttonStyle: "btn--categories",
-    buttonSize: "btn--small",
-    onclick: () => {},
-  },
-
-  {
-    id: "Road Accident Form",
-    type: "button",
-    svg: Accident,
-    icon: "",
-    children: "Road Accident",
-    buttonStyle: "btn--categories",
-    buttonSize: "btn--small",
-    onclick: () => {},
-  },
 
 ];
-
-
-
-

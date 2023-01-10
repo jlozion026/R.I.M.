@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect } from "react";
 import './style.css';
 import ActLogsCategories from "./components/ActLogCards";
 import { actLogsProps } from "./components/ActLogCards/utils";
@@ -20,15 +20,15 @@ const Logs: FC = () => {
   }, []);
 
   return (
-    <div className="mainGrid">
-      <div className="navContainer">
-        <div className="navCont">
+    <div className="logsmainGrid">
+      <div className="logsnavContainer">
+        <div className="logsnavCont">
           <NavBar cardSize="nav--bar" />
         </div>
       </div>
 
       <div className="categorieswrap">
-        <div className="topwrapper">
+        <div className="logstopwrapper">
           <div className="searchBarCon">
             <InputField
               placeholder="Search here"

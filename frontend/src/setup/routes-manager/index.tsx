@@ -10,7 +10,7 @@ import NotFound from '@/pages/notfound';
 
 import { AuthContext } from '../context-manager/authContext';
 import { AuthContextType } from '../context-manager/model';
-import Logs from '@/pages/Logs Page';
+import  Logs from '@/pages/logs_page';
 import LogInfo from '@/pages/logs_info';
 
 export const Views: FC = () => {
