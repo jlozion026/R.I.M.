@@ -1,0 +1,41 @@
+
+.logscardData{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    padding-left:6%;
+    background: #FFFFFF;
+    cursor: pointer;
+   
+}
+
+.city{
+    font-size: 1em;
+    color:#6F6F6F;
+    font-weight: bold;
+}
+.address{
+    font-size: 1em;
+    color:#6F6F6F;
+    
+}
+.iconsImg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:6em;
+    width: 6em;
+    padding-right: 1.5em;
+}
+.addressContainer{
+
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.activitylog{
+display: flex;
+    flex-direction: column;
+}

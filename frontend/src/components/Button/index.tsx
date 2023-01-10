@@ -15,6 +15,8 @@ const SIZES = [
   "btn--small",
   "for-icons",
   "btn--next",
+  "btn--logs",
+  "btn--active"
 ];
 
 const Button: FC<ButtonProps> = ({
