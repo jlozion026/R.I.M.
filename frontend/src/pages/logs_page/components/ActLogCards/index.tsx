@@ -18,7 +18,7 @@ const ActLogsCategories: FC<logsItems> = ({ reportType, cardSize, cardIcon, city
   }
   return (
     <Card cardSize={cardSize}>
-      <div className="cardData" onClick={ change_page } >
+      <div className="logscardData" onClick={ change_page } >
         <div className="iconImg">
           <img className="iconsImg" src={cardIcon} alt="iconsImg" />
         </div>

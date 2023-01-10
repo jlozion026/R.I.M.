@@ -3,7 +3,7 @@ import "./style.css";
 import { CardInterface } from "./models";
 
 
-const SIZES = ["card","card--main-nav","mobile--nav","card--logs","nav--bar"]
+const SIZES = ["card","card--main-nav","nav--bar"]
 
 
 const Card: FC<CardInterface> = ({

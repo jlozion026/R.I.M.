@@ -11,6 +11,11 @@ import { Link, useLocation } from "react-router-dom";
 
 
 
+const getCred = (e: React.ChangeEvent<HTMLInputElement>) => {
+    ({});
+  };
+
+
 const Logs: FC = () => {
   const { state } = useLocation();
 
@@ -39,7 +44,7 @@ const Logs: FC = () => {
               forinput={""}
               id={"searchBar"}
               required={false}
-              getData={""}
+              getData={getCred}
               readonly={false} />
             <span >
               <IoIosSearch className="searchIcon" />
@@ -63,7 +68,7 @@ const Logs: FC = () => {
                 forinput={""}
                 id={"searchBar"}
                 required={false}
-                getData={""}
+                getData={getCred}
                 readonly={false} />
               <span >
                 <IoIosSearch className="mobilesearchIcon" />

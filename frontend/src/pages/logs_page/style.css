@@ -124,9 +124,7 @@ align-items: center ;
     }
     .categorieswrap{
         grid-area: categories;
-        overflow-x: scroll;
         background-color: #F0F0F9;
-        background-color: solid;
         height: fit-content;
         padding-top: 25px;
         
@@ -229,6 +227,7 @@ align-items: center ;
         align-items: center;
         gap: 1em;
         padding-top: 30px;
+        padding-bottom: 1em;
         
     }
     .logsbuttons{
