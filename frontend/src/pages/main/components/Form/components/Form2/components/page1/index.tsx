@@ -56,13 +56,10 @@ const Page1: FC<IPage1> = ({
             <InputField
               label={"Date Started"}
               type={"text"}
-              auto={false}
               name={"StartDate"}
               placeholder={StartDate}
               forinput={"calendar"}
               id={"start-date"}
-              required={true}
-              getData={() => {}}
               readonly={true}
             />
           </div>
@@ -85,13 +82,9 @@ const Page1: FC<IPage1> = ({
             <InputField
               label={"Date Ended"}
               type={"text"}
-              auto={false}
               name={"EndDate"}
               placeholder={EndDate}
               forinput={"end-date"}
-              id={""}
-              required={false}
-              getData={() => {}}
               readonly={true}
             />
           </div>
@@ -124,8 +117,6 @@ const Page1: FC<IPage1> = ({
 
       <div className="btn-container-next">
         <Button
-          icon={""}
-          svg={""}
           type={btnType.Submit}
           buttonStyle={"btn--secondary"}
           onClick={Next}

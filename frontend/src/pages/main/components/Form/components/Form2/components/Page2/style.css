@@ -1,54 +1,79 @@
+.fi-container {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+  padding: 0.4em;
+  justify-content: space-between;
+  gap: 0.3em;
+  font-family: sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.fi-container label {
+  font-family: sans-serif;
+  font-weight: 600;
+  font-size: 1em;
+  margin-bottom: 0.3em;
+}
+
 .contractor-container {
+  margin-bottom: 5em;
+}
+
+.programAmount-container {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+  padding: 0.4em;
+  justify-content: space-between;
+}
+
+.contractorAmount-container {
+  margin-bottom: 6em;
+}
+
+.btn-container-submit {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0px;
+  gap: 10px;
+  width: 70%;
+  margin-bottom: 5%;
+}
+
+@media all and (max-width: 600px) {
+  .fi-container {
     display: flex;
     flex-direction: column;
-    width: 70%;
-    padding: 10px;
+    width: 95%;
+    padding: 0.5em;
     justify-content: space-between;
-    gap: 5px;
-    margin-bottom: 10%;
     font-family: sans-serif;
     font-weight: 500;
     font-size: 13px;
-}
+  }
+  .contractor-container {
+    margin-bottom: 20%;
+  }
 
-
-.finance-container{
+  .programAmount-container {
     display: flex;
     flex-direction: column;
-    width: 70%;
-    padding: 10px;
+    width: 95%;
     justify-content: space-between;
-    gap: 5px;
-    font-family: sans-serif;
-    font-weight: 500;
-    font-size: 13px;
-}
+  }
 
-.programAmount-container{
+  .contractorAmount-container {
+    margin-bottom: 6em;
+  }
+
+  .btn-container-submit {
     display: flex;
     flex-direction: column;
-    width: 70%;
-    padding: 10px;
-    justify-content: space-between;
-    gap: 5px;
-}
-
-.contractorAmount-container{
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-    padding: 10px;
-    justify-content: space-between;
-    gap: 5px;
-    margin-bottom: 5%;
-}
-
-.btn-container-submit{ 
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    padding: 0px;
-    gap: 10px;
-    width: 70%;
-    margin-bottom: 5%;
+    align-items: center;
+    padding: 1em;
+    width: 100%;
+  }
 }

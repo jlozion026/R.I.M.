@@ -88,11 +88,6 @@ const Search: FC<ISearch> = ({
         placeholder={PlaceHolder}
         getData={handleInput}
         value={value}
-        auto={false}
-        readonly={false}
-        required={false}
-        forinput={""}
-        id={""}
       />
       {/* We can use the "status" to decide whether we should display the dropdown or not */}
       {status === "OK" && (

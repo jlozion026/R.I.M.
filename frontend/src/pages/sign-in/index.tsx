@@ -16,7 +16,7 @@ import { credentials } from "./models";
 import { LoginProps } from "./utils";
 
 import "./style.css";
-import {  Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { AuthContext } from "@/setup/context-manager/authContext";
 import { AuthContextType } from "@/setup/context-manager/model";
 
@@ -87,8 +87,7 @@ const SignIn: FC = () => {
                     name={val.name}
                     auto={val.auto}
                     getData={getCred}
-                    required
-                    readonly={false}
+                    required={val.require}
                   />
                   <div className="validation">*Required</div>
                 </div>
@@ -103,8 +102,6 @@ const SignIn: FC = () => {
             </div>
             <div className="btn-container">
               <Button
-                svg=""
-                icon=""
                 type={btnType.Submit}
                 buttonStyle={"btn--primary"}
                 onClick={onSubmit}
