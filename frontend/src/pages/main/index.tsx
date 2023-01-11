@@ -1,4 +1,12 @@
-import { FC, memo, useCallback, useMemo, useRef, useState } from "react";
+import {
+  FC,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 import {
   GoogleMap,
@@ -23,29 +31,13 @@ import GenerateCoordinates from "./components/GenerateCoordinates";
 
 import { MarkerData } from "./components/GenerateCoordinates/models";
 
-import { MapOptions, LatLngLiteral } from "./models";
+import { libraries, defaultCenter, options } from "@/utils";
 
 import Zoom from "./components/Zoom";
 
 import Constructions from "@/Assets/svg/Constructions.svg";
 
 import "./style.css";
-
-const mapId = "753af1df20893fcc";
-
-const libraries: (
-  | "drawing"
-  | "geometry"
-  | "localContext"
-  | "places"
-  | "visualization"
-)[] = ["places"];
-
-// Default Center of GoogleMap
-const defaultCenter: LatLngLiteral = {
-  lat: 14.676,
-  lng: 121.0437,
-};
 
 const Main: FC = () => {
   const { isLoaded, loadError } = useLoadScript({
@@ -61,12 +53,20 @@ const Main: FC = () => {
   const zoomIn = () => setZoom(zoom + 1);
   const zoomOut = () => setZoom(zoom - 1);
 
-  const options: MapOptions = {
-    mapId: mapId,
-    disableDefaultUI: true,
-    zoomControl: false,
-    clickableIcons: false,
-  };
+  const [pingPopUp, setPingPopUp] = useState<boolean>(false);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  const hello = () => setPingPopUp(!pingPopUp);
+
+  const windowSize = window.matchMedia(`(max-width: 960px)`);
+
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   // dummy coordinates to generate multiple markers
   const coordinates = useMemo(
@@ -98,89 +98,94 @@ const Main: FC = () => {
   if (!isLoaded) return <div>"Loading Maps........"</div>;
 
   return (
-    <div className="map-container">
-      <GoogleMap
-        mapContainerClassName="mapContainerStyle"
-        center={defaultCenter}
-        zoom={zoom}
-        options={options}
-        onLoad={onMapLoad}
-        onUnmount={onUnMount}
-      >
-        {zoom <= 14 ? (
-          <>
-            <Marker position={defaultCenter} />
-            <Circle
-              center={defaultCenter}
-              radius={2500}
-              options={defaultOptions}
-            />
-            <Circle
-              center={defaultCenter}
-              radius={4500}
-              options={closeOptions}
-            />
-            <Circle
-              center={defaultCenter}
-              radius={6500}
-              options={middleOptions}
-            />
-            <Circle center={defaultCenter} radius={8000} options={farOptions} />
-          </>
-        ) : null}
-
-        <MarkerClusterer>
-          {(clusterer) => (
+    <>
+      <div className="map-container">
+        <GoogleMap
+          mapContainerClassName="mapContainerStyle"
+          center={defaultCenter}
+          zoom={zoom}
+          options={options}
+          onLoad={onMapLoad}
+          onUnmount={onUnMount}
+        >
+          {zoom <= 14 ? (
             <>
-              {coordinates.map((marker, index) => (
-                <Marker
-                  key={index}
-                  position={marker}
-                  icon={marker.icons}
-                  clusterer={clusterer}
-                  onClick={() => {
-                    setSelectedMarker(marker);
-                  }}
-                />
-              ))}
+              <Marker position={defaultCenter} />
+              <Circle
+                center={defaultCenter}
+                radius={2500}
+                options={defaultOptions}
+              />
+              <Circle
+                center={defaultCenter}
+                radius={4500}
+                options={closeOptions}
+              />
+              <Circle
+                center={defaultCenter}
+                radius={6500}
+                options={middleOptions}
+              />
+              <Circle
+                center={defaultCenter}
+                radius={8000}
+                options={farOptions}
+              />
             </>
-          )}
-        </MarkerClusterer>
+          ) : null}
 
-        {selectedMarker ? (
-          <InfoWindow
-            position={{
-              lat: selectedMarker.lat,
-              lng: selectedMarker.lng,
-            }}
-            onCloseClick={() => {
-              setSelectedMarker(null);
-            }}
-          >
-            <div className="info-window-container">
-              <div className="iw-icons-bg">
-                <img className="window-icons" src={Constructions}></img>
+          <MarkerClusterer>
+            {(clusterer) => (
+              <>
+                {coordinates.map((marker, index) => (
+                  <Marker
+                    key={index}
+                    position={marker}
+                    icon={marker.icons}
+                    clusterer={clusterer}
+                    onClick={() => {
+                      setSelectedMarker(marker);
+                    }}
+                  />
+                ))}
+              </>
+            )}
+          </MarkerClusterer>
+
+          {selectedMarker ? (
+            <InfoWindow
+              position={{
+                lat: selectedMarker.lat,
+                lng: selectedMarker.lng,
+              }}
+              onCloseClick={() => {
+                setSelectedMarker(null);
+              }}
+            >
+              <div className="info-window-container">
+                <div className="iw-icons-bg">
+                  <img className="window-icons" src={Constructions}></img>
+                </div>
+                <h1 className="window-title">Project Title</h1>
+                <hr className="iw-line" />
+                <h3 className="address-title">Address</h3>
+                <h5 className="latlng-container">
+                  {"Lat: " + selectedMarker.lat}
+                </h5>
+                <h5 className="latlng-container">
+                  {"Lng: " + selectedMarker.lng}
+                </h5>
               </div>
-              <h1 className="window-title">Project Title</h1>
-              <hr className="iw-line" />
-              <h3 className="address-title">Address</h3>
-              <h5 className="latlng-container">
-                {"Lat: " + selectedMarker.lat}
-              </h5>
-              <h5 className="latlng-container">
-                {"Lng: " + selectedMarker.lng}
-              </h5>
-            </div>
-          </InfoWindow>
-        ) : null}
-      </GoogleMap>
-
-      <div className="nav-container">
-        <Navbar cardSize="card--main-nav" />
+            </InfoWindow>
+          ) : null}
+        </GoogleMap>
+        <div className="nav-container">
+          <Navbar cardSize="nav--bar" PingPopOut={hello} />
+        </div>
+        <Zoom zoomIn={zoomIn} zoomOut={zoomOut} PanTo={panToQC} />
+        <ReportsBtn WindowSize={windowSize} PingPopUp={pingPopUp} />
       </div>
-      <Zoom zoomIn={zoomIn} zoomOut={zoomOut} PanTo={panToQC} />
-      <ReportsBtn />
-    </div>
+    </>
   );
 };
 

@@ -1,3 +1,4 @@
 export interface navCardItems {
-    cardSize:string
+  cardSize: string;
+  PingPopOut?(): void;
 }

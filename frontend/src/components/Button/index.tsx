@@ -16,7 +16,18 @@ const SIZES = [
   "for-icons",
   "btn--next",
   "btn--logs",
-  "btn--active"
+  "btn--active",
+  "btn--reports",
+];
+
+const COLORS = [
+  " ",
+  "orangeBg",
+  "yellowBg",
+  "alligatorBg",
+  "deepYellowBg",
+  "kowloonBg",
+  "softBlueBg",
 ];
 
 const Button: FC<ButtonProps> = ({
@@ -27,21 +38,36 @@ const Button: FC<ButtonProps> = ({
   type,
   buttonStyle,
   buttonSize,
+  svgBackGround,
 }) => {
-
-  const checkButtonStyle = STYLES.includes(buttonStyle) ? buttonStyle : STYLES[0];
+  const checkButtonStyle = STYLES.includes(buttonStyle)
+    ? buttonStyle
+    : STYLES[0];
 
   const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
 
+  const checkIconBackGround = COLORS.includes(svgBackGround || "")
+    ? svgBackGround
+    : COLORS[0];
+
   return (
-    <button className={`btn ${checkButtonStyle} ${checkButtonSize}`}
-      onClick={onClick} type={type}>
-      {svg ? <img src={svg} alt="icon" className="btn-img" /> : ""}
+    <button
+      className={`btn ${checkButtonStyle} ${checkButtonSize}`}
+      onClick={onClick}
+      type={type}
+    >
+      {svg ? (
+        <div className={`icon-bg ${checkIconBackGround}`}>
+          <img src={svg} alt="icon" className="btn-img " />
+        </div>
+      ) : (
+        ""
+      )}
+
       {icon}
       {children}
     </button>
   );
-}
-
+};
 
 export default Button;

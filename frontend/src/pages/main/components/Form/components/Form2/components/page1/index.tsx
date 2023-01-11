@@ -10,6 +10,8 @@ import { FaCalendarAlt } from "react-icons/fa";
 
 import { IPage1 } from "../../../../models";
 
+import useOnclickOutside from "react-cool-onclickoutside";
+
 import { btnType } from "@/components/Button/models";
 
 import "./style.css";
@@ -29,7 +31,11 @@ const Page1: FC<IPage1> = ({
   SetTo,
   SetToCoord,
   SetFromCoord,
+  ClickCalendar,
 }) => {
+  const ref = useOnclickOutside(() => {
+    ClickCalendar();
+  });
   return (
     <>
       <div className="location-container">
@@ -56,22 +62,22 @@ const Page1: FC<IPage1> = ({
             <InputField
               label={"Date Started"}
               type={"text"}
-              auto={false}
               name={"StartDate"}
               placeholder={StartDate}
               forinput={"calendar"}
               id={"start-date"}
-              required={true}
-              getData={() => {}}
               readonly={true}
             />
           </div>
+
           {CalendarStart ? (
-            <Calendar
-              date={new Date()}
-              onChange={HandleStartDate}
-              className="calendarElement"
-            />
+            <div ref={ref}>
+              <Calendar
+                date={new Date()}
+                onChange={HandleStartDate}
+                className="calendarElement"
+              />
+            </div>
           ) : null}
         </div>
         <p className="calendar-icon">
@@ -85,22 +91,20 @@ const Page1: FC<IPage1> = ({
             <InputField
               label={"Date Ended"}
               type={"text"}
-              auto={false}
               name={"EndDate"}
               placeholder={EndDate}
               forinput={"end-date"}
-              id={""}
-              required={false}
-              getData={() => {}}
               readonly={true}
             />
           </div>
           {CalendarEnd ? (
-            <Calendar
-              date={new Date()}
-              onChange={HandleEndDate}
-              className="calendarElement"
-            />
+            <div ref={ref}>
+              <Calendar
+                date={new Date()}
+                onChange={HandleEndDate}
+                className="calendarElement"
+              />
+            </div>
           ) : null}
         </div>
 
@@ -124,8 +128,6 @@ const Page1: FC<IPage1> = ({
 
       <div className="btn-container-next">
         <Button
-          icon={""}
-          svg={""}
           type={btnType.Submit}
           buttonStyle={"btn--secondary"}
           onClick={Next}

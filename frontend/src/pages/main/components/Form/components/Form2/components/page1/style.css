@@ -1,17 +1,17 @@
-.location-container{
+.location-container {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 65%;
   padding: 10px;
   justify-content: space-between;
   gap: 5px;
 }
 
-.location-container label{
+.location-container label {
   font-family: sans-serif;
-  font-weight: 500;
-  font-size: 13px;
-  margin-bottom: 5px;
+  font-weight: 600;
+  font-size: 0.8em;
+  margin-bottom: 0.3em;
 }
 
 .autocomplete-wrapper {
@@ -19,7 +19,7 @@
   flex-direction: column;
 }
 
-.date-container{
+.date-container {
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -28,29 +28,29 @@
   margin-left: 1.2em;
 }
 
-.date-container label{
+.date-container label {
   font-family: sans-serif;
-  font-weight: 500;
-  font-size: 13px;
-  margin-bottom: 5px;
+  font-weight: 600;
+  font-size: 0.8em;
+  margin-bottom: 0.3em;
 }
 
-.date-group{
+.date-group {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 65%;
   padding: 0.5rem;
   justify-content: space-between;
   gap: 5px;
 }
 
-.date-wrapper{
+.date-wrapper {
   display: flex;
   flex-direction: column;
 }
 
-.calendar-icon{
+.calendar-icon {
   display: flex;
   flex-direction: row;
   margin-top: 1.2rem;
@@ -58,10 +58,10 @@
   align-items: center;
 }
 
-.description{
+.description {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 65%;
   padding: 10px;
   justify-content: space-between;
   gap: 5px;
@@ -70,7 +70,14 @@
   font-size: 13px;
 }
 
-.calendarElement{
+.description label {
+  font-family: sans-serif;
+  font-weight: 600;
+  font-size: 1em;
+  margin-bottom: 0.3em;
+}
+
+.calendarElement {
   position: absolute;
   left: 50%;
   transform: translate(-50%);
@@ -79,11 +86,93 @@
   z-index: 10;
 }
 
-.btn-container-next{
+.btn-container-next {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   padding: 0px;
   gap: 10px;
   width: 70%;
+}
+
+@media all and (max-width: 600px) {
+  .location-container {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    padding: 10px;
+    justify-content: space-between;
+    gap: 5px;
+  }
+
+  .autocomplete-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .date-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1.2em;
+  }
+
+  .date-group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0.5em;
+    justify-content: space-between;
+    gap: 5px;
+  }
+
+  .date-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .calendar-icon {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1.2em;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    padding: 10px;
+    justify-content: space-between;
+    gap: 5px;
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+  }
+
+  .calendarElement {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    top: 100%;
+    border: 1px solid #205eff;
+    z-index: 10;
+  }
+  .rdrCalendarWrapper {
+    font-size: 10px;
+    height: 22.5em;
+  }
+
+  .btn-container-next {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    width: 100%;
+  }
 }

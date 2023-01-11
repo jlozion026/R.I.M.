@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, FC, useRef, useState } from "react";
 
 import DefaultForm from "./components/DefaultForm";
 import Form2 from "./components/Form2";
@@ -20,20 +20,22 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title }) => {
   const [page, setPage] = useState(false);
 
   //Calendar
-  const [startDate, setStartDate] = useState("mm/dd/yyyy");
-  const [endDate, setEndDate] = useState("mm/dd/yyyy");
+  const [startDate, setStartDate] = useState("YYYY/MM/DD");
+  const [endDate, setEndDate] = useState("YYYY/MM/DD");
 
-  // coordinates 
+  // coordinates
   const [fromPos, setFromPos] = useState<LatLngLiteral | null>(null);
   const [toPos, setToPos] = useState<LatLngLiteral | null>(null);
   // place
   const [from, setFrom] = useState<string>("");
   const [to, setTo] = useState<string>("");
 
-  const setToPlace = (place:string) => setTo(place)
-  const setFromPlace = (place:string) => setFrom(place)
-  const setToCoord = (position: google.maps.LatLngLiteral) => setToPos(position)
-  const setFromCoord = (position: google.maps.LatLngLiteral) => setFromPos(position)
+  const setToPlace = (place: string) => setTo(place);
+  const setFromPlace = (place: string) => setFrom(place);
+  const setToCoord = (position: google.maps.LatLngLiteral) =>
+    setToPos(position);
+  const setFromCoord = (position: google.maps.LatLngLiteral) =>
+    setFromPos(position);
 
   //Todo state of origin and destination Form2Data.
   const [form2Data, setForm2Data] = useState<IForm2Data>({
@@ -100,14 +102,12 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title }) => {
   };
 
   const handleStartDate = (date: Date) => {
-    console.log("start-date:" + format(date, "MM/dd/yyyy"));
-    setStartDate(format(date, "MM/dd/yyyy"));
+    setStartDate(format(date, "yyyy/MM/dd"));
     clickCalendar();
   };
 
   const handleEndDate = (date: Date) => {
-    console.log("end-date:" + format(date, "MM/dd/yyyy"));
-    setEndDate(format(date, "MM/dd/yyyy"));
+    setEndDate(format(date, "yyyy/MM/dd"));
     clickCalendar();
   };
 
@@ -125,15 +125,15 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title }) => {
   };
 
   return (
-    <form className="form">
-      <div className="header">
+    <form className="main-form">
+      <div className="header-form">
         {page ? (
           <p className="back-btn" onClick={() => setPage(false)}>
             <FaArrowLeft />
           </p>
         ) : null}
 
-        <h1 className="title">{Title}</h1>
+        <h1 className="title-form">{Title}</h1>
       </div>
       {FormType ? (
         <div className="step-bar">
@@ -158,6 +158,7 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title }) => {
             setCalendarStart((calendarStart) => !calendarStart)
           }
           ClickCalendarEnd={() => setCalendarEnd((calendarEnd) => !calendarEnd)}
+          ClickCalendar={clickCalendar}
           Submit={SubmitDefaultFormData}
         />
       ) : (
@@ -179,6 +180,7 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title }) => {
             setCalendarStart((calendarStart) => !calendarStart)
           }
           ClickCalendarEnd={() => setCalendarEnd((calendarEnd) => !calendarEnd)}
+          ClickCalendar={clickCalendar}
           Submit={SubmitForm2Data}
         />
       )}

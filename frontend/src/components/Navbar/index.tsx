@@ -2,24 +2,30 @@ import { FC } from "react";
 import Card from "@/components/Card";
 import { navCardItems } from "./models";
 
-import {MdOutlineSpaceDashboard, MdOutlinePinDrop} from "react-icons/md";
-import {CgProfile} from "react-icons/cg"
+import { MdOutlineSpaceDashboard, MdOutlinePinDrop } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
 
 import "./style.css";
 import { Link } from "react-router-dom";
 
-const Navbar: FC<navCardItems> = ({ cardSize }) => {
+const Navbar: FC<navCardItems> = ({ cardSize, PingPopOut }) => {
   return (
     <Card cardSize={cardSize}>
       <nav className="vectorContainer">
-      <Link to="/signin" className="nav-icon">
-        <p><MdOutlinePinDrop/></p>
+        <Link to="/" className="nav-icon">
+          <p onClick={PingPopOut}>
+            <MdOutlinePinDrop />
+          </p>
         </Link>
         <Link to="/dashboard" className="nav-icon">
-         <p><MdOutlineSpaceDashboard/></p> 
+          <p>
+            <MdOutlineSpaceDashboard />
+          </p>
         </Link>
         <Link to="/" className="nav-icon">
-        <p><CgProfile/></p>
+          <p>
+            <CgProfile />
+          </p>
         </Link>
       </nav>
     </Card>

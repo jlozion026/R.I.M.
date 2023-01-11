@@ -2,6 +2,13 @@
   --primary: #0c85ff;
   --secondary: #37b9f1;
   --white: #ffffff;
+  --none: none;
+  --orange: #fa976c;
+  --yellow: #ffe683;
+  --alligator: #ffd800;
+  --deepYellow: #ffc845;
+  --kowloon: #dfe15b;
+  --softBlue: #8ad5dd;
 }
 
 button {
@@ -12,9 +19,8 @@ button {
 }
 
 .btn-img {
-  height: 20%;
-  width: 20%;
-  margin-right: 10px;
+  height: 30px;
+  width: 30px;
 }
 
 .btn {
@@ -27,6 +33,41 @@ button {
 
 .btn:hover {
   transform: translateY(-2px);
+}
+
+.icon-bg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+/* Icon Background Colors */
+
+.orangeBg {
+  background-color: var(--orange);
+}
+
+.yellowBg {
+  background-color: var(--yellow);
+}
+
+.alligatorBg {
+  background-color: var(--alligator);
+}
+
+.deepYellowBg {
+  background-color: var(--deepYellow);
+}
+
+.kowloonBg {
+  background-color: var(--kowloon);
+}
+
+.softBlueBg {
+  background-color: var(--softBlue);
 }
 
 /* Button Colors and Styles */
@@ -55,7 +96,6 @@ button {
   border: none;
 }
 
-
 /* Button Sizes */
 
 .btn--large {
@@ -69,27 +109,27 @@ button {
 }
 
 .btn--small {
+  height: 100%;
+  width: 100%;
   padding: 5px;
   font-size: 12px;
   font-weight: bold;
- 
-
 }
-.btn--logs{
+.btn--logs {
   padding: 5px;
   font-size: 12px;
   min-height: 100%;
   min-width: 100%;
   font-weight: bold;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  color: #9B959E;
+  color: #9b959e;
 }
-.btn--active{
+.btn--active {
   padding: 5px;
   font-size: 12px;
   font-weight: bold;
   box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
-  color: #205EFF;
+  color: #205eff;
 }
 
 .for-icons {
@@ -106,7 +146,101 @@ button {
   font-weight: bold;
 }
 
+.btn--reports {
+  display: flex;
+  justify-content: space-evenly;
+  height: 2.6rem;
+  width: 100%;
+  padding: 5px;
+  font-size: 0.6em;
+  font-weight: bold;
+}
+
 .for-icons img {
   width: 0%;
   margin-right: 0px;
+}
+
+/* report buttons for small mobile view */
+@media all and (max-width: 480px) {
+  /* forms next button for mobile view */
+  .btn--next {
+    padding-left: 120px;
+    padding-right: 120px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 15px;
+    font-weight: bold;
+  }
+}
+
+/* report buttons for Mobile View */
+@media all and (min-width: 481px) and (max-width: 768px) {
+  .btn--categories {
+    background-color: var(--none);
+    color: var(--grey);
+    box-sizing: border-box;
+    border: none;
+  }
+
+  .btn--reports {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 5px;
+    font-size: 0.6em;
+    color: #626060;
+    font-weight: bold;
+  }
+
+  /* forms next button for mobile view */
+  .btn--next {
+    width: 90%;
+    height: 90%;
+    padding-left: 120px;
+    padding-right: 120px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 15px;
+    font-weight: bold;
+  }
+}
+
+/* Tablet View */
+@media all and (max-width: 960px) {
+  .btn-img {
+    height: 4.6em;
+    width: 4.6em;
+    margin-right: 0px;
+  }
+
+  .btn--reports {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 5px;
+    font-size: 0.6em;
+    color: #626060;
+    font-weight: bold;
+  }
+
+  /* forms next button for mobile view */
+  .btn--next {
+    width: 100%;
+    height: 100%;
+    padding-left: 120px;
+    padding-right: 120px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  .btn--secondary {
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+  }
 }

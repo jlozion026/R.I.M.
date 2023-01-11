@@ -8,32 +8,31 @@
 
 /*card sizes*/
 
-.card{
-    min-width: 100%;
-    min-height: 100%;
-    border-radius: 1vw;
+.card {
+  min-width: 100%;
+  min-height: 100%;
+  border-radius: 1vw;
 }
 .card--main-nav {
-    width: 60%;
-    height: 100%;
-    border-radius: .5em;
+  width: 60%;
+  height: 100%;
+  border-radius: 0.5em;
+}
+.nav--bar {
+  border-radius: 1vw;
+}
+@media all and (max-width: 960px) {
+  .card {
+    border-radius: 3.5vw;
   }
-  .nav--bar{
-    border-radius: 1vw;
+  .nav--bar {
+    border-radius: 0;
   }
-  @media all  and (max-width: 960px) {
- 
-    .card{
-      border-radius: 3.5vw;
-    }
-    .nav--bar{
-      border-radius: 0;
-    }
-    .nav--bar{
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.2);
+  .nav--bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.2);
   }
- }
+}

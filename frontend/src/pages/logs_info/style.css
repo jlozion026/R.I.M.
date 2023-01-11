@@ -1,0 +1,73 @@
+.logsInfo {
+  display: flex;
+  position: relative;
+  height: 100vh;
+  width: 100%;
+}
+
+.info-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 20%;
+  background-color: #ffff;
+  padding: 30px;
+  font-family: "Inter";
+}
+
+.bck-cont {
+  width: 100%;
+  margin-bottom: 30px;
+  padding: 0px 20px 0px 0px;
+  color: #9b959e;
+  cursor: pointer;
+}
+
+.info-title {
+  font-size: 1em;
+  width: 100%;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #7f7f82;
+}
+
+.info-title > h3 {
+  color: #464647;
+}
+
+.info-dates {
+  width: 100%;
+  color: #464647;
+}
+
+.info-dates .date-title {
+  font-size: 0.9em;
+  list-style-type: none;
+}
+
+.li-dates {
+  margin-top: 5px;
+  margin-left: 30px;
+  font-size: 0.8em;
+}
+
+.city-project-info {
+  display: flex;
+  flex-direction: column;
+  margin-top: 25px;
+  width: 100%;
+  list-style-type: none;
+  font-size: 0.9em;
+  gap: 25px;
+  color: #464647;
+}
+
+.map-cont {
+  height: 100%;
+  width: 80%;
+}
+
+.mapContainerStyle {
+  width: 100%;
+  height: 100%;
+}
