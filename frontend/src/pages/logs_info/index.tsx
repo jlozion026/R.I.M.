@@ -1,6 +1,6 @@
-import { FC, useCallback, useRef, useState } from "react";
+import { FC, useCallback, useMemo, useRef, useState } from "react";
 
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import {
   GoogleMap,
@@ -50,6 +50,9 @@ const LogInfo: FC = () => {
     libraries,
   });
 
+
+  const navigate = useNavigate();
+
   const { state } = useLocation();
 
   const [directions, setDirections] = useState<DirectionsResult>();
@@ -84,6 +87,10 @@ const LogInfo: FC = () => {
     );
   };
 
+  const drawDirection = useMemo(() => {
+    if (isLoaded) { fetchDirections(Origin, Destination) }
+  }, [isLoaded]);
+
   const mapRef = useRef<google.maps.Map | null>(null);
 
   const onLoad = useCallback((map: google.maps.Map): void => {
@@ -97,14 +104,15 @@ const LogInfo: FC = () => {
   if (loadError) return <div>"Error Loading Maps"</div>;
   if (!isLoaded) return <div>"Loading Maps........"</div>;
 
+
   return (
     <div className="logsInfo">
       <div className="info-cont">
-        <div className="bck-cont">
-          <p>
-            <FaArrowLeft size={20} />
-          </p>
-        </div>
+
+        <p className="bck-cont" onClick={() => navigate(-1)} >
+          <FaArrowLeft size={20} />
+        </p>
+
         <div className="info-title">
           <h1>Project Title</h1>
         </div>
@@ -145,7 +153,7 @@ const LogInfo: FC = () => {
             />
           ) : null}
         </GoogleMap>
-        <>{isLoaded ? fetchDirections(Origin, Destination) : null}</>
+        <>{drawDirection}</>
       </div>
     </div>
   );

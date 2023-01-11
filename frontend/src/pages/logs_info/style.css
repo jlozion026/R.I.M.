@@ -20,12 +20,11 @@
 .bck-cont {
   width: 100%;
   margin-bottom: 30px;
-}
-
-.bck-cont > p {
   padding: 0px 20px 0px 0px;
   color: #9b959e;
+  cursor: pointer;
 }
+
 
 .info-title {
   font-size: 1em;
