@@ -65,9 +65,18 @@
 .description > textarea {
   resize: none;
   border-radius: 10px;
-  border: 2px solid #205eff;
+  border: 2px solid #adafb3;
   padding-inline-start: 10px;
   padding-top: 10px;
+}
+
+.description > textarea:focus {
+  border: 2px solid #205eff;
+  outline: 0;
+}
+
+.description > textarea:hover {
+  border-color: #205eff;
 }
 
 .default-btn-container {

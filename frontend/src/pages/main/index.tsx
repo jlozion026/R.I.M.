@@ -31,29 +31,13 @@ import GenerateCoordinates from "./components/GenerateCoordinates";
 
 import { MarkerData } from "./components/GenerateCoordinates/models";
 
-import { MapOptions, LatLngLiteral } from "./models";
+import { libraries, defaultCenter, options } from "@/utils";
 
 import Zoom from "./components/Zoom";
 
 import Constructions from "@/Assets/svg/Constructions.svg";
 
 import "./style.css";
-
-const mapId = "753af1df20893fcc";
-
-const libraries: (
-  | "drawing"
-  | "geometry"
-  | "localContext"
-  | "places"
-  | "visualization"
-)[] = ["places"];
-
-// Default Center of GoogleMap
-const defaultCenter: LatLngLiteral = {
-  lat: 14.676,
-  lng: 121.0437,
-};
 
 const Main: FC = () => {
   const { isLoaded, loadError } = useLoadScript({
@@ -83,13 +67,6 @@ const Main: FC = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  const options: MapOptions = {
-    mapId: mapId,
-    disableDefaultUI: true,
-    zoomControl: false,
-    clickableIcons: false,
-  };
 
   // dummy coordinates to generate multiple markers
   const coordinates = useMemo(

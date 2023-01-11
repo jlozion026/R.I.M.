@@ -1,8 +1,8 @@
 export type LatLngLiteral = google.maps.LatLngLiteral;
 
 export interface IDefaultFormData {
-  from: LatLngLiteral|null;
-  to: LatLngLiteral|null;
+  from: LatLngLiteral | null;
+  to: LatLngLiteral | null;
   startDate: string;
   endDate: string;
   description: string;
@@ -33,6 +33,10 @@ export interface IForm {
   Title: string;
 }
 
+export interface OnClickOutSide {
+  ClickCalendar(): void;
+}
+
 export interface IPage extends IGetFormData {
   SetFrom(place: string): void;
   SetTo(place: string): void;
@@ -48,13 +52,13 @@ export interface IPage extends IGetFormData {
   EndDate: string;
 }
 
-export interface IPage1 extends IPage {
+export interface IPage1 extends IPage, OnClickOutSide {
   Next(): void;
 }
 
 export interface Ipage2 extends IGetFormData, ISubmit {}
 
-export interface IDefaultForm extends IPage, ISubmit {}
+export interface IDefaultForm extends IPage, ISubmit, OnClickOutSide {}
 
 export interface IForm2 extends IPage1, ISubmit {
   page: boolean;

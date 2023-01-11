@@ -8,12 +8,9 @@ import {
   DirectionsRenderer,
 } from "@react-google-maps/api";
 
-import {
-  LatLngLiteral,
-  MapOptions,
-  MarkerOptions,
-  DirectionsResult,
-} from "./models";
+import { LatLngLiteral, MarkerOptions, DirectionsResult } from "@/models";
+
+import { defaultCenter, libraries, options } from "@/utils";
 
 import { FaArrowLeft } from "react-icons/fa";
 
@@ -21,35 +18,11 @@ import pinRoadClosure from "@/Assets/svg/pinRoadClosure.svg";
 
 import "./style.css";
 
-const libraries: (
-  | "drawing"
-  | "geometry"
-  | "localContext"
-  | "places"
-  | "visualization"
-)[] = ["places"];
-
-// Default Center of GoogleMap
-const center: LatLngLiteral = {
-  lat: 14.676,
-  lng: 121.0437,
-};
-
-const mapId = "753af1df20893fcc";
-
-const options: MapOptions = {
-  mapId: mapId,
-  disableDefaultUI: true,
-  zoomControl: false,
-  clickableIcons: false,
-};
-
 const LogInfo: FC = () => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
-
 
   const navigate = useNavigate();
 
@@ -88,7 +61,9 @@ const LogInfo: FC = () => {
   };
 
   const drawDirection = useMemo(() => {
-    if (isLoaded) { fetchDirections(Origin, Destination) }
+    if (isLoaded) {
+      fetchDirections(Origin, Destination);
+    }
   }, [isLoaded]);
 
   const mapRef = useRef<google.maps.Map | null>(null);
@@ -104,12 +79,10 @@ const LogInfo: FC = () => {
   if (loadError) return <div>"Error Loading Maps"</div>;
   if (!isLoaded) return <div>"Loading Maps........"</div>;
 
-
   return (
     <div className="logsInfo">
       <div className="info-cont">
-
-        <p className="bck-cont" onClick={() => navigate(-1)} >
+        <p className="bck-cont" onClick={() => navigate(-1)}>
           <FaArrowLeft size={20} />
         </p>
 
@@ -137,7 +110,7 @@ const LogInfo: FC = () => {
       <div className="map-cont">
         <GoogleMap
           mapContainerClassName="mapContainerStyle"
-          center={center}
+          center={defaultCenter}
           zoom={15}
           options={options}
           onLoad={onLoad}

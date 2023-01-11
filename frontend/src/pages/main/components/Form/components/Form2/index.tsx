@@ -24,7 +24,8 @@ const Form2: FC<IForm2> = ({
   SetFrom,
   SetTo,
   SetToCoord,
-  SetFromCoord
+  SetFromCoord,
+  ClickCalendar,
 }) => {
   return (
     <>
@@ -44,6 +45,7 @@ const Form2: FC<IForm2> = ({
           StartDate={StartDate}
           EndDate={EndDate}
           Next={Next}
+          ClickCalendar={ClickCalendar}
         />
       ) : (
         <Page2 GetFormData={GetFormData} Submit={Submit} />

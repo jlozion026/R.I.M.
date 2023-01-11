@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, FC, useRef, useState } from "react";
 
 import DefaultForm from "./components/DefaultForm";
 import Form2 from "./components/Form2";
@@ -20,8 +20,8 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title }) => {
   const [page, setPage] = useState(false);
 
   //Calendar
-  const [startDate, setStartDate] = useState("mm/dd/yyyy");
-  const [endDate, setEndDate] = useState("mm/dd/yyyy");
+  const [startDate, setStartDate] = useState("YYYY/MM/DD");
+  const [endDate, setEndDate] = useState("YYYY/MM/DD");
 
   // coordinates
   const [fromPos, setFromPos] = useState<LatLngLiteral | null>(null);
@@ -102,12 +102,12 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title }) => {
   };
 
   const handleStartDate = (date: Date) => {
-    setStartDate(format(date, "MM/dd/yyyy"));
+    setStartDate(format(date, "yyyy/MM/dd"));
     clickCalendar();
   };
 
   const handleEndDate = (date: Date) => {
-    setEndDate(format(date, "MM/dd/yyyy"));
+    setEndDate(format(date, "yyyy/MM/dd"));
     clickCalendar();
   };
 
@@ -158,6 +158,7 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title }) => {
             setCalendarStart((calendarStart) => !calendarStart)
           }
           ClickCalendarEnd={() => setCalendarEnd((calendarEnd) => !calendarEnd)}
+          ClickCalendar={clickCalendar}
           Submit={SubmitDefaultFormData}
         />
       ) : (
@@ -179,6 +180,7 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title }) => {
             setCalendarStart((calendarStart) => !calendarStart)
           }
           ClickCalendarEnd={() => setCalendarEnd((calendarEnd) => !calendarEnd)}
+          ClickCalendar={clickCalendar}
           Submit={SubmitForm2Data}
         />
       )}

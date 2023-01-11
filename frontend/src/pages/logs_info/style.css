@@ -3,7 +3,6 @@
   position: relative;
   height: 100vh;
   width: 100%;
-  background-color: black;
 }
 
 .info-cont {
@@ -25,7 +24,6 @@
   cursor: pointer;
 }
 
-
 .info-title {
   font-size: 1em;
   width: 100%;
@@ -33,8 +31,13 @@
   border-bottom: 1px solid #7f7f82;
 }
 
+.info-title > h3 {
+  color: #464647;
+}
+
 .info-dates {
   width: 100%;
+  color: #464647;
 }
 
 .info-dates .date-title {
@@ -56,6 +59,7 @@
   list-style-type: none;
   font-size: 0.9em;
   gap: 25px;
+  color: #464647;
 }
 
 .map-cont {

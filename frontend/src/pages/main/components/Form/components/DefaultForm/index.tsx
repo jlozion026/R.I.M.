@@ -10,6 +10,8 @@ import { Calendar } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 
+import useOnclickOutside from "react-cool-onclickoutside";
+
 import { btnType } from "@/components/Button/models";
 
 import "./style.css";
@@ -31,7 +33,11 @@ const DefaultForm: FC<IDefaultForm> = ({
   SetTo,
   SetToCoord,
   SetFromCoord,
+  ClickCalendar,
 }) => {
+  const ref = useOnclickOutside(() => {
+    ClickCalendar();
+  });
   return (
     <>
       <div className="location-container">
@@ -66,11 +72,13 @@ const DefaultForm: FC<IDefaultForm> = ({
             />
           </div>
           {CalendarStart ? (
-            <Calendar
-              date={new Date()}
-              onChange={HandleStartDate}
-              className="calendarElement"
-            />
+            <div ref={ref}>
+              <Calendar
+                date={new Date()}
+                onChange={HandleStartDate}
+                className="calendarElement"
+              />
+            </div>
           ) : null}
         </div>
         <p className="calendar-icon">
@@ -91,11 +99,13 @@ const DefaultForm: FC<IDefaultForm> = ({
             />
           </div>
           {CalendarEnd ? (
-            <Calendar
-              date={new Date()}
-              onChange={HandleEndDate}
-              className="calendarElement"
-            />
+            <div ref={ref}>
+              <Calendar
+                date={new Date()}
+                onChange={HandleEndDate}
+                className="calendarElement"
+              />
+            </div>
           ) : null}
         </div>
 
