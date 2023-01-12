@@ -26,11 +26,6 @@ export class ReportCountOrderByAggregateInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
-  published?: "asc" | "desc" | undefined;
-
-  @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true
-  })
   location?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {

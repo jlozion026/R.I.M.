@@ -24,15 +24,10 @@ export class ReportCreateWithoutCity_porjectInput {
   })
   updatedAt?: Date | undefined;
 
-  @TypeGraphQL.Field(_type => Boolean, {
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
     nullable: false
   })
-  published!: boolean;
-
-  @TypeGraphQL.Field(_type => String, {
-    nullable: false
-  })
-  location!: string;
+  location!: Prisma.InputJsonValue;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: false

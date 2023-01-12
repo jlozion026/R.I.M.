@@ -25,15 +25,10 @@ export class ReportGroupBy {
   })
   updatedAt!: Date;
 
-  @TypeGraphQL.Field(_type => Boolean, {
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
     nullable: false
   })
-  published!: boolean;
-
-  @TypeGraphQL.Field(_type => String, {
-    nullable: false
-  })
-  location!: string;
+  location!: Prisma.JsonValue;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: false

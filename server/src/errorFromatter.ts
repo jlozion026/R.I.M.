@@ -13,7 +13,7 @@ export const myFormatError = (error: GraphQLError) => {
   
   else if (error.extensions?.code === "GRAPHQL_VALIDATION_FAILED") {
     return {
-      message: "Field Required",
+      message: "field required or invalid input",
       extensions: error.extensions?.code,
     };
   } 

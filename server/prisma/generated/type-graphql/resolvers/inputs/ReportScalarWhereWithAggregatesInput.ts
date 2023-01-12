@@ -2,8 +2,8 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
-import { BoolWithAggregatesFilter } from "../inputs/BoolWithAggregatesFilter";
 import { DateTimeWithAggregatesFilter } from "../inputs/DateTimeWithAggregatesFilter";
+import { JsonWithAggregatesFilter } from "../inputs/JsonWithAggregatesFilter";
 import { StringNullableWithAggregatesFilter } from "../inputs/StringNullableWithAggregatesFilter";
 import { StringWithAggregatesFilter } from "../inputs/StringWithAggregatesFilter";
 
@@ -41,15 +41,10 @@ export class ReportScalarWhereWithAggregatesInput {
   })
   updatedAt?: DateTimeWithAggregatesFilter | undefined;
 
-  @TypeGraphQL.Field(_type => BoolWithAggregatesFilter, {
+  @TypeGraphQL.Field(_type => JsonWithAggregatesFilter, {
     nullable: true
   })
-  published?: BoolWithAggregatesFilter | undefined;
-
-  @TypeGraphQL.Field(_type => StringWithAggregatesFilter, {
-    nullable: true
-  })
-  location?: StringWithAggregatesFilter | undefined;
+  location?: JsonWithAggregatesFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringWithAggregatesFilter, {
     nullable: true

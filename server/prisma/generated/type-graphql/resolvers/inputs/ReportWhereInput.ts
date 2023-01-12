@@ -3,10 +3,10 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { AccountRelationFilter } from "../inputs/AccountRelationFilter";
-import { BoolFilter } from "../inputs/BoolFilter";
 import { CityProjectRelationFilter } from "../inputs/CityProjectRelationFilter";
 import { DateTimeFilter } from "../inputs/DateTimeFilter";
 import { IncidentRelationFilter } from "../inputs/IncidentRelationFilter";
+import { JsonFilter } from "../inputs/JsonFilter";
 import { StringFilter } from "../inputs/StringFilter";
 import { StringNullableFilter } from "../inputs/StringNullableFilter";
 
@@ -44,15 +44,10 @@ export class ReportWhereInput {
   })
   updatedAt?: DateTimeFilter | undefined;
 
-  @TypeGraphQL.Field(_type => BoolFilter, {
+  @TypeGraphQL.Field(_type => JsonFilter, {
     nullable: true
   })
-  published?: BoolFilter | undefined;
-
-  @TypeGraphQL.Field(_type => StringFilter, {
-    nullable: true
-  })
-  location?: StringFilter | undefined;
+  location?: JsonFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true

@@ -24,6 +24,11 @@ export class AccountUpdateManyMutationInput {
   })
   password?: StringFieldUpdateOperationsInput | undefined;
 
+  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  designation?: StringFieldUpdateOperationsInput | undefined;
+
   @TypeGraphQL.Field(_type => EnumAccTypeFieldUpdateOperationsInput, {
     nullable: true
   })

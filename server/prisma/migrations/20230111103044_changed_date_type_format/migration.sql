@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Incident" ALTER COLUMN "date_started" SET DATA TYPE TIMESTAMPTZ(3),
+ALTER COLUMN "date_ended" SET DATA TYPE TIMESTAMPTZ(3);

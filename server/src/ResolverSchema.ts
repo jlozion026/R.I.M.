@@ -2,9 +2,6 @@ import { NonEmptyArray } from "type-graphql";
 
 import {
   CreateOneAccountResolver,
-  CreateOneCityProjectResolver,
-  CreateOneIncidentResolver,
-  CreateOneReportResolver,
   FindManyAccountResolver,
   FindManyCityProjectResolver,
   FindManyIncidentResolver,
@@ -13,7 +10,8 @@ import {
 import { LoginResolver } from "./customResolver/account/LoginResolver";
 import { LogoutResolver } from "./customResolver/account/LogoutResolver";
 import { RegisterOneAccountResolver } from "./customResolver/account/RegisterOneAccountResolver";
-import { UpdateAccountResolver } from "./customResolver/account/UpdateRegOneAccountResolver";
+import { UpdateAccountResolver } from "./customResolver/account/UpdateOneAccountResolver";
+import { CreateOneReportResolver } from "./customResolver/project/CreateReportResolver";
 
 
 export const resolver = [
@@ -25,6 +23,7 @@ export const resolver = [
   CreateOneAccountResolver,
   RegisterOneAccountResolver,
   CreateOneReportResolver,
+  // CreateOneReportResolver,
   // CreateOneCityProjectResolver,
   // CreateOneIncidentResolver,
 
@@ -34,9 +33,7 @@ export const resolver = [
   FindManyCityProjectResolver,
   FindManyIncidentResolver,
 
-  // *Update
-  // ! Having a problem on Validation 
-  // 
+  // *Update 
   UpdateAccountResolver,
 
   // *Delete

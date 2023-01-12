@@ -25,6 +25,7 @@ model Account {
   email    String   @unique @db.VarChar(180)
   /// @TypeGraphQL.omit(output: true)
   password String
+  designation String
   acc_type AccType
   reports  Report[]
 }
@@ -33,8 +34,7 @@ model Report {
   report_id   String   @id @default(cuid())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  published   Boolean
-  location    String   @db.VarChar()
+  location    Json     @db.Json
   description String   @db.VarChar(250)
   reporter    Account? @relation(fields: [reporter_id], references: [acc_id])
   reporter_id String?
@@ -47,8 +47,8 @@ model CityProject {
   project_id       String   @id @default(cuid())
   project_name     String   @db.VarChar(150)
   contractor_name  String   @db.VarChar(150)
-  date_started     DateTime @db.Date
-  date_ended       DateTime @db.Date
+  date_started     DateTime @db.Timestamptz(3)
+  date_ended       DateTime @db.Timestamptz(3)
   source_fund      String   @db.VarChar(150)
   project_ammount  Float    @db.DoublePrecision
   contract_ammount Float    @db.DoublePrecision
@@ -59,8 +59,8 @@ model CityProject {
 model Incident {
   incident_id   String   @id @default(cuid())
   incident_type String   @db.VarChar(110)
-  date_started  DateTime @db.Date
-  date_ended    DateTime @db.Date
+  date_started  DateTime @db.Timestamptz(3)
+  date_ended    DateTime @db.Timestamptz(3)
   report        Report   @relation(fields: [reports_id], references: [report_id])
   reports_id    String   @unique
 }

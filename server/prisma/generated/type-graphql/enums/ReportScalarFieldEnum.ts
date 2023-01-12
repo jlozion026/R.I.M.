@@ -4,7 +4,6 @@ export enum ReportScalarFieldEnum {
   report_id = "report_id",
   createdAt = "createdAt",
   updatedAt = "updatedAt",
-  published = "published",
   location = "location",
   description = "description",
   reporter_id = "reporter_id"

@@ -1,12 +1,11 @@
 import { InputTypesEnhanceMap } from "prisma/generated/type-graphql";
-import { accountsInputTypesConfig,  cityProjectCreateNestedOneWithoutReport, cityProjectCreateWithouReport, cityProjectInputTypesConfig, incidentCreateNestedOneWithoutReport, incidentCreateWithoutReport, reportCreateNestedOneWithoutCityProj, reportCreateWithoutCityProj, reportInputTtypesConfig } from "./inputTypeConfig";
+import { accountsInputTypesConfig,  cityProjectCreateNestedOneWithoutReport, cityProjectCreateWithouReport, cityProjectInputTypesConfig, incidentCreateNestedOneWithoutReport, incidentCreateWithoutReport, reportCreateNestedOneWithoutCityProj, reportCreateWithoutCityProj } from "./inputTypeConfig";
 
 
 
 const inputTypeEnhanceMap: InputTypesEnhanceMap = {
     AccountCreateInput: accountsInputTypesConfig,
 
-    ReportCreateInput: reportInputTtypesConfig,
     CityProjectCreateNestedOneWithoutReportInput: cityProjectCreateNestedOneWithoutReport,
     IncidentCreateNestedOneWithoutReportInput: incidentCreateNestedOneWithoutReport,
     CityProjectCreateWithoutReportInput: cityProjectCreateWithouReport,

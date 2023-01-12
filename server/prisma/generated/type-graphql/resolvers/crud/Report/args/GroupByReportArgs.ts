@@ -20,7 +20,7 @@ export class GroupByReportArgs {
   @TypeGraphQL.Field(_type => [ReportScalarFieldEnum], {
     nullable: false
   })
-  by!: Array<"report_id" | "createdAt" | "updatedAt" | "published" | "location" | "description" | "reporter_id">;
+  by!: Array<"report_id" | "createdAt" | "updatedAt" | "location" | "description" | "reporter_id">;
 
   @TypeGraphQL.Field(_type => ReportScalarWhereWithAggregatesInput, {
     nullable: true

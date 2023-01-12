@@ -40,6 +40,11 @@ export class AccountWhereInput {
   })
   password?: StringFilter | undefined;
 
+  @TypeGraphQL.Field(_type => StringFilter, {
+    nullable: true
+  })
+  designation?: StringFilter | undefined;
+
   @TypeGraphQL.Field(_type => EnumAccTypeFilter, {
     nullable: true
   })
