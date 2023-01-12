@@ -35,5 +35,5 @@ export class FindFirstAccountArgs {
   @TypeGraphQL.Field(_type => [AccountScalarFieldEnum], {
     nullable: true
   })
-  distinct?: Array<"acc_id" | "email" | "password" | "acc_type"> | undefined;
+  distinct?: Array<"acc_id" | "email" | "password" | "designation" | "acc_type"> | undefined;
 }

@@ -22,16 +22,6 @@ export class ReportMaxAggregate {
   })
   updatedAt!: Date | null;
 
-  @TypeGraphQL.Field(_type => Boolean, {
-    nullable: true
-  })
-  published!: boolean | null;
-
-  @TypeGraphQL.Field(_type => String, {
-    nullable: true
-  })
-  location!: string | null;
-
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })

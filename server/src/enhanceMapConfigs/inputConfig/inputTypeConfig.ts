@@ -3,7 +3,6 @@ import { InputTypeConfig } from "prisma/generated/type-graphql";
 import {
   IsDate,
   IsEmail,
-  IsLatLong,
   IsLowercase,
   IsNotEmpty,
   MinLength,
@@ -12,25 +11,44 @@ import {
 
 import { IsEmailAlreadyExist } from "./../../customResolver/account/middleware/isEmailAlreadyExist";
 
+
+// * Account Create
 export const accountsInputTypesConfig: InputTypeConfig<"AccountCreateInput"> = {
   fields: { 
-    email: [IsEmail(),IsLowercase(), <PropertyDecorator>(IsEmailAlreadyExist({ message: "email already exist" })),],
+    email: [IsEmail({},{message: "email must be an email"}),IsLowercase(), <PropertyDecorator>(IsEmailAlreadyExist({ message: "email already exist" })),],
     password: [MinLength(8, {message: "must be longer than or equal to 8 characters"})],
+    designation: [IsNotEmpty({message: "must not be empty"})],
     acc_type: [IsNotEmpty()]
   },
 };
 
-// ------------------------------------------------------------------------------------------------------------------ //
+// ? Account Update has custom input types
+// ? Report Create Input  has custom input types 
 
-export const reportInputTtypesConfig: InputTypeConfig<"ReportCreateInput"> = {
-  fields: {
-    _all: [IsNotEmpty({ message: "Field Required" })],
-    location: [IsLatLong({ message: "The location must be geocoded" })],
-    city_porject: [ValidateNested()],
-    incident: [ValidateNested()],
-  },
-};
+// * IncidentCreateNestedOneWithoutReportInput is ValidatedNested to validate the branches of the inputTypes
+export const incidentCreateNestedOneWithoutReport: InputTypeConfig<"IncidentCreateNestedOneWithoutReportInput"> =
+  {
+    fields: {
+      _all: [ValidateNested()],
 
+    },
+  };
+export const incidentCreateWithoutReport: InputTypeConfig<"IncidentCreateWithoutReportInput"> =
+  {
+    fields: {
+      incident_type: [
+        IsNotEmpty({message: "must not be empty"})
+      ],
+      date_started: [
+        IsDate({message: "date start must be date"})
+      ],
+      date_ended: [
+        IsDate({ message: "date end must be date" })
+      ],
+    },
+  };
+
+// * CityProjectCreateNestedOneWithoutReportInput is ValidatedNested to validate the branches of the inputTypes
 export const cityProjectCreateNestedOneWithoutReport: InputTypeConfig<"CityProjectCreateNestedOneWithoutReportInput"> =
   {
     fields: {
@@ -40,26 +58,12 @@ export const cityProjectCreateNestedOneWithoutReport: InputTypeConfig<"CityProje
 export const cityProjectCreateWithouReport: InputTypeConfig<"CityProjectCreateWithoutReportInput"> =
   {
     fields: {
-      _all: [IsNotEmpty({ message: "Field Required" })],
-      date_started: [IsDate({ message: "Must be date" })],
-      date_ended: [IsDate({ message: "Must be date" })],
+      _all: [IsNotEmpty({ message: "must not be empty" })],
+      date_started: [IsDate({ message: "start date is not a date" })],
+      date_ended: [IsDate({ message: "end date is not a date" })],
     },
   };
 
-export const incidentCreateNestedOneWithoutReport: InputTypeConfig<"IncidentCreateNestedOneWithoutReportInput"> =
-  {
-    fields: {
-      _all: [ValidateNested()],
-    },
-  };
-export const incidentCreateWithoutReport: InputTypeConfig<"IncidentCreateWithoutReportInput"> =
-  {
-    fields: {
-      _all: [IsNotEmpty({ message: "Field Required" })],
-      date_started: [IsDate({ message: "Must be date" })],
-      date_ended: [IsDate({ message: "Must be date" })],
-    },
-  };
 
 //------------------------------------------------------------------------------------------------------------------------- //
 
@@ -88,8 +92,8 @@ export const reportCreateWithoutCityProj: InputTypeConfig<"ReportCreateWithoutCi
 export const cityProjectInputTypesConfig: InputTypeConfig<"CityProjectCreateInput"> =
   {
     fields: {
-      project_name: [IsNotEmpty()],
-      contractor_name: [IsNotEmpty()],
+      project_name: [IsNotEmpty({message: "project name must not be empty"})],
+      contractor_name: [IsNotEmpty({message: "contractor name must not be empty"})],
     },
   };
 

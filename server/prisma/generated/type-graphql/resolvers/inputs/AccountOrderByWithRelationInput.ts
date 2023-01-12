@@ -27,6 +27,11 @@ export class AccountOrderByWithRelationInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
+  designation?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
   acc_type?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => ReportOrderByRelationAggregateInput, {

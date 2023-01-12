@@ -23,6 +23,11 @@ export class AccountMinAggregate {
   })
   password!: string | null;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  designation!: string | null;
+
   @TypeGraphQL.Field(_type => AccType, {
     nullable: true
   })

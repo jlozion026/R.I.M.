@@ -15,6 +15,7 @@ export async function createUser(args: CreateOneAccountArgs, ctx: Context) {
       email: args.data.email.toLowerCase(),
       password: hashedPassword,
       acc_type: args.data.acc_type,
+      designation: args.data.designation,
     },
   });
 }

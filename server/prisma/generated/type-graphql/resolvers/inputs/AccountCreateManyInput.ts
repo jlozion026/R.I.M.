@@ -23,6 +23,11 @@ export class AccountCreateManyInput {
   })
   password!: string;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  designation!: string;
+
   @TypeGraphQL.Field(_type => AccType, {
     nullable: false
   })

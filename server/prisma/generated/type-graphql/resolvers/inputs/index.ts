@@ -17,9 +17,6 @@ export { AccountUpdateWithoutReportsInput } from "./AccountUpdateWithoutReportsI
 export { AccountUpsertWithoutReportsInput } from "./AccountUpsertWithoutReportsInput";
 export { AccountWhereInput } from "./AccountWhereInput";
 export { AccountWhereUniqueInput } from "./AccountWhereUniqueInput";
-export { BoolFieldUpdateOperationsInput } from "./BoolFieldUpdateOperationsInput";
-export { BoolFilter } from "./BoolFilter";
-export { BoolWithAggregatesFilter } from "./BoolWithAggregatesFilter";
 export { CityProjectAvgOrderByAggregateInput } from "./CityProjectAvgOrderByAggregateInput";
 export { CityProjectCountOrderByAggregateInput } from "./CityProjectCountOrderByAggregateInput";
 export { CityProjectCreateInput } from "./CityProjectCreateInput";
@@ -69,8 +66,8 @@ export { IncidentUpdateWithoutReportInput } from "./IncidentUpdateWithoutReportI
 export { IncidentUpsertWithoutReportInput } from "./IncidentUpsertWithoutReportInput";
 export { IncidentWhereInput } from "./IncidentWhereInput";
 export { IncidentWhereUniqueInput } from "./IncidentWhereUniqueInput";
-export { NestedBoolFilter } from "./NestedBoolFilter";
-export { NestedBoolWithAggregatesFilter } from "./NestedBoolWithAggregatesFilter";
+export { JsonFilter } from "./JsonFilter";
+export { JsonWithAggregatesFilter } from "./JsonWithAggregatesFilter";
 export { NestedDateTimeFilter } from "./NestedDateTimeFilter";
 export { NestedDateTimeWithAggregatesFilter } from "./NestedDateTimeWithAggregatesFilter";
 export { NestedEnumAccTypeFilter } from "./NestedEnumAccTypeFilter";
@@ -79,6 +76,7 @@ export { NestedFloatFilter } from "./NestedFloatFilter";
 export { NestedFloatWithAggregatesFilter } from "./NestedFloatWithAggregatesFilter";
 export { NestedIntFilter } from "./NestedIntFilter";
 export { NestedIntNullableFilter } from "./NestedIntNullableFilter";
+export { NestedJsonFilter } from "./NestedJsonFilter";
 export { NestedStringFilter } from "./NestedStringFilter";
 export { NestedStringNullableFilter } from "./NestedStringNullableFilter";
 export { NestedStringNullableWithAggregatesFilter } from "./NestedStringNullableWithAggregatesFilter";

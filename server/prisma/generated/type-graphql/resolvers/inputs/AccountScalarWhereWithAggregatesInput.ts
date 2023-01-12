@@ -39,6 +39,11 @@ export class AccountScalarWhereWithAggregatesInput {
   })
   password?: StringWithAggregatesFilter | undefined;
 
+  @TypeGraphQL.Field(_type => StringWithAggregatesFilter, {
+    nullable: true
+  })
+  designation?: StringWithAggregatesFilter | undefined;
+
   @TypeGraphQL.Field(_type => EnumAccTypeWithAggregatesFilter, {
     nullable: true
   })

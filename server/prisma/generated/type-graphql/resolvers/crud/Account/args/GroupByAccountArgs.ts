@@ -20,7 +20,7 @@ export class GroupByAccountArgs {
   @TypeGraphQL.Field(_type => [AccountScalarFieldEnum], {
     nullable: false
   })
-  by!: Array<"acc_id" | "email" | "password" | "acc_type">;
+  by!: Array<"acc_id" | "email" | "password" | "designation" | "acc_type">;
 
   @TypeGraphQL.Field(_type => AccountScalarWhereWithAggregatesInput, {
     nullable: true

@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "CityProject" ALTER COLUMN "date_started" SET DATA TYPE TIMESTAMPTZ(3),
+ALTER COLUMN "date_ended" SET DATA TYPE TIMESTAMPTZ(3);
+
+-- AlterTable
+ALTER TABLE "Report" ALTER COLUMN "location" SET DATA TYPE JSON;

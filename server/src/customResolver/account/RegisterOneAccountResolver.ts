@@ -41,6 +41,7 @@ export class RegisterOneAccountResolver {
         email: args.data.email.toLowerCase(),
         password: hashedPassword,
         acc_type: args.data.acc_type,
+        designation: args.data.designation
       },
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });

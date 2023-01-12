@@ -3,7 +3,6 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { AccountUpdateOneWithoutReportsNestedInput } from "../inputs/AccountUpdateOneWithoutReportsNestedInput";
-import { BoolFieldUpdateOperationsInput } from "../inputs/BoolFieldUpdateOperationsInput";
 import { CityProjectUpdateOneWithoutReportNestedInput } from "../inputs/CityProjectUpdateOneWithoutReportNestedInput";
 import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
 import { IncidentUpdateOneWithoutReportNestedInput } from "../inputs/IncidentUpdateOneWithoutReportNestedInput";
@@ -28,15 +27,10 @@ export class ReportUpdateInput {
   })
   updatedAt?: DateTimeFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => BoolFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => GraphQLScalars.JSONResolver, {
     nullable: true
   })
-  published?: BoolFieldUpdateOperationsInput | undefined;
-
-  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
-    nullable: true
-  })
-  location?: StringFieldUpdateOperationsInput | undefined;
+  location?: Prisma.InputJsonValue | undefined;
 
   @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
     nullable: true

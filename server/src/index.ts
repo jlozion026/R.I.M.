@@ -18,6 +18,7 @@ const main = async () => {
     resolvers: resolver,
     emitSchemaFile: true,
     validate: {
+      forbidUnknownValues: false,
       validationError: {
         target: false,
         value: false,
@@ -31,8 +32,8 @@ const main = async () => {
     schema,
     context: ({ req, res }): Context => ({ prisma, res, req }),
     plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
+    // * comment it out if you want to turn on the developers errors. 
     formatError: myFormatError,
-    // * comment it out if you want to turn on stacktrace 
     debug: process.env.NODE_ENV === "development",
   });
 

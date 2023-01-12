@@ -2,6 +2,8 @@ export { AccType } from "./AccType";
 export { AccountScalarFieldEnum } from "./AccountScalarFieldEnum";
 export { CityProjectScalarFieldEnum } from "./CityProjectScalarFieldEnum";
 export { IncidentScalarFieldEnum } from "./IncidentScalarFieldEnum";
+export { JsonNullValueFilter } from "./JsonNullValueFilter";
+export { JsonNullValueInput } from "./JsonNullValueInput";
 export { QueryMode } from "./QueryMode";
 export { ReportScalarFieldEnum } from "./ReportScalarFieldEnum";
 export { SortOrder } from "./SortOrder";

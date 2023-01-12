@@ -25,6 +25,11 @@ export class AccountCountAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false
   })
+  designation!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
   acc_type!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {

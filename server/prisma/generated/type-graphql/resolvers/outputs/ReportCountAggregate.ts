@@ -25,11 +25,6 @@ export class ReportCountAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false
   })
-  published!: number;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false
-  })
   location!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
