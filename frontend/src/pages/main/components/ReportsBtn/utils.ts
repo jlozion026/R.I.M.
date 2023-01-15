@@ -8,7 +8,7 @@ import { btnType } from "@/components/Button/models";
 
 export const ReportsBtnProps = [
   {
-    id: "City Project Form",
+    id: "CityProject",
     type: btnType.Button,
     svg: Cityproject,
     svgBackGround: "alligatorBg",
@@ -19,7 +19,7 @@ export const ReportsBtnProps = [
   },
 
   {
-    id: "Road Closure Form",
+    id: "RoadClosure",
     type: btnType.Button,
     svg: RoadClosure,
     svgBackGround: "orangeBg",
@@ -30,7 +30,7 @@ export const ReportsBtnProps = [
   },
 
   {
-    id: "Road Constraction Form",
+    id: "RoadConstruction",
     type: btnType.Button,
     svg: Construction,
     svgBackGround: "deepYellowBg",
@@ -41,7 +41,7 @@ export const ReportsBtnProps = [
   },
 
   {
-    id: "Road Accident Form",
+    id: "RoadAccident",
     type: btnType.Button,
     svg: Accident,
     svgBackGround: "kowloonBg",
@@ -52,7 +52,7 @@ export const ReportsBtnProps = [
   },
 
   {
-    id: "Road Event Form",
+    id: "RoadEvent",
     type: btnType.Button,
     svg: Event,
     svgBackGround: "softBlueBg",
@@ -63,7 +63,7 @@ export const ReportsBtnProps = [
   },
 
   {
-    id: "Road Hazzard Form",
+    id: "RoadHazard",
     type: btnType.Button,
     svg: Hazzard,
     svgBackGround: "yellowBg",

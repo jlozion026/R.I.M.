@@ -1,14 +1,25 @@
+import { ReportType } from "@/generated/graphql";
 export type LatLngLiteral = google.maps.LatLngLiteral;
 
+export interface ICoordinates {
+  lat: string;
+  lng: string;
+}
+
+export interface ILocation {
+  origin: LatLngLiteral | null;
+  destination: LatLngLiteral | null;
+}
+
 export interface IDefaultFormData {
-  from: LatLngLiteral | null;
-  to: LatLngLiteral | null;
+  location: ILocation;
   startDate: string;
   endDate: string;
   description: string;
 }
 
 export interface IForm2Data extends IDefaultFormData {
+  projectName: string
   contractor: string;
   sourceFund: string;
   programAmount: string;
@@ -24,13 +35,14 @@ export interface IGetFormData {
 }
 
 interface ISubmit {
-  Submit(): void;
+  Submit(e: React.FormEvent<HTMLFormElement>): void;
 }
 
 export interface IForm {
   PopUp(): void;
   FormType: boolean;
   Title: string;
+  TypeOfReport: ReportType|undefined;
 }
 
 export interface OnClickOutSide {
@@ -40,8 +52,8 @@ export interface OnClickOutSide {
 export interface IPage extends IGetFormData {
   SetFrom(place: string): void;
   SetTo(place: string): void;
-  SetFromCoord(position: google.maps.LatLngLiteral): void;
-  SetToCoord(position: google.maps.LatLngLiteral): void;
+  SetFromCoord(position: LatLngLiteral): void;
+  SetToCoord(position: LatLngLiteral): void;
   HandleStartDate(date: Date): void;
   HandleEndDate(date: Date): void;
   ClickCalendarStart(): void;

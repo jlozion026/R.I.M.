@@ -1,6 +1,8 @@
 import { FC, useState } from "react";
 import Button from "@/components/Button";
 
+import { ReportType } from "@/generated/graphql";
+
 import { ReportsBtnProps } from "./utils";
 
 import PopUp from "../PopUp";
@@ -17,17 +19,30 @@ const ReportsBtn: FC<IReportsBtn> = ({ PingPopUp, WindowSize }) => {
   const [title, setTitle] = useState<string>("");
   const [trigger, setTrigger] = useState<boolean>(false);
   const [formType, setFormType] = useState<boolean>(false);
+  const [reportType, setReportType] = useState<ReportType|undefined>();
 
   const popUp = () => setTrigger(!trigger);
 
+  const stringToEnum = <T,>(str: string, enumeration: T): T[keyof T] | undefined => {
+    for (const key in enumeration) {
+      if (enumeration[key as keyof T] === str) {
+        return enumeration[key as keyof T];
+      }
+    }
+    return undefined;
+  }
+
   const selectReports = (id: string) => {
-    if (id !== "City Project Form") {
+    if (id !== "CityProject") {
       setFormType(false);
     } else {
       setFormType(true);
     }
 
-    setTitle(id);
+    setReportType(stringToEnum(id, ReportType));
+
+    setTitle(id.replace(/([A-Z])/g, " $1").trim());
+
     popUp();
 
     console.log(id);
@@ -81,10 +96,9 @@ const ReportsBtn: FC<IReportsBtn> = ({ PingPopUp, WindowSize }) => {
       )}
 
       <PopUp Trigger={trigger} popOut={popUp}>
-        <Form FormType={formType} Title={title} PopUp={popUp} />
+        <Form FormType={formType} Title={title} PopUp={popUp} TypeOfReport={reportType} />
       </PopUp>
     </>
   );
 };
-
 export default ReportsBtn;

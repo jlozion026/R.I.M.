@@ -1,4 +1,9 @@
-import { ChangeEvent, FC, useRef, useState } from "react";
+import { ChangeEvent, FC, useState } from "react";
+
+import { useCreateOneReportMutation, CreateOneReportMutation, ReportType } from "@/generated/graphql";
+
+import graphqlRequestClient from "@/lib/client/graphqlRequestClient";
+import { useQueryClient } from "@tanstack/react-query";
 
 import DefaultForm from "./components/DefaultForm";
 import Form2 from "./components/Form2";
@@ -13,9 +18,13 @@ import { IDefaultFormData, IForm, IForm2Data, LatLngLiteral } from "./models";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 
+
 import "./style.css";
 
-const Form: FC<IForm> = ({ PopUp, FormType, Title }) => {
+const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
+
+
+
   //Form 2 conditional rendering and Progress Steps
   const [page, setPage] = useState(false);
 
@@ -24,23 +33,24 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title }) => {
   const [endDate, setEndDate] = useState("YYYY/MM/DD");
 
   // coordinates
-  const [fromPos, setFromPos] = useState<LatLngLiteral | null>(null);
-  const [toPos, setToPos] = useState<LatLngLiteral | null>(null);
+  const [fromPos, setFromPos] = useState<LatLngLiteral>({ lat: 0, lng: 0 });
+  const [toPos, setToPos] = useState<LatLngLiteral>({ lat: 0, lng: 0 });
   // place
   const [from, setFrom] = useState<string>("");
   const [to, setTo] = useState<string>("");
 
   const setToPlace = (place: string) => setTo(place);
   const setFromPlace = (place: string) => setFrom(place);
-  const setToCoord = (position: google.maps.LatLngLiteral) =>
-    setToPos(position);
-  const setFromCoord = (position: google.maps.LatLngLiteral) =>
-    setFromPos(position);
+  const setToCoord = (position: LatLngLiteral) => setToPos(position);
+  const setFromCoord = (position: LatLngLiteral) => setFromPos(position);
 
   //Todo state of origin and destination Form2Data.
   const [form2Data, setForm2Data] = useState<IForm2Data>({
-    from: null,
-    to: null,
+    location: {
+      origin: { lat: 0, lng: 0 },
+      destination: { lat: 0, lng: 0 }
+    },
+    projectName: "",
     startDate: "",
     endDate: "",
     description: "",
@@ -52,8 +62,10 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title }) => {
 
   //Todo state of origin and destination DefaultFromData.
   const [defaultFormData, setDefaultFormData] = useState<IDefaultFormData>({
-    from: null,
-    to: null,
+    location: {
+      origin: { lat: 0, lng: 0 },
+      destination: { lat: 0, lng: 0 }
+    },
     startDate: "",
     endDate: "",
     description: "",
@@ -63,129 +75,178 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title }) => {
     setPage(true);
   };
 
+
+  const queryClient = useQueryClient();
+
+  const { mutate } = useCreateOneReportMutation<Error>(graphqlRequestClient, {
+    onSuccess: (data: CreateOneReportMutation) => {
+      queryClient.invalidateQueries(['getAllReports']);
+      console.table(data);
+    },
+
+    onError: (error: Error) => {
+      console.log(error);
+    }
+  })
+
   const SubmitForm2Data = () => {
     form2Data["startDate"] = startDate;
     form2Data["endDate"] = endDate;
-    form2Data["to"] = toPos;
-    form2Data["from"] = fromPos;
-    console.table(form2Data);
-    console.table([from, to]);
+    mutate({
+      data: {
+        location: {
+          origin: fromPos,
+          destination: toPos
+        },
+        description: defaultFormData.description,
+        report_type: TypeOfReport as ReportType,
+        city_porject: {
+          create: {
+            project_name: form2Data.projectName,
+            contractor_name: form2Data.contractor,
+            date_started: form2Data.startDate,
+            date_ended: form2Data.endDate,
+            source_fund: form2Data.sourceFund,
+            project_ammount: parseFloat(form2Data.programAmount),
+            contract_ammount: parseFloat(form2Data.contractAmount),
+          }
+        }
+      }
+    })
+
     PopUp();
-  };
+};
 
-  const SubmitDefaultFormData = () => {
-    defaultFormData["startDate"] = startDate;
-    defaultFormData["endDate"] = endDate;
-    defaultFormData["to"] = toPos;
-    defaultFormData["from"] = fromPos;
-    console.table(defaultFormData);
-    console.table([from, to]);
-    PopUp();
-  };
 
-  const getDefaultFormData = (
-    val: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    setDefaultFormData({
-      ...defaultFormData,
-      [val.target.name]: val.target.value,
-    });
-  };
+const SubmitDefaultFormData = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
 
-  const getForm2Data = (
-    val: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    setForm2Data({
-      ...form2Data,
-      [val.target.name]: val.target.value,
-    });
-  };
+  defaultFormData["startDate"] = startDate;
+  defaultFormData["endDate"] = endDate;
 
-  const handleStartDate = (date: Date) => {
-    setStartDate(format(date, "yyyy/MM/dd"));
-    clickCalendar();
-  };
-
-  const handleEndDate = (date: Date) => {
-    setEndDate(format(date, "yyyy/MM/dd"));
-    clickCalendar();
-  };
-
-  //Calendar Pop-Up
-  const [calendarStart, setCalendarStart] = useState(false);
-  const [calendarEnd, setCalendarEnd] = useState(false);
-
-  //Calendar StartDate and Calendar EndDate Pop-Up!!!
-  const clickCalendar = () => {
-    if (calendarStart) {
-      setCalendarStart(false);
-    } else if (calendarEnd) {
-      setCalendarEnd(false);
+  mutate({
+    data: {
+      location: {
+        origin: fromPos,
+        destination: toPos
+      },
+      description: defaultFormData.description,
+      report_type: TypeOfReport as ReportType,
+      incident: {
+        create: {
+          date_started: defaultFormData.startDate,
+          date_ended: defaultFormData.endDate
+        }
+      }
     }
-  };
+  })
 
-  return (
-    <form className="main-form">
-      <div className="header-form">
-        {page ? (
-          <p className="back-btn" onClick={() => setPage(false)}>
-            <FaArrowLeft />
-          </p>
-        ) : null}
+  PopUp();
+};
 
-        <h1 className="title-form">{Title}</h1>
-      </div>
-      {FormType ? (
-        <div className="step-bar">
-          <Steps page={page} />
-        </div>
+const getDefaultFormData = (
+  val: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+) => {
+  setDefaultFormData({
+    ...defaultFormData,
+    [val.target.name]: val.target.value,
+  });
+};
+
+const getForm2Data = (
+  val: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+) => {
+  setForm2Data({
+    ...form2Data,
+    [val.target.name]: val.target.value,
+  });
+};
+
+const handleStartDate = (date: Date) => {
+  setStartDate(format(date, "yyyy/MM/dd"));
+  clickCalendar();
+};
+
+const handleEndDate = (date: Date) => {
+  setEndDate(format(date, "yyyy/MM/dd"));
+  clickCalendar();
+};
+
+//Calendar Pop-Up
+const [calendarStart, setCalendarStart] = useState(false);
+const [calendarEnd, setCalendarEnd] = useState(false);
+
+//Calendar StartDate and Calendar EndDate Pop-Up!!!
+const clickCalendar = () => {
+  if (calendarStart) {
+    setCalendarStart(false);
+  } else if (calendarEnd) {
+    setCalendarEnd(false);
+  }
+};
+
+return (
+  <form className="main-form">
+    <div className="header-form">
+      {page ? (
+        <p className="back-btn" onClick={() => setPage(false)}>
+          <FaArrowLeft />
+        </p>
       ) : null}
 
-      {!FormType ? (
-        <DefaultForm
-          SetTo={setToPlace}
-          SetFrom={setFromPlace}
-          SetToCoord={setToCoord}
-          SetFromCoord={setFromCoord}
-          GetFormData={getDefaultFormData}
-          HandleStartDate={handleStartDate}
-          HandleEndDate={handleEndDate}
-          CalendarStart={calendarStart}
-          CalendarEnd={calendarEnd}
-          StartDate={startDate}
-          EndDate={endDate}
-          ClickCalendarStart={() =>
-            setCalendarStart((calendarStart) => !calendarStart)
-          }
-          ClickCalendarEnd={() => setCalendarEnd((calendarEnd) => !calendarEnd)}
-          ClickCalendar={clickCalendar}
-          Submit={SubmitDefaultFormData}
-        />
-      ) : (
-        <Form2
-          SetTo={setToPlace}
-          SetFrom={setFromPlace}
-          SetToCoord={setToCoord}
-          SetFromCoord={setFromCoord}
-          GetFormData={getForm2Data}
-          HandleStartDate={handleStartDate}
-          HandleEndDate={handleEndDate}
-          Next={next}
-          CalendarStart={calendarStart}
-          CalendarEnd={calendarEnd}
-          StartDate={startDate}
-          EndDate={endDate}
-          page={page}
-          ClickCalendarStart={() =>
-            setCalendarStart((calendarStart) => !calendarStart)
-          }
-          ClickCalendarEnd={() => setCalendarEnd((calendarEnd) => !calendarEnd)}
-          ClickCalendar={clickCalendar}
-          Submit={SubmitForm2Data}
-        />
-      )}
-    </form>
-  );
+      <h1 className="title-form">{Title}</h1>
+    </div>
+    {FormType ? (
+      <div className="step-bar">
+        <Steps page={page} />
+      </div>
+    ) : null}
+
+    {!FormType ? (
+      <DefaultForm
+        SetTo={setToPlace}
+        SetFrom={setFromPlace}
+        SetToCoord={setToCoord}
+        SetFromCoord={setFromCoord}
+        GetFormData={getDefaultFormData}
+        HandleStartDate={handleStartDate}
+        HandleEndDate={handleEndDate}
+        CalendarStart={calendarStart}
+        CalendarEnd={calendarEnd}
+        StartDate={startDate}
+        EndDate={endDate}
+        ClickCalendarStart={() =>
+          setCalendarStart((calendarStart) => !calendarStart)
+        }
+        ClickCalendarEnd={() => setCalendarEnd((calendarEnd) => !calendarEnd)}
+        ClickCalendar={clickCalendar}
+        Submit={(e) => SubmitDefaultFormData(e)}
+      />
+    ) : (
+      <Form2
+        SetTo={setToPlace}
+        SetFrom={setFromPlace}
+        SetToCoord={setToCoord}
+        SetFromCoord={setFromCoord}
+        GetFormData={getForm2Data}
+        HandleStartDate={handleStartDate}
+        HandleEndDate={handleEndDate}
+        Next={next}
+        CalendarStart={calendarStart}
+        CalendarEnd={calendarEnd}
+        StartDate={startDate}
+        EndDate={endDate}
+        page={page}
+        ClickCalendarStart={() =>
+          setCalendarStart((calendarStart) => !calendarStart)
+        }
+        ClickCalendarEnd={() => setCalendarEnd((calendarEnd) => !calendarEnd)}
+        ClickCalendar={clickCalendar}
+        Submit={SubmitForm2Data}
+      />
+    )}
+  </form>
+);
 };
 
 export default Form;

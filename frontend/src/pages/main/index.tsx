@@ -3,7 +3,6 @@ import {
   memo,
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from "react";
@@ -13,7 +12,6 @@ import {
   useLoadScript,
   Marker,
   Circle,
-  MarkerClusterer,
   InfoWindow,
 } from "@react-google-maps/api";
 
@@ -22,22 +20,26 @@ import {
   defaultOptions,
   farOptions,
   middleOptions,
+  panToQC,
 } from "./utils";
+
+import { GetAllReportsQuery, useGetAllReportsQuery } from "@/generated/graphql";
+
+
+import graphqlRequestClient from "@/lib/client/graphqlRequestClient";
 
 import ReportsBtn from "./components/ReportsBtn";
 import Navbar from "@/components/Navbar";
 
-import GenerateCoordinates from "./components/GenerateCoordinates";
-
-import { MarkerData } from "./components/GenerateCoordinates/models";
+import { MarkerData } from "./models";
 
 import { libraries, defaultCenter, options } from "@/utils";
 
 import Zoom from "./components/Zoom";
 
-import Constructions from "@/Assets/svg/Constructions.svg";
 
 import "./style.css";
+import MarkersClusterer from "./components/MarkersClusterer";
 
 const Main: FC = () => {
   const { isLoaded, loadError } = useLoadScript({
@@ -56,6 +58,9 @@ const Main: FC = () => {
   const [pingPopUp, setPingPopUp] = useState<boolean>(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
+  // send queries for all reports to the gql endpoint
+  const { isLoading, data } = useGetAllReportsQuery<GetAllReportsQuery, Error>(graphqlRequestClient, {}); 
+
   const hello = () => setPingPopUp(!pingPopUp);
 
   const windowSize = window.matchMedia(`(max-width: 960px)`);
@@ -68,11 +73,6 @@ const Main: FC = () => {
     };
   }, []);
 
-  // dummy coordinates to generate multiple markers
-  const coordinates = useMemo(
-    () => GenerateCoordinates(defaultCenter),
-    [defaultCenter]
-  );
 
   const mapRef = useRef<google.maps.Map | null>(null);
 
@@ -87,12 +87,6 @@ const Main: FC = () => {
     mapRef.current = map;
   };
 
-  //recenter the Map when we clicked the Target Sign in the Map
-  const panToQC = (): void => {
-    if (mapRef.current) {
-      mapRef.current?.panTo(defaultCenter);
-    }
-  };
 
   if (loadError) return <div>"Error Loading Maps"</div>;
   if (!isLoaded) return <div>"Loading Maps........"</div>;
@@ -134,23 +128,12 @@ const Main: FC = () => {
             </>
           ) : null}
 
-          <MarkerClusterer>
-            {(clusterer) => (
-              <>
-                {coordinates.map((marker, index) => (
-                  <Marker
-                    key={index}
-                    position={marker}
-                    icon={marker.icons}
-                    clusterer={clusterer}
-                    onClick={() => {
-                      setSelectedMarker(marker);
-                    }}
-                  />
-                ))}
-              </>
-            )}
-          </MarkerClusterer>
+          {isLoaded && !isLoading
+            ?
+              <MarkersClusterer ReportsData={data} SelectMarker={setSelectedMarker} />
+            :
+              null
+          }
 
           {selectedMarker ? (
             <InfoWindow
@@ -164,9 +147,9 @@ const Main: FC = () => {
             >
               <div className="info-window-container">
                 <div className="iw-icons-bg">
-                  <img className="window-icons" src={Constructions}></img>
+                  <img className="window-icons" src={selectedMarker.icon}></img>
                 </div>
-                <h1 className="window-title">Project Title</h1>
+                <h1 className="window-title">{selectedMarker.report_type}</h1>
                 <hr className="iw-line" />
                 <h3 className="address-title">Address</h3>
                 <h5 className="latlng-container">
@@ -182,7 +165,7 @@ const Main: FC = () => {
         <div className="nav-container">
           <Navbar cardSize="nav--bar" PingPopOut={hello} />
         </div>
-        <Zoom zoomIn={zoomIn} zoomOut={zoomOut} PanTo={panToQC} />
+        <Zoom zoomIn={zoomIn} zoomOut={zoomOut} PanTo={() => panToQC(mapRef, defaultCenter)} />
         <ReportsBtn WindowSize={windowSize} PingPopUp={pingPopUp} />
       </div>
     </>

@@ -13,6 +13,8 @@ import { AuthContextType } from '../context-manager/model';
 import  Logs from '@/pages/logs_page';
 import LogInfo from '@/pages/logs_info';
 
+import {setToken} from '@/lib/auth'
+
 export const Views: FC = () => {
   const { setAccToken } = useContext(AuthContext) as AuthContextType;
   const [loading, setLoading] = useState(false);
@@ -26,9 +28,10 @@ export const Views: FC = () => {
     }).then(async res => {
       const { accessToken } = await res.json();
       if (accessToken) {
+        setToken(accessToken);
         setAccToken();
       }
-      console.log("app: ", accessToken);
+      //console.log("app: ", accessToken);
     })
     setLoading(false);
   }, [])
