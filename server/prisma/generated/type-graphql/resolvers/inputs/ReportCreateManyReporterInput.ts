@@ -2,6 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { ReportType } from "../../enums/ReportType";
 
 @TypeGraphQL.InputType("ReportCreateManyReporterInput", {
   isAbstract: true
@@ -31,4 +32,9 @@ export class ReportCreateManyReporterInput {
     nullable: false
   })
   description!: string;
+
+  @TypeGraphQL.Field(_type => ReportType, {
+    nullable: false
+  })
+  report_type!: "RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard";
 }

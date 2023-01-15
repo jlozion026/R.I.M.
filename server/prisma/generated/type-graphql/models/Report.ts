@@ -5,6 +5,7 @@ import { DecimalJSScalar } from "../scalars";
 import { Account } from "../models/Account";
 import { CityProject } from "../models/CityProject";
 import { Incident } from "../models/Incident";
+import { ReportType } from "../enums/ReportType";
 
 @TypeGraphQL.ObjectType("Report", {
   isAbstract: true
@@ -41,6 +42,11 @@ export class Report {
     nullable: true
   })
   reporter_id?: string | null;
+
+  @TypeGraphQL.Field(_type => ReportType, {
+    nullable: false
+  })
+  report_type!: "RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard";
 
   city_porject?: CityProject | null;
 

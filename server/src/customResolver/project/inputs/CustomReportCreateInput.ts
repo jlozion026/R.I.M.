@@ -4,6 +4,7 @@ import { IncidentCreateNestedOneWithoutReportInput } from "../../../../prisma/ge
 import { Location } from "./InputLocation"
 import { Field, InputType } from "type-graphql";
 import { IsDate, IsNotEmpty, ValidateNested } from "class-validator";
+import { ReportType } from "../../../../prisma/generated/type-graphql/enums/ReportType";
 
 @InputType("CustomReportCreateInput", {isAbstract: true})
 export class CustomReportCreateInput {
@@ -26,6 +27,12 @@ export class CustomReportCreateInput {
   @IsNotEmpty()
   @Field(_type => String, {nullable: false})
   description!: string;
+
+  @IsNotEmpty()
+  @Field(_type => ReportType, {
+    nullable: false
+  })
+  report_type!: "RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard";
 
   @ValidateNested()
   @Field(_type => AccountCreateNestedOneWithoutReportsInput, {nullable: true})

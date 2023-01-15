@@ -1,0 +1,47 @@
+import * as TypeGraphQL from "type-graphql";
+import * as GraphQLScalars from "graphql-scalars";
+import { Prisma } from "@prisma/client";
+import { DecimalJSScalar } from "../../scalars";
+import { NestedEnumReportTypeFilter } from "../inputs/NestedEnumReportTypeFilter";
+import { NestedIntFilter } from "../inputs/NestedIntFilter";
+import { ReportType } from "../../enums/ReportType";
+
+@TypeGraphQL.InputType("NestedEnumReportTypeWithAggregatesFilter", {
+  isAbstract: true
+})
+export class NestedEnumReportTypeWithAggregatesFilter {
+  @TypeGraphQL.Field(_type => ReportType, {
+    nullable: true
+  })
+  equals?: "RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard" | undefined;
+
+  @TypeGraphQL.Field(_type => [ReportType], {
+    nullable: true
+  })
+  in?: Array<"RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard"> | undefined;
+
+  @TypeGraphQL.Field(_type => [ReportType], {
+    nullable: true
+  })
+  notIn?: Array<"RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard"> | undefined;
+
+  @TypeGraphQL.Field(_type => NestedEnumReportTypeWithAggregatesFilter, {
+    nullable: true
+  })
+  not?: NestedEnumReportTypeWithAggregatesFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedIntFilter, {
+    nullable: true
+  })
+  _count?: NestedIntFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedEnumReportTypeFilter, {
+    nullable: true
+  })
+  _min?: NestedEnumReportTypeFilter | undefined;
+
+  @TypeGraphQL.Field(_type => NestedEnumReportTypeFilter, {
+    nullable: true
+  })
+  _max?: NestedEnumReportTypeFilter | undefined;
+}

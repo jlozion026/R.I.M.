@@ -36,9 +36,6 @@ export const incidentCreateNestedOneWithoutReport: InputTypeConfig<"IncidentCrea
 export const incidentCreateWithoutReport: InputTypeConfig<"IncidentCreateWithoutReportInput"> =
   {
     fields: {
-      incident_type: [
-        IsNotEmpty({message: "must not be empty"})
-      ],
       date_started: [
         IsDate({message: "date start must be date"})
       ],

@@ -2,10 +2,12 @@ import { NonEmptyArray } from "type-graphql";
 
 import {
   CreateOneAccountResolver,
+  DeleteOneReportResolver,
   FindManyAccountResolver,
   FindManyCityProjectResolver,
   FindManyIncidentResolver,
   FindManyReportResolver,
+  FindUniqueIncidentResolver,
 } from "../prisma/generated/type-graphql";
 import { LoginResolver } from "./customResolver/account/LoginResolver";
 import { LogoutResolver } from "./customResolver/account/LogoutResolver";
@@ -32,9 +34,11 @@ export const resolver = [
   FindManyReportResolver,
   FindManyCityProjectResolver,
   FindManyIncidentResolver,
+  FindUniqueIncidentResolver,
 
   // *Update 
   UpdateAccountResolver,
 
   // *Delete
+  DeleteOneReportResolver
 ] as NonEmptyArray<Function>;

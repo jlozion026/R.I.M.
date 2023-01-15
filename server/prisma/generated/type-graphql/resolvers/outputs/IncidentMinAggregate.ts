@@ -12,11 +12,6 @@ export class IncidentMinAggregate {
   })
   incident_id!: string | null;
 
-  @TypeGraphQL.Field(_type => String, {
-    nullable: true
-  })
-  incident_type!: string | null;
-
   @TypeGraphQL.Field(_type => Date, {
     nullable: true
   })

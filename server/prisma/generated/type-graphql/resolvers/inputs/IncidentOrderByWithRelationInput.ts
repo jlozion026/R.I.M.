@@ -17,11 +17,6 @@ export class IncidentOrderByWithRelationInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
-  incident_type?: "asc" | "desc" | undefined;
-
-  @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true
-  })
   date_started?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {

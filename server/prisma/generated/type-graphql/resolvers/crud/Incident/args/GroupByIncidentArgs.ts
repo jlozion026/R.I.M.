@@ -20,7 +20,7 @@ export class GroupByIncidentArgs {
   @TypeGraphQL.Field(_type => [IncidentScalarFieldEnum], {
     nullable: false
   })
-  by!: Array<"incident_id" | "incident_type" | "date_started" | "date_ended" | "reports_id">;
+  by!: Array<"incident_id" | "date_started" | "date_ended" | "reports_id">;
 
   @TypeGraphQL.Field(_type => IncidentScalarWhereWithAggregatesInput, {
     nullable: true

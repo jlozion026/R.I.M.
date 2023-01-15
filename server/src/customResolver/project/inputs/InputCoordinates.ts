@@ -1,20 +1,17 @@
-import { IsLatitude, IsLongitude } from "class-validator";
-import { Field, InputType } from "type-graphql";
+import { Field, InputType, Float } from "type-graphql";
 
 @InputType("Coordinates", {
   isAbstract: true
 })
 export class Coordinates {
 
-  @IsLatitude({message: "must be a latitude"})
-  @Field(_type => String, {
+  @Field(_type => Float, {
     nullable: false
   })
-  lat!: string;
+  lat!: number;
 
-  @IsLongitude({message: "must be a longitude"})
-  @Field(_type => String, {
+  @Field(_type => Float, {
     nullable: false
   })
-  lng!: string;
+  lng!: number;
 }

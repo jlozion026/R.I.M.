@@ -35,5 +35,5 @@ export class FindFirstIncidentArgs {
   @TypeGraphQL.Field(_type => [IncidentScalarFieldEnum], {
     nullable: true
   })
-  distinct?: Array<"incident_id" | "incident_type" | "date_started" | "date_ended" | "reports_id"> | undefined;
+  distinct?: Array<"incident_id" | "date_started" | "date_ended" | "reports_id"> | undefined;
 }

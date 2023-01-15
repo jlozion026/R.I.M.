@@ -1,6 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
 import { EnumAccTypeFieldUpdateOperationsInput, ReportUpdateManyWithoutReporterNestedInput, StringFieldUpdateOperationsInput } from "../../../../prisma/generated/type-graphql";
-import { EmailFieldUpdateOperationsInput } from "./emailFieldUpdateOperationsInput";
+import { EmailFieldUpdateOperationsInput } from "./EmailFieldUpdateOperationsInput";
 import { PasswordFieldUpdateOperationsInput } from "./PasswordFieldUpdateOperationsInput";
 import { DesignationFieldUpdateOperationsInput } from "./DesignationFieldUpdateOperationsInput";
 import { ValidateNested } from "class-validator";
