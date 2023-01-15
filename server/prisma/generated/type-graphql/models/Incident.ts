@@ -13,11 +13,6 @@ export class Incident {
   })
   incident_id!: string;
 
-  @TypeGraphQL.Field(_type => String, {
-    nullable: false
-  })
-  incident_type!: string;
-
   @TypeGraphQL.Field(_type => Date, {
     nullable: false
   })

@@ -46,6 +46,11 @@ export class ReportOrderByWithRelationInput {
   })
   reporter_id?: "asc" | "desc" | undefined;
 
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  report_type?: "asc" | "desc" | undefined;
+
   @TypeGraphQL.Field(_type => CityProjectOrderByWithRelationInput, {
     nullable: true
   })

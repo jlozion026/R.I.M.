@@ -15,11 +15,6 @@ export class IncidentCountAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false
   })
-  incident_type!: number;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false
-  })
   date_started!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {

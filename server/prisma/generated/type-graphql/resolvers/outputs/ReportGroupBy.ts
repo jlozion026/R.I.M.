@@ -5,6 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { ReportCountAggregate } from "../outputs/ReportCountAggregate";
 import { ReportMaxAggregate } from "../outputs/ReportMaxAggregate";
 import { ReportMinAggregate } from "../outputs/ReportMinAggregate";
+import { ReportType } from "../../enums/ReportType";
 
 @TypeGraphQL.ObjectType("ReportGroupBy", {
   isAbstract: true
@@ -39,6 +40,11 @@ export class ReportGroupBy {
     nullable: true
   })
   reporter_id!: string | null;
+
+  @TypeGraphQL.Field(_type => ReportType, {
+    nullable: false
+  })
+  report_type!: "RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard";
 
   @TypeGraphQL.Field(_type => ReportCountAggregate, {
     nullable: true

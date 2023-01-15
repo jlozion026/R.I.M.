@@ -6,5 +6,6 @@ export { JsonNullValueFilter } from "./JsonNullValueFilter";
 export { JsonNullValueInput } from "./JsonNullValueInput";
 export { QueryMode } from "./QueryMode";
 export { ReportScalarFieldEnum } from "./ReportScalarFieldEnum";
+export { ReportType } from "./ReportType";
 export { SortOrder } from "./SortOrder";
 export { TransactionIsolationLevel } from "./TransactionIsolationLevel";

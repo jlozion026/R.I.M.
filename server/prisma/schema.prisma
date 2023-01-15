@@ -20,14 +20,22 @@ enum AccType {
   ADMIN
 }
 
+enum ReportType {
+  RoadClosure
+  RoadConstruction
+  RoadAccident
+  RoadEvent
+  RoadHazard
+}
+
 model Account {
-  acc_id   String   @id @unique @default(cuid())
-  email    String   @unique @db.VarChar(180)
+  acc_id      String   @id @unique @default(cuid())
+  email       String   @unique @db.VarChar(180)
   /// @TypeGraphQL.omit(output: true)
-  password String
+  password    String
   designation String
-  acc_type AccType
-  reports  Report[]
+  acc_type    AccType
+  reports     Report[]
 }
 
 model Report {
@@ -38,6 +46,7 @@ model Report {
   description String   @db.VarChar(250)
   reporter    Account? @relation(fields: [reporter_id], references: [acc_id])
   reporter_id String?
+  report_type ReportType
 
   city_porject CityProject?
   incident     Incident?
@@ -52,15 +61,14 @@ model CityProject {
   source_fund      String   @db.VarChar(150)
   project_ammount  Float    @db.DoublePrecision
   contract_ammount Float    @db.DoublePrecision
-  report           Report   @relation(fields: [reports_id], references: [report_id])
+  report           Report   @relation(fields: [reports_id], references: [report_id], onDelete: Cascade)
   reports_id       String   @unique
 }
 
 model Incident {
   incident_id   String   @id @default(cuid())
-  incident_type String   @db.VarChar(110)
   date_started  DateTime @db.Timestamptz(3)
   date_ended    DateTime @db.Timestamptz(3)
-  report        Report   @relation(fields: [reports_id], references: [report_id])
+  report        Report   @relation(fields: [reports_id], references: [report_id], onDelete: Cascade)
   reports_id    String   @unique
 }

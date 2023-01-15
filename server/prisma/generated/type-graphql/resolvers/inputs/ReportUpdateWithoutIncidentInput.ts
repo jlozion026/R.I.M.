@@ -5,6 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { AccountUpdateOneWithoutReportsNestedInput } from "../inputs/AccountUpdateOneWithoutReportsNestedInput";
 import { CityProjectUpdateOneWithoutReportNestedInput } from "../inputs/CityProjectUpdateOneWithoutReportNestedInput";
 import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
+import { EnumReportTypeFieldUpdateOperationsInput } from "../inputs/EnumReportTypeFieldUpdateOperationsInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
 @TypeGraphQL.InputType("ReportUpdateWithoutIncidentInput", {
@@ -40,6 +41,11 @@ export class ReportUpdateWithoutIncidentInput {
     nullable: true
   })
   reporter?: AccountUpdateOneWithoutReportsNestedInput | undefined;
+
+  @TypeGraphQL.Field(_type => EnumReportTypeFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  report_type?: EnumReportTypeFieldUpdateOperationsInput | undefined;
 
   @TypeGraphQL.Field(_type => CityProjectUpdateOneWithoutReportNestedInput, {
     nullable: true

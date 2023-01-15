@@ -5,6 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { AccountRelationFilter } from "../inputs/AccountRelationFilter";
 import { CityProjectRelationFilter } from "../inputs/CityProjectRelationFilter";
 import { DateTimeFilter } from "../inputs/DateTimeFilter";
+import { EnumReportTypeFilter } from "../inputs/EnumReportTypeFilter";
 import { IncidentRelationFilter } from "../inputs/IncidentRelationFilter";
 import { JsonFilter } from "../inputs/JsonFilter";
 import { StringFilter } from "../inputs/StringFilter";
@@ -63,6 +64,11 @@ export class ReportWhereInput {
     nullable: true
   })
   reporter_id?: StringNullableFilter | undefined;
+
+  @TypeGraphQL.Field(_type => EnumReportTypeFilter, {
+    nullable: true
+  })
+  report_type?: EnumReportTypeFilter | undefined;
 
   @TypeGraphQL.Field(_type => CityProjectRelationFilter, {
     nullable: true

@@ -1,4 +1,3 @@
-
 import { Report } from "../../../prisma/generated/type-graphql/models/Report"
 import { getPrismaFromContext } from "../../../prisma/generated/type-graphql/helpers";
 import { CustomCreateOneReportArgs } from "./args/CustomCreateOneReportArgs";

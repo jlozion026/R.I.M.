@@ -29,11 +29,6 @@ export class IncidentScalarWhereWithAggregatesInput {
   })
   incident_id?: StringWithAggregatesFilter | undefined;
 
-  @TypeGraphQL.Field(_type => StringWithAggregatesFilter, {
-    nullable: true
-  })
-  incident_type?: StringWithAggregatesFilter | undefined;
-
   @TypeGraphQL.Field(_type => DateTimeWithAggregatesFilter, {
     nullable: true
   })

@@ -30,11 +30,6 @@ export class IncidentWhereInput {
   })
   incident_id?: StringFilter | undefined;
 
-  @TypeGraphQL.Field(_type => StringFilter, {
-    nullable: true
-  })
-  incident_type?: StringFilter | undefined;
-
   @TypeGraphQL.Field(_type => DateTimeFilter, {
     nullable: true
   })

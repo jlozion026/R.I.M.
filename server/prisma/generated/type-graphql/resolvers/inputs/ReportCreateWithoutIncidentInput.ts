@@ -4,6 +4,7 @@ import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { AccountCreateNestedOneWithoutReportsInput } from "../inputs/AccountCreateNestedOneWithoutReportsInput";
 import { CityProjectCreateNestedOneWithoutReportInput } from "../inputs/CityProjectCreateNestedOneWithoutReportInput";
+import { ReportType } from "../../enums/ReportType";
 
 @TypeGraphQL.InputType("ReportCreateWithoutIncidentInput", {
   isAbstract: true
@@ -38,6 +39,11 @@ export class ReportCreateWithoutIncidentInput {
     nullable: true
   })
   reporter?: AccountCreateNestedOneWithoutReportsInput | undefined;
+
+  @TypeGraphQL.Field(_type => ReportType, {
+    nullable: false
+  })
+  report_type!: "RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard";
 
   @TypeGraphQL.Field(_type => CityProjectCreateNestedOneWithoutReportInput, {
     nullable: true
