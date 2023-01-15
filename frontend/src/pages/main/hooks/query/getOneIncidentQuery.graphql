@@ -1,0 +1,8 @@
+query GetOneIncident($reportId: String){
+  incident(where:{
+    reports_id: $reportId
+  }){
+    date_started
+    date_ended
+  }
+}

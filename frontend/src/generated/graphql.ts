@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { GraphQLClient } from 'graphql-request';
-import { useMutation, UseMutationOptions } from '@tanstack/react-query';
+import { RequestInit } from 'graphql-request/dist/types.dom';
+import { useMutation, useQuery, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -22,6 +23,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   DateTime: any;
+  JSON: any;
 };
 
 export enum AccType {
@@ -34,8 +36,8 @@ export type Account = {
   _count?: Maybe<AccountCount>;
   acc_id: Scalars['String'];
   acc_type: AccType;
+  designation: Scalars['String'];
   email: Scalars['String'];
-  password: Scalars['String'];
 };
 
 export type AccountCount = {
@@ -46,6 +48,7 @@ export type AccountCount = {
 export type AccountCreateInput = {
   acc_id?: InputMaybe<Scalars['String']>;
   acc_type: AccType;
+  designation: Scalars['String'];
   email: Scalars['String'];
   password: Scalars['String'];
   reports?: InputMaybe<ReportCreateNestedManyWithoutReporterInput>;
@@ -65,6 +68,7 @@ export type AccountCreateOrConnectWithoutReportsInput = {
 export type AccountCreateWithoutReportsInput = {
   acc_id?: InputMaybe<Scalars['String']>;
   acc_type: AccType;
+  designation: Scalars['String'];
   email: Scalars['String'];
   password: Scalars['String'];
 };
@@ -72,6 +76,7 @@ export type AccountCreateWithoutReportsInput = {
 export type AccountOrderByWithRelationInput = {
   acc_id?: InputMaybe<SortOrder>;
   acc_type?: InputMaybe<SortOrder>;
+  designation?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
   reports?: InputMaybe<ReportOrderByRelationAggregateInput>;
@@ -85,6 +90,7 @@ export type AccountRelationFilter = {
 export enum AccountScalarFieldEnum {
   AccId = 'acc_id',
   AccType = 'acc_type',
+  Designation = 'designation',
   Email = 'email',
   Password = 'password'
 }
@@ -95,6 +101,7 @@ export type AccountWhereInput = {
   OR?: InputMaybe<Array<AccountWhereInput>>;
   acc_id?: InputMaybe<StringFilter>;
   acc_type?: InputMaybe<EnumAccTypeFilter>;
+  designation?: InputMaybe<StringFilter>;
   email?: InputMaybe<StringFilter>;
   password?: InputMaybe<StringFilter>;
   reports?: InputMaybe<ReportListRelationFilter>;
@@ -103,11 +110,6 @@ export type AccountWhereInput = {
 export type AccountWhereUniqueInput = {
   acc_id?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
-};
-
-export type BoolFilter = {
-  equals?: InputMaybe<Scalars['Boolean']>;
-  not?: InputMaybe<NestedBoolFilter>;
 };
 
 export type CityProject = {
@@ -120,18 +122,6 @@ export type CityProject = {
   project_id: Scalars['String'];
   project_name: Scalars['String'];
   reports_id: Scalars['String'];
-  source_fund: Scalars['String'];
-};
-
-export type CityProjectCreateInput = {
-  contract_ammount: Scalars['Float'];
-  contractor_name: Scalars['String'];
-  date_ended: Scalars['DateTime'];
-  date_started: Scalars['DateTime'];
-  project_ammount: Scalars['Float'];
-  project_id?: InputMaybe<Scalars['String']>;
-  project_name: Scalars['String'];
-  report: ReportCreateNestedOneWithoutCity_PorjectInput;
   source_fund: Scalars['String'];
 };
 
@@ -187,6 +177,32 @@ export enum CityProjectScalarFieldEnum {
   SourceFund = 'source_fund'
 }
 
+export type CityProjectUpdateOneWithoutReportNestedInput = {
+  connect?: InputMaybe<CityProjectWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CityProjectCreateOrConnectWithoutReportInput>;
+  create?: InputMaybe<CityProjectCreateWithoutReportInput>;
+  delete?: InputMaybe<Scalars['Boolean']>;
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  update?: InputMaybe<CityProjectUpdateWithoutReportInput>;
+  upsert?: InputMaybe<CityProjectUpsertWithoutReportInput>;
+};
+
+export type CityProjectUpdateWithoutReportInput = {
+  contract_ammount?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  contractor_name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  date_ended?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  date_started?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  project_ammount?: InputMaybe<FloatFieldUpdateOperationsInput>;
+  project_id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  project_name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  source_fund?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type CityProjectUpsertWithoutReportInput = {
+  create: CityProjectCreateWithoutReportInput;
+  update: CityProjectUpdateWithoutReportInput;
+};
+
 export type CityProjectWhereInput = {
   AND?: InputMaybe<Array<CityProjectWhereInput>>;
   NOT?: InputMaybe<Array<CityProjectWhereInput>>;
@@ -208,6 +224,36 @@ export type CityProjectWhereUniqueInput = {
   reports_id?: InputMaybe<Scalars['String']>;
 };
 
+export type Coordinates = {
+  lat: Scalars['Float'];
+  lng: Scalars['Float'];
+};
+
+export type CustomAccountUpdateInput = {
+  acc_id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  acc_type?: InputMaybe<EnumAccTypeFieldUpdateOperationsInput>;
+  designation?: InputMaybe<DesignationFieldUpdateOperationsInput>;
+  email?: InputMaybe<EmailFieldUpdateOperationsInput>;
+  password?: InputMaybe<PasswordFieldUpdateOperationsInput>;
+  reports?: InputMaybe<ReportUpdateManyWithoutReporterNestedInput>;
+};
+
+export type CustomReportCreateInput = {
+  city_porject?: InputMaybe<CityProjectCreateNestedOneWithoutReportInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  description: Scalars['String'];
+  incident?: InputMaybe<IncidentCreateNestedOneWithoutReportInput>;
+  location: Location;
+  report_id?: InputMaybe<Scalars['String']>;
+  report_type: ReportType;
+  reporter?: InputMaybe<AccountCreateNestedOneWithoutReportsInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: InputMaybe<Scalars['DateTime']>;
+};
+
 export type DateTimeFilter = {
   equals?: InputMaybe<Scalars['DateTime']>;
   gt?: InputMaybe<Scalars['DateTime']>;
@@ -219,11 +265,42 @@ export type DateTimeFilter = {
   notIn?: InputMaybe<Array<Scalars['DateTime']>>;
 };
 
+export type DesignationFieldUpdateOperationsInput = {
+  set?: InputMaybe<Scalars['String']>;
+};
+
+export type EmailFieldUpdateOperationsInput = {
+  set?: InputMaybe<Scalars['String']>;
+};
+
+export type EnumAccTypeFieldUpdateOperationsInput = {
+  set?: InputMaybe<AccType>;
+};
+
 export type EnumAccTypeFilter = {
   equals?: InputMaybe<AccType>;
   in?: InputMaybe<Array<AccType>>;
   not?: InputMaybe<NestedEnumAccTypeFilter>;
   notIn?: InputMaybe<Array<AccType>>;
+};
+
+export type EnumReportTypeFieldUpdateOperationsInput = {
+  set?: InputMaybe<ReportType>;
+};
+
+export type EnumReportTypeFilter = {
+  equals?: InputMaybe<ReportType>;
+  in?: InputMaybe<Array<ReportType>>;
+  not?: InputMaybe<NestedEnumReportTypeFilter>;
+  notIn?: InputMaybe<Array<ReportType>>;
+};
+
+export type FloatFieldUpdateOperationsInput = {
+  decrement?: InputMaybe<Scalars['Float']>;
+  divide?: InputMaybe<Scalars['Float']>;
+  increment?: InputMaybe<Scalars['Float']>;
+  multiply?: InputMaybe<Scalars['Float']>;
+  set?: InputMaybe<Scalars['Float']>;
 };
 
 export type FloatFilter = {
@@ -242,16 +319,7 @@ export type Incident = {
   date_ended: Scalars['DateTime'];
   date_started: Scalars['DateTime'];
   incident_id: Scalars['String'];
-  incident_type: Scalars['String'];
   reports_id: Scalars['String'];
-};
-
-export type IncidentCreateInput = {
-  date_ended: Scalars['DateTime'];
-  date_started: Scalars['DateTime'];
-  incident_id?: InputMaybe<Scalars['String']>;
-  incident_type: Scalars['String'];
-  report: ReportCreateNestedOneWithoutIncidentInput;
 };
 
 export type IncidentCreateNestedOneWithoutReportInput = {
@@ -269,14 +337,12 @@ export type IncidentCreateWithoutReportInput = {
   date_ended: Scalars['DateTime'];
   date_started: Scalars['DateTime'];
   incident_id?: InputMaybe<Scalars['String']>;
-  incident_type: Scalars['String'];
 };
 
 export type IncidentOrderByWithRelationInput = {
   date_ended?: InputMaybe<SortOrder>;
   date_started?: InputMaybe<SortOrder>;
   incident_id?: InputMaybe<SortOrder>;
-  incident_type?: InputMaybe<SortOrder>;
   report?: InputMaybe<ReportOrderByWithRelationInput>;
   reports_id?: InputMaybe<SortOrder>;
 };
@@ -290,9 +356,29 @@ export enum IncidentScalarFieldEnum {
   DateEnded = 'date_ended',
   DateStarted = 'date_started',
   IncidentId = 'incident_id',
-  IncidentType = 'incident_type',
   ReportsId = 'reports_id'
 }
+
+export type IncidentUpdateOneWithoutReportNestedInput = {
+  connect?: InputMaybe<IncidentWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<IncidentCreateOrConnectWithoutReportInput>;
+  create?: InputMaybe<IncidentCreateWithoutReportInput>;
+  delete?: InputMaybe<Scalars['Boolean']>;
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  update?: InputMaybe<IncidentUpdateWithoutReportInput>;
+  upsert?: InputMaybe<IncidentUpsertWithoutReportInput>;
+};
+
+export type IncidentUpdateWithoutReportInput = {
+  date_ended?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  date_started?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  incident_id?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type IncidentUpsertWithoutReportInput = {
+  create: IncidentCreateWithoutReportInput;
+  update: IncidentUpdateWithoutReportInput;
+};
 
 export type IncidentWhereInput = {
   AND?: InputMaybe<Array<IncidentWhereInput>>;
@@ -301,7 +387,6 @@ export type IncidentWhereInput = {
   date_ended?: InputMaybe<DateTimeFilter>;
   date_started?: InputMaybe<DateTimeFilter>;
   incident_id?: InputMaybe<StringFilter>;
-  incident_type?: InputMaybe<StringFilter>;
   report?: InputMaybe<ReportRelationFilter>;
   reports_id?: InputMaybe<StringFilter>;
 };
@@ -311,33 +396,57 @@ export type IncidentWhereUniqueInput = {
   reports_id?: InputMaybe<Scalars['String']>;
 };
 
-export type LoginResponse = {
-  __typename?: 'LoginResponse';
+export type JsonFilter = {
+  array_contains?: InputMaybe<Scalars['JSON']>;
+  array_ends_with?: InputMaybe<Scalars['JSON']>;
+  array_starts_with?: InputMaybe<Scalars['JSON']>;
+  equals?: InputMaybe<Scalars['JSON']>;
+  gt?: InputMaybe<Scalars['JSON']>;
+  gte?: InputMaybe<Scalars['JSON']>;
+  lt?: InputMaybe<Scalars['JSON']>;
+  lte?: InputMaybe<Scalars['JSON']>;
+  not?: InputMaybe<Scalars['JSON']>;
+  path?: InputMaybe<Array<Scalars['String']>>;
+  string_contains?: InputMaybe<Scalars['String']>;
+  string_ends_with?: InputMaybe<Scalars['String']>;
+  string_starts_with?: InputMaybe<Scalars['String']>;
+};
+
+export type Location = {
+  destination: Coordinates;
+  origin: Coordinates;
+};
+
+export type LoginResponseSuccess = {
+  __typename?: 'LoginResponseSuccess';
   accessToken: Scalars['String'];
+  account: Account;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createOneCityProject: CityProject;
-  createOneIncident: Incident;
+  createOneAccount: Account;
   createOneReport: Report;
-  login?: Maybe<LoginResponse>;
-  register: Account;
+  deleteOneReport?: Maybe<Report>;
+  login?: Maybe<LoginResponseSuccess>;
+  logout: Scalars['Boolean'];
+  registerOneAccount: Account;
+  updateOneAccount?: Maybe<Account>;
 };
 
 
-export type MutationCreateOneCityProjectArgs = {
-  data: CityProjectCreateInput;
-};
-
-
-export type MutationCreateOneIncidentArgs = {
-  data: IncidentCreateInput;
+export type MutationCreateOneAccountArgs = {
+  data: AccountCreateInput;
 };
 
 
 export type MutationCreateOneReportArgs = {
-  data: ReportCreateInput;
+  data: CustomReportCreateInput;
+};
+
+
+export type MutationDeleteOneReportArgs = {
+  where: ReportWhereUniqueInput;
 };
 
 
@@ -351,13 +460,14 @@ export type MutationLoginArgs = {
 };
 
 
-export type MutationRegisterArgs = {
+export type MutationRegisterOneAccountArgs = {
   data: AccountCreateInput;
 };
 
-export type NestedBoolFilter = {
-  equals?: InputMaybe<Scalars['Boolean']>;
-  not?: InputMaybe<NestedBoolFilter>;
+
+export type MutationUpdateOneAccountArgs = {
+  data: CustomAccountUpdateInput;
+  where: AccountWhereUniqueInput;
 };
 
 export type NestedDateTimeFilter = {
@@ -376,6 +486,13 @@ export type NestedEnumAccTypeFilter = {
   in?: InputMaybe<Array<AccType>>;
   not?: InputMaybe<NestedEnumAccTypeFilter>;
   notIn?: InputMaybe<Array<AccType>>;
+};
+
+export type NestedEnumReportTypeFilter = {
+  equals?: InputMaybe<ReportType>;
+  in?: InputMaybe<Array<ReportType>>;
+  not?: InputMaybe<NestedEnumReportTypeFilter>;
+  notIn?: InputMaybe<Array<ReportType>>;
 };
 
 export type NestedFloatFilter = {
@@ -417,10 +534,15 @@ export type NestedStringNullableFilter = {
   startsWith?: InputMaybe<Scalars['String']>;
 };
 
+export type PasswordFieldUpdateOperationsInput = {
+  set?: InputMaybe<Scalars['String']>;
+};
+
 export type Query = {
   __typename?: 'Query';
   accounts: Array<Account>;
   cityProjects: Array<CityProject>;
+  incident?: Maybe<Incident>;
   incidents: Array<Incident>;
   reports: Array<Report>;
 };
@@ -443,6 +565,11 @@ export type QueryCityProjectsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   take?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<CityProjectWhereInput>;
+};
+
+
+export type QueryIncidentArgs = {
+  where: IncidentWhereUniqueInput;
 };
 
 
@@ -474,31 +601,19 @@ export type Report = {
   __typename?: 'Report';
   createdAt: Scalars['DateTime'];
   description: Scalars['String'];
-  location: Scalars['String'];
-  published: Scalars['Boolean'];
+  location: Scalars['JSON'];
   report_id: Scalars['String'];
+  report_type: ReportType;
   reporter_id?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
-};
-
-export type ReportCreateInput = {
-  city_porject?: InputMaybe<CityProjectCreateNestedOneWithoutReportInput>;
-  createdAt?: InputMaybe<Scalars['DateTime']>;
-  description: Scalars['String'];
-  incident?: InputMaybe<IncidentCreateNestedOneWithoutReportInput>;
-  location: Scalars['String'];
-  published: Scalars['Boolean'];
-  report_id?: InputMaybe<Scalars['String']>;
-  reporter?: InputMaybe<AccountCreateNestedOneWithoutReportsInput>;
-  updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type ReportCreateManyReporterInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   description: Scalars['String'];
-  location: Scalars['String'];
-  published: Scalars['Boolean'];
+  location: Scalars['JSON'];
   report_id?: InputMaybe<Scalars['String']>;
+  report_type: ReportType;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -514,53 +629,9 @@ export type ReportCreateNestedManyWithoutReporterInput = {
   createMany?: InputMaybe<ReportCreateManyReporterInputEnvelope>;
 };
 
-export type ReportCreateNestedOneWithoutCity_PorjectInput = {
-  connect?: InputMaybe<ReportWhereUniqueInput>;
-  connectOrCreate?: InputMaybe<ReportCreateOrConnectWithoutCity_PorjectInput>;
-  create?: InputMaybe<ReportCreateWithoutCity_PorjectInput>;
-};
-
-export type ReportCreateNestedOneWithoutIncidentInput = {
-  connect?: InputMaybe<ReportWhereUniqueInput>;
-  connectOrCreate?: InputMaybe<ReportCreateOrConnectWithoutIncidentInput>;
-  create?: InputMaybe<ReportCreateWithoutIncidentInput>;
-};
-
-export type ReportCreateOrConnectWithoutCity_PorjectInput = {
-  create: ReportCreateWithoutCity_PorjectInput;
-  where: ReportWhereUniqueInput;
-};
-
-export type ReportCreateOrConnectWithoutIncidentInput = {
-  create: ReportCreateWithoutIncidentInput;
-  where: ReportWhereUniqueInput;
-};
-
 export type ReportCreateOrConnectWithoutReporterInput = {
   create: ReportCreateWithoutReporterInput;
   where: ReportWhereUniqueInput;
-};
-
-export type ReportCreateWithoutCity_PorjectInput = {
-  createdAt?: InputMaybe<Scalars['DateTime']>;
-  description: Scalars['String'];
-  incident?: InputMaybe<IncidentCreateNestedOneWithoutReportInput>;
-  location: Scalars['String'];
-  published: Scalars['Boolean'];
-  report_id?: InputMaybe<Scalars['String']>;
-  reporter?: InputMaybe<AccountCreateNestedOneWithoutReportsInput>;
-  updatedAt?: InputMaybe<Scalars['DateTime']>;
-};
-
-export type ReportCreateWithoutIncidentInput = {
-  city_porject?: InputMaybe<CityProjectCreateNestedOneWithoutReportInput>;
-  createdAt?: InputMaybe<Scalars['DateTime']>;
-  description: Scalars['String'];
-  location: Scalars['String'];
-  published: Scalars['Boolean'];
-  report_id?: InputMaybe<Scalars['String']>;
-  reporter?: InputMaybe<AccountCreateNestedOneWithoutReportsInput>;
-  updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type ReportCreateWithoutReporterInput = {
@@ -568,9 +639,9 @@ export type ReportCreateWithoutReporterInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   description: Scalars['String'];
   incident?: InputMaybe<IncidentCreateNestedOneWithoutReportInput>;
-  location: Scalars['String'];
-  published: Scalars['Boolean'];
+  location: Scalars['JSON'];
   report_id?: InputMaybe<Scalars['String']>;
+  report_type: ReportType;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -590,8 +661,8 @@ export type ReportOrderByWithRelationInput = {
   description?: InputMaybe<SortOrder>;
   incident?: InputMaybe<IncidentOrderByWithRelationInput>;
   location?: InputMaybe<SortOrder>;
-  published?: InputMaybe<SortOrder>;
   report_id?: InputMaybe<SortOrder>;
+  report_type?: InputMaybe<SortOrder>;
   reporter?: InputMaybe<AccountOrderByWithRelationInput>;
   reporter_id?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
@@ -606,11 +677,82 @@ export enum ReportScalarFieldEnum {
   CreatedAt = 'createdAt',
   Description = 'description',
   Location = 'location',
-  Published = 'published',
   ReportId = 'report_id',
+  ReportType = 'report_type',
   ReporterId = 'reporter_id',
   UpdatedAt = 'updatedAt'
 }
+
+export type ReportScalarWhereInput = {
+  AND?: InputMaybe<Array<ReportScalarWhereInput>>;
+  NOT?: InputMaybe<Array<ReportScalarWhereInput>>;
+  OR?: InputMaybe<Array<ReportScalarWhereInput>>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  description?: InputMaybe<StringFilter>;
+  location?: InputMaybe<JsonFilter>;
+  report_id?: InputMaybe<StringFilter>;
+  report_type?: InputMaybe<EnumReportTypeFilter>;
+  reporter_id?: InputMaybe<StringNullableFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export enum ReportType {
+  RoadAccident = 'RoadAccident',
+  RoadClosure = 'RoadClosure',
+  RoadConstruction = 'RoadConstruction',
+  RoadEvent = 'RoadEvent',
+  RoadHazard = 'RoadHazard'
+}
+
+export type ReportUpdateManyMutationInput = {
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  location?: InputMaybe<Scalars['JSON']>;
+  report_id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  report_type?: InputMaybe<EnumReportTypeFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type ReportUpdateManyWithWhereWithoutReporterInput = {
+  data: ReportUpdateManyMutationInput;
+  where: ReportScalarWhereInput;
+};
+
+export type ReportUpdateManyWithoutReporterNestedInput = {
+  connect?: InputMaybe<Array<ReportWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<ReportCreateOrConnectWithoutReporterInput>>;
+  create?: InputMaybe<Array<ReportCreateWithoutReporterInput>>;
+  createMany?: InputMaybe<ReportCreateManyReporterInputEnvelope>;
+  delete?: InputMaybe<Array<ReportWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<ReportScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<ReportWhereUniqueInput>>;
+  set?: InputMaybe<Array<ReportWhereUniqueInput>>;
+  update?: InputMaybe<Array<ReportUpdateWithWhereUniqueWithoutReporterInput>>;
+  updateMany?: InputMaybe<Array<ReportUpdateManyWithWhereWithoutReporterInput>>;
+  upsert?: InputMaybe<Array<ReportUpsertWithWhereUniqueWithoutReporterInput>>;
+};
+
+export type ReportUpdateWithWhereUniqueWithoutReporterInput = {
+  data: ReportUpdateWithoutReporterInput;
+  where: ReportWhereUniqueInput;
+};
+
+export type ReportUpdateWithoutReporterInput = {
+  city_porject?: InputMaybe<CityProjectUpdateOneWithoutReportNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  incident?: InputMaybe<IncidentUpdateOneWithoutReportNestedInput>;
+  location?: InputMaybe<Scalars['JSON']>;
+  report_id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  report_type?: InputMaybe<EnumReportTypeFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type ReportUpsertWithWhereUniqueWithoutReporterInput = {
+  create: ReportCreateWithoutReporterInput;
+  update: ReportUpdateWithoutReporterInput;
+  where: ReportWhereUniqueInput;
+};
 
 export type ReportWhereInput = {
   AND?: InputMaybe<Array<ReportWhereInput>>;
@@ -620,9 +762,9 @@ export type ReportWhereInput = {
   createdAt?: InputMaybe<DateTimeFilter>;
   description?: InputMaybe<StringFilter>;
   incident?: InputMaybe<IncidentRelationFilter>;
-  location?: InputMaybe<StringFilter>;
-  published?: InputMaybe<BoolFilter>;
+  location?: InputMaybe<JsonFilter>;
   report_id?: InputMaybe<StringFilter>;
+  report_type?: InputMaybe<EnumReportTypeFilter>;
   reporter?: InputMaybe<AccountRelationFilter>;
   reporter_id?: InputMaybe<StringNullableFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
@@ -636,6 +778,10 @@ export enum SortOrder {
   Asc = 'asc',
   Desc = 'desc'
 }
+
+export type StringFieldUpdateOperationsInput = {
+  set?: InputMaybe<Scalars['String']>;
+};
 
 export type StringFilter = {
   contains?: InputMaybe<Scalars['String']>;
@@ -667,14 +813,101 @@ export type StringNullableFilter = {
   startsWith?: InputMaybe<Scalars['String']>;
 };
 
+export type CreateOneReportMutationVariables = Exact<{
+  data: CustomReportCreateInput;
+}>;
+
+
+export type CreateOneReportMutation = { __typename?: 'Mutation', createOneReport: { __typename?: 'Report', report_id: string, location: any, description: string } };
+
+export type GetAllReportsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllReportsQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', location: any, report_id: string, report_type: ReportType, description: string }> };
+
+export type GetOneIncidentQueryVariables = Exact<{
+  reportId?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetOneIncidentQuery = { __typename?: 'Query', incident?: { __typename?: 'Incident', date_started: any, date_ended: any } | null };
+
 export type LoginMutationVariables = Exact<{
   where?: InputMaybe<AccountWhereInput>;
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'LoginResponse', accessToken: string } | null };
+export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'LoginResponseSuccess', accessToken: string } | null };
 
 
+export const CreateOneReportDocument = `
+    mutation createOneReport($data: CustomReportCreateInput!) {
+  createOneReport(data: $data) {
+    report_id
+    location
+    description
+  }
+}
+    `;
+export const useCreateOneReportMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      client: GraphQLClient,
+      options?: UseMutationOptions<CreateOneReportMutation, TError, CreateOneReportMutationVariables, TContext>,
+      headers?: RequestInit['headers']
+    ) =>
+    useMutation<CreateOneReportMutation, TError, CreateOneReportMutationVariables, TContext>(
+      ['createOneReport'],
+      (variables?: CreateOneReportMutationVariables) => fetcher<CreateOneReportMutation, CreateOneReportMutationVariables>(client, CreateOneReportDocument, variables, headers)(),
+      options
+    );
+export const GetAllReportsDocument = `
+    query getAllReports {
+  reports {
+    location
+    report_id
+    report_type
+    description
+  }
+}
+    `;
+export const useGetAllReportsQuery = <
+      TData = GetAllReportsQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: GetAllReportsQueryVariables,
+      options?: UseQueryOptions<GetAllReportsQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetAllReportsQuery, TError, TData>(
+      variables === undefined ? ['getAllReports'] : ['getAllReports', variables],
+      fetcher<GetAllReportsQuery, GetAllReportsQueryVariables>(client, GetAllReportsDocument, variables, headers),
+      options
+    );
+export const GetOneIncidentDocument = `
+    query GetOneIncident($reportId: String) {
+  incident(where: {reports_id: $reportId}) {
+    date_started
+    date_ended
+  }
+}
+    `;
+export const useGetOneIncidentQuery = <
+      TData = GetOneIncidentQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: GetOneIncidentQueryVariables,
+      options?: UseQueryOptions<GetOneIncidentQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetOneIncidentQuery, TError, TData>(
+      variables === undefined ? ['GetOneIncident'] : ['GetOneIncident', variables],
+      fetcher<GetOneIncidentQuery, GetOneIncidentQueryVariables>(client, GetOneIncidentDocument, variables, headers),
+      options
+    );
 export const LoginDocument = `
     mutation login($where: AccountWhereInput) {
   login(where: $where) {

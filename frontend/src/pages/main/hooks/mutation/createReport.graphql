@@ -1,0 +1,7 @@
+mutation createOneReport($data: CustomReportCreateInput!){
+  createOneReport(data: $data){
+    report_id
+    location
+    description
+  }
+}

@@ -1,0 +1,8 @@
+query getAllReports{
+  reports{
+    location
+    report_id
+    report_type
+    description
+  }
+}

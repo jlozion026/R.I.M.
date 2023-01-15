@@ -1,3 +1,4 @@
+
 export const defaultOptions = {
   strokeOpacity: 0.5,
   strokeWeight: 1,
@@ -28,4 +29,14 @@ export const farOptions = {
   fillOpacity: 0.05,
   strokeColor: "#FF5252",
   fillColor: "#FF5252",
+};
+
+//recenter the Map when we clicked the Target Sign in the Map
+export const panToQC = (
+  mapRef: React.MutableRefObject<google.maps.Map | null>,
+  defaultCenter: google.maps.LatLng | google.maps.LatLngLiteral
+): void => {
+  if (mapRef.current) {
+    mapRef.current?.panTo(defaultCenter);
+  }
 };

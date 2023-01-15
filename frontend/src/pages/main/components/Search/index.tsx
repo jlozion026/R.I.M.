@@ -53,7 +53,7 @@ const Search: FC<ISearch> = ({
       // Get latitude and longitude via utility functions
       getGeocode({ address: description }).then((results) => {
         const { lat, lng } = getLatLng(results[0]);
-        SetCoordinates({ lat, lng });
+        SetCoordinates({lat, lng});
       });
     };
 
