@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { GraphQLClient } from 'graphql-request';
 import { RequestInit } from 'graphql-request/dist/types.dom';
-import { useMutation, useQuery, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
+import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from '@tanstack/react-query';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -95,6 +95,29 @@ export enum AccountScalarFieldEnum {
   Password = 'password'
 }
 
+export type AccountUpdateOneWithoutReportsNestedInput = {
+  connect?: InputMaybe<AccountWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<AccountCreateOrConnectWithoutReportsInput>;
+  create?: InputMaybe<AccountCreateWithoutReportsInput>;
+  delete?: InputMaybe<Scalars['Boolean']>;
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  update?: InputMaybe<AccountUpdateWithoutReportsInput>;
+  upsert?: InputMaybe<AccountUpsertWithoutReportsInput>;
+};
+
+export type AccountUpdateWithoutReportsInput = {
+  acc_id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  acc_type?: InputMaybe<EnumAccTypeFieldUpdateOperationsInput>;
+  designation?: InputMaybe<StringFieldUpdateOperationsInput>;
+  email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  password?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type AccountUpsertWithoutReportsInput = {
+  create: AccountCreateWithoutReportsInput;
+  update: AccountUpdateWithoutReportsInput;
+};
+
 export type AccountWhereInput = {
   AND?: InputMaybe<Array<AccountWhereInput>>;
   NOT?: InputMaybe<Array<AccountWhereInput>>;
@@ -110,6 +133,13 @@ export type AccountWhereInput = {
 export type AccountWhereUniqueInput = {
   acc_id?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
+};
+
+export type AggregateReport = {
+  __typename?: 'AggregateReport';
+  _count?: Maybe<ReportCountAggregate>;
+  _max?: Maybe<ReportMaxAggregate>;
+  _min?: Maybe<ReportMinAggregate>;
 };
 
 export type CityProject = {
@@ -432,6 +462,7 @@ export type Mutation = {
   logout: Scalars['Boolean'];
   registerOneAccount: Account;
   updateOneAccount?: Maybe<Account>;
+  updateOneReport?: Maybe<Report>;
 };
 
 
@@ -468,6 +499,12 @@ export type MutationRegisterOneAccountArgs = {
 export type MutationUpdateOneAccountArgs = {
   data: CustomAccountUpdateInput;
   where: AccountWhereUniqueInput;
+};
+
+
+export type MutationUpdateOneReportArgs = {
+  data: ReportUpdateInput;
+  where: ReportWhereUniqueInput;
 };
 
 export type NestedDateTimeFilter = {
@@ -540,11 +577,20 @@ export type PasswordFieldUpdateOperationsInput = {
 
 export type Query = {
   __typename?: 'Query';
+  account?: Maybe<Account>;
   accounts: Array<Account>;
+  aggregateReport: AggregateReport;
+  cityProject?: Maybe<CityProject>;
   cityProjects: Array<CityProject>;
   incident?: Maybe<Incident>;
   incidents: Array<Incident>;
+  report?: Maybe<Report>;
   reports: Array<Report>;
+};
+
+
+export type QueryAccountArgs = {
+  where: AccountWhereUniqueInput;
 };
 
 
@@ -555,6 +601,20 @@ export type QueryAccountsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   take?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<AccountWhereInput>;
+};
+
+
+export type QueryAggregateReportArgs = {
+  cursor?: InputMaybe<ReportWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<ReportOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ReportWhereInput>;
+};
+
+
+export type QueryCityProjectArgs = {
+  where: CityProjectWhereUniqueInput;
 };
 
 
@@ -583,6 +643,11 @@ export type QueryIncidentsArgs = {
 };
 
 
+export type QueryReportArgs = {
+  where: ReportWhereUniqueInput;
+};
+
+
 export type QueryReportsArgs = {
   cursor?: InputMaybe<ReportWhereUniqueInput>;
   distinct?: InputMaybe<Array<ReportScalarFieldEnum>>;
@@ -606,6 +671,18 @@ export type Report = {
   report_type: ReportType;
   reporter_id?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
+};
+
+export type ReportCountAggregate = {
+  __typename?: 'ReportCountAggregate';
+  _all: Scalars['Int'];
+  createdAt: Scalars['Int'];
+  description: Scalars['Int'];
+  location: Scalars['Int'];
+  report_id: Scalars['Int'];
+  report_type: Scalars['Int'];
+  reporter_id: Scalars['Int'];
+  updatedAt: Scalars['Int'];
 };
 
 export type ReportCreateManyReporterInput = {
@@ -649,6 +726,26 @@ export type ReportListRelationFilter = {
   every?: InputMaybe<ReportWhereInput>;
   none?: InputMaybe<ReportWhereInput>;
   some?: InputMaybe<ReportWhereInput>;
+};
+
+export type ReportMaxAggregate = {
+  __typename?: 'ReportMaxAggregate';
+  createdAt?: Maybe<Scalars['DateTime']>;
+  description?: Maybe<Scalars['String']>;
+  report_id?: Maybe<Scalars['String']>;
+  report_type?: Maybe<ReportType>;
+  reporter_id?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type ReportMinAggregate = {
+  __typename?: 'ReportMinAggregate';
+  createdAt?: Maybe<Scalars['DateTime']>;
+  description?: Maybe<Scalars['String']>;
+  report_id?: Maybe<Scalars['String']>;
+  report_type?: Maybe<ReportType>;
+  reporter_id?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
 export type ReportOrderByRelationAggregateInput = {
@@ -697,12 +794,25 @@ export type ReportScalarWhereInput = {
 };
 
 export enum ReportType {
+  CityProject = 'CityProject',
   RoadAccident = 'RoadAccident',
   RoadClosure = 'RoadClosure',
   RoadConstruction = 'RoadConstruction',
   RoadEvent = 'RoadEvent',
   RoadHazard = 'RoadHazard'
 }
+
+export type ReportUpdateInput = {
+  city_porject?: InputMaybe<CityProjectUpdateOneWithoutReportNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  incident?: InputMaybe<IncidentUpdateOneWithoutReportNestedInput>;
+  location?: InputMaybe<Location>;
+  report_id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  report_type?: InputMaybe<EnumReportTypeFieldUpdateOperationsInput>;
+  reporter?: InputMaybe<AccountUpdateOneWithoutReportsNestedInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
 
 export type ReportUpdateManyMutationInput = {
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -813,6 +923,20 @@ export type StringNullableFilter = {
   startsWith?: InputMaybe<Scalars['String']>;
 };
 
+export type GetCountOfIncidentQueryVariables = Exact<{
+  reportType?: InputMaybe<ReportType>;
+}>;
+
+
+export type GetCountOfIncidentQuery = { __typename?: 'Query', aggregateReport: { __typename?: 'AggregateReport', _count?: { __typename?: 'ReportCountAggregate', report_type: number } | null } };
+
+export type GetAllReportsByTypeQueryVariables = Exact<{
+  reportType?: InputMaybe<ReportType>;
+}>;
+
+
+export type GetAllReportsByTypeQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', report_id: string, location: any, report_type: ReportType }> };
+
 export type CreateOneReportMutationVariables = Exact<{
   data: CustomReportCreateInput;
 }>;
@@ -840,6 +964,52 @@ export type LoginMutationVariables = Exact<{
 export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'LoginResponseSuccess', accessToken: string } | null };
 
 
+export const GetCountOfIncidentDocument = `
+    query GetCountOfIncident($reportType: ReportType) {
+  aggregateReport(where: {report_type: {equals: $reportType}}) {
+    _count {
+      report_type
+    }
+  }
+}
+    `;
+export const useGetCountOfIncidentQuery = <
+      TData = GetCountOfIncidentQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: GetCountOfIncidentQueryVariables,
+      options?: UseQueryOptions<GetCountOfIncidentQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetCountOfIncidentQuery, TError, TData>(
+      variables === undefined ? ['GetCountOfIncident'] : ['GetCountOfIncident', variables],
+      fetcher<GetCountOfIncidentQuery, GetCountOfIncidentQueryVariables>(client, GetCountOfIncidentDocument, variables, headers),
+      options
+    );
+export const GetAllReportsByTypeDocument = `
+    query GetAllReportsByType($reportType: ReportType) {
+  reports(where: {report_type: {equals: $reportType}}) {
+    report_id
+    location
+    report_type
+  }
+}
+    `;
+export const useGetAllReportsByTypeQuery = <
+      TData = GetAllReportsByTypeQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: GetAllReportsByTypeQueryVariables,
+      options?: UseQueryOptions<GetAllReportsByTypeQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetAllReportsByTypeQuery, TError, TData>(
+      variables === undefined ? ['GetAllReportsByType'] : ['GetAllReportsByType', variables],
+      fetcher<GetAllReportsByTypeQuery, GetAllReportsByTypeQueryVariables>(client, GetAllReportsByTypeDocument, variables, headers),
+      options
+    );
 export const CreateOneReportDocument = `
     mutation createOneReport($data: CustomReportCreateInput!) {
   createOneReport(data: $data) {

@@ -1,0 +1,11 @@
+query GetCountOfIncident($reportType: ReportType ){
+  aggregateReport(where:{
+    report_type:{
+      equals: $reportType
+    } 
+  }){
+    _count {
+      report_type
+    }
+  }
+}
