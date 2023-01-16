@@ -13,17 +13,17 @@ export class NestedEnumReportTypeWithAggregatesFilter {
   @TypeGraphQL.Field(_type => ReportType, {
     nullable: true
   })
-  equals?: "RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard" | undefined;
+  equals?: "RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard" | "CityProject" | undefined;
 
   @TypeGraphQL.Field(_type => [ReportType], {
     nullable: true
   })
-  in?: Array<"RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard"> | undefined;
+  in?: Array<"RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard" | "CityProject"> | undefined;
 
   @TypeGraphQL.Field(_type => [ReportType], {
     nullable: true
   })
-  notIn?: Array<"RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard"> | undefined;
+  notIn?: Array<"RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard" | "CityProject"> | undefined;
 
   @TypeGraphQL.Field(_type => NestedEnumReportTypeWithAggregatesFilter, {
     nullable: true

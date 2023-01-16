@@ -11,5 +11,5 @@ export class EnumReportTypeFieldUpdateOperationsInput {
   @TypeGraphQL.Field(_type => ReportType, {
     nullable: true
   })
-  set?: "RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard" | undefined;
+  set?: "RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard" | "CityProject" | undefined;
 }

@@ -14,12 +14,13 @@ export const reportActionsConfig: ResolverActionsConfig<"Report"> = {
   createOneReport: [UseMiddleware(isAuth)],
 };
 
+export const incidentActionsConfig: ResolverActionsConfig<"Incident"> = {
+  incidents: [UseMiddleware(isAuth)],
+  createOneIncident: [UseMiddleware(isAuth)],
+};
+
 export const cityProjectActionsConfig: ResolverActionsConfig<"CityProject"> = {
   cityProjects: [UseMiddleware(isAuth)],
   createOneCityProject: [UseMiddleware(isAuth)],
 };
 
-export const incidentActionsConfig: ResolverActionsConfig<"Incident"> = {
-  incidents: [UseMiddleware(isAuth)],
-  createOneIncident: [UseMiddleware(isAuth)],
-};

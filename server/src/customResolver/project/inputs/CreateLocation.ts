@@ -1,6 +1,6 @@
-import { ValidateNested } from "class-validator";
+import { IsLatLong, IsNotEmpty, ValidateNested } from "class-validator";
 import { Field, InputType } from "type-graphql";
-import { Coordinates } from "./InputCoordinates";
+import { Coordinates } from "./CreateCoordinates";
 
 
 

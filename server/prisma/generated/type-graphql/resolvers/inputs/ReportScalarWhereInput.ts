@@ -52,13 +52,13 @@ export class ReportScalarWhereInput {
   })
   description?: StringFilter | undefined;
 
-  @TypeGraphQL.Field(_type => StringNullableFilter, {
-    nullable: true
-  })
-  reporter_id?: StringNullableFilter | undefined;
-
   @TypeGraphQL.Field(_type => EnumReportTypeFilter, {
     nullable: true
   })
   report_type?: EnumReportTypeFilter | undefined;
+
+  @TypeGraphQL.Field(_type => StringNullableFilter, {
+    nullable: true
+  })
+  reporter_id?: StringNullableFilter | undefined;
 }

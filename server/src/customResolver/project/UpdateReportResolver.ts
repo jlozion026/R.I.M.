@@ -1,22 +1,26 @@
-// import * as TypeGraphQL from "type-graphql";
-// import graphqlFields from "graphql-fields";
-// import { GraphQLResolveInfo } from "graphql";
-// import { Report } from "../../../prisma/generated/type-graphql";
-// import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../prisma/generated/type-graphql/helpers";
-// import { CustomUpdateOneReportArgs } from "./args/CustomUpdateReportArgs";
+import { Args, Ctx, Mutation, Resolver, UseMiddleware } from "type-graphql";
 
-// @TypeGraphQL.Resolver(_of => Report)
-// export class UpdateOneReportResolver {
-//   @TypeGraphQL.Mutation(_returns => Report, {
-//     nullable: true
-//   })
-//   async updateOneReport(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: CustomUpdateOneReportArgs): Promise<Report | null> {
-//     const { _count } = transformFields(
-//       graphqlFields(info as any)
-//     );
-//     return getPrismaFromContext(ctx).report.update({
-//       ...args,
-//       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
-//     });
-//   }
-// }
+import { Report } from "../../../prisma/generated/type-graphql";
+
+import { isAuth } from "../account/middleware/isAuth";
+
+import { CustomUpdateOneReportArgs } from "./args/CustomUpdateReportArgs";
+
+import { getPrismaFromContext} from "../../../prisma/generated/type-graphql/helpers";
+
+@Resolver(_of => Report)
+export class UpdateReportResolver {
+  @UseMiddleware(isAuth)
+  @Mutation(_returns => Report, {
+    nullable: true
+  })
+  async updateOneReport(
+    @Ctx() ctx: any, 
+    @Args() args: CustomUpdateOneReportArgs
+    ): Promise<Report | null> {
+
+    return getPrismaFromContext(ctx).report.update({
+      ...args,
+    });
+  }
+}

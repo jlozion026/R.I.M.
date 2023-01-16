@@ -5,7 +5,8 @@ export enum ReportType {
   RoadConstruction = "RoadConstruction",
   RoadAccident = "RoadAccident",
   RoadEvent = "RoadEvent",
-  RoadHazard = "RoadHazard"
+  RoadHazard = "RoadHazard",
+  CityProject = "CityProject"
 }
 TypeGraphQL.registerEnumType(ReportType, {
   name: "ReportType",

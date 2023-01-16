@@ -52,13 +52,13 @@ export class ReportScalarWhereWithAggregatesInput {
   })
   description?: StringWithAggregatesFilter | undefined;
 
-  @TypeGraphQL.Field(_type => StringNullableWithAggregatesFilter, {
-    nullable: true
-  })
-  reporter_id?: StringNullableWithAggregatesFilter | undefined;
-
   @TypeGraphQL.Field(_type => EnumReportTypeWithAggregatesFilter, {
     nullable: true
   })
   report_type?: EnumReportTypeWithAggregatesFilter | undefined;
+
+  @TypeGraphQL.Field(_type => StringNullableWithAggregatesFilter, {
+    nullable: true
+  })
+  reporter_id?: StringNullableWithAggregatesFilter | undefined;
 }

@@ -35,5 +35,5 @@ export class FindFirstReportArgs {
   @TypeGraphQL.Field(_type => [ReportScalarFieldEnum], {
     nullable: true
   })
-  distinct?: Array<"report_id" | "createdAt" | "updatedAt" | "location" | "description" | "reporter_id" | "report_type"> | undefined;
+  distinct?: Array<"report_id" | "createdAt" | "updatedAt" | "location" | "description" | "report_type" | "reporter_id"> | undefined;
 }

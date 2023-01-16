@@ -65,6 +65,29 @@ enum AccountScalarFieldEnum {
   password
 }
 
+input AccountUpdateOneWithoutReportsNestedInput {
+  connect: AccountWhereUniqueInput
+  connectOrCreate: AccountCreateOrConnectWithoutReportsInput
+  create: AccountCreateWithoutReportsInput
+  delete: Boolean
+  disconnect: Boolean
+  update: AccountUpdateWithoutReportsInput
+  upsert: AccountUpsertWithoutReportsInput
+}
+
+input AccountUpdateWithoutReportsInput {
+  acc_id: StringFieldUpdateOperationsInput
+  acc_type: EnumAccTypeFieldUpdateOperationsInput
+  designation: StringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+}
+
+input AccountUpsertWithoutReportsInput {
+  create: AccountCreateWithoutReportsInput!
+  update: AccountUpdateWithoutReportsInput!
+}
+
 input AccountWhereInput {
   acc_id: StringFilter
   acc_type: EnumAccTypeFilter
@@ -85,6 +108,12 @@ input AccountWhereUniqueInput {
 enum AccType {
   ADMIN
   NORMAL
+}
+
+type AggregateReport {
+  _count: ReportCountAggregate
+  _max: ReportMaxAggregate
+  _min: ReportMinAggregate
 }
 
 type CityProject {
@@ -413,6 +442,7 @@ type Mutation {
   logout: Boolean!
   registerOneAccount(data: AccountCreateInput!): Account!
   updateOneAccount(data: CustomAccountUpdateInput!, where: AccountWhereUniqueInput!): Account
+  updateOneReport(data: ReportUpdateInput!, where: ReportWhereUniqueInput!): Report
 }
 
 input NestedDateTimeFilter {
@@ -484,10 +514,14 @@ input PasswordFieldUpdateOperationsInput {
 }
 
 type Query {
+  account(where: AccountWhereUniqueInput!): Account
   accounts(cursor: AccountWhereUniqueInput, distinct: [AccountScalarFieldEnum!], orderBy: [AccountOrderByWithRelationInput!], skip: Int, take: Int, where: AccountWhereInput): [Account!]!
+  aggregateReport(cursor: ReportWhereUniqueInput, orderBy: [ReportOrderByWithRelationInput!], skip: Int, take: Int, where: ReportWhereInput): AggregateReport!
+  cityProject(where: CityProjectWhereUniqueInput!): CityProject
   cityProjects(cursor: CityProjectWhereUniqueInput, distinct: [CityProjectScalarFieldEnum!], orderBy: [CityProjectOrderByWithRelationInput!], skip: Int, take: Int, where: CityProjectWhereInput): [CityProject!]!
   incident(where: IncidentWhereUniqueInput!): Incident
   incidents(cursor: IncidentWhereUniqueInput, distinct: [IncidentScalarFieldEnum!], orderBy: [IncidentOrderByWithRelationInput!], skip: Int, take: Int, where: IncidentWhereInput): [Incident!]!
+  report(where: ReportWhereUniqueInput!): Report
   reports(cursor: ReportWhereUniqueInput, distinct: [ReportScalarFieldEnum!], orderBy: [ReportOrderByWithRelationInput!], skip: Int, take: Int, where: ReportWhereInput): [Report!]!
 }
 
@@ -504,6 +538,17 @@ type Report {
   report_type: ReportType!
   reporter_id: String
   updatedAt: DateTime!
+}
+
+type ReportCountAggregate {
+  _all: Int!
+  createdAt: Int!
+  description: Int!
+  location: Int!
+  report_id: Int!
+  report_type: Int!
+  reporter_id: Int!
+  updatedAt: Int!
 }
 
 input ReportCreateManyReporterInput {
@@ -547,6 +592,24 @@ input ReportListRelationFilter {
   every: ReportWhereInput
   none: ReportWhereInput
   some: ReportWhereInput
+}
+
+type ReportMaxAggregate {
+  createdAt: DateTime
+  description: String
+  report_id: String
+  report_type: ReportType
+  reporter_id: String
+  updatedAt: DateTime
+}
+
+type ReportMinAggregate {
+  createdAt: DateTime
+  description: String
+  report_id: String
+  report_type: ReportType
+  reporter_id: String
+  updatedAt: DateTime
 }
 
 input ReportOrderByRelationAggregateInput {
@@ -595,11 +658,24 @@ input ReportScalarWhereInput {
 }
 
 enum ReportType {
+  CityProject
   RoadAccident
   RoadClosure
   RoadConstruction
   RoadEvent
   RoadHazard
+}
+
+input ReportUpdateInput {
+  city_porject: CityProjectUpdateOneWithoutReportNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  incident: IncidentUpdateOneWithoutReportNestedInput
+  location: Location
+  report_id: StringFieldUpdateOperationsInput
+  report_type: EnumReportTypeFieldUpdateOperationsInput
+  reporter: AccountUpdateOneWithoutReportsNestedInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input ReportUpdateManyMutationInput {

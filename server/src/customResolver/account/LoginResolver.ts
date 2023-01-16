@@ -3,10 +3,7 @@ import { ApolloError } from "apollo-server-express";
 
 import { Context } from "src/Context";
 
-import {
-  Account,
-  FindFirstAccountArgs,
-} from "../../../prisma/generated/type-graphql";
+import {Account,FindFirstAccountArgs} from "../../../prisma/generated/type-graphql";
 
 import { findUserByEmail, verifyPassword } from "./utils/account.service";
 import { createAccessToken, createRefreshToken } from "./utils/Auth";

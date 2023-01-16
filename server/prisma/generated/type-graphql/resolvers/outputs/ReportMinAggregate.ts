@@ -28,13 +28,13 @@ export class ReportMinAggregate {
   })
   description!: string | null;
 
+  @TypeGraphQL.Field(_type => ReportType, {
+    nullable: true
+  })
+  report_type!: "RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard" | "CityProject" | null;
+
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
   reporter_id!: string | null;
-
-  @TypeGraphQL.Field(_type => ReportType, {
-    nullable: true
-  })
-  report_type!: "RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard" | null;
 }
