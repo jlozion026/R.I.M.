@@ -15,9 +15,10 @@ export const myFormatError = (error: GraphQLError) => {
     return {
       message: "field required or invalid input",
       extensions: error.extensions?.code,
-    };
-  } 
 
+    };
+  }
+  
   return {
     message: error.message,
     extensions: error.extensions,

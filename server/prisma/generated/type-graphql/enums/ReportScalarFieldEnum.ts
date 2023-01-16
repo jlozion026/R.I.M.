@@ -6,8 +6,8 @@ export enum ReportScalarFieldEnum {
   updatedAt = "updatedAt",
   location = "location",
   description = "description",
-  reporter_id = "reporter_id",
-  report_type = "report_type"
+  report_type = "report_type",
+  reporter_id = "reporter_id"
 }
 TypeGraphQL.registerEnumType(ReportScalarFieldEnum, {
   name: "ReportScalarFieldEnum",

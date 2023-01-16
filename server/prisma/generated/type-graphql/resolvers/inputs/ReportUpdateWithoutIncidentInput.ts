@@ -37,15 +37,15 @@ export class ReportUpdateWithoutIncidentInput {
   })
   description?: StringFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => AccountUpdateOneWithoutReportsNestedInput, {
-    nullable: true
-  })
-  reporter?: AccountUpdateOneWithoutReportsNestedInput | undefined;
-
   @TypeGraphQL.Field(_type => EnumReportTypeFieldUpdateOperationsInput, {
     nullable: true
   })
   report_type?: EnumReportTypeFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => AccountUpdateOneWithoutReportsNestedInput, {
+    nullable: true
+  })
+  reporter?: AccountUpdateOneWithoutReportsNestedInput | undefined;
 
   @TypeGraphQL.Field(_type => CityProjectUpdateOneWithoutReportNestedInput, {
     nullable: true

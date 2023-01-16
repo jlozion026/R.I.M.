@@ -38,7 +38,7 @@ export class ReportCreateWithoutReporterInput {
   @TypeGraphQL.Field(_type => ReportType, {
     nullable: false
   })
-  report_type!: "RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard";
+  report_type!: "RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard" | "CityProject";
 
   @TypeGraphQL.Field(_type => CityProjectCreateNestedOneWithoutReportInput, {
     nullable: true

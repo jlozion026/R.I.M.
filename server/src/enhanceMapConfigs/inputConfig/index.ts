@@ -1,20 +1,42 @@
 import { InputTypesEnhanceMap } from "prisma/generated/type-graphql";
-import { accountsInputTypesConfig,  cityProjectCreateNestedOneWithoutReport, cityProjectCreateWithouReport, cityProjectInputTypesConfig, incidentCreateNestedOneWithoutReport, incidentCreateWithoutReport, reportCreateNestedOneWithoutCityProj, reportCreateWithoutCityProj } from "./inputTypeConfig";
 
+import { dateTimeFieldUpdateOperationsInput, enumReportTypeFieldUpdateOperationsInput, stringFieldUpdateOperationInput } from "./inputTypeConfigReusable";
+
+import { accountsInputTypesConfig } from "./inputTypeConfigAccount";
+
+import { incidentCreateNestedOneWithoutReport, incidentCreateWithoutReport, incidentUpdateOneWithoutReportNestedInput, incidentUpdateWithoutReportInput } from "./inputTypeConfigReportIncident";
+
+import { cityProjectCreateNestedOneWithoutReport, cityProjectCreateWithouReport, cityProjectUpdateOneWithoutReportNestedInput, cityProjectUpdateWithoutReportInput } from "./inputTypeConfigReportCityProject";
 
 
 const inputTypeEnhanceMap: InputTypesEnhanceMap = {
+    // * Reusable Input TypesCongig
+    DateTimeFieldUpdateOperationsInput: dateTimeFieldUpdateOperationsInput,
+    StringFieldUpdateOperationsInput: stringFieldUpdateOperationInput,
+    EnumReportTypeFieldUpdateOperationsInput: enumReportTypeFieldUpdateOperationsInput,
+
+    // * Accounts Related TypesConfig
+
+    // * Create Account
     AccountCreateInput: accountsInputTypesConfig,
-
-    CityProjectCreateNestedOneWithoutReportInput: cityProjectCreateNestedOneWithoutReport,
+    
+    // * Report Incident Related TypesConfig
+    
+    // * Create Report Incident
     IncidentCreateNestedOneWithoutReportInput: incidentCreateNestedOneWithoutReport,
-    CityProjectCreateWithoutReportInput: cityProjectCreateWithouReport,
     IncidentCreateWithoutReportInput: incidentCreateWithoutReport,
+    // * Update Report Incident
+    IncidentUpdateOneWithoutReportNestedInput: incidentUpdateOneWithoutReportNestedInput,
+    IncidentUpdateWithoutReportInput: incidentUpdateWithoutReportInput,
 
-    CityProjectCreateInput: cityProjectInputTypesConfig,
-    ReportCreateNestedOneWithoutCity_porjectInput: reportCreateNestedOneWithoutCityProj,
-    ReportCreateWithoutCity_porjectInput: reportCreateWithoutCityProj
-
+    // * Report CityProject Related TypesConfig
+    
+    // * Create Report City Project
+    CityProjectCreateNestedOneWithoutReportInput: cityProjectCreateNestedOneWithoutReport,
+    CityProjectCreateWithoutReportInput: cityProjectCreateWithouReport,
+    // * Update Report Incident
+    CityProjectUpdateOneWithoutReportNestedInput: cityProjectUpdateOneWithoutReportNestedInput,
+    CityProjectUpdateWithoutReportInput: cityProjectUpdateWithoutReportInput
 }
 
 export default inputTypeEnhanceMap

@@ -31,10 +31,10 @@ export class ReportMaxOrderByAggregateInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
-  reporter_id?: "asc" | "desc" | undefined;
+  report_type?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
-  report_type?: "asc" | "desc" | undefined;
+  reporter_id?: "asc" | "desc" | undefined;
 }

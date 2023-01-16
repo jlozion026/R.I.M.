@@ -3,10 +3,7 @@ import argon2 from "argon2";
 
 import { Context } from "src/Context";
 
-import {
-  CreateOneAccountArgs,
-  FindFirstAccountArgs,
-} from "prisma/generated/type-graphql";
+import {CreateOneAccountArgs,FindFirstAccountArgs} from "prisma/generated/type-graphql";
 
 export async function createUser(args: CreateOneAccountArgs, ctx: Context) {
   const hashedPassword = await argon2.hash(args.data.password);

@@ -1,5 +1,4 @@
 import { MinLength } from "class-validator";
-import * as TypeGraphQL from "type-graphql";
 import { Field, InputType } from "type-graphql";
 
 

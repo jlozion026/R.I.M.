@@ -55,6 +55,11 @@ export class ReportWhereInput {
   })
   description?: StringFilter | undefined;
 
+  @TypeGraphQL.Field(_type => EnumReportTypeFilter, {
+    nullable: true
+  })
+  report_type?: EnumReportTypeFilter | undefined;
+
   @TypeGraphQL.Field(_type => AccountRelationFilter, {
     nullable: true
   })
@@ -64,11 +69,6 @@ export class ReportWhereInput {
     nullable: true
   })
   reporter_id?: StringNullableFilter | undefined;
-
-  @TypeGraphQL.Field(_type => EnumReportTypeFilter, {
-    nullable: true
-  })
-  report_type?: EnumReportTypeFilter | undefined;
 
   @TypeGraphQL.Field(_type => CityProjectRelationFilter, {
     nullable: true

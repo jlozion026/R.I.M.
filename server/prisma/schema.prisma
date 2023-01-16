@@ -26,7 +26,9 @@ enum ReportType {
   RoadAccident
   RoadEvent
   RoadHazard
+  CityProject
 }
+
 
 model Account {
   acc_id      String   @id @unique @default(cuid())
@@ -44,9 +46,9 @@ model Report {
   updatedAt   DateTime @updatedAt
   location    Json     @db.Json
   description String   @db.VarChar(250)
+  report_type ReportType
   reporter    Account? @relation(fields: [reporter_id], references: [acc_id])
   reporter_id String?
-  report_type ReportType
 
   city_porject CityProject?
   incident     Incident?
@@ -61,7 +63,7 @@ model CityProject {
   source_fund      String   @db.VarChar(150)
   project_ammount  Float    @db.DoublePrecision
   contract_ammount Float    @db.DoublePrecision
-  report           Report   @relation(fields: [reports_id], references: [report_id], onDelete: Cascade)
+  report           Report   @relation(fields: [reports_id], references: [report_id])
   reports_id       String   @unique
 }
 

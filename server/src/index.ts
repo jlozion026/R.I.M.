@@ -10,12 +10,14 @@ import { Context } from "./Context";
 
 import { enhanceMaps } from "./enhanceMaps";
 import { myFormatError } from "./errorFromatter";
+import { CustomAuthChecker } from "./customAuthChecker";
 
 enhanceMaps();
 
 const main = async () => {
   const schema = await buildSchema({
     resolvers: resolver,
+    authChecker: CustomAuthChecker,
     emitSchemaFile: true,
     validate: {
       forbidUnknownValues: false,

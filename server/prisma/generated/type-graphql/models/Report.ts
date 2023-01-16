@@ -36,17 +36,17 @@ export class Report {
   })
   description!: string;
 
+  @TypeGraphQL.Field(_type => ReportType, {
+    nullable: false
+  })
+  report_type!: "RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard" | "CityProject";
+
   reporter?: Account | null;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
   reporter_id?: string | null;
-
-  @TypeGraphQL.Field(_type => ReportType, {
-    nullable: false
-  })
-  report_type!: "RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard";
 
   city_porject?: CityProject | null;
 

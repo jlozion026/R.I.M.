@@ -1,7 +1,7 @@
 import { AccountCreateNestedOneWithoutReportsInput } from "../../../../prisma/generated/type-graphql/resolvers/inputs";
 import { CityProjectCreateNestedOneWithoutReportInput } from "../../../../prisma/generated/type-graphql/resolvers/inputs";;
 import { IncidentCreateNestedOneWithoutReportInput } from "../../../../prisma/generated/type-graphql/resolvers/inputs";;
-import { Location } from "./InputLocation"
+import { Location } from "./CreateLocation"
 import { Field, InputType } from "type-graphql";
 import { IsDate, IsNotEmpty, ValidateNested } from "class-validator";
 import { ReportType } from "../../../../prisma/generated/type-graphql/enums/ReportType";
@@ -32,16 +32,14 @@ export class CustomReportCreateInput {
   @Field(_type => ReportType, {
     nullable: false
   })
-  report_type!: "RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard";
+  report_type!: "RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard" | "CityProject";
 
-  @ValidateNested()
   @Field(_type => AccountCreateNestedOneWithoutReportsInput, {nullable: true})
   reporter?: AccountCreateNestedOneWithoutReportsInput | undefined;
 
   @ValidateNested()
   @Field(_type => IncidentCreateNestedOneWithoutReportInput, {nullable: true})
   incident?: IncidentCreateNestedOneWithoutReportInput | undefined;
-
 
   @ValidateNested()
   @Field(_type => CityProjectCreateNestedOneWithoutReportInput, {nullable: true})

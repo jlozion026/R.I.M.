@@ -33,13 +33,13 @@ export class ReportCreateManyInput {
   })
   description!: string;
 
+  @TypeGraphQL.Field(_type => ReportType, {
+    nullable: false
+  })
+  report_type!: "RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard" | "CityProject";
+
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
   reporter_id?: string | undefined;
-
-  @TypeGraphQL.Field(_type => ReportType, {
-    nullable: false
-  })
-  report_type!: "RoadClosure" | "RoadConstruction" | "RoadAccident" | "RoadEvent" | "RoadHazard";
 }
