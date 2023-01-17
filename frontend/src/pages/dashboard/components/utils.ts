@@ -7,6 +7,7 @@ import Event from "@/Assets/svg/Event.svg";
 
 export const CardProps = [
   {
+    id: 'RoadClosure',
     cardIcon: RoadClosure,
     cardTitle: "Road Closure",
     cardValue: 0,
@@ -14,6 +15,7 @@ export const CardProps = [
     imgColor: "rcColor",
   },
   {
+    id: 'RoadConstruction',
     cardIcon: Constructions,
     cardTitle: "Constructions",
     cardValue: 0,
@@ -21,6 +23,7 @@ export const CardProps = [
     imgColor: "conColor",
   },
   {
+    id: 'RoadAccident',
     cardIcon: Accident,
     cardTitle: "Accidents",
     cardValue: 0,
@@ -28,6 +31,7 @@ export const CardProps = [
     imgColor: "acColor",
   },
   {
+    id: 'RoadHazard',
     cardIcon: Hazzard,
     cardTitle: "Hazzards",
     cardValue: 0,
@@ -35,6 +39,7 @@ export const CardProps = [
     imgColor: "hazColor",
   },
   {
+    id: 'RoadEvent',
     cardIcon: Event,
     cardTitle: "Events",
     cardValue: 0,
@@ -42,6 +47,7 @@ export const CardProps = [
     imgColor: "eventColor",
   },
   {
+    id: 'CityProject',
     cardIcon: Cityproject,
     cardTitle: "City Project",
     cardValue: 0,

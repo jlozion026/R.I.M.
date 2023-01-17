@@ -24,8 +24,6 @@ import {
 } from "./utils";
 
 import { GetAllReportsQuery, useGetAllReportsQuery } from "@/generated/graphql";
-
-
 import graphqlRequestClient from "@/lib/client/graphqlRequestClient";
 
 import ReportsBtn from "./components/ReportsBtn";

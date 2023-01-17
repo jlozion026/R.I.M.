@@ -1,15 +1,42 @@
 import { FC } from "react";
+
+import {  ReportType } from "@/generated/graphql";
+
+import { useIncidentCountData } from './hooks/useGetCountOfIncidentData'
+
 import NavBar from "@/components/Navbar";
-import { CardProps } from "./components/utils";
 import CardCategories from "./components/CongestionCards";
 import Summary from "./components/Summary";
+
 import MonthlyCongestionLvl from "./components/MonthlyCongestionLvl/Index";
 import HourlyCongestionLvl from "./components/HourlyCongestionLvl";
 import YearCongestionlvl from "./components/YearCongestionlvl/Index";
+
+import {IDashboardData} from './models'
+import {getCountData} from './utils'
+
+import { CardProps } from "./components/utils";
+
 import './style.css';
-import { Outlet } from "react-router-dom";
 
 const Dashboard: FC = () => {
+
+  const { data: roadClosure } = useIncidentCountData(ReportType.RoadClosure);
+  const { data: roadAccident } = useIncidentCountData(ReportType.RoadAccident);
+  const { data: roadEvent } = useIncidentCountData(ReportType.RoadEvent);
+  const { data: roadHazard } = useIncidentCountData(ReportType.RoadHazard);
+  const { data: roadConstructions } = useIncidentCountData(ReportType.RoadConstruction);
+  const { data: cityProject } = useIncidentCountData(ReportType.CityProject);
+
+  const data: IDashboardData = {
+    RoadClosure: roadClosure,
+    RoadAccident: roadAccident,
+    RoadEvent: roadEvent,
+    RoadHazard: roadHazard,
+    RoadConstruction: roadConstructions,
+    CityProject: cityProject
+  }
+
   return (
     <div className="mainGrid">
       <div className="navContainer">
@@ -25,10 +52,11 @@ const Dashboard: FC = () => {
               return (
                 <div className="wrapper" key={key}>
                   <CardCategories
+                    id={val.id}
                     cardSize={val.cardSize}
                     cardTitle={val.cardTitle}
                     cardIcon={val.cardIcon}
-                    cardValue={val.cardValue}
+                    cardValue={getCountData(val.id, data)}
                     imgColor={val.imgColor}
                   />
                 </div>
@@ -45,7 +73,6 @@ const Dashboard: FC = () => {
       <div className="graphContainer">
         <div className="graphsWrap">
           <div className="graphs">
-
             <div className="medCard">
               <YearCongestionlvl cardSize="card" />
             </div>
