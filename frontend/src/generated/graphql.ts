@@ -582,6 +582,8 @@ export type Query = {
   aggregateReport: AggregateReport;
   cityProject?: Maybe<CityProject>;
   cityProjects: Array<CityProject>;
+  findFirstCityProject?: Maybe<CityProject>;
+  findFirstIncident?: Maybe<Incident>;
   incident?: Maybe<Incident>;
   incidents: Array<Incident>;
   report?: Maybe<Report>;
@@ -628,6 +630,26 @@ export type QueryCityProjectsArgs = {
 };
 
 
+export type QueryFindFirstCityProjectArgs = {
+  cursor?: InputMaybe<CityProjectWhereUniqueInput>;
+  distinct?: InputMaybe<Array<CityProjectScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<CityProjectOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<CityProjectWhereInput>;
+};
+
+
+export type QueryFindFirstIncidentArgs = {
+  cursor?: InputMaybe<IncidentWhereUniqueInput>;
+  distinct?: InputMaybe<Array<IncidentScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<IncidentOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<IncidentWhereInput>;
+};
+
+
 export type QueryIncidentArgs = {
   where: IncidentWhereUniqueInput;
 };
@@ -664,11 +686,14 @@ export enum QueryMode {
 
 export type Report = {
   __typename?: 'Report';
+  city_porject?: Maybe<CityProject>;
   createdAt: Scalars['DateTime'];
   description: Scalars['String'];
+  incident?: Maybe<Incident>;
   location: Scalars['JSON'];
   report_id: Scalars['String'];
   report_type: ReportType;
+  reporter?: Maybe<Account>;
   reporter_id?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
 };
@@ -930,6 +955,13 @@ export type GetCountOfIncidentQueryVariables = Exact<{
 
 export type GetCountOfIncidentQuery = { __typename?: 'Query', aggregateReport: { __typename?: 'AggregateReport', _count?: { __typename?: 'ReportCountAggregate', report_type: number } | null } };
 
+export type GetOneReportQueryVariables = Exact<{
+  reportId?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetOneReportQuery = { __typename?: 'Query', report?: { __typename?: 'Report', report_id: string, report_type: ReportType, location: any, description: string, incident?: { __typename?: 'Incident', date_started: any, date_ended: any } | null, city_porject?: { __typename?: 'CityProject', project_name: string, contractor_name: string, date_started: any, date_ended: any, source_fund: string, project_ammount: number, contract_ammount: number } | null } | null };
+
 export type GetAllReportsByTypeQueryVariables = Exact<{
   reportType?: InputMaybe<ReportType>;
 }>;
@@ -948,13 +980,6 @@ export type GetAllReportsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetAllReportsQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', location: any, report_id: string, report_type: ReportType, description: string }> };
-
-export type GetOneIncidentQueryVariables = Exact<{
-  reportId?: InputMaybe<Scalars['String']>;
-}>;
-
-
-export type GetOneIncidentQuery = { __typename?: 'Query', incident?: { __typename?: 'Incident', date_started: any, date_ended: any } | null };
 
 export type LoginMutationVariables = Exact<{
   where?: InputMaybe<AccountWhereInput>;
@@ -985,6 +1010,43 @@ export const useGetCountOfIncidentQuery = <
     useQuery<GetCountOfIncidentQuery, TError, TData>(
       variables === undefined ? ['GetCountOfIncident'] : ['GetCountOfIncident', variables],
       fetcher<GetCountOfIncidentQuery, GetCountOfIncidentQueryVariables>(client, GetCountOfIncidentDocument, variables, headers),
+      options
+    );
+export const GetOneReportDocument = `
+    query GetOneReport($reportId: String) {
+  report(where: {report_id: $reportId}) {
+    report_id
+    report_type
+    location
+    description
+    incident {
+      date_started
+      date_ended
+    }
+    city_porject {
+      project_name
+      contractor_name
+      date_started
+      date_ended
+      source_fund
+      project_ammount
+      contract_ammount
+    }
+  }
+}
+    `;
+export const useGetOneReportQuery = <
+      TData = GetOneReportQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: GetOneReportQueryVariables,
+      options?: UseQueryOptions<GetOneReportQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetOneReportQuery, TError, TData>(
+      variables === undefined ? ['GetOneReport'] : ['GetOneReport', variables],
+      fetcher<GetOneReportQuery, GetOneReportQueryVariables>(client, GetOneReportDocument, variables, headers),
       options
     );
 export const GetAllReportsByTypeDocument = `
@@ -1054,28 +1116,6 @@ export const useGetAllReportsQuery = <
     useQuery<GetAllReportsQuery, TError, TData>(
       variables === undefined ? ['getAllReports'] : ['getAllReports', variables],
       fetcher<GetAllReportsQuery, GetAllReportsQueryVariables>(client, GetAllReportsDocument, variables, headers),
-      options
-    );
-export const GetOneIncidentDocument = `
-    query GetOneIncident($reportId: String) {
-  incident(where: {reports_id: $reportId}) {
-    date_started
-    date_ended
-  }
-}
-    `;
-export const useGetOneIncidentQuery = <
-      TData = GetOneIncidentQuery,
-      TError = unknown
-    >(
-      client: GraphQLClient,
-      variables?: GetOneIncidentQueryVariables,
-      options?: UseQueryOptions<GetOneIncidentQuery, TError, TData>,
-      headers?: RequestInit['headers']
-    ) =>
-    useQuery<GetOneIncidentQuery, TError, TData>(
-      variables === undefined ? ['GetOneIncident'] : ['GetOneIncident', variables],
-      fetcher<GetOneIncidentQuery, GetOneIncidentQueryVariables>(client, GetOneIncidentDocument, variables, headers),
       options
     );
 export const LoginDocument = `

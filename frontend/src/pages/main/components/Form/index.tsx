@@ -81,7 +81,6 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
   const { mutate } = useCreateOneReportMutation<Error>(graphqlRequestClient, {
     onSuccess: (data: CreateOneReportMutation) => {
       queryClient.invalidateQueries(['getAllReports']);
-      console.table(data);
     },
 
     onError: (error: Error) => {
