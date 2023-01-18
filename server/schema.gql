@@ -124,6 +124,7 @@ type CityProject {
   project_ammount: Float!
   project_id: String!
   project_name: String!
+  report: Report!
   reports_id: String!
   source_fund: String!
 }
@@ -326,6 +327,7 @@ type Incident {
   date_ended: DateTime!
   date_started: DateTime!
   incident_id: String!
+  report: Report!
   reports_id: String!
 }
 
@@ -514,8 +516,6 @@ input PasswordFieldUpdateOperationsInput {
 }
 
 type Query {
-  account(where: AccountWhereUniqueInput!): Account
-  accounts(cursor: AccountWhereUniqueInput, distinct: [AccountScalarFieldEnum!], orderBy: [AccountOrderByWithRelationInput!], skip: Int, take: Int, where: AccountWhereInput): [Account!]!
   aggregateReport(cursor: ReportWhereUniqueInput, orderBy: [ReportOrderByWithRelationInput!], skip: Int, take: Int, where: ReportWhereInput): AggregateReport!
   cityProject(where: CityProjectWhereUniqueInput!): CityProject
   cityProjects(cursor: CityProjectWhereUniqueInput, distinct: [CityProjectScalarFieldEnum!], orderBy: [CityProjectOrderByWithRelationInput!], skip: Int, take: Int, where: CityProjectWhereInput): [CityProject!]!
@@ -531,11 +531,14 @@ enum QueryMode {
 }
 
 type Report {
+  city_porject: CityProject
   createdAt: DateTime!
   description: String!
+  incident: Incident
   location: JSON!
   report_id: String!
   report_type: ReportType!
+  reporter: Account
   reporter_id: String
   updatedAt: DateTime!
 }

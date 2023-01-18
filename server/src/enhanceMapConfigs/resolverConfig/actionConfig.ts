@@ -11,15 +11,19 @@ export const accountsActionsConfig: ResolverActionsConfig<"Account"> = {
 
 export const reportActionsConfig: ResolverActionsConfig<"Report"> = {
   report: [UseMiddleware(isAuth)],
+  reports: [UseMiddleware(isAuth)],
   createOneReport: [UseMiddleware(isAuth)],
+  aggregateReport: [UseMiddleware(isAuth)],
 };
 
 export const incidentActionsConfig: ResolverActionsConfig<"Incident"> = {
+  incident: [UseMiddleware(isAuth)],
   incidents: [UseMiddleware(isAuth)],
   createOneIncident: [UseMiddleware(isAuth)],
 };
 
 export const cityProjectActionsConfig: ResolverActionsConfig<"CityProject"> = {
+  cityProject: [UseMiddleware(isAuth)],
   cityProjects: [UseMiddleware(isAuth)],
   createOneCityProject: [UseMiddleware(isAuth)],
 };

@@ -63,7 +63,7 @@ model CityProject {
   source_fund      String   @db.VarChar(150)
   project_ammount  Float    @db.DoublePrecision
   contract_ammount Float    @db.DoublePrecision
-  report           Report   @relation(fields: [reports_id], references: [report_id])
+  report           Report   @relation(fields: [reports_id], references: [report_id], onDelete: Cascade)
   reports_id       String   @unique
 }
 
