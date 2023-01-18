@@ -1,15 +1,9 @@
-import {
-  FC,
-  useCallback,
-  useMemo,
-  useRef,
-  useState
-} from "react";
+import { FC, useCallback, useMemo, useRef, useState } from "react";
 
 import {
   GetOneReportQuery,
   useGetOneReportQuery,
-  ReportType
+  ReportType,
 } from "@/generated/graphql";
 
 import graphqlRequestClient from "@/lib/client/graphqlRequestClient";
@@ -31,7 +25,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import "./style.css";
 
 import { getToken } from "@/lib/auth";
-import { getPinIcon } from "@/lib/getIcon"
+import { getPinIcon } from "@/lib/getIcon";
 import { fetchDirections } from "./utils";
 import Loader from "@/components/Loader";
 
@@ -45,13 +39,15 @@ const LogInfo: FC = () => {
 
   const { state } = useLocation();
 
-  graphqlRequestClient.setHeader('authorization', `bearer ${getToken()}`)
-  const { data: report, isLoading } = useGetOneReportQuery<GetOneReportQuery, Error>(graphqlRequestClient, {
-    reportId: state.type
+  graphqlRequestClient.setHeader("authorization", `bearer ${getToken()}`);
+  const { data: report, isLoading } = useGetOneReportQuery<
+    GetOneReportQuery,
+    Error
+  >(graphqlRequestClient, {
+    reportId: state.type,
   });
 
   const [directions, setDirections] = useState<DirectionsResult>();
-
 
   const markerOptions: MarkerOptions = {
     icon: {
@@ -60,10 +56,13 @@ const LogInfo: FC = () => {
     },
   };
 
-
   const drawDirection = useMemo(() => {
     if (!isLoading) {
-      fetchDirections(report?.report?.location.origin, report?.report?.location.destination, setDirections);
+      fetchDirections(
+        report?.report?.location.origin,
+        report?.report?.location.destination,
+        setDirections
+      );
     }
   }, [isLoading]);
 
@@ -78,7 +77,12 @@ const LogInfo: FC = () => {
   };
 
   if (loadError) return <div>"Error Loading Maps"</div>;
-  if (!isLoaded) return <div className="logsInfo"><Loader/></div>;
+  if (!isLoaded)
+    return (
+      <div className="logsInfo">
+        <Loader />
+      </div>
+    );
 
   return (
     <div className="logsInfo">
@@ -86,11 +90,9 @@ const LogInfo: FC = () => {
         <p className="bck-cont" onClick={() => navigate(-1)}>
           <FaArrowLeft size={20} />
         </p>
-        {!isLoaded && isLoading
-          ?
+        {!isLoaded && isLoading ? (
           <Loader />
-          :
-
+        ) : (
           <>
             <div className="info-title">
               <h1>Project Title</h1>
@@ -99,61 +101,80 @@ const LogInfo: FC = () => {
               <h3>Project Details</h3>
             </div>
 
-            {report?.report?.report_type != ReportType.CityProject ?
+            {report?.report?.report_type != ReportType.CityProject ? (
               <>
-                <ul className="info-dates">
-                  <li className="date-title">DATES</li>
-                  <li className="li-dates">{report?.report?.incident?.date_started}</li>
-                  <li className="li-dates">{report?.report?.incident?.date_ended}</li>
+                <div className="info-dates">
+                  <div className="date-title">DATES</div>
+                  <div className="li-dates">
+                    {report?.report?.incident?.date_started}
+                  </div>
+                  <div className="li-dates">
+                    {report?.report?.incident?.date_ended}
+                  </div>
 
-                  <li className="date-title">LOCATION</li>
-                  <li className="li-dates">
-                    origin: {report?.report?.location.origin.lat}  {report?.report?.location.origin.lng}
-                  </li>
-                  <li className="li-dates">
-                    destination: {report?.report?.location.destination.lat}  {report?.report?.location.destination.lng}
-                  </li>
-                </ul>
+                  <div className="date-title">LOCATION</div>
+                  <div className="li-dates">
+                    origin: {report?.report?.location.origin.lat}{" "}
+                    {report?.report?.location.origin.lng}
+                  </div>
+                  <div className="li-dates">
+                    destination: {report?.report?.location.destination.lat}{" "}
+                    {report?.report?.location.destination.lng}
+                  </div>
+                </div>
 
-                <ul className="info-dates">
-                  <li className="date-title">Description</li>
-                  <li className="li-dates">{report?.report?.description}</li>
-                </ul>
+                <div className="info-dates">
+                  <div className="date-title">Description</div>
+                  <div className="li-dates">{report?.report?.description}</div>
+                </div>
               </>
-              :
+            ) : (
               <>
-                <ul className="info-dates">
-                  <li className="date-title">DATES</li>
-                  <li className="li-dates">{report?.report?.city_porject?.date_started}</li>
-                  <li className="li-dates">{report?.report?.city_porject?.date_ended}</li>
-                </ul>
+                <div className="info-dates">
+                  <div className="date-title">DATES</div>
+                  <div className="li-dates">
+                    {report?.report?.city_porject?.date_started}
+                  </div>
+                  <div className="li-dates">
+                    {report?.report?.city_porject?.date_ended}
+                  </div>
+                </div>
 
-                <ul className="city-project-info">
-                  <li>LOCATION</li>
-                  <li className="li-dates">
-                    origin: {report?.report?.location.origin.lat}  {report?.report?.location.origin.lng}
-                  </li>
-                  <li className="li-dates">
-                    destination: {report?.report?.location.destination.lat}  {report?.report?.location.destination.lng}
-                  </li>
-                  <li>CONTRACTOR</li>
-                  <li className="li-dates">{report.report?.city_porject?.contractor_name}</li>
-                  <li>SOURCE FUND</li>
-                  <li className="li-dates">{report.report?.city_porject?.source_fund}</li>
-                  <li>PROGRAM AMOUNT</li>
-                  <li className="li-dates">{report.report?.city_porject?.project_ammount}</li>
-                  <li>CONTRACTOR AMOUNT</li>
-                  <li className="li-dates">{report.report?.city_porject?.contract_ammount}</li>
-                  <li className="date-title">Description</li>
-                  <li className="li-dates">{report?.report?.description}</li>
-                </ul>
+                <div className="city-project-info">
+                  <div>LOCATION</div>
+                  <div className="li-dates">
+                    origin: {report?.report?.location.origin.lat}
+                    {report?.report?.location.origin.lng}
+                  </div>
+                  <div className="li-dates">
+                    destination: {report?.report?.location.destination.lat}
+                    {report?.report?.location.destination.lng}
+                  </div>
+                  <div>CONTRACTOR</div>
+                  <div className="li-dates">
+                    {report.report?.city_porject?.contractor_name}
+                  </div>
+                  <div>SOURCE FUND</div>
+                  <div className="li-dates">
+                    {report.report?.city_porject?.source_fund}
+                  </div>
+                  <div>PROGRAM AMOUNT</div>
+                  <div className="li-dates">
+                    {report.report?.city_porject?.project_ammount}
+                  </div>
+                  <div>CONTRACTOR AMOUNT</div>
+                  <div className="li-dates">
+                    {report.report?.city_porject?.contract_ammount}
+                  </div>
+                  <div className="date-title">Description</div>
+                  <div className="li-dates">{report?.report?.description}</div>
+                </div>
               </>
-            }
+            )}
           </>
-        }
-
-
+        )}
       </div>
+
       <div className="map-cont">
         <GoogleMap
           mapContainerClassName="mapContainerStyle"
