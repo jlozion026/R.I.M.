@@ -38,6 +38,9 @@ import Zoom from "./components/Zoom";
 
 import "./style.css";
 import MarkersClusterer from "./components/MarkersClusterer";
+import Loader from "@/components/Loader";
+
+import { getToken } from '@/lib/auth'
 
 const Main: FC = () => {
   const { isLoaded, loadError } = useLoadScript({
@@ -56,6 +59,8 @@ const Main: FC = () => {
   const [pingPopUp, setPingPopUp] = useState<boolean>(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
+
+  graphqlRequestClient.setHeader('authorization', `bearer ${getToken()}`) //sets the authorization header
   // send queries for all reports to the gql endpoint
   const { isLoading, data } = useGetAllReportsQuery<GetAllReportsQuery, Error>(graphqlRequestClient, {}); 
 
@@ -87,7 +92,7 @@ const Main: FC = () => {
 
 
   if (loadError) return <div>"Error Loading Maps"</div>;
-  if (!isLoaded) return <div>"Loading Maps........"</div>;
+  if (!isLoaded) return <div className="map-container"><Loader/></div>;
 
   return (
     <>

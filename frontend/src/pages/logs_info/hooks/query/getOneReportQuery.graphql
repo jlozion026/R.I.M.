@@ -1,0 +1,24 @@
+query GetOneReport($reportId: String){
+  report(where:{
+    report_id: $reportId
+  }){
+    report_id
+    report_type
+    location
+    description
+    incident{
+      date_started
+      date_ended
+    }
+    city_porject{
+      project_name
+      contractor_name
+      date_started
+      date_ended
+      source_fund
+      project_ammount
+      contract_ammount
+      
+    }
+  }
+}

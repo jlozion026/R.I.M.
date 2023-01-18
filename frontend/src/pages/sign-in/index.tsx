@@ -31,7 +31,6 @@ const SignIn: FC = () => {
 
   const { mutate } = useLoginMutation<Error>(graphqlRequestClient, {
     onSuccess: (data: LoginMutation) => {
-      console.table(data.login);
 
       if (data.login?.accessToken) setAccToken();
     },
