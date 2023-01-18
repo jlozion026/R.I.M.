@@ -7,6 +7,8 @@ import { isAuth } from "../account/middleware/isAuth";
 import { CustomCreateOneReportArgs } from "./args/CustomCreateOneReportArgs";
 
 import { getPrismaFromContext } from "../../../prisma/generated/type-graphql/helpers";
+import { ApolloError } from "apollo-server-express";
+import { IsCreateReportExist } from "./utils/report.service";
 
 @Resolver(_of => Report)
 export class CreateReportResolver {
@@ -18,6 +20,12 @@ export class CreateReportResolver {
     @Ctx() ctx: any, 
     @Args() args: CustomCreateOneReportArgs
     ): Promise<Report> {
+
+      const isReport = await IsCreateReportExist(args, ctx) 
+      if (isReport) {
+        throw new ApolloError("Report Already Exist", "VALIDATION_ERROR")
+      }
+
       return getPrismaFromContext(ctx).report.create({
       ...args,
       });

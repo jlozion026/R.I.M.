@@ -7,6 +7,8 @@ import { isAuth } from "../account/middleware/isAuth";
 import { CustomUpdateOneReportArgs } from "./args/CustomUpdateReportArgs";
 
 import { getPrismaFromContext} from "../../../prisma/generated/type-graphql/helpers";
+import { IsUpdateReportExist } from "./utils/report.service";
+import { ApolloError } from "apollo-server-express";
 
 @Resolver(_of => Report)
 export class UpdateReportResolver {
@@ -18,6 +20,11 @@ export class UpdateReportResolver {
     @Ctx() ctx: any, 
     @Args() args: CustomUpdateOneReportArgs
     ): Promise<Report | null> {
+    
+      const isReport = await IsUpdateReportExist(args, ctx) 
+      if (isReport) {
+        throw new ApolloError("Report Already Exist", "VALIDATION_ERROR")
+      }
 
     return getPrismaFromContext(ctx).report.update({
       ...args,

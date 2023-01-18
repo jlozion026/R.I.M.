@@ -2,16 +2,17 @@ import { NonEmptyArray } from "type-graphql";
 
 import {
   AggregateReportResolver,
+  CityProjectRelationsResolver,
   CreateOneAccountResolver,
   DeleteOneReportResolver,
-  FindManyAccountResolver,
   FindManyCityProjectResolver,
   FindManyIncidentResolver,
   FindManyReportResolver,
-  FindUniqueAccountResolver,
   FindUniqueCityProjectResolver,
   FindUniqueIncidentResolver,
   FindUniqueReportResolver,
+  IncidentRelationsResolver,
+  ReportRelationsResolver,
 } from "../prisma/generated/type-graphql";
 
 import { LoginResolver } from "./customResolver/account/LoginResolver";
@@ -33,15 +34,20 @@ export const resolver = [
   CreateReportResolver,
 
   // *Read
-  FindManyAccountResolver,
   FindManyReportResolver,
-  FindManyCityProjectResolver,
-  FindManyIncidentResolver,
-  FindUniqueAccountResolver,
   FindUniqueReportResolver,
-  FindUniqueIncidentResolver,
+  ReportRelationsResolver,
+  
+  FindManyCityProjectResolver,
   FindUniqueCityProjectResolver,
+  CityProjectRelationsResolver,
+  
+  FindManyIncidentResolver,
+  FindUniqueIncidentResolver,
+  IncidentRelationsResolver,
+  
   AggregateReportResolver,
+
 
   // *Update 
   UpdateAccountResolver,
