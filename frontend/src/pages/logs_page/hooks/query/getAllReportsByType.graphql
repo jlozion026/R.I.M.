@@ -1,0 +1,11 @@
+query GetAllReportsByType($reportType: ReportType){
+  reports(where:{
+    report_type: {
+      equals: $reportType
+    }
+  }){
+    report_id
+    location
+    report_type
+  }
+}

@@ -1,0 +1,10 @@
+query getAllSearchResult($searchString: String){
+  reports(where:{
+    description:{contains: $searchString}
+  }){
+    report_id
+    report_type
+    description
+    location
+  }
+}

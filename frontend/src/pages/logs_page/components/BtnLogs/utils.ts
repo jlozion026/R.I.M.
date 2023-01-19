@@ -7,16 +7,6 @@ import Event from "@/Assets/svg/Event.svg";
 export const LogsReportsBtnProps = [
   
   {
-    id: "All",
-    type: "button",
-    svg: "",
-    icon: "",
-    children: "All",
-    buttonStyle: "btn--categories",
-    buttonSize: "btn--logs",
-    onclick: () => {},
-  },
-  {
     id: "Recent",
     type: "button",
     svg: "",
@@ -37,7 +27,7 @@ export const LogsReportsBtnProps = [
     onclick: () => {},
   },
   {
-    id: "City Project btn",
+    id: "CityProject",
     type: "button",
     svg: Hazzard,
     icon: "",
@@ -48,7 +38,7 @@ export const LogsReportsBtnProps = [
   },
 
   {
-    id: "Road Closure btn",
+    id: "RoadClosure",
     type: "button",
     svg: roadclosure,
     icon: "",
@@ -59,7 +49,7 @@ export const LogsReportsBtnProps = [
   },
 
   {
-    id: "Road Construction btn",
+    id: "RoadConstruction",
     type: "button",
     svg: Construction,
     icon: "",
@@ -70,7 +60,7 @@ export const LogsReportsBtnProps = [
   },
 
   {
-    id: "Road Accident btn",
+    id: "RoadAccident",
     type: "button",
     svg: Accident,
     icon: "",
@@ -81,7 +71,7 @@ export const LogsReportsBtnProps = [
   },
 
   {
-    id: "Road Event btn",
+    id: "RoadEvent",
     type: "button",
     svg: Event,
     icon: "",
@@ -92,7 +82,7 @@ export const LogsReportsBtnProps = [
   },
 
   {
-    id: "Road Hazzard btn",
+    id: "RoadHazard",
     type: "button",
     svg: Hazzard,
     icon: "",

@@ -1,0 +1,10 @@
+query getAllReportsByDescOrder{
+	reports(orderBy:{
+      createdAt: desc
+  }){
+    report_id
+    report_type
+    location
+  }
+  
+}
