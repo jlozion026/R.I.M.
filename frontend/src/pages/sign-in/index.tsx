@@ -15,6 +15,8 @@ import wave2 from "@/Assets/svg/wave2.svg";
 import { credentials } from "./models";
 import { LoginProps } from "./utils";
 
+import {setToken} from '@/lib/auth'
+
 import "./style.css";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "@/setup/context-manager/authContext";
@@ -32,7 +34,10 @@ const SignIn: FC = () => {
   const { mutate } = useLoginMutation<Error>(graphqlRequestClient, {
     onSuccess: (data: LoginMutation) => {
 
-      if (data.login?.accessToken) setAccToken();
+      if (data.login?.accessToken) {
+        setAccToken();
+        setToken(data?.login.accessToken);
+      }
     },
 
     onError: (error: Error) => {

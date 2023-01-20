@@ -11,7 +11,6 @@ import Cityproject from "@/Assets/svg/Cityproject.svg"
 import Hazzard from "@/Assets/svg/Hazzard.svg"
 import Event from "@/Assets/svg/Event.svg"
 import Accident from "@/Assets/svg/Accident.svg"
-import { ReportType } from "@/generated/graphql";
 
 
 const pinIcons = {
@@ -33,7 +32,8 @@ const reportIcons = {
 }
 
 
-export const getPinIcon = (reportType: ReportType) => {
+// need to make this generic because some components had a value that is undefined
+export const getPinIcon = <T,>(reportType: T) => {
   const pinType = "pin".concat(reportType as string);
 
   if (pinType in pinIcons) {
@@ -42,7 +42,7 @@ export const getPinIcon = (reportType: ReportType) => {
   return;
 }
 
-export const getIcon = (reportType: ReportType) => {
+export const getIcon = <T, >(reportType: T) => {
   const iconType = reportType as string;
 
   if (iconType in reportIcons) {

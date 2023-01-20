@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, useEffect, useState } from "react";
+import { FC, ChangeEvent, useEffect, useState, useMemo } from "react";
 
 import useDebounce from './hooks/useDebounce'
 
@@ -34,7 +34,7 @@ import { getIcon } from '@/lib/getIcon'
 import { stringToEnum } from '@/lib/stringToEnum'
 
 
-import { INewReports } from './models'
+import { INewReports, ArrReports } from './models'
 
 
 import useOnclickOutside from "react-cool-onclickoutside";
@@ -47,6 +47,7 @@ import SearchResults from "./components/SearchResults";
 
 const Logs: FC = () => {
   const [modReports, setModReports] = useState<INewReports>([]); //modified reports
+
   const [loadAddr, setLoadAddr] = useState(true);
   const [searchString, setSearchString] = useState<string>('');
   const [searchClick, setSearchClick] = useState<boolean>(false);
@@ -57,10 +58,6 @@ const Logs: FC = () => {
 
   const { state } = useLocation(); // stores the data passed by previous route
 
-  // sets the reportTypeQuery when the component mounted
-  useEffect(() => {
-    setReportTypeQuery(state.type)
-  }, []);
 
   graphqlRequestClient.setHeader('authorization', `bearer ${getToken()}`) // set authorization token
 
@@ -72,27 +69,11 @@ const Logs: FC = () => {
     onSuccess: async (data: GetAllReportsByTypeQuery) => {
       const report_arr = data.reports;
       const new_arr = await addAddressAndPlusCode(report_arr, setLoadAddr);
-      setModReports(new_arr)
+      setModReports(new_arr as INewReports);
     },
   });
 
-  // query reports by descending order
-  const { refetch: fetch_report_desc } = useGetAllReportsByDescOrderQuery<
-    GetAllReportsByDescOrderQuery,
-    Error>
-    (
-      graphqlRequestClient, {},
-      {
-        enabled: false,
-        refetchOnWindowFocus: false,
-        onSuccess: async (data: GetAllReportsByDescOrderQuery) => {
-          const report_arr = data.reports;
-          const new_arr = await addAddressAndPlusCode(report_arr, setLoadAddr);
-          setModReports(new_arr)
-        },
-      });
-
-  const { data: searchResults  } = useGetAllSearchResultQuery<GetAllSearchResultQuery, Error>(
+  const { data: searchResults } = useGetAllSearchResultQuery<GetAllSearchResultQuery, Error>(
     graphqlRequestClient, {
     searchString: debouncedVal
   }, {
@@ -100,39 +81,89 @@ const Logs: FC = () => {
   }
   );
 
+  // query reports by descending order
+  const { data: descData, isStale: descIsStale, refetch: fetch_report_desc } = useGetAllReportsByDescOrderQuery<
+    GetAllReportsByDescOrderQuery,
+    Error>
+    (
+      graphqlRequestClient, {},
+      {
+        staleTime: 10000,
+        refetchOnWindowFocus: false,
+      });
+
+
+
   // query reports by ascending order
-  const { refetch: fetch_report_asc } = useGetAllReportsByAscOrderQuery<
+  const { data: ascData, isStale, refetch: fetch_report_asc } = useGetAllReportsByAscOrderQuery<
     GetAllReportsByAscOrderQuery,
     Error>
     (
       graphqlRequestClient, {},
       {
-        enabled: false,
+        staleTime: 10000,
         refetchOnWindowFocus: false,
-        onSuccess: async (data: GetAllReportsByDescOrderQuery) => {
-          const report_arr = data.reports;
-          const new_arr = await addAddressAndPlusCode(report_arr, setLoadAddr);
-          setModReports(new_arr)
-        },
       });
+
+  //memomized ascending data
+  const transform_asc_data = useMemo(async () => await addAddressAndPlusCode(
+    ascData?.reports as ArrReports,
+    setLoadAddr
+  ), [ascData])
+
+  const transform_desc_data = useMemo(async () => await addAddressAndPlusCode(
+    descData?.reports as ArrReports,
+    setLoadAddr
+  ), [descData])
 
 
   // call back function for buttons
-  const trigFetch = (btnID: string) => {
-    if (btnID === "Recent") fetch_report_desc();
-    else if (btnID === "Oldest") fetch_report_asc();
+  const trigFetch = async (btnID: string) => {
+    if (btnID === "Recent") {
+      if (!descIsStale) {
+        setLoadAddr(true);
+        const transformed_data = await transform_desc_data;
+        setLoadAddr(false);
+        setModReports(transformed_data as INewReports);
+      }
+      else {
+        fetch_report_desc();
+      }
+    }
+    else if (btnID === "Oldest") {
+      if (!isStale) {
+        console.log(transform_asc_data);
+        setLoadAddr(true);
+        const clean = await transform_asc_data;
+        console.table(clean);
+        setLoadAddr(false);
+        setModReports(clean as INewReports);
+      }
+      else {
+        fetch_report_asc();
+        setLoadAddr(true);
+        const clean = await transform_asc_data;
+        console.table(clean);
+        setLoadAddr(false);
+        setModReports(clean as INewReports);
+      }
+    }
     else {
       setReportTypeQuery(btnID);
     }
 
   }
+  // sets the reportTypeQuery when the component mounted
+  useEffect(() => {
+    setReportTypeQuery(state.type)
+  }, []);
 
   const getSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchString(e.target.value);
   };
 
   const ref = useOnclickOutside(() => {
-    setSearchClick(!searchClick);
+    setSearchClick(false);
     setSearchString("");
   });
 
@@ -148,7 +179,7 @@ const Logs: FC = () => {
         <div className="logstopwrapper">
           <div
             className="searchBarCon"
-            onClick={() => setSearchClick(!searchClick)}
+            onClick={() => setSearchClick(true)}
             ref={ref} >
 
             <InputField
