@@ -1,10 +1,15 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
+
+import { MainContext } from "@/setup/context-manager/mainContext";
+
+import { MainContextType } from "@/setup/context-manager/model";
 
 import InputField from "@/components/InputField";
 import Button from "@/components/Button";
 import Search from "@/pages/main/components/Search";
 
 import { FaCalendarAlt } from "react-icons/fa";
+import { RiEraserFill } from "react-icons/ri";
 import { Calendar } from "react-date-range";
 
 import "react-date-range/dist/styles.css"; // main css file
@@ -29,12 +34,12 @@ const DefaultForm: FC<IDefaultForm> = ({
   CalendarEnd,
   StartDate,
   EndDate,
-  SetFrom,
-  SetTo,
-  SetToCoord,
-  SetFromCoord,
   ClickCalendar,
 }) => {
+  const { coordinates, addresses, resetMarkers } = useContext(
+    MainContext
+  ) as MainContextType;
+
   const ref = useOnclickOutside(() => {
     ClickCalendar();
   });
@@ -42,20 +47,54 @@ const DefaultForm: FC<IDefaultForm> = ({
     <>
       <div className="location-container">
         <Search
-          SetCoordinates={SetFromCoord}
-          SetPlace={SetFrom}
-          Name={"From"}
-          PlaceHolder={"From"}
+          Name={"location"}
+          PlaceHolder={"Search Location"}
           Label={"Location"}
         />
+      </div>
 
-        <Search
-          SetCoordinates={SetToCoord}
-          SetPlace={SetTo}
-          Name={"To"}
-          PlaceHolder={"to"}
-          Label={""}
-        />
+      <div className="addresses-container">
+        <div className="address-flex-column">
+          <div className="org-des-column">
+            <div>
+              <span className="label-styles">From:</span>
+              <span className="address-styles">{addresses.addOrigin}</span>
+            </div>
+            <div className="lat-lng-row">
+              <div>
+                <span className="label-styles">Lat:</span>
+                <span className="lat-lng-color">{coordinates.origin.lat}</span>
+              </div>
+              <div>
+                <span className="label-styles">Lng:</span>
+                <span className="lat-lng-color">{coordinates.origin.lng}</span>
+              </div>
+            </div>
+          </div>
+          <div className="org-des-column">
+            <div>
+              <span className="label-styles">To:</span>
+              <span className="address-styles">{addresses.addDestination}</span>
+            </div>
+            <div className="lat-lng-row">
+              <div>
+                <span className="label-styles">Lat:</span>
+                <span className="lat-lng-color">
+                  {coordinates.destination.lat}
+                </span>
+              </div>
+              <div>
+                <span className="label-styles">Lng:</span>
+                <span className="lat-lng-color">
+                  {coordinates.destination.lng}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p className="eraser-icon">
+          <RiEraserFill size={25} color={"#205EFF"} onClick={resetMarkers} />
+        </p>
       </div>
 
       <div className="date-container">

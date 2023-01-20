@@ -6,4 +6,6 @@ export interface ButtonProps {
 export interface IReportsBtn {
   WindowSize: MediaQueryList;
   PingPopUp: boolean;
+  trigger: boolean;
+  popUp(): void;
 }

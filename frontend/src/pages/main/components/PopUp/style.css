@@ -2,7 +2,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 40%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
@@ -12,10 +12,14 @@
 
 .btn-popup {
   position: absolute;
-  top: 10%;
-  right: 19%;
+  top: 3%;
+  right: 10%;
   cursor: pointer;
   z-index: 10;
+  color: #d1d3d6;
+}
+.btn-popup:hover {
+  color: red;
 }
 
 @media all and (max-width: 960px) {

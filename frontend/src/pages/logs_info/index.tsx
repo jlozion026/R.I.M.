@@ -114,11 +114,11 @@ const LogInfo: FC = () => {
 
                   <div className="date-title">LOCATION</div>
                   <div className="li-dates">
-                    origin: {report?.report?.location.origin.lat}{" "}
+                    origin: {report?.report?.location.origin.lat}
                     {report?.report?.location.origin.lng}
                   </div>
                   <div className="li-dates">
-                    destination: {report?.report?.location.destination.lat}{" "}
+                    destination: {report?.report?.location.destination.lat}
                     {report?.report?.location.destination.lng}
                   </div>
                 </div>
