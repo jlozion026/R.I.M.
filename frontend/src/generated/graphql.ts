@@ -151,6 +151,7 @@ export type CityProject = {
   project_ammount: Scalars['Float'];
   project_id: Scalars['String'];
   project_name: Scalars['String'];
+  report: Report;
   reports_id: Scalars['String'];
   source_fund: Scalars['String'];
 };
@@ -349,6 +350,7 @@ export type Incident = {
   date_ended: Scalars['DateTime'];
   date_started: Scalars['DateTime'];
   incident_id: Scalars['String'];
+  report: Report;
   reports_id: Scalars['String'];
 };
 
@@ -577,32 +579,14 @@ export type PasswordFieldUpdateOperationsInput = {
 
 export type Query = {
   __typename?: 'Query';
-  account?: Maybe<Account>;
-  accounts: Array<Account>;
   aggregateReport: AggregateReport;
   cityProject?: Maybe<CityProject>;
   cityProjects: Array<CityProject>;
-  findFirstCityProject?: Maybe<CityProject>;
-  findFirstIncident?: Maybe<Incident>;
+  findFirstReport?: Maybe<Report>;
   incident?: Maybe<Incident>;
   incidents: Array<Incident>;
   report?: Maybe<Report>;
   reports: Array<Report>;
-};
-
-
-export type QueryAccountArgs = {
-  where: AccountWhereUniqueInput;
-};
-
-
-export type QueryAccountsArgs = {
-  cursor?: InputMaybe<AccountWhereUniqueInput>;
-  distinct?: InputMaybe<Array<AccountScalarFieldEnum>>;
-  orderBy?: InputMaybe<Array<AccountOrderByWithRelationInput>>;
-  skip?: InputMaybe<Scalars['Int']>;
-  take?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<AccountWhereInput>;
 };
 
 
@@ -630,23 +614,13 @@ export type QueryCityProjectsArgs = {
 };
 
 
-export type QueryFindFirstCityProjectArgs = {
-  cursor?: InputMaybe<CityProjectWhereUniqueInput>;
-  distinct?: InputMaybe<Array<CityProjectScalarFieldEnum>>;
-  orderBy?: InputMaybe<Array<CityProjectOrderByWithRelationInput>>;
+export type QueryFindFirstReportArgs = {
+  cursor?: InputMaybe<ReportWhereUniqueInput>;
+  distinct?: InputMaybe<Array<ReportScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<ReportOrderByWithRelationInput>>;
   skip?: InputMaybe<Scalars['Int']>;
   take?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<CityProjectWhereInput>;
-};
-
-
-export type QueryFindFirstIncidentArgs = {
-  cursor?: InputMaybe<IncidentWhereUniqueInput>;
-  distinct?: InputMaybe<Array<IncidentScalarFieldEnum>>;
-  orderBy?: InputMaybe<Array<IncidentOrderByWithRelationInput>>;
-  skip?: InputMaybe<Scalars['Int']>;
-  take?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<IncidentWhereInput>;
+  where?: InputMaybe<ReportWhereInput>;
 };
 
 
@@ -962,12 +936,29 @@ export type GetOneReportQueryVariables = Exact<{
 
 export type GetOneReportQuery = { __typename?: 'Query', report?: { __typename?: 'Report', report_id: string, report_type: ReportType, location: any, description: string, incident?: { __typename?: 'Incident', date_started: any, date_ended: any } | null, city_porject?: { __typename?: 'CityProject', project_name: string, contractor_name: string, date_started: any, date_ended: any, source_fund: string, project_ammount: number, contract_ammount: number } | null } | null };
 
+export type GetAllReportsByAscOrderQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllReportsByAscOrderQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', report_id: string, report_type: ReportType, location: any }> };
+
+export type GetAllReportsByDescOrderQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllReportsByDescOrderQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', report_id: string, report_type: ReportType, location: any }> };
+
 export type GetAllReportsByTypeQueryVariables = Exact<{
   reportType?: InputMaybe<ReportType>;
 }>;
 
 
 export type GetAllReportsByTypeQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', report_id: string, location: any, report_type: ReportType }> };
+
+export type GetAllSearchResultQueryVariables = Exact<{
+  searchString?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetAllSearchResultQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', report_id: string, report_type: ReportType, description: string, location: any }> };
 
 export type CreateOneReportMutationVariables = Exact<{
   data: CustomReportCreateInput;
@@ -1049,6 +1040,52 @@ export const useGetOneReportQuery = <
       fetcher<GetOneReportQuery, GetOneReportQueryVariables>(client, GetOneReportDocument, variables, headers),
       options
     );
+export const GetAllReportsByAscOrderDocument = `
+    query getAllReportsByAscOrder {
+  reports(orderBy: {createdAt: asc}) {
+    report_id
+    report_type
+    location
+  }
+}
+    `;
+export const useGetAllReportsByAscOrderQuery = <
+      TData = GetAllReportsByAscOrderQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: GetAllReportsByAscOrderQueryVariables,
+      options?: UseQueryOptions<GetAllReportsByAscOrderQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetAllReportsByAscOrderQuery, TError, TData>(
+      variables === undefined ? ['getAllReportsByAscOrder'] : ['getAllReportsByAscOrder', variables],
+      fetcher<GetAllReportsByAscOrderQuery, GetAllReportsByAscOrderQueryVariables>(client, GetAllReportsByAscOrderDocument, variables, headers),
+      options
+    );
+export const GetAllReportsByDescOrderDocument = `
+    query getAllReportsByDescOrder {
+  reports(orderBy: {createdAt: desc}) {
+    report_id
+    report_type
+    location
+  }
+}
+    `;
+export const useGetAllReportsByDescOrderQuery = <
+      TData = GetAllReportsByDescOrderQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: GetAllReportsByDescOrderQueryVariables,
+      options?: UseQueryOptions<GetAllReportsByDescOrderQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetAllReportsByDescOrderQuery, TError, TData>(
+      variables === undefined ? ['getAllReportsByDescOrder'] : ['getAllReportsByDescOrder', variables],
+      fetcher<GetAllReportsByDescOrderQuery, GetAllReportsByDescOrderQueryVariables>(client, GetAllReportsByDescOrderDocument, variables, headers),
+      options
+    );
 export const GetAllReportsByTypeDocument = `
     query GetAllReportsByType($reportType: ReportType) {
   reports(where: {report_type: {equals: $reportType}}) {
@@ -1070,6 +1107,30 @@ export const useGetAllReportsByTypeQuery = <
     useQuery<GetAllReportsByTypeQuery, TError, TData>(
       variables === undefined ? ['GetAllReportsByType'] : ['GetAllReportsByType', variables],
       fetcher<GetAllReportsByTypeQuery, GetAllReportsByTypeQueryVariables>(client, GetAllReportsByTypeDocument, variables, headers),
+      options
+    );
+export const GetAllSearchResultDocument = `
+    query getAllSearchResult($searchString: String) {
+  reports(where: {description: {contains: $searchString}}) {
+    report_id
+    report_type
+    description
+    location
+  }
+}
+    `;
+export const useGetAllSearchResultQuery = <
+      TData = GetAllSearchResultQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: GetAllSearchResultQueryVariables,
+      options?: UseQueryOptions<GetAllSearchResultQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetAllSearchResultQuery, TError, TData>(
+      variables === undefined ? ['getAllSearchResult'] : ['getAllSearchResult', variables],
+      fetcher<GetAllSearchResultQuery, GetAllSearchResultQueryVariables>(client, GetAllSearchResultDocument, variables, headers),
       options
     );
 export const CreateOneReportDocument = `

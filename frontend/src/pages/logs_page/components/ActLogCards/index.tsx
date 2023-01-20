@@ -5,14 +5,14 @@ import { logsItems } from "./models";
 import { useNavigate } from "react-router-dom";
 
 
-const ActLogsCategories: FC<logsItems> = ({ reportType, cardSize, cardIcon, city, address }) => {
+const ActLogsCategories: FC<logsItems> = ({ reportID,  cardSize, cardIcon, city, address }) => {
 
   const navigate = useNavigate();
 
   const change_page = () => {
     navigate("/info", {
       state: {
-        type: reportType
+        type: reportID
       }
     })
   }

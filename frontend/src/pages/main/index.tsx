@@ -62,7 +62,10 @@ const Main: FC = () => {
 
   graphqlRequestClient.setHeader('authorization', `bearer ${getToken()}`) //sets the authorization header
   // send queries for all reports to the gql endpoint
-  const { isLoading, data } = useGetAllReportsQuery<GetAllReportsQuery, Error>(graphqlRequestClient, {}); 
+  const { isLoading, data } = useGetAllReportsQuery<GetAllReportsQuery, Error>(graphqlRequestClient, {},
+  {
+      refetchIntervalInBackground: true
+    }); 
 
   const hello = () => setPingPopUp(!pingPopUp);
 

@@ -1,0 +1,10 @@
+query getAllReportsByAscOrder{
+	reports(orderBy:{
+      createdAt: asc
+  }){
+    report_id
+    report_type
+    location
+  }
+  
+}

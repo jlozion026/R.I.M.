@@ -1,17 +1,18 @@
-import { FC} from "react";
+import { FC } from "react";
 import Button from "@/components/Button";
 import { btnType } from "@/components/Button/models";
 
 import { LogsReportsBtnProps } from "./utils";
 
+import { IBtnLogs } from './models'
 
 import "./style.css";
 
-const BtnLogs: FC = () => {
- 
+const BtnLogs: FC<IBtnLogs> = ({ TrigFetch }) => {
+
   return (
     <>
-    
+
       <div className="logsbtncontainer">
         {LogsReportsBtnProps.map((val, key) => {
           return (
@@ -20,18 +21,19 @@ const BtnLogs: FC = () => {
                 type={btnType.Submit}
                 svg={val.svg}
                 icon={val.icon}
-                children={val.children}
                 buttonStyle={val.buttonStyle}
                 buttonSize={val.buttonSize}
-                onClick={() => (val.id)}
-              ></Button>
+                onClick={() => TrigFetch(val.id)}
+              >
+                {val.children}
+              </Button>
             </div>
           );
         })}
-        </div>
+      </div>
 
-      
-      
+
+
     </>
   );
 };

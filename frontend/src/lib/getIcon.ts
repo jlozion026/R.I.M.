@@ -32,6 +32,7 @@ const reportIcons = {
 }
 
 
+// need to make this generic because some components had a value that is undefined
 export const getPinIcon = <T,>(reportType: T) => {
   const pinType = "pin".concat(reportType as string);
 
@@ -41,7 +42,7 @@ export const getPinIcon = <T,>(reportType: T) => {
   return;
 }
 
-export const getIcon = <T,>(reportType: T) => {
+export const getIcon = <T, >(reportType: T) => {
   const iconType = reportType as string;
 
   if (iconType in reportIcons) {
