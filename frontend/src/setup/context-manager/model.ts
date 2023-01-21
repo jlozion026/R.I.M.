@@ -7,6 +7,7 @@ export type Props = {
 
 export type AuthContextType = {
   auth: boolean;
+  signOut: () => void;
   setAccToken: () => void;
 };
 

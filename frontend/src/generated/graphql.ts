@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { GraphQLClient } from 'graphql-request';
 import { RequestInit } from 'graphql-request/dist/types.dom';
-import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from '@tanstack/react-query';
+import { useMutation, useQuery, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -911,6 +911,11 @@ export type StringNullableFilter = {
   startsWith?: InputMaybe<Scalars['String']>;
 };
 
+export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LogoutMutation = { __typename?: 'Mutation', logout: boolean };
+
 export type GetCountOfIncidentQueryVariables = Exact<{
   reportType?: InputMaybe<ReportType>;
 }>;
@@ -969,6 +974,24 @@ export type LoginMutationVariables = Exact<{
 export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'LoginResponseSuccess', accessToken: string } | null };
 
 
+export const LogoutDocument = `
+    mutation logout {
+  logout
+}
+    `;
+export const useLogoutMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      client: GraphQLClient,
+      options?: UseMutationOptions<LogoutMutation, TError, LogoutMutationVariables, TContext>,
+      headers?: RequestInit['headers']
+    ) =>
+    useMutation<LogoutMutation, TError, LogoutMutationVariables, TContext>(
+      ['logout'],
+      (variables?: LogoutMutationVariables) => fetcher<LogoutMutation, LogoutMutationVariables>(client, LogoutDocument, variables, headers)(),
+      options
+    );
 export const GetCountOfIncidentDocument = `
     query GetCountOfIncident($reportType: ReportType) {
   aggregateReport(where: {report_type: {equals: $reportType}}) {

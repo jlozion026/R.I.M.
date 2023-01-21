@@ -1,6 +1,11 @@
-import { FC } from "react";
+import { FC, useState } from "react";
+
 import Card from "@/components/Card";
+import DropDown from "./components/dropdown/index";
+
+
 import { navCardItems } from "./models";
+
 
 import { MdOutlineSpaceDashboard, MdOutlinePinDrop } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
@@ -9,6 +14,8 @@ import "./style.css";
 import { Link } from "react-router-dom";
 
 const Navbar: FC<navCardItems> = ({ cardSize, PingPopOut }) => {
+  const [menuTrig, setMenuTrig] = useState<boolean>(false);
+
   return (
     <Card cardSize={cardSize}>
       <nav className="vectorContainer">
@@ -22,11 +29,19 @@ const Navbar: FC<navCardItems> = ({ cardSize, PingPopOut }) => {
             <MdOutlineSpaceDashboard />
           </p>
         </Link>
-        <Link to="/" className="nav-icon">
+
+        <div className="nav-icon" onClick={() => setMenuTrig(!menuTrig)}>
           <p>
             <CgProfile />
           </p>
-        </Link>
+          {
+            menuTrig
+              ?
+              <DropDown />
+              :
+              null
+          }
+        </div>
       </nav>
     </Card>
   );

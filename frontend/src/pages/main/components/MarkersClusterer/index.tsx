@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 
 import { MarkerClusterer, Marker } from "@react-google-maps/api";
 
@@ -11,7 +11,6 @@ const MarkersClusterer: FC<IMakersClusterer> = ({
   ReportsData,
   SelectMarker,
 }) => {
-  const [strAddr, setStrAddr] =  useState<string|undefined>('');
 
   const checkType = (report: any, reportType: string) => {
     if (reportType != "CityProject") {
@@ -26,19 +25,6 @@ const MarkersClusterer: FC<IMakersClusterer> = ({
     })
   }
 
-  const getAddr = async (report: any): Promise<string> =>{
-    try{
-      const res = await coordToAddress({
-          lat: report.location.origin.lat,
-          lng: report.location.origin.lng
-        })
-      return res as string;
-    }
-    catch(err){
-        console.log(err)
-      }
-    return "Address:"
-  } 
 
   return (
     <MarkerClusterer maxZoom={20}>
@@ -58,7 +44,10 @@ const MarkersClusterer: FC<IMakersClusterer> = ({
                       .replace(/([A-Z])/g, " $1")
                       .trim(),
                     description: report.description,
-                    addr:  await getAddr(report),
+                    addr: await coordToAddress({
+                      lat: report.location.origin.lat,
+                      lng: report.location.origin.lng
+                    }),
                     lat: report.location.origin.lat,
                     lng: report.location.origin.lng,
                     date_started: checkType(report, report.report_type).start,
@@ -72,8 +61,7 @@ const MarkersClusterer: FC<IMakersClusterer> = ({
                 position={report.location.destination}
                 clusterer={clusterer}
                 icon={getPinIcon(report.report_type)}
-                onClick={async() => {
-                  getAddr(report);
+                onClick={async () => {
                   SelectMarker({
                     icon: getIcon(report.report_type),
                     report_type: report.report_type
@@ -81,7 +69,10 @@ const MarkersClusterer: FC<IMakersClusterer> = ({
                       .trim(),
                     description: report.description,
                     lat: report.location.destination.lat,
-                    addr:  await getAddr(report),
+                    addr: await coordToAddress({
+                      lat: report.location.origin.lat,
+                      lng: report.location.origin.lng
+                    }),
                     lng: report.location.destination.lng,
                     date_started: checkType(report, report.report_type).start,
                     date_ended: checkType(report, report.report_type).end,
