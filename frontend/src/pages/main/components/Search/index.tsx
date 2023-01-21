@@ -52,6 +52,7 @@ const Search: FC<ISearch> = ({ Name, PlaceHolder, Label }) => {
       getGeocode({ address: description }).then((results) => {
         const { lat, lng } = getLatLng(results[0]);
         mapRef.current?.panTo({ lat, lng });
+        mapRef.current?.setZoom(18);
       });
     };
 

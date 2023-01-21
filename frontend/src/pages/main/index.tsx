@@ -118,13 +118,20 @@ const Main: FC = () => {
     }
   };
 
+
   const [selectedMarker, setSelectedMarker] = useState<MarkerData | null>(null);
 
   // Zoom Control Button
-  const [zoom, setZoom] = useState(13);
+  const [zoom, setZoom] = useState<number|undefined>(13);
 
-  const zoomIn = () => setZoom(zoom + 1);
-  const zoomOut = () => setZoom(zoom - 1);
+  const zoomIn = () => {
+    mapRef.current?.setZoom(mapRef.current.getZoom()! + 1);
+    setZoom(mapRef.current?.getZoom());
+  }
+  const zoomOut = () => {
+    mapRef.current?.setZoom(mapRef.current.getZoom()! - 1);
+    setZoom(mapRef.current?.getZoom());
+  }
 
   const [pingPopUp, setPingPopUp] = useState<boolean>(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -181,6 +188,7 @@ const Main: FC = () => {
           onLoad={onMapLoad}
           onUnmount={onUnMount}
           onClick={clickCoordinates}
+          onZoomChanged={() => setZoom(mapRef.current?.getZoom())}
         >
           {coordinates.origin ? (
             <Marker
@@ -197,7 +205,7 @@ const Main: FC = () => {
             />
           ) : null}
 
-          {zoom <= 14 ? (
+          {zoom! <= 14 ? (
             <>
               <Marker position={defaultCenter} />
               <Circle
