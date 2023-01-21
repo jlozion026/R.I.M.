@@ -38,6 +38,7 @@ import MarkersClusterer from "./components/MarkersClusterer";
 import Loader from "@/components/Loader";
 
 import { getToken } from "@/lib/auth";
+import { coordToAddress } from "@/lib/coordToAddress";
 
 import { getIcon, getPinIcon } from '@/lib/getIcon'
 
@@ -258,11 +259,15 @@ const Main: FC = () => {
                 <hr className="iw-line" />
                 <h3 className="address-title">Address</h3>
                 <h5 className="latlng-container">
-                  {"Lat: " + selectedMarker.lat}
+                  {"date_started: " + selectedMarker.date_started}
                 </h5>
                 <h5 className="latlng-container">
-                  {"Lng: " + selectedMarker.lng}
+                  {"date_ended" + selectedMarker.date_ended}
                 </h5>
+                <p>{selectedMarker.description}</p>
+                <p>{selectedMarker?.addr}</p>
+                
+
               </div>
             </InfoWindow>
           ) : null}

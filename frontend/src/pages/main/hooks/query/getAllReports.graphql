@@ -4,5 +4,13 @@ query getAllReports{
     report_id
     report_type
     description
+    incident{
+      date_started
+      date_ended
+    }
+    city_porject{
+      date_started
+      date_ended
+    }
   }
 }
