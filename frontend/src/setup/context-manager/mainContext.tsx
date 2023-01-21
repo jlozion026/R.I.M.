@@ -1,3 +1,4 @@
+import { ReportType } from "@/generated/graphql";
 import { FC, createContext, useState, useRef } from "react";
 import { ICoordinates, IAddresses, MainContextType, Props } from "./model";
 
@@ -6,6 +7,9 @@ export const MainContext = createContext<MainContextType | null>(null);
 const MainContextProvider: FC<Props> = ({ children }) => {
   // Instance of GoogleMap
   const mapRef = useRef<google.maps.Map | null>(null);
+
+
+  const [reportType, setReportType] = useState<ReportType | undefined>();
 
   // Limit the Marker Using This State
   const [markerCount, setMarkerCount] = useState<number>(0);
@@ -48,6 +52,8 @@ const MainContextProvider: FC<Props> = ({ children }) => {
         setAddresses,
         setMarkerCount,
         resetMarkers,
+        reportType,
+        setReportType,
         mapRef,
       }}
     >
