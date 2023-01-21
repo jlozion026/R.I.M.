@@ -28,15 +28,33 @@
   padding: 10px;
 }
 
-.iw-icons-bg {
+.Road.Accident,.Road.Closure,.Road.Construction,
+.Road.Event,.Road.Hazard,.City.Project{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fcb712;
   border-radius: 50%;
   width: 50px;
   height: 50px;
   margin-bottom: 10px;
+}
+.Road.Accident{
+  background-color: #DFE15B;
+}
+.Road.Closure{
+  background-color: #FA976C;
+}
+.Road.Construction{
+  background-color: #FFC845;
+}
+.Road.Event{
+  background-color: #89D3DB;
+}
+.Road.Hazard{
+  background-color: #FFE683;
+}
+.City.Project{
+  background-color: #756300;
 }
 
 .window-icons {

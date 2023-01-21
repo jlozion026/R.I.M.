@@ -249,7 +249,7 @@ const Main: FC = () => {
               }}
             >
               <div className="info-window-container">
-                <div className="iw-icons-bg">
+                <div className={selectedMarker.report_type}>
                   <img className="window-icons" src={selectedMarker.icon}></img>
                 </div>
                 <h1 className="window-title">{selectedMarker.report_type}</h1>
