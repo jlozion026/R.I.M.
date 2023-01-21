@@ -1,3 +1,4 @@
+import { ReportType } from "@/generated/graphql";
 import { LatLngLiteral } from "@/models";
 
 export type Props = {
@@ -28,4 +29,6 @@ export type MainContextType = {
   setAddresses: (addresses: IAddresses) => void;
   setMarkerCount: (arg0: number) => void;
   resetMarkers: () => void;
+  reportType: ReportType| undefined
+  setReportType: (arg0: ReportType|undefined) => void
 };

@@ -39,6 +39,8 @@ import Loader from "@/components/Loader";
 
 import { getToken } from "@/lib/auth";
 
+import { getIcon, getPinIcon } from '@/lib/getIcon'
+
 import "./style.css";
 
 const Main: FC = () => {
@@ -62,6 +64,7 @@ const Main: FC = () => {
     setCoordinates,
     setAddresses,
     resetMarkers,
+    reportType,
     mapRef,
   } = useContext(MainContext) as MainContextType;
 
@@ -122,7 +125,7 @@ const Main: FC = () => {
   const [selectedMarker, setSelectedMarker] = useState<MarkerData | null>(null);
 
   // Zoom Control Button
-  const [zoom, setZoom] = useState<number|undefined>(13);
+  const [zoom, setZoom] = useState<number | undefined>(13);
 
   const zoomIn = () => {
     mapRef.current?.setZoom(mapRef.current.getZoom()! + 1);
@@ -188,20 +191,19 @@ const Main: FC = () => {
           onLoad={onMapLoad}
           onUnmount={onUnMount}
           onClick={clickCoordinates}
-          onZoomChanged={() => setZoom(mapRef.current?.getZoom())}
         >
           {coordinates.origin ? (
             <Marker
               position={coordinates.origin}
               title={"Origin"}
-              icon={pinRoadClosure}
+              icon={getPinIcon(reportType)}
             />
           ) : null}
           {coordinates.destination ? (
             <Marker
               position={coordinates.destination}
               title={"Destination"}
-              icon={pinRoadClosure}
+              icon={getPinIcon(reportType)}
             />
           ) : null}
 

@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
 import Button from "@/components/Button";
 
 import { ReportType } from "@/generated/graphql";
@@ -14,6 +14,9 @@ import { stringToEnum } from "@/lib/stringToEnum";
 
 import "./models";
 
+import {MainContext} from '@/setup/context-manager/mainContext'
+import {MainContextType} from '@/setup/context-manager/model'
+
 import "./style.css";
 
 const ReportsBtn: FC<IReportsBtn> = ({
@@ -24,7 +27,8 @@ const ReportsBtn: FC<IReportsBtn> = ({
 }) => {
   const [title, setTitle] = useState<string>("");
   const [formType, setFormType] = useState<boolean>(false);
-  const [reportType, setReportType] = useState<ReportType | undefined>();
+
+  const {reportType, setReportType } = useContext(MainContext) as MainContextType;
 
   const selectReports = (id: string) => {
     if (id !== "CityProject") {
