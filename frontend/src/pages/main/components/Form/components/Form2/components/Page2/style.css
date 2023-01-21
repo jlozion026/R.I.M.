@@ -1,7 +1,7 @@
 .fi-container {
   display: flex;
   flex-direction: column;
-  width: 65%;
+  width: 75%;
   padding: 0.4em;
   justify-content: space-between;
   gap: 0.3em;
@@ -17,14 +17,10 @@
   margin-bottom: 0.3em;
 }
 
-.contractor-container {
-  margin-bottom: 5em;
-}
-
 .programAmount-container {
   display: flex;
   flex-direction: column;
-  width: 65%;
+  width: 75%;
   padding: 0.4em;
   justify-content: space-between;
 }

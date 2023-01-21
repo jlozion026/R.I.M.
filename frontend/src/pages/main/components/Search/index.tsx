@@ -1,4 +1,7 @@
-import { ChangeEvent, FC } from "react";
+import { ChangeEvent, FC, useContext } from "react";
+
+import { MainContext } from "@/setup/context-manager/mainContext";
+import { MainContextType } from "@/setup/context-manager/model";
 
 import usePlacesAutocomplete, {
   getGeocode,
@@ -11,17 +14,11 @@ import { MdOutlinePinDrop } from "react-icons/md";
 
 import { ISearch } from "./models";
 
-import "./style.css";
-
 import InputField from "@/components/InputField";
 
-const Search: FC<ISearch> = ({
-  SetCoordinates,
-  SetPlace,
-  Name,
-  PlaceHolder,
-  Label,
-}) => {
+import "./style.css";
+
+const Search: FC<ISearch> = ({ Name, PlaceHolder, Label }) => {
   const {
     value,
     suggestions: { status, data },
@@ -30,6 +27,8 @@ const Search: FC<ISearch> = ({
   } = usePlacesAutocomplete({
     debounce: 300,
   });
+
+  const { mapRef } = useContext(MainContext) as MainContextType;
 
   const ref = useOnclickOutside(() => {
     // When user clicks outside of the component, we can dismiss
@@ -46,14 +45,14 @@ const Search: FC<ISearch> = ({
     () => {
       // When user selects a place, we can replace the keyword without request data from API
       // by setting the second parameter to "false"
-      SetPlace(description);
       setValue(description, false);
       clearSuggestions();
 
       // Get latitude and longitude via utility functions
       getGeocode({ address: description }).then((results) => {
         const { lat, lng } = getLatLng(results[0]);
-        SetCoordinates({lat, lng});
+        mapRef.current?.panTo({ lat, lng });
+        mapRef.current?.setZoom(18);
       });
     };
 

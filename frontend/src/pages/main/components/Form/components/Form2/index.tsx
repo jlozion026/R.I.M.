@@ -21,20 +21,12 @@ const Form2: FC<IForm2> = ({
   StartDate,
   EndDate,
   page,
-  SetFrom,
-  SetTo,
-  SetToCoord,
-  SetFromCoord,
   ClickCalendar,
 }) => {
   return (
     <>
       {!page ? (
         <Page1
-          SetTo={SetTo}
-          SetFrom={SetFrom}
-          SetToCoord={SetToCoord}
-          SetFromCoord={SetFromCoord}
           GetFormData={GetFormData}
           HandleStartDate={HandleStartDate}
           HandleEndDate={HandleEndDate}

@@ -11,6 +11,16 @@ import { btnType } from "@/components/Button/models";
 const Page2: FC<Ipage2> = ({ GetFormData, Submit }) => {
   return (
     <>
+      <div className="fi-container pn-container">
+        <InputField
+          label={"Project Name"}
+          type={"text"}
+          name={"projectName"}
+          placeholder={"Enter Project Name"}
+          getData={GetFormData}
+        />
+      </div>
+
       <div className="fi-container contractor-container">
         <InputField
           label={"Contractor"}
@@ -33,7 +43,7 @@ const Page2: FC<Ipage2> = ({ GetFormData, Submit }) => {
 
       <div className="programAmount-container">
         <InputField
-          type={"text"}
+          type={"number"}
           name={"programAmount"}
           placeholder={"Program Amount"}
           getData={GetFormData}
@@ -42,7 +52,7 @@ const Page2: FC<Ipage2> = ({ GetFormData, Submit }) => {
 
       <div className="contractorAmount-container programAmount-container">
         <InputField
-          type={"text"}
+          type={"number"}
           name={"contractAmount"}
           placeholder={"Contract Amount"}
           getData={GetFormData}

@@ -19,7 +19,7 @@ export interface IDefaultFormData {
 }
 
 export interface IForm2Data extends IDefaultFormData {
-  projectName: string
+  projectName: string;
   contractor: string;
   sourceFund: string;
   programAmount: string;
@@ -42,7 +42,7 @@ export interface IForm {
   PopUp(): void;
   FormType: boolean;
   Title: string;
-  TypeOfReport: ReportType|undefined;
+  TypeOfReport: ReportType | undefined;
 }
 
 export interface OnClickOutSide {
@@ -50,10 +50,6 @@ export interface OnClickOutSide {
 }
 
 export interface IPage extends IGetFormData {
-  SetFrom(place: string): void;
-  SetTo(place: string): void;
-  SetFromCoord(position: LatLngLiteral): void;
-  SetToCoord(position: LatLngLiteral): void;
   HandleStartDate(date: Date): void;
   HandleEndDate(date: Date): void;
   ClickCalendarStart(): void;

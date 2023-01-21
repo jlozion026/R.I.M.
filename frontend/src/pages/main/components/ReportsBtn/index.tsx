@@ -10,20 +10,21 @@ import PopUp from "../PopUp";
 import Form from "../Form";
 
 import { IReportsBtn } from "./models";
-import {stringToEnum} from '@/lib/stringToEnum'
+import { stringToEnum } from "@/lib/stringToEnum";
 
 import "./models";
 
 import "./style.css";
 
-const ReportsBtn: FC<IReportsBtn> = ({ PingPopUp, WindowSize }) => {
+const ReportsBtn: FC<IReportsBtn> = ({
+  PingPopUp,
+  WindowSize,
+  popUp,
+  trigger,
+}) => {
   const [title, setTitle] = useState<string>("");
-  const [trigger, setTrigger] = useState<boolean>(false);
   const [formType, setFormType] = useState<boolean>(false);
-  const [reportType, setReportType] = useState<ReportType|undefined>();
-
-  const popUp = () => setTrigger(!trigger);
-
+  const [reportType, setReportType] = useState<ReportType | undefined>();
 
   const selectReports = (id: string) => {
     if (id !== "CityProject") {
@@ -89,7 +90,12 @@ const ReportsBtn: FC<IReportsBtn> = ({ PingPopUp, WindowSize }) => {
       )}
 
       <PopUp Trigger={trigger} popOut={popUp}>
-        <Form FormType={formType} Title={title} PopUp={popUp} TypeOfReport={reportType} />
+        <Form
+          FormType={formType}
+          Title={title}
+          PopUp={popUp}
+          TypeOfReport={reportType}
+        />
       </PopUp>
     </>
   );

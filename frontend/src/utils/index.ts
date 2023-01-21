@@ -22,3 +22,13 @@ export const options: MapOptions = {
   zoomControl: false,
   clickableIcons: false,
 };
+
+export interface ICoordinates {
+  origin: LatLngLiteral;
+  destination: LatLngLiteral;
+}
+
+export interface IAddresses {
+  addOrigin: string;
+  addDestination: string;
+}

@@ -1,11 +1,4 @@
-import {
-  FC,
-  memo,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { FC, memo, useCallback, useEffect, useState, useContext } from "react";
 
 import {
   GoogleMap,
@@ -29,18 +22,24 @@ import graphqlRequestClient from "@/lib/client/graphqlRequestClient";
 import ReportsBtn from "./components/ReportsBtn";
 import Navbar from "@/components/Navbar";
 
-import { MarkerData } from "./models";
+import { LatLngLiteral, MarkerData } from "./models";
+
+import pinRoadClosure from "@/Assets/svg/pinRoadClosure.svg";
+
+import { MainContext } from "@/setup/context-manager/mainContext";
+
+import { MainContextType } from "@/setup/context-manager/model";
 
 import { libraries, defaultCenter, options } from "@/utils";
 
 import Zoom from "./components/Zoom";
 
-
-import "./style.css";
 import MarkersClusterer from "./components/MarkersClusterer";
 import Loader from "@/components/Loader";
 
-import { getToken } from '@/lib/auth'
+import { getToken } from "@/lib/auth";
+
+import "./style.css";
 
 const Main: FC = () => {
   const { isLoaded, loadError } = useLoadScript({
@@ -48,24 +47,104 @@ const Main: FC = () => {
     libraries,
   });
 
+  const [trigger, setTrigger] = useState<boolean>(false);
+
+  const formPopUp = () => {
+    setTrigger(!trigger);
+    resetMarkers();
+  };
+
+  const {
+    coordinates,
+    addresses,
+    markerCount,
+    setMarkerCount,
+    setCoordinates,
+    setAddresses,
+    resetMarkers,
+    mapRef,
+  } = useContext(MainContext) as MainContextType;
+
+  const clickCoordinates = (event: google.maps.MapMouseEvent) => {
+    if (trigger) {
+      if (event.latLng) {
+        const pin: LatLngLiteral = {
+          lat: event.latLng.lat() as number,
+          lng: event.latLng.lng() as number,
+        };
+        if (markerCount === 0) {
+          setCoordinates({
+            ...coordinates,
+            origin: pin,
+          });
+
+          setMarkerCount(1);
+        } else if (markerCount === 1) {
+          setCoordinates({
+            ...coordinates,
+            destination: pin,
+          });
+          setMarkerCount(0);
+        }
+        getAddresses(pin);
+      }
+    } else {
+      setTrigger(false);
+    }
+  };
+
+  const getAddresses = async (position: LatLngLiteral) => {
+    const geocoder = new google.maps.Geocoder();
+
+    try {
+      const address = await geocoder.geocode({ location: position });
+      if (address.results && address.results[0]) {
+        if (markerCount === 0) {
+          setAddresses({
+            ...addresses,
+            addOrigin: address.results[0].formatted_address,
+          });
+        } else if (markerCount === 1) {
+          setAddresses({
+            ...addresses,
+            addDestination: address.results[0].formatted_address,
+          });
+        }
+      } else {
+        return "No results found";
+      }
+    } catch (error) {
+      console.log("Error!");
+    }
+  };
+
+
   const [selectedMarker, setSelectedMarker] = useState<MarkerData | null>(null);
 
   // Zoom Control Button
-  const [zoom, setZoom] = useState(13);
+  const [zoom, setZoom] = useState<number|undefined>(13);
 
-  const zoomIn = () => setZoom(zoom + 1);
-  const zoomOut = () => setZoom(zoom - 1);
+  const zoomIn = () => {
+    mapRef.current?.setZoom(mapRef.current.getZoom()! + 1);
+    setZoom(mapRef.current?.getZoom());
+  }
+  const zoomOut = () => {
+    mapRef.current?.setZoom(mapRef.current.getZoom()! - 1);
+    setZoom(mapRef.current?.getZoom());
+  }
 
   const [pingPopUp, setPingPopUp] = useState<boolean>(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-
-  graphqlRequestClient.setHeader('authorization', `bearer ${getToken()}`) //sets the authorization header
+  graphqlRequestClient.setHeader("authorization", `bearer ${getToken()}`); //sets the authorization header
   // send queries for all reports to the gql endpoint
-  const { isLoading, data } = useGetAllReportsQuery<GetAllReportsQuery, Error>(graphqlRequestClient, {},
-  {
-      refetchIntervalInBackground: true
-    }); 
+  const { isLoading, data } = useGetAllReportsQuery<GetAllReportsQuery, Error>(
+    graphqlRequestClient,
+    {},
+    {
+      refetchIntervalInBackground: true,
+    }
+  );
 
   const hello = () => setPingPopUp(!pingPopUp);
 
@@ -79,9 +158,6 @@ const Main: FC = () => {
     };
   }, []);
 
-
-  const mapRef = useRef<google.maps.Map | null>(null);
-
   // This function when the Map Loads it prevent from generate a
   //new version every time the component renders
   const onMapLoad = useCallback((map: google.maps.Map): void => {
@@ -93,9 +169,13 @@ const Main: FC = () => {
     mapRef.current = map;
   };
 
-
   if (loadError) return <div>"Error Loading Maps"</div>;
-  if (!isLoaded) return <div className="map-container"><Loader/></div>;
+  if (!isLoaded)
+    return (
+      <div className="map-container">
+        <Loader />
+      </div>
+    );
 
   return (
     <>
@@ -107,8 +187,25 @@ const Main: FC = () => {
           options={options}
           onLoad={onMapLoad}
           onUnmount={onUnMount}
+          onClick={clickCoordinates}
+          onZoomChanged={() => setZoom(mapRef.current?.getZoom())}
         >
-          {zoom <= 14 ? (
+          {coordinates.origin ? (
+            <Marker
+              position={coordinates.origin}
+              title={"Origin"}
+              icon={pinRoadClosure}
+            />
+          ) : null}
+          {coordinates.destination ? (
+            <Marker
+              position={coordinates.destination}
+              title={"Destination"}
+              icon={pinRoadClosure}
+            />
+          ) : null}
+
+          {zoom! <= 14 ? (
             <>
               <Marker position={defaultCenter} />
               <Circle
@@ -134,12 +231,12 @@ const Main: FC = () => {
             </>
           ) : null}
 
-          {isLoaded && !isLoading
-            ?
-              <MarkersClusterer ReportsData={data} SelectMarker={setSelectedMarker} />
-            :
-              null
-          }
+          {isLoaded && !isLoading ? (
+            <MarkersClusterer
+              ReportsData={data}
+              SelectMarker={setSelectedMarker}
+            />
+          ) : null}
 
           {selectedMarker ? (
             <InfoWindow
@@ -171,8 +268,17 @@ const Main: FC = () => {
         <div className="nav-container">
           <Navbar cardSize="nav--bar" PingPopOut={hello} />
         </div>
-        <Zoom zoomIn={zoomIn} zoomOut={zoomOut} PanTo={() => panToQC(mapRef, defaultCenter)} />
-        <ReportsBtn WindowSize={windowSize} PingPopUp={pingPopUp} />
+        <Zoom
+          zoomIn={zoomIn}
+          zoomOut={zoomOut}
+          PanTo={() => panToQC(mapRef, defaultCenter)}
+        />
+        <ReportsBtn
+          WindowSize={windowSize}
+          PingPopUp={pingPopUp}
+          trigger={trigger}
+          popUp={formPopUp}
+        />
       </div>
     </>
   );

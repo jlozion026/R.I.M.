@@ -1,4 +1,4 @@
-import { LatLngLiteral } from '@/models'
+import { LatLngLiteral } from "@/models";
 
 export interface ICoordinates {
   lat: string;
@@ -6,9 +6,7 @@ export interface ICoordinates {
 }
 
 export interface ISearch {
-  SetCoordinates(position: LatLngLiteral): void;
-  SetPlace(place: string): void;
   Name: string;
   Label: string;
   PlaceHolder: string;
-};
+}
