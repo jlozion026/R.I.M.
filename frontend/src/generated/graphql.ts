@@ -582,7 +582,6 @@ export type Query = {
   aggregateReport: AggregateReport;
   cityProject?: Maybe<CityProject>;
   cityProjects: Array<CityProject>;
-  findFirstReport?: Maybe<Report>;
   incident?: Maybe<Incident>;
   incidents: Array<Incident>;
   report?: Maybe<Report>;
@@ -611,16 +610,6 @@ export type QueryCityProjectsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   take?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<CityProjectWhereInput>;
-};
-
-
-export type QueryFindFirstReportArgs = {
-  cursor?: InputMaybe<ReportWhereUniqueInput>;
-  distinct?: InputMaybe<Array<ReportScalarFieldEnum>>;
-  orderBy?: InputMaybe<Array<ReportOrderByWithRelationInput>>;
-  skip?: InputMaybe<Scalars['Int']>;
-  take?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<ReportWhereInput>;
 };
 
 
@@ -970,7 +959,7 @@ export type CreateOneReportMutation = { __typename?: 'Mutation', createOneReport
 export type GetAllReportsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllReportsQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', location: any, report_id: string, report_type: ReportType, description: string }> };
+export type GetAllReportsQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', location: any, report_id: string, report_type: ReportType, description: string, incident?: { __typename?: 'Incident', date_started: any, date_ended: any } | null, city_porject?: { __typename?: 'CityProject', date_started: any, date_ended: any } | null }> };
 
 export type LoginMutationVariables = Exact<{
   where?: InputMaybe<AccountWhereInput>;
@@ -1162,6 +1151,14 @@ export const GetAllReportsDocument = `
     report_id
     report_type
     description
+    incident {
+      date_started
+      date_ended
+    }
+    city_porject {
+      date_started
+      date_ended
+    }
   }
 }
     `;
