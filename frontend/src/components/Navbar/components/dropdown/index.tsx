@@ -30,23 +30,25 @@ const DropDown: FC = () => {
     },
   });
   return (
-    <ul className='dropdown'>
-      <li className='menu-item' >
-        <p className='drop-icon'>
-          <TiUserAdd />
-        </p>
-        <p>
-          Create User
-        </p>
-      </li>
-      <li className='menu-item' onClick={() => mutate({})}>
-        <p className='drop-icon'>
-          <BiLogOut />
-        </p>
-        <p>Logout</p>
-      </li>
+    <div className="dropdown">
+      <ul className='dropdown-card'>
+        <li className='menu-item' >
+          <p className='drop-icon'>
+            <TiUserAdd />
+          </p>
+          <p>
+            Create User
+          </p>
+        </li>
+        <li className='menu-item' onClick={() => mutate({})}>
+          <p className='drop-icon'>
+            <BiLogOut />
+          </p>
+          <p>Logout</p>
+        </li>
 
-    </ul>
+      </ul>
+    </div>
   )
 }
 export default DropDown;

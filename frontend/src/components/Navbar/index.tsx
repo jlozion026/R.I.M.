@@ -30,7 +30,7 @@ const Navbar: FC<navCardItems> = ({ cardSize, PingPopOut }) => {
           </p>
         </Link>
 
-        <div className="nav-icon" onClick={() => setMenuTrig(!menuTrig)}>
+        <div className="nav-icon" onClick={() => setMenuTrig(true)}>
           <p>
             <CgProfile />
           </p>

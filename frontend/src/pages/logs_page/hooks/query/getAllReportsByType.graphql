@@ -1,9 +1,12 @@
-query GetAllReportsByType($reportType: ReportType){
-  reports(where:{
+query GetAllReportsByType($take: Int, $skip: Int, $reportType: ReportType){
+  reports(
+  where:{
     report_type: {
       equals: $reportType
     }
-  }){
+  }
+  take: $take skip: $skip
+  ){
     report_id
     location
     report_type

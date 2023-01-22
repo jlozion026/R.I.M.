@@ -9,12 +9,18 @@ export async function addAddressAndPlusCode<T extends ArrReports>(reports: T, cb
   cb_setLoadAddr(true);
   console.log(`len of reports ${reports.length}`)
 
+  let test: any;
 
   const geocoder = new google.maps.Geocoder();
 
   for (const report of reports) {
     try {
-      const test = await geocoder.geocode({ location: report.location.origin })
+      test = await new Promise(resolve => {
+        setTimeout(() => {
+          resolve( geocoder.geocode({ location: report.location.origin }))
+          resolve(12);
+        }, 800);
+      })
       test.results[0].formatted_address
 
       const modifiedReport = {
@@ -30,8 +36,10 @@ export async function addAddressAndPlusCode<T extends ArrReports>(reports: T, cb
 
     }
   }
+  //const resversed = [...newReports].reverse();
+  //console.log("after");
+  //console.table(resversed);
 
   cb_setLoadAddr(false);
   return newReports
 }
-

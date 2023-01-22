@@ -1,14 +1,30 @@
-.dropdown{
-    position: absolute;
-    width: 300px;
-    right: 100%;
-    top: 80%;
+.dropdown-card{
+    width: 250px;
     transform: translateX(-40);
     overflow: hidden;
     background-color: #ffffff;
     box-shadow: 0 0 20px rgb(0 0 0 / 15%);
     padding: 1rem;
-    border-radius: 10px;
+    border-radius: 8px;
+}
+
+.dropdown{
+  position:absolute;
+  right: 4.4em;
+  top: 75%;
+}
+
+
+.dropdown::before{
+    position: absolute;
+    right: -1em;
+    top: 1.5em;
+    display: inline-block;
+    border-top: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+    border-left: 9px solid #ffffff;
+    content: '';
 }
 
 

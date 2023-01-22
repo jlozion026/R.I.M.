@@ -941,6 +941,8 @@ export type GetAllReportsByDescOrderQueryVariables = Exact<{ [key: string]: neve
 export type GetAllReportsByDescOrderQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', report_id: string, report_type: ReportType, location: any }> };
 
 export type GetAllReportsByTypeQueryVariables = Exact<{
+  take?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
   reportType?: InputMaybe<ReportType>;
 }>;
 
@@ -1099,8 +1101,8 @@ export const useGetAllReportsByDescOrderQuery = <
       options
     );
 export const GetAllReportsByTypeDocument = `
-    query GetAllReportsByType($reportType: ReportType) {
-  reports(where: {report_type: {equals: $reportType}}) {
+    query GetAllReportsByType($take: Int, $skip: Int, $reportType: ReportType) {
+  reports(where: {report_type: {equals: $reportType}}, take: $take, skip: $skip) {
     report_id
     location
     report_type

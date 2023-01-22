@@ -9,8 +9,8 @@ export interface ButtonProps {
   svg?: string;
   children: string;
   type: btnType;
-  buttonStyle: string;
-  buttonSize: string;
+  buttonStyle?: string;
+  buttonSize?: string;
   svgBackGround?: string;
   onClick(e: any): void;
 }
