@@ -9,8 +9,12 @@ export const AuthContextProvider: FC<Props> = ({ children }) => {
   const setAccToken = () => {
     setAuth(true);
   }
+
+  const signOut = () => {
+    setAuth(false);
+  }
   return (
-    <AuthContext.Provider value={{ auth, setAccToken }}>
+    <AuthContext.Provider value={{ auth, setAccToken, signOut }}>
       {children}
     </AuthContext.Provider>
   )
