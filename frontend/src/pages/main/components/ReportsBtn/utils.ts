@@ -12,7 +12,7 @@ export const ReportsBtnProps = [
     type: btnType.Button,
     svg: Cityproject,
     svgBackGround: "alligatorBg",
-    children: "City Project Form",
+    children: "City Project",
     buttonStyle: "btn--categories",
     buttonSize: "btn--reports",
     onclick: () => {},

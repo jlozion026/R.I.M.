@@ -1,6 +1,7 @@
 import React from "react";
 
 export interface input {
+  checked?: boolean;
   readonly?: boolean;
   label?: string;
   type: string;

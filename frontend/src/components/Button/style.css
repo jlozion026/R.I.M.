@@ -9,6 +9,7 @@
   --deepYellow: #ffc845;
   --kowloon: #dfe15b;
   --softBlue: #8ad5dd;
+  --superBlue: #205eff;
 }
 
 button {
@@ -96,11 +97,19 @@ button {
   border: none;
 }
 
+.btn--superBlue {
+  background-color: var(--superBlue);
+  color: var(--white);
+  border: none;
+}
+
 /* Button Sizes */
 
 .btn--large {
-  padding: 20px 40px;
-  font-size: 24px;
+  padding: 10px;
+  font-size: large;
+  width: 100%;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .btn--medium {

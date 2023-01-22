@@ -62,9 +62,9 @@ const Page2: FC<Ipage2> = ({ GetFormData, Submit }) => {
       <div className="btn-container-submit">
         <Button
           type={btnType.Submit}
-          buttonStyle={"btn--secondary"}
+          buttonStyle={"btn--superBlue"}
           onClick={Submit}
-          buttonSize={"btn--next"}
+          buttonSize={"btn--large"}
         >
           Submit
         </Button>

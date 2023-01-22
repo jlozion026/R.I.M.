@@ -1,8 +1,8 @@
-.popup-container {
+.pop-up {
   position: fixed;
   top: 0;
   left: 0;
-  width: 40%;
+  width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
@@ -10,20 +10,15 @@
   align-items: center;
 }
 
-.btn-popup {
+.btn-closed {
   position: absolute;
-  top: 3%;
-  right: 10%;
+  top: 10%;
+  right: 19%;
   cursor: pointer;
   z-index: 10;
   color: #d1d3d6;
 }
-.btn-popup:hover {
-  color: #d1d3d6;
-}
 
-@media all and (max-width: 960px) {
-  .btn-popup {
-    display: none;
-  }
+.btn-closed:hover {
+  color: #ffff;
 }
