@@ -10,9 +10,9 @@ const STYLES = [
 ];
 
 const SIZES = [
-  "btn--large",
   "btn--medium",
   "btn--small",
+  "btn--large",
   "for-icons",
   "btn--next",
   "btn--logs",
@@ -40,11 +40,11 @@ const Button: FC<ButtonProps> = ({
   buttonSize,
   svgBackGround,
 }) => {
-  const checkButtonStyle = STYLES.includes(buttonStyle)
+  const checkButtonStyle = STYLES.includes(buttonStyle!)
     ? buttonStyle
     : STYLES[0];
 
-  const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
+  const checkButtonSize = SIZES.includes(buttonSize!) ? buttonSize : SIZES[0];
 
   const checkIconBackGround = COLORS.includes(svgBackGround || "")
     ? svgBackGround
@@ -56,6 +56,7 @@ const Button: FC<ButtonProps> = ({
       onClick={onClick}
       type={type}
     >
+    <>
       {svg ? (
         <div className={`icon-bg ${checkIconBackGround}`}>
           <img src={svg} alt="icon" className="btn-img " />
@@ -63,9 +64,9 @@ const Button: FC<ButtonProps> = ({
       ) : (
         ""
       )}
-
       {icon}
       {children}
+    </>
     </button>
   );
 };

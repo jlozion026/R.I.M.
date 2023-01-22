@@ -24,6 +24,7 @@ import InputField from "@/components/InputField";
 
 import { IoIosSearch } from "react-icons/io";
 import { BiArrowBack } from "react-icons/bi";
+import { GiNextButton } from 'react-icons/gi';
 
 
 import Loader from "@/components/Loader";
@@ -34,7 +35,7 @@ import { getIcon } from '@/lib/getIcon'
 import { stringToEnum } from '@/lib/stringToEnum'
 
 
-import { INewReports, ArrReports } from './models'
+import { INewReports } from './models'
 
 
 import useOnclickOutside from "react-cool-onclickoutside";
@@ -43,6 +44,8 @@ import './style.css';
 
 import { getToken } from "@/lib/auth";
 import SearchResults from "./components/SearchResults";
+import Button from "@/components/Button";
+import { btnType } from '@/components/Button/models';
 
 
 const Logs: FC = () => {
@@ -51,6 +54,8 @@ const Logs: FC = () => {
   const [loadAddr, setLoadAddr] = useState(true);
   const [searchString, setSearchString] = useState<string>('');
   const [searchClick, setSearchClick] = useState<boolean>(false);
+
+  const [page, setPage] = useState<number>(0);
 
   const debouncedVal = useDebounce(searchString, 200);
 
@@ -61,11 +66,14 @@ const Logs: FC = () => {
 
   graphqlRequestClient.setHeader('authorization', `bearer ${getToken()}`) // set authorization token
 
-  const { isLoading } = useGetAllReportsByTypeQuery<GetAllReportsByTypeQuery, Error>(
+  const { isLoading, isFetching } = useGetAllReportsByTypeQuery<GetAllReportsByTypeQuery, Error>(
     graphqlRequestClient, {
-    reportType: stringToEnum(reportTypeQuery, ReportType)
+    reportType: stringToEnum(reportTypeQuery, ReportType),
+    take: 5,
+    skip: page,
   }, {
     refetchOnWindowFocus: false,
+    keepPreviousData: true,
     onSuccess: async (data: GetAllReportsByTypeQuery) => {
       const report_arr = data.reports;
       const new_arr = await addAddressAndPlusCode(report_arr, setLoadAddr);
@@ -106,53 +114,36 @@ const Logs: FC = () => {
       });
 
   //memomized ascending data
-  const transform_asc_data = useMemo(async () => await addAddressAndPlusCode(
-    ascData?.reports as ArrReports,
-    setLoadAddr
-  ), [ascData])
+  //const transform_asc_data = useMemo(async () => await addAddressAndPlusCode(
+  //  ascData?.reports as ArrReports,
+  //  setLoadAddr
+  //), [ascData])
 
-  const transform_desc_data = useMemo(async () => await addAddressAndPlusCode(
-    descData?.reports as ArrReports,
-    setLoadAddr
-  ), [descData])
+  //const transform_desc_data = useMemo(async () => await addAddressAndPlusCode(
+  //  descData?.reports as ArrReports,
+  //  setLoadAddr
+  //), [descData])
 
 
   // call back function for buttons
   const trigFetch = async (btnID: string) => {
     if (btnID === "Recent") {
-      if (!descIsStale) {
-        setLoadAddr(true);
-        const transformed_data = await transform_desc_data;
-        setLoadAddr(false);
-        setModReports(transformed_data as INewReports);
-      }
-      else {
-        fetch_report_desc();
-      }
+      console.log("recent");
     }
     else if (btnID === "Oldest") {
       if (!isStale) {
-        console.log(transform_asc_data);
-        setLoadAddr(true);
-        const clean = await transform_asc_data;
-        console.table(clean);
-        setLoadAddr(false);
-        setModReports(clean as INewReports);
+        console.log("oldest")
       }
       else {
-        fetch_report_asc();
-        setLoadAddr(true);
-        const clean = await transform_asc_data;
-        console.table(clean);
-        setLoadAddr(false);
-        setModReports(clean as INewReports);
+        console.log("oldest")
       }
     }
     else {
       setReportTypeQuery(btnID);
     }
-
+    setPage(0);
   }
+
   // sets the reportTypeQuery when the component mounted
   useEffect(() => {
     setReportTypeQuery(state.type)
@@ -255,6 +246,30 @@ const Logs: FC = () => {
             :
             <h1 className="logs-warning">No {state.type.replace(/([A-Z])/g, " $1").trim()} Reports Available</h1>
         }
+        <div className="page-btns">
+          {page !== 0 ?
+            <Button
+              type={btnType.Button}
+              onClick={() => setPage(page - 5)}
+            >
+              Previous
+            </Button>
+            : null
+          }
+          {
+            modReports.length > 0 ?
+
+              <Button
+                type={btnType.Button}
+                onClick={() => setPage(page + 5)}
+              >
+                Next
+              </Button>
+              : null
+          }
+
+        </div>
+        {isFetching}
       </div>
     </div>)
 
