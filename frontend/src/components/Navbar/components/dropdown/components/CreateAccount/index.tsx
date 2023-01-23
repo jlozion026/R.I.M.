@@ -6,6 +6,9 @@ import { btnType } from "@/components/Button/models";
 
 import { ICreateAccountData, ICreateAccount } from "./models";
 
+
+import { RadioProps } from './utils';
+
 import "./style.css";
 
 const CreateAccount: FC<ICreateAccount> = ({ popUp, setMenuTrig }) => {
@@ -18,11 +21,15 @@ const CreateAccount: FC<ICreateAccount> = ({ popUp, setMenuTrig }) => {
       accountType: "",
     });
 
-  const isRadioSelected = (value: string): boolean =>
-    selectedRadioBtn === value;
+  const isRadioSelected = (value: string) => selectedRadioBtn === value;
+
+  const getRadioVal = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+    setSelectedRadioBtn(e.target.value);
+  }
+
 
   const getCreateAccountData = (e: ChangeEvent<HTMLInputElement>) => {
-    setSelectedRadioBtn(e.target.value);
     setCreateAccountData({
       ...createAccountData,
       [e.target.name]: e.target.value,
@@ -31,6 +38,7 @@ const CreateAccount: FC<ICreateAccount> = ({ popUp, setMenuTrig }) => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    createAccountData["accountType"] = selectedRadioBtn;
 
     setErrMsg(""); // clear the error message state variable
     if (createAccountData.email.indexOf("@gmail.com") === -1) {
@@ -77,34 +85,25 @@ const CreateAccount: FC<ICreateAccount> = ({ popUp, setMenuTrig }) => {
       <div className="ca-account-type">
         <div className="at-title">Account Type:</div>
         <div className="radio-btn-group">
-          <div className="radio-btn">
-            <span>Admin</span>
-            <label className="custom-rb">
-              <InputField
-                type={"radio"}
-                name={"accountType"}
-                placeholder={""}
-                value={"ADMIN"}
-                checked={isRadioSelected("ADMIN")}
-                getData={getCreateAccountData}
-              />
-              <span className="checkmark"></span>
-            </label>
-          </div>
-          <div className="radio-btn">
-            <span>Normal</span>
-            <label className="custom-rb">
-              <InputField
-                type={"radio"}
-                name={"accountType"}
-                placeholder={""}
-                value={"NORMAL"}
-                checked={isRadioSelected("NORMAL")}
-                getData={getCreateAccountData}
-              />
-              <span className="checkmark"></span>
-            </label>
-          </div>
+          {RadioProps.map((val, key) => {
+            return (
+              <div className="radio-btn" key={key}>
+                <span>{val.value}</span>
+                <label className="custom-rb">
+                  <InputField
+                    type={"radio"}
+                    name={"accountType"}
+                    placeholder={""}
+                    value={val.value}
+                    checked={isRadioSelected(val.value)}
+                    getData={getRadioVal}
+                  />
+                  <span className="checkmark"></span>
+                </label>
+              </div>
+            );
+          })
+          }
         </div>
       </div>
       <div className="ca-button">
