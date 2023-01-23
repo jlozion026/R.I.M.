@@ -40,7 +40,7 @@ import Loader from "@/components/Loader";
 import { getToken } from "@/lib/auth";
 import { coordToAddress } from "@/lib/coordToAddress";
 
-import { getIcon, getPinIcon } from '@/lib/getIcon'
+import { getIcon, getPinIcon } from "@/lib/getIcon";
 
 import "./style.css";
 
@@ -122,7 +122,6 @@ const Main: FC = () => {
     }
   };
 
-
   const [selectedMarker, setSelectedMarker] = useState<MarkerData | null>(null);
 
   // Zoom Control Button
@@ -131,11 +130,11 @@ const Main: FC = () => {
   const zoomIn = () => {
     mapRef.current?.setZoom(mapRef.current.getZoom()! + 1);
     setZoom(mapRef.current?.getZoom());
-  }
+  };
   const zoomOut = () => {
     mapRef.current?.setZoom(mapRef.current.getZoom()! - 1);
     setZoom(mapRef.current?.getZoom());
-  }
+  };
 
   const [pingPopUp, setPingPopUp] = useState<boolean>(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -266,8 +265,6 @@ const Main: FC = () => {
                 </h5>
                 <p>{selectedMarker.description}</p>
                 <p>{selectedMarker?.addr}</p>
-                
-
               </div>
             </InfoWindow>
           ) : null}

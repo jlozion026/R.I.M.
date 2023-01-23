@@ -45,7 +45,11 @@ const Page1: FC<IPage1> = ({
   return (
     <>
       <div className="location-container">
-        <Search Name={"From"} PlaceHolder={"From"} Label={"Location"} />
+        <Search
+          Name={"Location"}
+          PlaceHolder={"Search Location"}
+          Label={"Location"}
+        />
       </div>
 
       <div className="addresses-container">
@@ -165,9 +169,9 @@ const Page1: FC<IPage1> = ({
       <div className="btn-container-next">
         <Button
           type={btnType.Submit}
-          buttonStyle={"btn--secondary"}
+          buttonStyle={"btn--superBlue"}
           onClick={Next}
-          buttonSize={"btn--next"}
+          buttonSize={"btn--large"}
         >
           Next
         </Button>

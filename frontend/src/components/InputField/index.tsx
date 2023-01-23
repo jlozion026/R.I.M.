@@ -13,6 +13,7 @@ const InputField: FC<input> = ({
   forinput,
   required,
   value,
+  checked,
   getData,
 }) => {
   return (
@@ -27,6 +28,7 @@ const InputField: FC<input> = ({
         value={value}
         name={name}
         required={required}
+        checked={checked}
         onChange={getData}
       />
     </>

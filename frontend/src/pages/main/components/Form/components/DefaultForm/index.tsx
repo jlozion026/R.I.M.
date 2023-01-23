@@ -169,9 +169,9 @@ const DefaultForm: FC<IDefaultForm> = ({
       <div className="default-btn-container">
         <Button
           type={btnType.Submit}
-          buttonStyle={"btn--secondary"}
+          buttonStyle={"btn--superBlue"}
           onClick={Submit}
-          buttonSize={"btn--next"}
+          buttonSize={"btn--large"}
         >
           Submit
         </Button>

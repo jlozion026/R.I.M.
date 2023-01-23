@@ -54,7 +54,7 @@
   width: 100vw;
   height: 29vh;
 }
-.wrapper {
+.cards-wrapper {
   display: flex;
   flex: 1;
 }

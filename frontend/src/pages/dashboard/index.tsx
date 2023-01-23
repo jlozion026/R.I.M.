@@ -1,8 +1,8 @@
 import { FC } from "react";
 
-import {  ReportType } from "@/generated/graphql";
+import { ReportType } from "@/generated/graphql";
 
-import { useIncidentCountData } from './hooks/useGetCountOfIncidentData'
+import { useIncidentCountData } from "./hooks/useGetCountOfIncidentData";
 
 import NavBar from "@/components/Navbar";
 import CardCategories from "./components/CongestionCards";
@@ -12,20 +12,21 @@ import MonthlyCongestionLvl from "./components/MonthlyCongestionLvl/Index";
 import HourlyCongestionLvl from "./components/HourlyCongestionLvl";
 import YearCongestionlvl from "./components/YearCongestionlvl/Index";
 
-import {IDashboardData} from './models'
-import {getCountData} from './utils'
+import { IDashboardData } from "./models";
+import { getCountData } from "./utils";
 
 import { CardProps } from "./components/utils";
 
-import './style.css';
+import "./style.css";
 
 const Dashboard: FC = () => {
-
   const { data: roadClosure } = useIncidentCountData(ReportType.RoadClosure);
   const { data: roadAccident } = useIncidentCountData(ReportType.RoadAccident);
   const { data: roadEvent } = useIncidentCountData(ReportType.RoadEvent);
   const { data: roadHazard } = useIncidentCountData(ReportType.RoadHazard);
-  const { data: roadConstructions } = useIncidentCountData(ReportType.RoadConstruction);
+  const { data: roadConstructions } = useIncidentCountData(
+    ReportType.RoadConstruction
+  );
   const { data: cityProject } = useIncidentCountData(ReportType.CityProject);
 
   const data: IDashboardData = {
@@ -34,8 +35,8 @@ const Dashboard: FC = () => {
     RoadEvent: roadEvent,
     RoadHazard: roadHazard,
     RoadConstruction: roadConstructions,
-    CityProject: cityProject
-  }
+    CityProject: cityProject,
+  };
 
   return (
     <div className="mainGrid">
@@ -47,10 +48,9 @@ const Dashboard: FC = () => {
       <div className="cardContainer">
         <div className="cardCon">
           <div className="cards">
-
             {CardProps.map((val, key) => {
               return (
-                <div className="wrapper" key={key}>
+                <div className="cards-wrapper" key={key}>
                   <CardCategories
                     id={val.id}
                     cardSize={val.cardSize}
@@ -61,12 +61,10 @@ const Dashboard: FC = () => {
                   />
                 </div>
               );
-
             })}
             <div className="longCard">
               <Summary cardSize="card" />
             </div>
-
           </div>
         </div>
       </div>
@@ -87,11 +85,8 @@ const Dashboard: FC = () => {
             </div>
           </div>
         </div>
-
       </div>
-
     </div>
-
-  )
-}
+  );
+};
 export default Dashboard;
