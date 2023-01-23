@@ -12,5 +12,6 @@ export interface input {
   id?: string;
   required?: boolean;
   value?: string;
+  onClick?(): void;
   getData?(e: React.ChangeEvent<HTMLInputElement>): any;
 }

@@ -1,5 +1,11 @@
 import { FC, ChangeEvent, useState } from "react";
 
+import {
+  useRegisterOneAccountMutation,
+  RegisterOneAccountMutation,
+  AccType
+} from "@/generated/graphql";
+
 import InputField from "@/components/InputField";
 import Button from "@/components/Button";
 import { btnType } from "@/components/Button/models";
@@ -7,25 +13,49 @@ import { btnType } from "@/components/Button/models";
 import { ICreateAccountData, ICreateAccount } from "./models";
 
 
-import { RadioProps } from './utils';
+import { RadioProps, InputProps } from './utils';
+
+import { getToken } from "@/lib/auth";
 
 import "./style.css";
+import { stringToEnum } from "@/lib/stringToEnum";
+import graphqlRequestClient from "@/lib/client/graphqlRequestClient";
 
 const CreateAccount: FC<ICreateAccount> = ({ popUp, setMenuTrig }) => {
   const [errMsg, setErrMsg] = useState("");
-  const [selectedRadioBtn, setSelectedRadioBtn] = useState<string>("");
+  const [selectedRadioBtn, setSelectedRadioBtn] = useState<AccType | undefined>();
   const [createAccountData, setCreateAccountData] =
     useState<ICreateAccountData>({
       email: "",
+      password: "",
       designation: "",
-      accountType: "",
     });
+
+
+  graphqlRequestClient.setHeader("authorization", `bearer ${getToken()}`); //sets the authorization header
+
+  const { mutate } = useRegisterOneAccountMutation<Error>(graphqlRequestClient, {
+    onSuccess: (data: RegisterOneAccountMutation) => {
+      console.table(data);
+      popUp();
+      setMenuTrig();
+    },
+
+    onError: (error: Error) => {
+      const err = error.message.indexOf(":") + 2;
+      const jsonSubString = error.message.substring(err) // convert error message to JSON 
+      const errJSON = JSON.parse(jsonSubString);
+
+      setErrMsg(errJSON.response.errors[0].constraints[0].message)
+      console.table(errJSON.response.errors[0]);
+    },
+  });
 
   const isRadioSelected = (value: string) => selectedRadioBtn === value;
 
   const getRadioVal = (e: ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
-    setSelectedRadioBtn(e.target.value);
+    setSelectedRadioBtn(stringToEnum(e.target.value, AccType));
   }
 
 
@@ -38,20 +68,22 @@ const CreateAccount: FC<ICreateAccount> = ({ popUp, setMenuTrig }) => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    createAccountData["accountType"] = selectedRadioBtn;
+    const pass = createAccountData.designation.replace(/\s/g, '').toLowerCase();
+    createAccountData["password"] = pass + "pass12345";
+    console.log(createAccountData.password);
 
     setErrMsg(""); // clear the error message state variable
-    if (createAccountData.email.indexOf("@gmail.com") === -1) {
-      setErrMsg("Email should be a gmail email address.");
-    } else if (!createAccountData.designation) {
-      setErrMsg("Designation is required.");
-    } else if (!createAccountData.accountType) {
-      setErrMsg("Account Type is required.");
-    } else {
-      console.table(createAccountData);
-      popUp();
-      setMenuTrig();
-    }
+    console.log(selectedRadioBtn);
+    console.table(createAccountData);
+
+    mutate({
+      data: {
+        email: createAccountData.email,
+        password: createAccountData.password,
+        designation: createAccountData.designation,
+        acc_type: selectedRadioBtn!
+      }
+    })
   };
 
   return (
@@ -63,25 +95,20 @@ const CreateAccount: FC<ICreateAccount> = ({ popUp, setMenuTrig }) => {
     >
       {errMsg ? <div className="err">{errMsg}</div> : ""}
       <div className="ca-title">Create Account</div>
-      <div className="ca-input-field ca-email">
-        <InputField
-          label={"Email"}
-          type={"email"}
-          name={"email"}
-          placeholder={"Enter Email"}
-          getData={getCreateAccountData}
-          required={true}
-        />
-      </div>
-      <div className="ca-input-field ca-designation">
-        <InputField
-          label={"Designation"}
-          type={"text"}
-          name={"designation"}
-          placeholder={"Enter Designation"}
-          getData={getCreateAccountData}
-        />
-      </div>
+      {InputProps.map((val, key) => {
+        return (
+          <div className={val.style} key={key}>
+            <InputField
+              label={val.label}
+              type={val.type}
+              name={val.name}
+              placeholder={val.placeholder}
+              required={val.required}
+              getData={getCreateAccountData}
+            />
+          </div>
+        );
+      })}
       <div className="ca-account-type">
         <div className="at-title">Account Type:</div>
         <div className="radio-btn-group">
