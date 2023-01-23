@@ -4,7 +4,7 @@ import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
 import { FloatFieldUpdateOperationsInput } from "../inputs/FloatFieldUpdateOperationsInput";
-import { ReportUpdateOneRequiredWithoutCity_porjectNestedInput } from "../inputs/ReportUpdateOneRequiredWithoutCity_porjectNestedInput";
+import { ReportUpdateOneRequiredWithoutCity_projectNestedInput } from "../inputs/ReportUpdateOneRequiredWithoutCity_projectNestedInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
 @TypeGraphQL.InputType("CityProjectUpdateInput", {
@@ -51,8 +51,8 @@ export class CityProjectUpdateInput {
   })
   contract_ammount?: FloatFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => ReportUpdateOneRequiredWithoutCity_porjectNestedInput, {
+  @TypeGraphQL.Field(_type => ReportUpdateOneRequiredWithoutCity_projectNestedInput, {
     nullable: true
   })
-  report?: ReportUpdateOneRequiredWithoutCity_porjectNestedInput | undefined;
+  report?: ReportUpdateOneRequiredWithoutCity_projectNestedInput | undefined;
 }

@@ -8,7 +8,7 @@ query getAllReports{
       date_started
       date_ended
     }
-    city_porject{
+    city_project{
       date_started
       date_ended
     }

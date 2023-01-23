@@ -48,5 +48,5 @@ export class ReportCreateWithoutIncidentInput {
   @TypeGraphQL.Field(_type => CityProjectCreateNestedOneWithoutReportInput, {
     nullable: true
   })
-  city_porject?: CityProjectCreateNestedOneWithoutReportInput | undefined;
+  city_project?: CityProjectCreateNestedOneWithoutReportInput | undefined;
 }

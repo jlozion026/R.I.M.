@@ -50,7 +50,7 @@ model Report {
   reporter    Account? @relation(fields: [reporter_id], references: [acc_id])
   reporter_id String?
 
-  city_porject CityProject?
+  city_project CityProject?
   incident     Incident?
 }
 

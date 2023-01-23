@@ -73,7 +73,7 @@ export class ReportWhereInput {
   @TypeGraphQL.Field(_type => CityProjectRelationFilter, {
     nullable: true
   })
-  city_porject?: CityProjectRelationFilter | undefined;
+  city_project?: CityProjectRelationFilter | undefined;
 
   @TypeGraphQL.Field(_type => IncidentRelationFilter, {
     nullable: true

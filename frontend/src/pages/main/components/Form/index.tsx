@@ -91,7 +91,7 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
         },
         description: form2Data.description,
         report_type: TypeOfReport as ReportType,
-        city_porject: {
+        city_project: {
           create: {
             project_name: form2Data.projectName,
             contractor_name: form2Data.contractor,

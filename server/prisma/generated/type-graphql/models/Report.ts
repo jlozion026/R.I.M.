@@ -48,7 +48,7 @@ export class Report {
   })
   reporter_id?: string | null;
 
-  city_porject?: CityProject | null;
+  city_project?: CityProject | null;
 
   incident?: Incident | null;
 }

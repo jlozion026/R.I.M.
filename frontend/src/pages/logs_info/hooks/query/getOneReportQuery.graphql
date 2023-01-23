@@ -10,7 +10,7 @@ query GetOneReport($reportId: String){
       date_started
       date_ended
     }
-    city_porject{
+    city_project{
       project_name
       contractor_name
       date_started

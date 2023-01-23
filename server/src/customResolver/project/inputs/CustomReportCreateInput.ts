@@ -43,7 +43,7 @@ export class CustomReportCreateInput {
 
   @ValidateNested()
   @Field(_type => CityProjectCreateNestedOneWithoutReportInput, {nullable: true})
-  city_porject?: CityProjectCreateNestedOneWithoutReportInput | undefined;
+  city_project?: CityProjectCreateNestedOneWithoutReportInput | undefined;
 
 
 }
