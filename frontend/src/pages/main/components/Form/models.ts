@@ -57,6 +57,7 @@ export interface IPage extends IGetFormData {
   CalendarStart: boolean;
   CalendarEnd: boolean;
   StartDate: string;
+  setGenAdd(arg0:string): void;
   EndDate: string;
 }
 

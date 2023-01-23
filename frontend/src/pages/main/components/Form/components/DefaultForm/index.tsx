@@ -32,6 +32,7 @@ const DefaultForm: FC<IDefaultForm> = ({
   Submit,
   CalendarStart,
   CalendarEnd,
+  setGenAdd,
   StartDate,
   EndDate,
   ClickCalendar,
@@ -50,6 +51,7 @@ const DefaultForm: FC<IDefaultForm> = ({
           Name={"location"}
           PlaceHolder={"Search Location"}
           Label={"Location"}
+          SetGenAdd={setGenAdd}
         />
       </div>
 

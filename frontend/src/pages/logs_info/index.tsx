@@ -114,12 +114,10 @@ const LogInfo: FC = () => {
 
                   <div className="date-title">LOCATION</div>
                   <div className="li-dates">
-                    origin: {report?.report?.location.origin.lat}
-                    {report?.report?.location.origin.lng}
+                    origin: {report?.report?.location.addresses.from}
                   </div>
                   <div className="li-dates">
-                    destination: {report?.report?.location.destination.lat}
-                    {report?.report?.location.destination.lng}
+                    destination: {report?.report?.location.addresses.to}
                   </div>
                 </div>
 
@@ -143,12 +141,10 @@ const LogInfo: FC = () => {
                 <div className="city-project-info">
                   <div>LOCATION</div>
                   <div className="li-dates">
-                    origin: {report?.report?.location.origin.lat}
-                    {report?.report?.location.origin.lng}
+                    origin: {report?.report?.location.addresses.from}
                   </div>
                   <div className="li-dates">
-                    destination: {report?.report?.location.destination.lat}
-                    {report?.report?.location.destination.lng}
+                    destination: {report?.report?.location.addresses.to}
                   </div>
                   <div>CONTRACTOR</div>
                   <div className="li-dates">

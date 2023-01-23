@@ -5,8 +5,6 @@ import useDebounce from './hooks/useDebounce'
 import {
   GetAllReportsByTypeQuery,
   useGetAllReportsByTypeQuery,
-  GetAllReportsByDescOrderQuery,
-  useGetAllReportsByDescOrderQuery,
   GetAllReportsByAscOrderQuery,
   useGetAllReportsByAscOrderQuery,
   GetAllSearchResultQuery,
@@ -35,7 +33,7 @@ import { getIcon } from '@/lib/getIcon'
 import { stringToEnum } from '@/lib/stringToEnum'
 
 
-import { INewReports } from './models'
+import { INewReports, ArrReports } from './models'
 
 
 import useOnclickOutside from "react-cool-onclickoutside";
@@ -76,8 +74,7 @@ const Logs: FC = () => {
     keepPreviousData: true,
     onSuccess: async (data: GetAllReportsByTypeQuery) => {
       const report_arr = data.reports;
-      const new_arr = await addAddressAndPlusCode(report_arr, setLoadAddr);
-      setModReports(new_arr as INewReports);
+      setModReports(report_arr as INewReports);
     },
   });
 
@@ -89,19 +86,6 @@ const Logs: FC = () => {
   }
   );
 
-  // query reports by descending order
-  const { data: descData, isStale: descIsStale, refetch: fetch_report_desc } = useGetAllReportsByDescOrderQuery<
-    GetAllReportsByDescOrderQuery,
-    Error>
-    (
-      graphqlRequestClient, {},
-      {
-        staleTime: 10000,
-        refetchOnWindowFocus: false,
-      });
-
-
-
   // query reports by ascending order
   const { data: ascData, isStale, refetch: fetch_report_asc } = useGetAllReportsByAscOrderQuery<
     GetAllReportsByAscOrderQuery,
@@ -109,33 +93,36 @@ const Logs: FC = () => {
     (
       graphqlRequestClient, {},
       {
-        staleTime: 10000,
+        staleTime: 1 * (60 * 1000), // 1 min refresh time
         refetchOnWindowFocus: false,
       });
 
   //memomized ascending data
-  //const transform_asc_data = useMemo(async () => await addAddressAndPlusCode(
-  //  ascData?.reports as ArrReports,
-  //  setLoadAddr
-  //), [ascData])
+  const transform_asc_data = useMemo(() => addAddressAndPlusCode(
+    ascData?.reports as ArrReports,
+    setLoadAddr
+  ), [ascData])
 
-  //const transform_desc_data = useMemo(async () => await addAddressAndPlusCode(
-  //  descData?.reports as ArrReports,
-  //  setLoadAddr
-  //), [descData])
 
 
   // call back function for buttons
   const trigFetch = async (btnID: string) => {
     if (btnID === "Recent") {
-      console.log("recent");
+      if (!isStale) {
+        setModReports(transform_asc_data?.desc as ArrReports);
+      }
+      else {
+        fetch_report_asc();
+        setModReports(transform_asc_data?.desc as ArrReports);
+      }
     }
     else if (btnID === "Oldest") {
       if (!isStale) {
-        console.log("oldest")
+        setModReports(transform_asc_data?.asc as ArrReports);
       }
       else {
-        console.log("oldest")
+        fetch_report_asc();
+        setModReports(transform_asc_data?.asc as ArrReports);
       }
     }
     else {
@@ -236,8 +223,8 @@ const Logs: FC = () => {
                     reportID={val.report_id}
                     cardIcon={getIcon(val.report_type)}
                     cardSize={"card"}
-                    city={val.form_addr}
-                    address={val.plus_code as string}
+                    city={val.location.addresses.general_address}
+                    address={val.location.addresses.from}
                   />
                 </div>
               );

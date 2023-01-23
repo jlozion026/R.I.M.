@@ -31,7 +31,7 @@ const SearchResults: FC<ISearchResults> = ({ searchData }) => {
         return (
           <li className="search-item" key={key} onClick={() => change_page(report.report_id)}>
             <img src={getIcon(report.report_type)} alt="icon" />
-            {truncateString(report.description, 22)}
+            {truncateString(report.location.addresses.general_address, 22)}
           </li>
         );
 

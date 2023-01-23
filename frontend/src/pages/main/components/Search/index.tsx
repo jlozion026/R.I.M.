@@ -18,7 +18,7 @@ import InputField from "@/components/InputField";
 
 import "./style.css";
 
-const Search: FC<ISearch> = ({ Name, PlaceHolder, Label }) => {
+const Search: FC<ISearch> = ({ Name, PlaceHolder, Label, SetGenAdd }) => {
   const {
     value,
     suggestions: { status, data },
@@ -45,6 +45,7 @@ const Search: FC<ISearch> = ({ Name, PlaceHolder, Label }) => {
     () => {
       // When user selects a place, we can replace the keyword without request data from API
       // by setting the second parameter to "false"
+      SetGenAdd(description);
       setValue(description, false);
       clearSuggestions();
 
