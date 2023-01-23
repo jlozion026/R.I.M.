@@ -20,8 +20,8 @@ const MarkersClusterer: FC<IMakersClusterer> = ({
       })
     }
     return ({
-      start: report.city_porject.date_started,
-      end: report.city_porject.date_ended,
+      start: report.city_project.date_started,
+      end: report.city_project.date_ended,
     })
   }
 

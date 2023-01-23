@@ -21,12 +21,12 @@ export class ReportRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => CityProject, {
     nullable: true
   })
-  async city_porject(@TypeGraphQL.Root() report: Report, @TypeGraphQL.Ctx() ctx: any): Promise<CityProject | null> {
+  async city_project(@TypeGraphQL.Root() report: Report, @TypeGraphQL.Ctx() ctx: any): Promise<CityProject | null> {
     return getPrismaFromContext(ctx).report.findUnique({
       where: {
         report_id: report.report_id,
       },
-    }).city_porject({});
+    }).city_project({});
   }
 
   @TypeGraphQL.FieldResolver(_type => Incident, {

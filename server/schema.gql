@@ -110,6 +110,12 @@ enum AccType {
   NORMAL
 }
 
+input Addresses {
+  from: String!
+  general_address: String!
+  to: String!
+}
+
 type AggregateReport {
   _count: ReportCountAggregate
   _max: ReportMaxAggregate
@@ -243,7 +249,7 @@ input CustomAccountUpdateInput {
 }
 
 input CustomReportCreateInput {
-  city_porject: CityProjectCreateNestedOneWithoutReportInput
+  city_project: CityProjectCreateNestedOneWithoutReportInput
   createdAt: DateTime
   description: String!
   incident: IncidentCreateNestedOneWithoutReportInput
@@ -427,6 +433,7 @@ input JsonFilter {
 }
 
 input Location {
+  addresses: Addresses!
   destination: Coordinates!
   origin: Coordinates!
 }
@@ -439,6 +446,7 @@ type LoginResponseSuccess {
 type Mutation {
   createOneAccount(data: AccountCreateInput!): Account!
   createOneReport(data: CustomReportCreateInput!): Report!
+  deleteOneAccount(where: AccountWhereUniqueInput!): Account
   deleteOneReport(where: ReportWhereUniqueInput!): Report
   login(cursor: AccountWhereUniqueInput, distinct: [AccountScalarFieldEnum!], orderBy: [AccountOrderByWithRelationInput!], skip: Int, take: Int, where: AccountWhereInput): LoginResponseSuccess
   logout: Boolean!
@@ -519,6 +527,7 @@ type Query {
   aggregateReport(cursor: ReportWhereUniqueInput, orderBy: [ReportOrderByWithRelationInput!], skip: Int, take: Int, where: ReportWhereInput): AggregateReport!
   cityProject(where: CityProjectWhereUniqueInput!): CityProject
   cityProjects(cursor: CityProjectWhereUniqueInput, distinct: [CityProjectScalarFieldEnum!], orderBy: [CityProjectOrderByWithRelationInput!], skip: Int, take: Int, where: CityProjectWhereInput): [CityProject!]!
+  findFirstReport(cursor: ReportWhereUniqueInput, distinct: [ReportScalarFieldEnum!], orderBy: [ReportOrderByWithRelationInput!], skip: Int, take: Int, where: ReportWhereInput): Report
   incident(where: IncidentWhereUniqueInput!): Incident
   incidents(cursor: IncidentWhereUniqueInput, distinct: [IncidentScalarFieldEnum!], orderBy: [IncidentOrderByWithRelationInput!], skip: Int, take: Int, where: IncidentWhereInput): [Incident!]!
   report(where: ReportWhereUniqueInput!): Report
@@ -531,7 +540,7 @@ enum QueryMode {
 }
 
 type Report {
-  city_porject: CityProject
+  city_project: CityProject
   createdAt: DateTime!
   description: String!
   incident: Incident
@@ -581,7 +590,7 @@ input ReportCreateOrConnectWithoutReporterInput {
 }
 
 input ReportCreateWithoutReporterInput {
-  city_porject: CityProjectCreateNestedOneWithoutReportInput
+  city_project: CityProjectCreateNestedOneWithoutReportInput
   createdAt: DateTime
   description: String!
   incident: IncidentCreateNestedOneWithoutReportInput
@@ -620,7 +629,7 @@ input ReportOrderByRelationAggregateInput {
 }
 
 input ReportOrderByWithRelationInput {
-  city_porject: CityProjectOrderByWithRelationInput
+  city_project: CityProjectOrderByWithRelationInput
   createdAt: SortOrder
   description: SortOrder
   incident: IncidentOrderByWithRelationInput
@@ -670,7 +679,7 @@ enum ReportType {
 }
 
 input ReportUpdateInput {
-  city_porject: CityProjectUpdateOneWithoutReportNestedInput
+  city_project: CityProjectUpdateOneWithoutReportNestedInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
   incident: IncidentUpdateOneWithoutReportNestedInput
@@ -710,7 +719,7 @@ input ReportUpdateManyWithWhereWithoutReporterInput {
 }
 
 input ReportUpdateWithoutReporterInput {
-  city_porject: CityProjectUpdateOneWithoutReportNestedInput
+  city_project: CityProjectUpdateOneWithoutReportNestedInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
   incident: IncidentUpdateOneWithoutReportNestedInput
@@ -733,7 +742,7 @@ input ReportUpsertWithWhereUniqueWithoutReporterInput {
 
 input ReportWhereInput {
   AND: [ReportWhereInput!]
-  city_porject: CityProjectRelationFilter
+  city_project: CityProjectRelationFilter
   createdAt: DateTimeFilter
   description: StringFilter
   incident: IncidentRelationFilter

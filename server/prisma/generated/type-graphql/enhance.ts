@@ -223,7 +223,7 @@ const relationResolversMap = {
 };
 const relationResolversInfo = {
   Account: ["reports"],
-  Report: ["reporter", "city_porject", "incident"],
+  Report: ["reporter", "city_project", "incident"],
   CityProject: ["report"],
   Incident: ["report"]
 };
@@ -417,8 +417,8 @@ const inputsInfo = {
   AccountWhereUniqueInput: ["acc_id", "email"],
   AccountOrderByWithAggregationInput: ["acc_id", "email", "password", "designation", "acc_type", "_count", "_max", "_min"],
   AccountScalarWhereWithAggregatesInput: ["AND", "OR", "NOT", "acc_id", "email", "password", "designation", "acc_type"],
-  ReportWhereInput: ["AND", "OR", "NOT", "report_id", "createdAt", "updatedAt", "location", "description", "report_type", "reporter", "reporter_id", "city_porject", "incident"],
-  ReportOrderByWithRelationInput: ["report_id", "createdAt", "updatedAt", "location", "description", "report_type", "reporter", "reporter_id", "city_porject", "incident"],
+  ReportWhereInput: ["AND", "OR", "NOT", "report_id", "createdAt", "updatedAt", "location", "description", "report_type", "reporter", "reporter_id", "city_project", "incident"],
+  ReportOrderByWithRelationInput: ["report_id", "createdAt", "updatedAt", "location", "description", "report_type", "reporter", "reporter_id", "city_project", "incident"],
   ReportWhereUniqueInput: ["report_id"],
   ReportOrderByWithAggregationInput: ["report_id", "createdAt", "updatedAt", "location", "description", "report_type", "reporter_id", "_count", "_max", "_min"],
   ReportScalarWhereWithAggregatesInput: ["AND", "OR", "NOT", "report_id", "createdAt", "updatedAt", "location", "description", "report_type", "reporter_id"],
@@ -436,8 +436,8 @@ const inputsInfo = {
   AccountUpdateInput: ["acc_id", "email", "password", "designation", "acc_type", "reports"],
   AccountCreateManyInput: ["acc_id", "email", "password", "designation", "acc_type"],
   AccountUpdateManyMutationInput: ["acc_id", "email", "password", "designation", "acc_type"],
-  ReportCreateInput: ["report_id", "createdAt", "updatedAt", "location", "description", "report_type", "reporter", "city_porject", "incident"],
-  ReportUpdateInput: ["report_id", "createdAt", "updatedAt", "location", "description", "report_type", "reporter", "city_porject", "incident"],
+  ReportCreateInput: ["report_id", "createdAt", "updatedAt", "location", "description", "report_type", "reporter", "city_project", "incident"],
+  ReportUpdateInput: ["report_id", "createdAt", "updatedAt", "location", "description", "report_type", "reporter", "city_project", "incident"],
   ReportCreateManyInput: ["report_id", "createdAt", "updatedAt", "location", "description", "report_type", "reporter_id"],
   ReportUpdateManyMutationInput: ["report_id", "createdAt", "updatedAt", "location", "description", "report_type"],
   CityProjectCreateInput: ["project_id", "project_name", "contractor_name", "date_started", "date_ended", "source_fund", "project_ammount", "contract_ammount", "report"],
@@ -495,9 +495,9 @@ const inputsInfo = {
   CityProjectUpdateOneWithoutReportNestedInput: ["create", "connectOrCreate", "upsert", "disconnect", "delete", "connect", "update"],
   IncidentUpdateOneWithoutReportNestedInput: ["create", "connectOrCreate", "upsert", "disconnect", "delete", "connect", "update"],
   NullableStringFieldUpdateOperationsInput: ["set"],
-  ReportCreateNestedOneWithoutCity_porjectInput: ["create", "connectOrCreate", "connect"],
+  ReportCreateNestedOneWithoutCity_projectInput: ["create", "connectOrCreate", "connect"],
   FloatFieldUpdateOperationsInput: ["set", "increment", "decrement", "multiply", "divide"],
-  ReportUpdateOneRequiredWithoutCity_porjectNestedInput: ["create", "connectOrCreate", "upsert", "connect", "update"],
+  ReportUpdateOneRequiredWithoutCity_projectNestedInput: ["create", "connectOrCreate", "upsert", "connect", "update"],
   ReportCreateNestedOneWithoutIncidentInput: ["create", "connectOrCreate", "connect"],
   ReportUpdateOneRequiredWithoutIncidentNestedInput: ["create", "connectOrCreate", "upsert", "connect", "update"],
   NestedStringFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "contains", "startsWith", "endsWith", "not"],
@@ -515,7 +515,7 @@ const inputsInfo = {
   NestedIntNullableFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "not"],
   NestedFloatFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "not"],
   NestedFloatWithAggregatesFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "not", "_count", "_avg", "_sum", "_min", "_max"],
-  ReportCreateWithoutReporterInput: ["report_id", "createdAt", "updatedAt", "location", "description", "report_type", "city_porject", "incident"],
+  ReportCreateWithoutReporterInput: ["report_id", "createdAt", "updatedAt", "location", "description", "report_type", "city_project", "incident"],
   ReportCreateOrConnectWithoutReporterInput: ["where", "create"],
   ReportCreateManyReporterInputEnvelope: ["data", "skipDuplicates"],
   ReportUpsertWithWhereUniqueWithoutReporterInput: ["where", "update", "create"],
@@ -534,16 +534,16 @@ const inputsInfo = {
   CityProjectUpdateWithoutReportInput: ["project_id", "project_name", "contractor_name", "date_started", "date_ended", "source_fund", "project_ammount", "contract_ammount"],
   IncidentUpsertWithoutReportInput: ["update", "create"],
   IncidentUpdateWithoutReportInput: ["incident_id", "date_started", "date_ended"],
-  ReportCreateWithoutCity_porjectInput: ["report_id", "createdAt", "updatedAt", "location", "description", "report_type", "reporter", "incident"],
-  ReportCreateOrConnectWithoutCity_porjectInput: ["where", "create"],
-  ReportUpsertWithoutCity_porjectInput: ["update", "create"],
-  ReportUpdateWithoutCity_porjectInput: ["report_id", "createdAt", "updatedAt", "location", "description", "report_type", "reporter", "incident"],
-  ReportCreateWithoutIncidentInput: ["report_id", "createdAt", "updatedAt", "location", "description", "report_type", "reporter", "city_porject"],
+  ReportCreateWithoutCity_projectInput: ["report_id", "createdAt", "updatedAt", "location", "description", "report_type", "reporter", "incident"],
+  ReportCreateOrConnectWithoutCity_projectInput: ["where", "create"],
+  ReportUpsertWithoutCity_projectInput: ["update", "create"],
+  ReportUpdateWithoutCity_projectInput: ["report_id", "createdAt", "updatedAt", "location", "description", "report_type", "reporter", "incident"],
+  ReportCreateWithoutIncidentInput: ["report_id", "createdAt", "updatedAt", "location", "description", "report_type", "reporter", "city_project"],
   ReportCreateOrConnectWithoutIncidentInput: ["where", "create"],
   ReportUpsertWithoutIncidentInput: ["update", "create"],
-  ReportUpdateWithoutIncidentInput: ["report_id", "createdAt", "updatedAt", "location", "description", "report_type", "reporter", "city_porject"],
+  ReportUpdateWithoutIncidentInput: ["report_id", "createdAt", "updatedAt", "location", "description", "report_type", "reporter", "city_project"],
   ReportCreateManyReporterInput: ["report_id", "createdAt", "updatedAt", "location", "description", "report_type"],
-  ReportUpdateWithoutReporterInput: ["report_id", "createdAt", "updatedAt", "location", "description", "report_type", "city_porject", "incident"]
+  ReportUpdateWithoutReporterInput: ["report_id", "createdAt", "updatedAt", "location", "description", "report_type", "city_project", "incident"]
 };
 
 type InputTypesNames = keyof typeof inputTypes;

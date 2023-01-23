@@ -4,7 +4,9 @@ import {
   AggregateReportResolver,
   CityProjectRelationsResolver,
   CreateOneAccountResolver,
+  DeleteOneAccountResolver,
   DeleteOneReportResolver,
+  FindFirstReportResolver,
   FindManyCityProjectResolver,
   FindManyIncidentResolver,
   FindManyReportResolver,
@@ -20,7 +22,7 @@ import { LogoutResolver } from "./customResolver/account/LogoutResolver";
 import { RegisterOneAccountResolver } from "./customResolver/account/RegisterOneAccountResolver";
 import { UpdateAccountResolver } from "./customResolver/account/UpdateOneAccountResolver";
 import { CreateReportResolver } from "./customResolver/project/CreateReportResolver";
-import { UpdateReportResolver } from "../src/customResolver/project/UpdateReportResolver";
+// import { UpdateReportResolver } from "../src/customResolver/project/UpdateReportResolver";
 
 
 export const resolver = [
@@ -37,6 +39,7 @@ export const resolver = [
   FindManyReportResolver,
   FindUniqueReportResolver,
   ReportRelationsResolver,
+  FindFirstReportResolver,
   
   FindManyCityProjectResolver,
   FindUniqueCityProjectResolver,
@@ -48,12 +51,12 @@ export const resolver = [
   
   AggregateReportResolver,
 
-
   // *Update 
   UpdateAccountResolver,
-  UpdateReportResolver, 
+  // UpdateReportResolver, 
 
   // *Delete
-  DeleteOneReportResolver
+  DeleteOneAccountResolver,
+  DeleteOneReportResolver,
 
 ] as NonEmptyArray<Function>;

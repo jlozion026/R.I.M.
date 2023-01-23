@@ -2,7 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
-import { ReportCreateNestedOneWithoutCity_porjectInput } from "../inputs/ReportCreateNestedOneWithoutCity_porjectInput";
+import { ReportCreateNestedOneWithoutCity_projectInput } from "../inputs/ReportCreateNestedOneWithoutCity_projectInput";
 
 @TypeGraphQL.InputType("CityProjectCreateInput", {
   isAbstract: true
@@ -48,8 +48,8 @@ export class CityProjectCreateInput {
   })
   contract_ammount!: number;
 
-  @TypeGraphQL.Field(_type => ReportCreateNestedOneWithoutCity_porjectInput, {
+  @TypeGraphQL.Field(_type => ReportCreateNestedOneWithoutCity_projectInput, {
     nullable: false
   })
-  report!: ReportCreateNestedOneWithoutCity_porjectInput;
+  report!: ReportCreateNestedOneWithoutCity_projectInput;
 }

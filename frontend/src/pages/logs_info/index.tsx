@@ -133,10 +133,10 @@ const LogInfo: FC = () => {
                 <div className="info-dates">
                   <div className="date-title">DATES</div>
                   <div className="li-dates">
-                    {report?.report?.city_porject?.date_started}
+                    {report?.report?.city_project?.date_started}
                   </div>
                   <div className="li-dates">
-                    {report?.report?.city_porject?.date_ended}
+                    {report?.report?.city_project?.date_ended}
                   </div>
                 </div>
 
@@ -152,19 +152,19 @@ const LogInfo: FC = () => {
                   </div>
                   <div>CONTRACTOR</div>
                   <div className="li-dates">
-                    {report.report?.city_porject?.contractor_name}
+                    {report.report?.city_project?.contractor_name}
                   </div>
                   <div>SOURCE FUND</div>
                   <div className="li-dates">
-                    {report.report?.city_porject?.source_fund}
+                    {report.report?.city_project?.source_fund}
                   </div>
                   <div>PROGRAM AMOUNT</div>
                   <div className="li-dates">
-                    {report.report?.city_porject?.project_ammount}
+                    {report.report?.city_project?.project_ammount}
                   </div>
                   <div>CONTRACTOR AMOUNT</div>
                   <div className="li-dates">
-                    {report.report?.city_porject?.contract_ammount}
+                    {report.report?.city_project?.contract_ammount}
                   </div>
                   <div className="date-title">Description</div>
                   <div className="li-dates">{report?.report?.description}</div>

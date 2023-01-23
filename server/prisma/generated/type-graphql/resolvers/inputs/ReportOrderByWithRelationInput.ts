@@ -54,7 +54,7 @@ export class ReportOrderByWithRelationInput {
   @TypeGraphQL.Field(_type => CityProjectOrderByWithRelationInput, {
     nullable: true
   })
-  city_porject?: CityProjectOrderByWithRelationInput | undefined;
+  city_project?: CityProjectOrderByWithRelationInput | undefined;
 
   @TypeGraphQL.Field(_type => IncidentOrderByWithRelationInput, {
     nullable: true

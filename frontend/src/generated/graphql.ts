@@ -135,6 +135,12 @@ export type AccountWhereUniqueInput = {
   email?: InputMaybe<Scalars['String']>;
 };
 
+export type Addresses = {
+  from: Scalars['String'];
+  genAddress: Scalars['String'];
+  to: Scalars['String'];
+};
+
 export type AggregateReport = {
   __typename?: 'AggregateReport';
   _count?: Maybe<ReportCountAggregate>;
@@ -270,7 +276,7 @@ export type CustomAccountUpdateInput = {
 };
 
 export type CustomReportCreateInput = {
-  city_porject?: InputMaybe<CityProjectCreateNestedOneWithoutReportInput>;
+  city_project?: InputMaybe<CityProjectCreateNestedOneWithoutReportInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   description: Scalars['String'];
   incident?: InputMaybe<IncidentCreateNestedOneWithoutReportInput>;
@@ -445,6 +451,7 @@ export type JsonFilter = {
 };
 
 export type Location = {
+  addresses: Addresses;
   destination: Coordinates;
   origin: Coordinates;
 };
@@ -459,6 +466,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   createOneAccount: Account;
   createOneReport: Report;
+  deleteOneAccount?: Maybe<Account>;
   deleteOneReport?: Maybe<Report>;
   login?: Maybe<LoginResponseSuccess>;
   logout: Scalars['Boolean'];
@@ -475,6 +483,11 @@ export type MutationCreateOneAccountArgs = {
 
 export type MutationCreateOneReportArgs = {
   data: CustomReportCreateInput;
+};
+
+
+export type MutationDeleteOneAccountArgs = {
+  where: AccountWhereUniqueInput;
 };
 
 
@@ -582,6 +595,7 @@ export type Query = {
   aggregateReport: AggregateReport;
   cityProject?: Maybe<CityProject>;
   cityProjects: Array<CityProject>;
+  findFirstReport?: Maybe<Report>;
   incident?: Maybe<Incident>;
   incidents: Array<Incident>;
   report?: Maybe<Report>;
@@ -610,6 +624,16 @@ export type QueryCityProjectsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   take?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<CityProjectWhereInput>;
+};
+
+
+export type QueryFindFirstReportArgs = {
+  cursor?: InputMaybe<ReportWhereUniqueInput>;
+  distinct?: InputMaybe<Array<ReportScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<ReportOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ReportWhereInput>;
 };
 
 
@@ -649,7 +673,7 @@ export enum QueryMode {
 
 export type Report = {
   __typename?: 'Report';
-  city_porject?: Maybe<CityProject>;
+  city_project?: Maybe<CityProject>;
   createdAt: Scalars['DateTime'];
   description: Scalars['String'];
   incident?: Maybe<Incident>;
@@ -700,7 +724,7 @@ export type ReportCreateOrConnectWithoutReporterInput = {
 };
 
 export type ReportCreateWithoutReporterInput = {
-  city_porject?: InputMaybe<CityProjectCreateNestedOneWithoutReportInput>;
+  city_project?: InputMaybe<CityProjectCreateNestedOneWithoutReportInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   description: Scalars['String'];
   incident?: InputMaybe<IncidentCreateNestedOneWithoutReportInput>;
@@ -741,7 +765,7 @@ export type ReportOrderByRelationAggregateInput = {
 };
 
 export type ReportOrderByWithRelationInput = {
-  city_porject?: InputMaybe<CityProjectOrderByWithRelationInput>;
+  city_project?: InputMaybe<CityProjectOrderByWithRelationInput>;
   createdAt?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   incident?: InputMaybe<IncidentOrderByWithRelationInput>;
@@ -791,7 +815,7 @@ export enum ReportType {
 }
 
 export type ReportUpdateInput = {
-  city_porject?: InputMaybe<CityProjectUpdateOneWithoutReportNestedInput>;
+  city_project?: InputMaybe<CityProjectUpdateOneWithoutReportNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   incident?: InputMaybe<IncidentUpdateOneWithoutReportNestedInput>;
@@ -836,7 +860,7 @@ export type ReportUpdateWithWhereUniqueWithoutReporterInput = {
 };
 
 export type ReportUpdateWithoutReporterInput = {
-  city_porject?: InputMaybe<CityProjectUpdateOneWithoutReportNestedInput>;
+  city_project?: InputMaybe<CityProjectUpdateOneWithoutReportNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   incident?: InputMaybe<IncidentUpdateOneWithoutReportNestedInput>;
@@ -856,7 +880,7 @@ export type ReportWhereInput = {
   AND?: InputMaybe<Array<ReportWhereInput>>;
   NOT?: InputMaybe<Array<ReportWhereInput>>;
   OR?: InputMaybe<Array<ReportWhereInput>>;
-  city_porject?: InputMaybe<CityProjectRelationFilter>;
+  city_project?: InputMaybe<CityProjectRelationFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   description?: InputMaybe<StringFilter>;
   incident?: InputMaybe<IncidentRelationFilter>;
@@ -928,7 +952,7 @@ export type GetOneReportQueryVariables = Exact<{
 }>;
 
 
-export type GetOneReportQuery = { __typename?: 'Query', report?: { __typename?: 'Report', report_id: string, report_type: ReportType, location: any, description: string, incident?: { __typename?: 'Incident', date_started: any, date_ended: any } | null, city_porject?: { __typename?: 'CityProject', project_name: string, contractor_name: string, date_started: any, date_ended: any, source_fund: string, project_ammount: number, contract_ammount: number } | null } | null };
+export type GetOneReportQuery = { __typename?: 'Query', report?: { __typename?: 'Report', report_id: string, report_type: ReportType, location: any, description: string, incident?: { __typename?: 'Incident', date_started: any, date_ended: any } | null, city_project?: { __typename?: 'CityProject', project_name: string, contractor_name: string, date_started: any, date_ended: any, source_fund: string, project_ammount: number, contract_ammount: number } | null } | null };
 
 export type GetAllReportsByAscOrderQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -966,7 +990,7 @@ export type CreateOneReportMutation = { __typename?: 'Mutation', createOneReport
 export type GetAllReportsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllReportsQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', location: any, report_id: string, report_type: ReportType, description: string, incident?: { __typename?: 'Incident', date_started: any, date_ended: any } | null, city_porject?: { __typename?: 'CityProject', date_started: any, date_ended: any } | null }> };
+export type GetAllReportsQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', location: any, report_id: string, report_type: ReportType, description: string, incident?: { __typename?: 'Incident', date_started: any, date_ended: any } | null, city_project?: { __typename?: 'CityProject', date_started: any, date_ended: any } | null }> };
 
 export type LoginMutationVariables = Exact<{
   where?: InputMaybe<AccountWhereInput>;
@@ -1028,7 +1052,7 @@ export const GetOneReportDocument = `
       date_started
       date_ended
     }
-    city_porject {
+    city_project {
       project_name
       contractor_name
       date_started
@@ -1180,7 +1204,7 @@ export const GetAllReportsDocument = `
       date_started
       date_ended
     }
-    city_porject {
+    city_project {
       date_started
       date_ended
     }

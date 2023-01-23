@@ -45,7 +45,7 @@ export class ReportUpdateWithoutReporterInput {
   @TypeGraphQL.Field(_type => CityProjectUpdateOneWithoutReportNestedInput, {
     nullable: true
   })
-  city_porject?: CityProjectUpdateOneWithoutReportNestedInput | undefined;
+  city_project?: CityProjectUpdateOneWithoutReportNestedInput | undefined;
 
   @TypeGraphQL.Field(_type => IncidentUpdateOneWithoutReportNestedInput, {
     nullable: true

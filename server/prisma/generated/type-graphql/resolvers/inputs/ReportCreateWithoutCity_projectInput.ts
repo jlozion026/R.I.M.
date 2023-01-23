@@ -6,10 +6,10 @@ import { AccountCreateNestedOneWithoutReportsInput } from "../inputs/AccountCrea
 import { IncidentCreateNestedOneWithoutReportInput } from "../inputs/IncidentCreateNestedOneWithoutReportInput";
 import { ReportType } from "../../enums/ReportType";
 
-@TypeGraphQL.InputType("ReportCreateWithoutCity_porjectInput", {
+@TypeGraphQL.InputType("ReportCreateWithoutCity_projectInput", {
   isAbstract: true
 })
-export class ReportCreateWithoutCity_porjectInput {
+export class ReportCreateWithoutCity_projectInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })

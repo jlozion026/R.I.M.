@@ -8,10 +8,10 @@ import { EnumReportTypeFieldUpdateOperationsInput } from "../inputs/EnumReportTy
 import { IncidentUpdateOneWithoutReportNestedInput } from "../inputs/IncidentUpdateOneWithoutReportNestedInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
-@TypeGraphQL.InputType("ReportUpdateWithoutCity_porjectInput", {
+@TypeGraphQL.InputType("ReportUpdateWithoutCity_projectInput", {
   isAbstract: true
 })
-export class ReportUpdateWithoutCity_porjectInput {
+export class ReportUpdateWithoutCity_projectInput {
   @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
     nullable: true
   })
