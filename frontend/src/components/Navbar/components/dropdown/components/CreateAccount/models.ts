@@ -1,7 +1,7 @@
 export interface ICreateAccountData {
   email: string;
+  password: string;
   designation: string;
-  accountType: string;
 }
 
 export interface ICreateAccount {

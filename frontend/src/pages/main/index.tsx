@@ -38,9 +38,8 @@ import MarkersClusterer from "./components/MarkersClusterer";
 import Loader from "@/components/Loader";
 
 import { getToken } from "@/lib/auth";
-import { coordToAddress } from "@/lib/coordToAddress";
 
-import { getIcon, getPinIcon } from "@/lib/getIcon";
+import {  getPinIcon } from "@/lib/getIcon";
 
 import "./style.css";
 

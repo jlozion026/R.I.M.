@@ -1,0 +1,7 @@
+mutation registerOneAccount($data: AccountCreateInput!){
+  registerOneAccount(data: $data){
+    email 
+    acc_type
+    designation 
+  }
+}

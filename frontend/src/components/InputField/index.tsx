@@ -12,6 +12,7 @@ const InputField: FC<input> = ({
   name,
   forinput,
   required,
+  onClick,
   value,
   checked,
   getData,
@@ -25,6 +26,7 @@ const InputField: FC<input> = ({
         type={type}
         placeholder={placeholder}
         autoFocus={auto}
+        onClick={onClick}
         value={value}
         name={name}
         required={required}

@@ -592,6 +592,7 @@ export type PasswordFieldUpdateOperationsInput = {
 
 export type Query = {
   __typename?: 'Query';
+  accounts: Array<Account>;
   aggregateReport: AggregateReport;
   cityProject?: Maybe<CityProject>;
   cityProjects: Array<CityProject>;
@@ -600,6 +601,16 @@ export type Query = {
   incidents: Array<Incident>;
   report?: Maybe<Report>;
   reports: Array<Report>;
+};
+
+
+export type QueryAccountsArgs = {
+  cursor?: InputMaybe<AccountWhereUniqueInput>;
+  distinct?: InputMaybe<Array<AccountScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<AccountOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<AccountWhereInput>;
 };
 
 
@@ -935,6 +946,13 @@ export type StringNullableFilter = {
   startsWith?: InputMaybe<Scalars['String']>;
 };
 
+export type RegisterOneAccountMutationVariables = Exact<{
+  data: AccountCreateInput;
+}>;
+
+
+export type RegisterOneAccountMutation = { __typename?: 'Mutation', registerOneAccount: { __typename?: 'Account', email: string, acc_type: AccType, designation: string } };
+
 export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1000,6 +1018,28 @@ export type LoginMutationVariables = Exact<{
 export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'LoginResponseSuccess', accessToken: string } | null };
 
 
+export const RegisterOneAccountDocument = `
+    mutation registerOneAccount($data: AccountCreateInput!) {
+  registerOneAccount(data: $data) {
+    email
+    acc_type
+    designation
+  }
+}
+    `;
+export const useRegisterOneAccountMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      client: GraphQLClient,
+      options?: UseMutationOptions<RegisterOneAccountMutation, TError, RegisterOneAccountMutationVariables, TContext>,
+      headers?: RequestInit['headers']
+    ) =>
+    useMutation<RegisterOneAccountMutation, TError, RegisterOneAccountMutationVariables, TContext>(
+      ['registerOneAccount'],
+      (variables?: RegisterOneAccountMutationVariables) => fetcher<RegisterOneAccountMutation, RegisterOneAccountMutationVariables>(client, RegisterOneAccountDocument, variables, headers)(),
+      options
+    );
 export const LogoutDocument = `
     mutation logout {
   logout
