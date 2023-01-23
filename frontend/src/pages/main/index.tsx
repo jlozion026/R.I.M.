@@ -261,14 +261,18 @@ const Main: FC = () => {
                 <p className="address-title">
                   <span className="txt-cw"> Address:</span>
                 </p>
-                <p>{selectedMarker?.addr}</p>
+                <p className="info-details">{selectedMarker?.addr}</p>
                 <p className="ds-container">
                   <span className="txt-cw"> Date Started: </span>
-                  {selectedMarker.date_started}
+                  <p className="info-details">
+                    {selectedMarker.date_started.split("T")[0]}
+                  </p>
                 </p>
                 <p className="de-container">
                   <span className="txt-cw">Date Ended: </span>
-                  {selectedMarker.date_ended}
+                  <p className="info-details">
+                    {selectedMarker.date_ended.split("T")[0]}
+                  </p>
                 </p>
               </div>
             </InfoWindow>

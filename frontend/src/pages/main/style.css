@@ -83,6 +83,9 @@
   padding: 30px 15px 30px 15px;
   border-radius: 15px;
   width: 100%;
+  line-height: 1.2em;
+  letter-spacing: 0.016em;
+  color: #484751;
 }
 
 .iw-line {
@@ -102,7 +105,7 @@
 .txt-cw {
   font-size: small;
   font-weight: 600;
-  color: #6f6f6f;
+  color: #686868;
 }
 
 .ds-container {
@@ -119,4 +122,7 @@
 
 .nav-container {
   z-index: 1;
+}
+.info-details{
+  color: #6f6f6f;
 }
