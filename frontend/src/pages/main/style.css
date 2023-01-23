@@ -26,10 +26,15 @@
   align-items: center;
   flex-direction: column;
   padding: 10px;
+  width: 300px;
 }
 
-.Road.Accident,.Road.Closure,.Road.Construction,
-.Road.Event,.Road.Hazard,.City.Project{
+.Road.Accident,
+.Road.Closure,
+.Road.Construction,
+.Road.Event,
+.Road.Hazard,
+.City.Project {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,23 +43,23 @@
   height: 50px;
   margin-bottom: 10px;
 }
-.Road.Accident{
-  background-color: #DFE15B;
+.Road.Accident {
+  background-color: #cbcf0b;
 }
-.Road.Closure{
-  background-color: #FA976C;
+.Road.Closure {
+  background-color: #f95415;
 }
-.Road.Construction{
-  background-color: #FFC845;
+.Road.Construction {
+  background-color: #fcb712;
 }
-.Road.Event{
-  background-color: #89D3DB;
+.Road.Event {
+  background-color: #0096a6;
 }
-.Road.Hazard{
-  background-color: #FFE683;
+.Road.Hazard {
+  background-color: #f5cf38;
 }
-.City.Project{
-  background-color: #756300;
+.City.Project {
+  background-color: #ffd800;
 }
 
 .window-icons {
@@ -63,10 +68,24 @@
 }
 
 .window-title {
-  display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
+  padding: 0px 0px 10px 0px;
+}
+
+.iw-description {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: justify;
+  background-color: #f1f1f1;
+  padding: 30px 15px 30px 15px;
+  border-radius: 15px;
+  width: 100%;
+  line-height: 1.2em;
+  letter-spacing: 0.016em;
+  color: #484751;
 }
 
 .iw-line {
@@ -80,14 +99,30 @@
   font-weight: 100;
   color: #272626;
   width: 100%;
+  padding: 12px 10px 0px 0px;
 }
 
-.latlng-container {
-  color: #6f6f6f;
+.txt-cw {
+  font-size: small;
+  font-weight: 600;
+  color: #686868;
+}
+
+.ds-container {
   font-weight: 50;
   width: 100%;
+  padding: 10px 5px 5px 0px;
+}
+
+.de-container {
+  font-weight: 50;
+  width: 100%;
+  padding: 2px 5px 5px 0px;
 }
 
 .nav-container {
   z-index: 1;
+}
+.info-details{
+  color: #6f6f6f;
 }

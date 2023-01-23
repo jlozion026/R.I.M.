@@ -255,16 +255,25 @@ const Main: FC = () => {
                   <img className="window-icons" src={selectedMarker.icon}></img>
                 </div>
                 <h1 className="window-title">{selectedMarker.report_type}</h1>
-                <hr className="iw-line" />
-                <h3 className="address-title">Address</h3>
-                <h5 className="latlng-container">
-                  {"date_started: " + selectedMarker.date_started}
-                </h5>
-                <h5 className="latlng-container">
-                  {"date_ended" + selectedMarker.date_ended}
-                </h5>
-                <p>{selectedMarker.description}</p>
-                <p>{selectedMarker?.addr}</p>
+                <div className="iw-description">
+                  <p>{selectedMarker.description}</p>
+                </div>
+                <p className="address-title">
+                  <span className="txt-cw"> Address:</span>
+                </p>
+                <p className="info-details">{selectedMarker?.addr}</p>
+                <p className="ds-container">
+                  <span className="txt-cw"> Date Started: </span>
+                  <p className="info-details">
+                    {selectedMarker.date_started.split("T")[0]}
+                  </p>
+                </p>
+                <p className="de-container">
+                  <span className="txt-cw">Date Ended: </span>
+                  <p className="info-details">
+                    {selectedMarker.date_ended.split("T")[0]}
+                  </p>
+                </p>
               </div>
             </InfoWindow>
           ) : null}
