@@ -95,29 +95,6 @@ export enum AccountScalarFieldEnum {
   Password = 'password'
 }
 
-export type AccountUpdateOneWithoutReportsNestedInput = {
-  connect?: InputMaybe<AccountWhereUniqueInput>;
-  connectOrCreate?: InputMaybe<AccountCreateOrConnectWithoutReportsInput>;
-  create?: InputMaybe<AccountCreateWithoutReportsInput>;
-  delete?: InputMaybe<Scalars['Boolean']>;
-  disconnect?: InputMaybe<Scalars['Boolean']>;
-  update?: InputMaybe<AccountUpdateWithoutReportsInput>;
-  upsert?: InputMaybe<AccountUpsertWithoutReportsInput>;
-};
-
-export type AccountUpdateWithoutReportsInput = {
-  acc_id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  acc_type?: InputMaybe<EnumAccTypeFieldUpdateOperationsInput>;
-  designation?: InputMaybe<StringFieldUpdateOperationsInput>;
-  email?: InputMaybe<StringFieldUpdateOperationsInput>;
-  password?: InputMaybe<StringFieldUpdateOperationsInput>;
-};
-
-export type AccountUpsertWithoutReportsInput = {
-  create: AccountCreateWithoutReportsInput;
-  update: AccountUpdateWithoutReportsInput;
-};
-
 export type AccountWhereInput = {
   AND?: InputMaybe<Array<AccountWhereInput>>;
   NOT?: InputMaybe<Array<AccountWhereInput>>;
@@ -137,7 +114,7 @@ export type AccountWhereUniqueInput = {
 
 export type Addresses = {
   from: Scalars['String'];
-  genAddress: Scalars['String'];
+  general_address: Scalars['String'];
   to: Scalars['String'];
 };
 
@@ -472,7 +449,6 @@ export type Mutation = {
   logout: Scalars['Boolean'];
   registerOneAccount: Account;
   updateOneAccount?: Maybe<Account>;
-  updateOneReport?: Maybe<Report>;
 };
 
 
@@ -514,12 +490,6 @@ export type MutationRegisterOneAccountArgs = {
 export type MutationUpdateOneAccountArgs = {
   data: CustomAccountUpdateInput;
   where: AccountWhereUniqueInput;
-};
-
-
-export type MutationUpdateOneReportArgs = {
-  data: ReportUpdateInput;
-  where: ReportWhereUniqueInput;
 };
 
 export type NestedDateTimeFilter = {
@@ -592,7 +562,6 @@ export type PasswordFieldUpdateOperationsInput = {
 
 export type Query = {
   __typename?: 'Query';
-  accounts: Array<Account>;
   aggregateReport: AggregateReport;
   cityProject?: Maybe<CityProject>;
   cityProjects: Array<CityProject>;
@@ -601,16 +570,6 @@ export type Query = {
   incidents: Array<Incident>;
   report?: Maybe<Report>;
   reports: Array<Report>;
-};
-
-
-export type QueryAccountsArgs = {
-  cursor?: InputMaybe<AccountWhereUniqueInput>;
-  distinct?: InputMaybe<Array<AccountScalarFieldEnum>>;
-  orderBy?: InputMaybe<Array<AccountOrderByWithRelationInput>>;
-  skip?: InputMaybe<Scalars['Int']>;
-  take?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<AccountWhereInput>;
 };
 
 
@@ -824,18 +783,6 @@ export enum ReportType {
   RoadEvent = 'RoadEvent',
   RoadHazard = 'RoadHazard'
 }
-
-export type ReportUpdateInput = {
-  city_project?: InputMaybe<CityProjectUpdateOneWithoutReportNestedInput>;
-  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  description?: InputMaybe<StringFieldUpdateOperationsInput>;
-  incident?: InputMaybe<IncidentUpdateOneWithoutReportNestedInput>;
-  location?: InputMaybe<Location>;
-  report_id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  report_type?: InputMaybe<EnumReportTypeFieldUpdateOperationsInput>;
-  reporter?: InputMaybe<AccountUpdateOneWithoutReportsNestedInput>;
-  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-};
 
 export type ReportUpdateManyMutationInput = {
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -1189,7 +1136,9 @@ export const useGetAllReportsByTypeQuery = <
     );
 export const GetAllSearchResultDocument = `
     query getAllSearchResult($searchString: String) {
-  reports(where: {description: {contains: $searchString}}) {
+  reports(
+    where: {OR: [{location: {path: ["addresses", "general_address"], string_contains: $searchString}}, {description: {contains: $searchString}}]}
+  ) {
     report_id
     report_type
     description

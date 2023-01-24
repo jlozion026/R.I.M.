@@ -27,6 +27,7 @@ const Page1: FC<IPage1> = ({
   ClickCalendarEnd,
   HandleEndDate,
   HandleStartDate,
+  setGenAdd,
   Next,
   StartDate,
   CalendarStart,
@@ -48,6 +49,7 @@ const Page1: FC<IPage1> = ({
         <Search
           Name={"Location"}
           PlaceHolder={"Search Location"}
+          SetGenAdd={setGenAdd}
           Label={"Location"}
         />
       </div>

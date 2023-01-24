@@ -30,10 +30,12 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import "./style.css";
 
 const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
-  const { coordinates } = useContext(MainContext) as MainContextType;
+  const { coordinates, addresses } = useContext(MainContext) as MainContextType;
 
   //Form 2 conditional rendering and Progress Steps
   const [page, setPage] = useState(false);
+
+  const [genAdd, setGenAdd] = useState<string>("");
 
   //Calendar
   const [startDate, setStartDate] = useState("YYYY/MM/DD");
@@ -90,6 +92,11 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
     mutate({
       data: {
         location: {
+          addresses: {
+            general_address: genAdd,
+            to: addresses.addOrigin,
+            from: addresses.addDestination
+          },
           origin: coordinates.origin,
           destination: coordinates.destination,
         },
@@ -121,6 +128,11 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
     mutate({
       data: {
         location: {
+          addresses: {
+            general_address: genAdd,
+            to: addresses.addOrigin,
+            from: addresses.addDestination
+          },
           origin: coordinates.origin,
           destination: coordinates.destination,
         },
@@ -198,6 +210,7 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
 
       {!FormType ? (
         <DefaultForm
+          setGenAdd={setGenAdd}
           GetFormData={getDefaultFormData}
           HandleStartDate={handleStartDate}
           HandleEndDate={handleEndDate}
@@ -214,6 +227,7 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
         />
       ) : (
         <Form2
+          setGenAdd={setGenAdd}
           GetFormData={getForm2Data}
           HandleStartDate={handleStartDate}
           HandleEndDate={handleEndDate}

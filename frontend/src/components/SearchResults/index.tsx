@@ -6,6 +6,7 @@ import { getIcon } from '@/lib/getIcon'
 import { useNavigate } from "react-router-dom";
 
 import './styles.css';
+import { truncateString } from '@/lib/truncateString';
 
 const SearchResults: FC<ISearchResults> = ({ searchData }) => {
 
@@ -17,12 +18,6 @@ const SearchResults: FC<ISearchResults> = ({ searchData }) => {
         type: reportID
       }
     })
-  }
-  const truncateString = (word: string, maxLength: number): string => {
-    if (word.length > maxLength) {
-      return word.substring(0, maxLength) + "...";
-    }
-    return word
   }
 
   return (
