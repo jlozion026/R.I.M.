@@ -17,6 +17,7 @@ const Form2: FC<IForm2> = ({
   Submit,
   Next,
   CalendarStart,
+  setGenAdd,
   CalendarEnd,
   StartDate,
   EndDate,
@@ -27,6 +28,7 @@ const Form2: FC<IForm2> = ({
     <>
       {!page ? (
         <Page1
+          setGenAdd={setGenAdd}
           GetFormData={GetFormData}
           HandleStartDate={HandleStartDate}
           HandleEndDate={HandleEndDate}

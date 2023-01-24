@@ -231,7 +231,7 @@ const Logs: FC = () => {
 
             })
             :
-            <h1 className="logs-warning">No {state.type.replace(/([A-Z])/g, " $1").trim()} Reports Available</h1>
+            <h1 className="logs-warning">No {reportTypeQuery.replace(/([A-Z])/g, " $1").trim()} Reports Available</h1>
         }
         <div className="page-btns">
           {page !== 0 ?
