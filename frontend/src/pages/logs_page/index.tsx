@@ -1,6 +1,6 @@
-import { FC, ChangeEvent, useEffect, useState, useMemo } from "react";
+import { FC, ChangeEvent, useEffect, useState } from "react";
 
-import useDebounce from './hooks/useDebounce'
+import useDebounce from '@/lib/useDebounce';
 
 import {
   GetAllReportsByTypeQuery,
@@ -20,6 +20,8 @@ import NavBar from "@/components/Navbar";
 import BtnLogs from "./components/BtnLogs";
 import InputField from "@/components/InputField";
 
+import PageButtons from "./components/PageBtn";
+
 import { IoIosSearch } from "react-icons/io";
 import { BiArrowBack } from "react-icons/bi";
 import { GiNextButton } from 'react-icons/gi';
@@ -30,41 +32,40 @@ import Loader from "@/components/Loader";
 import { Link, useLocation } from "react-router-dom";
 
 import { getIcon } from '@/lib/getIcon'
+import { getToken } from "@/lib/auth";
 import { stringToEnum } from '@/lib/stringToEnum'
 
+import SearchResults from "@/components/SearchResults";
 
 import { INewReports, ArrReports } from './models'
 
 
 import useOnclickOutside from "react-cool-onclickoutside";
-import { addAddressAndPlusCode } from './utils'
+
+
 import './style.css';
 
-import { getToken } from "@/lib/auth";
-import SearchResults from "./components/SearchResults";
-import Button from "@/components/Button";
-import { btnType } from '@/components/Button/models';
-
-
 const Logs: FC = () => {
-  const [modReports, setModReports] = useState<INewReports>([]); //modified reports
+  const [modReports, setModReports] = useState<ArrReports>([]); //modified reports
 
   const [loadAddr, setLoadAddr] = useState(true);
   const [searchString, setSearchString] = useState<string>('');
   const [searchClick, setSearchClick] = useState<boolean>(false);
 
   const [page, setPage] = useState<number>(0);
+  const [orderPage, setOrderPage] = useState<number>(0);
 
   const debouncedVal = useDebounce(searchString, 200);
 
   const [reportTypeQuery, setReportTypeQuery] = useState<string>('');
+  const [typeOrder, setTypeOrder] = useState<string>('');
 
   const { state } = useLocation(); // stores the data passed by previous route
 
 
   graphqlRequestClient.setHeader('authorization', `bearer ${getToken()}`) // set authorization token
 
-  const { isLoading, isFetching } = useGetAllReportsByTypeQuery<GetAllReportsByTypeQuery, Error>(
+  const { data: reportData, isLoading, isFetching } = useGetAllReportsByTypeQuery<GetAllReportsByTypeQuery, Error>(
     graphqlRequestClient, {
     reportType: stringToEnum(reportTypeQuery, ReportType),
     take: 5,
@@ -74,6 +75,7 @@ const Logs: FC = () => {
     keepPreviousData: true,
     onSuccess: async (data: GetAllReportsByTypeQuery) => {
       const report_arr = data.reports;
+      setLoadAddr(false);
       setModReports(report_arr as INewReports);
     },
   });
@@ -87,48 +89,52 @@ const Logs: FC = () => {
   );
 
   // query reports by ascending order
-  const { data: ascData, isStale, refetch: fetch_report_asc } = useGetAllReportsByAscOrderQuery<
+  const { data: ascData  } = useGetAllReportsByAscOrderQuery<
     GetAllReportsByAscOrderQuery,
     Error>
     (
-      graphqlRequestClient, {},
+      graphqlRequestClient, {
+      take: 5,
+      skip: orderPage,
+    },
       {
-        staleTime: 1 * (60 * 1000), // 1 min refresh time
+        //staleTime: 1 * (60 * 1000), // 1 min refresh time
         refetchOnWindowFocus: false,
+        keepPreviousData: true,
+        onSuccess: async (data: GetAllReportsByTypeQuery) => {
+          const report_arr = data.reports;
+          setLoadAddr(false);
+          if (typeOrder === "Recent") {
+
+            const reversed = [...ascData?.reports!].reverse();
+            setModReports(reversed as ArrReports);
+
+          } else if (typeOrder === "Oldest") {
+            setModReports(report_arr as INewReports);
+          }
+
+        },
       });
-
-  //memomized ascending data
-  const transform_asc_data = useMemo(() => addAddressAndPlusCode(
-    ascData?.reports as ArrReports,
-    setLoadAddr
-  ), [ascData])
-
 
 
   // call back function for buttons
   const trigFetch = async (btnID: string) => {
     if (btnID === "Recent") {
-      if (!isStale) {
-        setModReports(transform_asc_data?.desc as ArrReports);
-      }
-      else {
-        fetch_report_asc();
-        setModReports(transform_asc_data?.desc as ArrReports);
-      }
+      setTypeOrder(btnID);
+      const reversed = [...ascData?.reports!].reverse();
+      setModReports(reversed as ArrReports);
     }
     else if (btnID === "Oldest") {
-      if (!isStale) {
-        setModReports(transform_asc_data?.asc as ArrReports);
-      }
-      else {
-        fetch_report_asc();
-        setModReports(transform_asc_data?.asc as ArrReports);
-      }
+      setTypeOrder(btnID);
+      setModReports(ascData?.reports as ArrReports);
     }
     else {
+      setTypeOrder("");
       setReportTypeQuery(btnID);
+      setModReports(reportData?.reports as ArrReports);
     }
     setPage(0);
+    setOrderPage(0);
   }
 
   // sets the reportTypeQuery when the component mounted
@@ -234,31 +240,18 @@ const Logs: FC = () => {
             <h1 className="logs-warning">No {reportTypeQuery.replace(/([A-Z])/g, " $1").trim()} Reports Available</h1>
         }
         <div className="page-btns">
-          {page !== 0 ?
-            <Button
-              type={btnType.Button}
-              onClick={() => setPage(page - 5)}
-            >
-              Previous
-            </Button>
-            : null
-          }
-          {
-            modReports.length > 0 ?
-
-              <Button
-                type={btnType.Button}
-                onClick={() => setPage(page + 5)}
-              >
-                Next
-              </Button>
-              : null
-          }
+          <PageButtons
+            orderPage={orderPage}
+            page={page}
+            setPage={setPage}
+            setOrderPage={setOrderPage}
+            typeOrder={typeOrder}
+            length={modReports.length}
+          />
 
         </div>
         {isFetching}
       </div>
     </div>)
-
 }
 export default Logs;

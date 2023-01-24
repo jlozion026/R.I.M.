@@ -1,0 +1,36 @@
+.search-results {
+  position: absolute;
+  list-style: none;
+  top: 100%;
+  width: 100%;
+  overflow: hidden;
+  z-index: 10;
+  background-color: white;
+  border: 2px solid #adafb3;
+  box-shadow: 0 0 20px rgb(0 0 0 / 20%);
+}
+
+.search-results:focus{
+  border: 2px solid #205eff;
+  outline: 0;
+}
+
+.search-results:hover{
+  border: 2px solid #205eff;
+}
+
+.search-item {
+  transition: background-color var(--speed);
+  height: 2.5em;
+  display: flex;
+  padding: 0.5em;
+}
+
+.search-item > img{
+  margin-right: 10px;
+}
+
+.search-item:hover {
+  background-color: #f0f0f9;
+}
+
