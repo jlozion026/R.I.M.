@@ -25,7 +25,7 @@ export async function createExpress() {
 
     app.use(cookieParser())
     app.post("/refresh_token", async (req, res) => {
-    const token = req.cookies.jid 
+    const token = req.cookies.auth_token
     if (!token) {
         return res.send({ ok: false, accessToken: "" }) 
     }

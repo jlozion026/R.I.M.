@@ -63,7 +63,7 @@ export class CustomReportUpdateInput {
   @Field(_type => CityProjectUpdateOneWithoutReportNestedInput, {
     nullable: true
   })
-  city_porject?: CityProjectUpdateOneWithoutReportNestedInput | undefined;
+  city_project?: CityProjectUpdateOneWithoutReportNestedInput | undefined;
 
   @ValidateNested()
   @Field(_type => IncidentUpdateOneWithoutReportNestedInput, {
