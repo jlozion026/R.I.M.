@@ -5,7 +5,7 @@ import { MainContextType } from "@/setup/context-manager/model";
 
 import Button from "@/components/Button";
 import InputField from "@/components/InputField";
-import Search from "@/pages/main/components/Search";
+import Search from "../../../Search/index";
 
 import { Calendar } from "react-date-range";
 

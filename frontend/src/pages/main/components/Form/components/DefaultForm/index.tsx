@@ -6,7 +6,7 @@ import { MainContextType } from "@/setup/context-manager/model";
 
 import InputField from "@/components/InputField";
 import Button from "@/components/Button";
-import Search from "@/pages/main/components/Search";
+import Search from "../Search/index";
 
 import { FaCalendarAlt } from "react-icons/fa";
 import { RiEraserFill } from "react-icons/ri";

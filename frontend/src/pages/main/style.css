@@ -134,3 +134,14 @@
     width: 100%;
   }
 }
+.main-search{
+  position: absolute;
+  background: white;
+  display: flex;
+  width: 25em;
+  height: 4em;
+  top: 3%;
+  left: 2%;
+  z-index: 10;
+}
+
