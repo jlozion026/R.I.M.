@@ -1,0 +1,18 @@
+query getAllSearchResult($searchString: String){
+  reports(where:{
+    OR:[
+    {
+      location:{
+      path: ["addresses", "general_address"]
+      string_contains: $searchString
+      }
+    },
+    {description:{contains: $searchString}}
+  ]
+}){
+    report_id
+    report_type
+    description
+    location
+  }
+}

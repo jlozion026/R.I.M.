@@ -35,10 +35,11 @@ import { getIcon } from '@/lib/getIcon'
 import { getToken } from "@/lib/auth";
 import { stringToEnum } from '@/lib/stringToEnum'
 
-import SearchResults from "@/components/SearchResults";
+import SearchResults from "./components/SearchResults";
 
 import { INewReports, ArrReports } from './models'
 
+import { useNavigate } from "react-router-dom";
 
 import useOnclickOutside from "react-cool-onclickoutside";
 
@@ -89,7 +90,7 @@ const Logs: FC = () => {
   );
 
   // query reports by ascending order
-  const { data: ascData  } = useGetAllReportsByAscOrderQuery<
+  const { data: ascData } = useGetAllReportsByAscOrderQuery<
     GetAllReportsByAscOrderQuery,
     Error>
     (
@@ -180,9 +181,11 @@ const Logs: FC = () => {
               <IoIosSearch className="searchIcon" />
             </span>
             {searchClick ?
-              <SearchResults searchData={searchResults?.reports} />
-              : null
-            }
+              <ul className="logs-search-results">
+                <SearchResults searchData={searchResults?.reports} />
+              </ul>
+                : null
+              }
           </div>
         </div>
 

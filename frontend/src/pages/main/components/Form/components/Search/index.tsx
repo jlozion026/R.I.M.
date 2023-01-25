@@ -3,12 +3,14 @@ import { ChangeEvent, FC, useContext } from "react";
 import { MainContext } from "@/setup/context-manager/mainContext";
 import { MainContextType } from "@/setup/context-manager/model";
 
-import SearchResults from "@/components/SearchResults";
 
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
+
+
+import SearchResults from "@/components/SearchResults";
 
 import useOnclickOutside from "react-cool-onclickoutside";
 
@@ -17,15 +19,13 @@ import { MdOutlinePinDrop } from "react-icons/md";
 import { ISearch } from "./models";
 
 import InputField from "@/components/InputField";
-import {GoSearch } from "react-icons/go";
-import { FiFilter } from "react-icons/fi";
 
 import "./style.css";
 import { GetAllSearchResultQuery, useGetAllSearchResultQuery } from "@/generated/graphql";
 import graphqlRequestClient from "@/lib/client/graphqlRequestClient";
 import { truncateString } from "@/lib/truncateString";
 
-const Search: FC<ISearch> = ({ Name, PlaceHolder, Label, SetGenAdd }) => {
+const Search: FC<ISearch> = ({ Name, PlaceHolder, Label, SetGenAdd  }) => {
   const {
     value,
     suggestions: { status, data },
@@ -48,7 +48,6 @@ const Search: FC<ISearch> = ({ Name, PlaceHolder, Label, SetGenAdd }) => {
     // When user clicks outside of the component, we can dismiss
     // the searched suggestions by calling this method
     clearSuggestions();
-    setValue("");
   });
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -89,11 +88,9 @@ const Search: FC<ISearch> = ({ Name, PlaceHolder, Label, SetGenAdd }) => {
           key={place_id}
           onClick={handleSelect(suggestion)}
         >
-          <p className="search-item-icon">
-            <MdOutlinePinDrop />
-          </p>
+          <MdOutlinePinDrop />
           <div className="search-word">
-            {truncateString(res, 35)}
+            {truncateString(res, 22)}
           </div>
         </li>
       );
@@ -101,35 +98,22 @@ const Search: FC<ISearch> = ({ Name, PlaceHolder, Label, SetGenAdd }) => {
   }
 
   return (
-    <div className="main-search-pos-cont">
-      <div className="main-search-cont" ref={ref}>
-        <InputField
-          type={"text"}
-          label={Label}
-          name={Name}
-          placeholder={PlaceHolder}
-          getData={handleInput}
-          value={value}
-        />
-
-        <span className="main-search-icon">
-          <p>
-            <GoSearch size={30} />
-          </p>
-        </span>
-        <span className="main-filter-icon">
-          <p>
-            <FiFilter size={30} />
-          </p>
-        </span>
-        {/* We can use the "status" to decide whether we should display the dropdown or not */}
-        {status === "OK" ? (
-          <ul className="main-search-results">
-            <SearchResults searchData={searchResults?.reports} cbOnClick={SetGenAdd} setVal={setValue} />
+    <div className="search-cont" ref={ref}>
+      <InputField
+        type={"text"}
+        label={Label}
+        name={Name}
+        placeholder={PlaceHolder}
+        getData={handleInput}
+        value={value}
+      />
+      {/* We can use the "status" to decide whether we should display the dropdown or not */}
+      {status === "OK" ? (
+          <ul className="search-results">
+            <SearchResults searchData={searchResults?.reports} cbOnClick={SetGenAdd} setVal={setValue}/>
             {renderSuggestions()}
           </ul>
-        ) : null}
-      </div>
+      ) : null}
     </div>
   );
 };

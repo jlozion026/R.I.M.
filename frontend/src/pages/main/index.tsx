@@ -16,6 +16,7 @@ import {
   panToQC,
 } from "./utils";
 
+
 import { GetAllReportsQuery, useGetAllReportsQuery } from "@/generated/graphql";
 import graphqlRequestClient from "@/lib/client/graphqlRequestClient";
 
@@ -32,9 +33,11 @@ import { MainContextType } from "@/setup/context-manager/model";
 
 import { libraries, defaultCenter, options } from "@/utils";
 
+
 import Zoom from "./components/Zoom";
 
 import MarkersClusterer from "./components/MarkersClusterer";
+import Search from "./components/Search";
 import Loader from "@/components/Loader";
 
 import { getToken } from "@/lib/auth";
@@ -55,6 +58,8 @@ const Main: FC = () => {
     setTrigger(!trigger);
     resetMarkers();
   };
+
+  const [searchString, setSearchString] = useState<string>("");
 
   const {
     coordinates,
@@ -273,6 +278,14 @@ const Main: FC = () => {
             </InfoWindow>
           ) : null}
         </GoogleMap>
+
+        <Search
+          Label={""}
+          Name={"search"}
+          PlaceHolder={"Search Location"}
+          SetGenAdd={setSearchString}
+        />
+
         <div className="nav-container">
           <Navbar cardSize="nav--bar" PingPopOut={hello} />
         </div>
