@@ -3,8 +3,6 @@ import { FC, useContext, useState } from "react";
 import PopUp from "./components/PopUp";
 import CreateAccount from "./components/CreateAccount";
 
-import useOnclickOutside from "react-cool-onclickoutside";
-
 import { IDropDown } from "./models";
 
 import { BiLogOut } from "react-icons/bi";

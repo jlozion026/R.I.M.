@@ -1,0 +1,9 @@
+mutation updateOneReport($report_id: String, $data: ReportUpdateInput!){
+  updateOneReport(
+    where:{report_id: $report_id}
+    data: $data
+  ){
+    report_id
+  }
+}
+
