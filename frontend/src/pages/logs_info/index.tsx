@@ -96,39 +96,39 @@ const LogInfo: FC = () => {
           <Loader />
         ) : (
           <>
-            <div className="info-title">
-              <h1>Project Title</h1>
-            </div>
-            <div className="info-title">
-              <p>Project Details</p>
-            </div>
 
             {report?.report?.report_type != ReportType.CityProject ? (
               <>
+                <div className="info-title">
+                  <h1>{report?.report?.report_type.replace(/([A-Z])/g, " $1").trim()}</h1>
+                </div>
+                <div className="info-title">
+                  <p>Project Details</p>
+                </div>
                 <div className="default-li">
                   <p className="sm-titles">DATES</p>
                   <div className="li-d">
-                    Started:
-                    <span>
+                    <h5>Started:</h5>
+                    <div>
                       {report?.report?.incident?.date_started.split("T")[0]}
-                    </span>
+                    </div>
                   </div>
 
                   <div className="li-d">
-                    Ended:
-                    <span>
+                    <h5>Ended:</h5>
+                    <div>
                       {report?.report?.incident?.date_ended.split("T")[0]}
-                    </span>
+                    </div>
                   </div>
 
                   <p className="sm-titles">LOCATION</p>
                   <div className="li-d">
-                    Origin:
-                    <span>{report?.report?.location.addresses.from}</span>
+                    <h5>Origin:</h5>
+                    <div>{report?.report?.location.addresses.from}</div>
                   </div>
                   <div className="li-d">
-                    Destination:
-                    <span>{report?.report?.location.addresses.to}</span>
+                    <h5>Destination:</h5>
+                    <div>{report?.report?.location.addresses.to}</div>
                   </div>
                   <p className="sm-titles">DESCRIPTION</p>
                   <div className="li-d">{report?.report?.description}</div>
@@ -136,29 +136,35 @@ const LogInfo: FC = () => {
               </>
             ) : (
               <>
+                <div className="info-title">
+                  <h1>{report.report?.city_project?.project_name}</h1>
+                </div>
+                <div className="info-title">
+                  <p>Project Details</p>
+                </div>
                 <div className="default-li">
                   <p className="sm-titles">DATES</p>
                   <div className="li-d">
-                    Started:
-                    <span>
+                    <h5>Started:</h5>
+                    <div>
                       {report?.report?.city_project?.date_started.split("T")[0]}
-                    </span>
+                    </div>
                   </div>
                   <div className="li-d">
-                    Ended:
-                    <span>
+                    <h5>Ended:</h5>
+                    <div>
                       {report?.report?.city_project?.date_ended.split("T")[0]}
-                    </span>
+                    </div>
                   </div>
 
                   <p className="sm-titles">LOCATION</p>
                   <div className="li-d">
-                    Origin:
-                    <span>{report?.report?.location.addresses.from}</span>
+                    <h5>Origin:</h5>
+                    <div>{report?.report?.location.addresses.from}</div>
                   </div>
                   <div className="li-d">
-                    Destination:
-                    <span>{report?.report?.location.addresses.to}</span>
+                    <h5>Destination:</h5>
+                    <div>{report?.report?.location.addresses.to}</div>
                   </div>
 
                   <p className="sm-titles">CONTRACTOR</p>
