@@ -11,13 +11,15 @@
   z-index: 2;
 }
 
+
 .btn-popup {
   position: absolute;
   top: 3%;
-  right: 10%;
+  right: 3%;
   cursor: pointer;
   z-index: 10;
   color: #d1d3d6;
+  font-size: 2vw;
 }
 .btn-popup:hover {
   color: #d1d3d6;

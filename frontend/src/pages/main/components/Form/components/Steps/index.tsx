@@ -11,12 +11,14 @@ const Steps: FC<StepsInt> = ({ page }) => {
           <div
             className={`circle selected ${page ? "completed " : "uncomplete"}`}
           >
-            1
+            <p className="progress-number">1</p>
           </div>
           <div className="circle-text">Basic Details</div>
         </div>
         <div className="step">
-          <div className={`circle ${page ? "circle selected" : ""}`}>2</div>
+          <div className={`circle ${page ? "circle selected" : ""}`}>
+          <p className="progress-number">2</p>
+          </div>
           <div className="circle-text">Project Details</div>
         </div>
       </div>

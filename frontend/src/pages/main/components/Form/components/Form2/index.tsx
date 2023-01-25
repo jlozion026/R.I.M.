@@ -27,7 +27,8 @@ const Form2: FC<IForm2> = ({
   return (
     <>
       {!page ? (
-        <Page1
+        <div className="form-wrapper">
+            <Page1
           setGenAdd={setGenAdd}
           GetFormData={GetFormData}
           HandleStartDate={HandleStartDate}
@@ -41,6 +42,8 @@ const Form2: FC<IForm2> = ({
           Next={Next}
           ClickCalendar={ClickCalendar}
         />
+        </div>
+      
       ) : (
         <Page2 GetFormData={GetFormData} Submit={Submit} />
       )}

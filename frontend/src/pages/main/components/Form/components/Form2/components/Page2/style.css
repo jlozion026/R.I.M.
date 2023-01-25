@@ -1,43 +1,49 @@
 .fi-container {
   display: flex;
   flex-direction: column;
-  width: 75%;
-  padding: 0.4em;
-  justify-content: space-between;
-  gap: 0.3em;
+  width: 100%;
+  padding-bottom: 1vw;
+  gap: 0.3vw;
   font-family: sans-serif;
   font-weight: 500;
-  font-size: 13px;
+  font-size: 1vw;
+  align-items: center;
 }
 
 .fi-container label {
+  display: flex;
+  align-self: start;
   font-family: sans-serif;
   font-weight: 600;
-  font-size: 1em;
-  margin-bottom: 0.3em;
+  font-size: 1vw;
+  margin-left: 4.6vw;
+  margin-bottom: 0.3vw;
 }
 
 .programAmount-container {
   display: flex;
   flex-direction: column;
-  width: 75%;
-  padding: 0.4em;
+  width: 100%;
+  padding-bottom: 0.9vw;
+  align-items: center;
   justify-content: space-between;
 }
 
 .contractorAmount-container {
-  margin-bottom: 6em;
+  display: flex;
+  align-items: center;
+  justify-content: start;
 }
 
 .btn-container-submit {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  padding: 0px;
-  gap: 10px;
-  width: 70%;
-  margin-bottom: 5%;
+  align-items: center;
+  width: 27vw;
+  margin-top: 2vh;
+  height: 7vh;
 }
+
 
 @media all and (max-width: 600px) {
   .fi-container {

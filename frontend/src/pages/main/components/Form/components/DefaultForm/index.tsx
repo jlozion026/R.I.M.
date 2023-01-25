@@ -46,7 +46,8 @@ const DefaultForm: FC<IDefaultForm> = ({
   });
   return (
     <>
-      <div className="location-container">
+        <div className="form-wrapper">
+        <div className="location-container">
         <Search
           Name={"location"}
           PlaceHolder={"Search Location"}
@@ -95,7 +96,7 @@ const DefaultForm: FC<IDefaultForm> = ({
           </div>
         </div>
         <p className="eraser-icon">
-          <RiEraserFill size={25} color={"#205EFF"} onClick={resetMarkers} />
+          <RiEraserFill onClick={resetMarkers} />
         </p>
       </div>
 
@@ -122,9 +123,9 @@ const DefaultForm: FC<IDefaultForm> = ({
             </div>
           ) : null}
         </div>
-        <p className="calendar-icon">
-          <FaCalendarAlt size={20} color={"#205EFF"} />
-        </p>
+        <div className="calendar-icon">
+        <span className="calendar-svg"><FaCalendarAlt/></span>
+        </div>
       </div>
 
       <div className="date-container">
@@ -150,22 +151,24 @@ const DefaultForm: FC<IDefaultForm> = ({
           ) : null}
         </div>
 
-        <p className="calendar-icon">
-          <FaCalendarAlt size={20} color={"#205EFF"} />
-        </p>
+        <div className="calendar-icon">
+        <span className="calendar-svg"><FaCalendarAlt/></span>
+        </div>
       </div>
 
-      <div className="description">
-        <p>
-          <label htmlFor="description">Description</label>
-        </p>
-        <textarea
-          id="description"
-          name="description"
-          onChange={GetFormData}
-          rows={7}
-          cols={51}
-        />
+      <div className="description-wrapper">
+        <div className="description">
+            <p>
+              <label htmlFor="description">Description</label>
+            </p>
+            <textarea
+              id="description"
+              name="description"
+              onChange={GetFormData}
+              rows={7}
+              cols={51}
+            />
+          </div>
       </div>
 
       <div className="default-btn-container">
@@ -178,6 +181,8 @@ const DefaultForm: FC<IDefaultForm> = ({
           Submit
         </Button>
       </div>
+      </div>
+     
     </>
   );
 };
