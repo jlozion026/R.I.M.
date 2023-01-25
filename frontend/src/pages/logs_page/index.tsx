@@ -39,6 +39,7 @@ import SearchResults from "./components/SearchResults";
 
 import { INewReports, ArrReports } from './models'
 
+
 import { useNavigate } from "react-router-dom";
 
 import useOnclickOutside from "react-cool-onclickoutside";
@@ -188,6 +189,7 @@ const Logs: FC = () => {
               }
           </div>
         </div>
+
 
         <div className="mobilesearchwrapper">
           <div className="mobiletopwrapper">

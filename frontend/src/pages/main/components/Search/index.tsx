@@ -114,12 +114,12 @@ const Search: FC<ISearch> = ({ Name, PlaceHolder, Label, SetGenAdd }) => {
 
         <span className="main-search-icon">
           <p>
-            <GoSearch size={30} />
+            <GoSearch size={25} />
           </p>
         </span>
         <span className="main-filter-icon">
           <p>
-            <FiFilter size={30} />
+            <FiFilter size={25} />
           </p>
         </span>
         {/* We can use the "status" to decide whether we should display the dropdown or not */}

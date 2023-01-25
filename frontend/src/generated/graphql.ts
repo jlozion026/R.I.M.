@@ -95,6 +95,29 @@ export enum AccountScalarFieldEnum {
   Password = 'password'
 }
 
+export type AccountUpdateOneWithoutReportsNestedInput = {
+  connect?: InputMaybe<AccountWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<AccountCreateOrConnectWithoutReportsInput>;
+  create?: InputMaybe<AccountCreateWithoutReportsInput>;
+  delete?: InputMaybe<Scalars['Boolean']>;
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  update?: InputMaybe<AccountUpdateWithoutReportsInput>;
+  upsert?: InputMaybe<AccountUpsertWithoutReportsInput>;
+};
+
+export type AccountUpdateWithoutReportsInput = {
+  acc_id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  acc_type?: InputMaybe<EnumAccTypeFieldUpdateOperationsInput>;
+  designation?: InputMaybe<StringFieldUpdateOperationsInput>;
+  email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  password?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type AccountUpsertWithoutReportsInput = {
+  create: AccountCreateWithoutReportsInput;
+  update: AccountUpdateWithoutReportsInput;
+};
+
 export type AccountWhereInput = {
   AND?: InputMaybe<Array<AccountWhereInput>>;
   NOT?: InputMaybe<Array<AccountWhereInput>>;
@@ -449,6 +472,7 @@ export type Mutation = {
   logout: Scalars['Boolean'];
   registerOneAccount: Account;
   updateOneAccount?: Maybe<Account>;
+  updateOneReport?: Maybe<Report>;
 };
 
 
@@ -490,6 +514,12 @@ export type MutationRegisterOneAccountArgs = {
 export type MutationUpdateOneAccountArgs = {
   data: CustomAccountUpdateInput;
   where: AccountWhereUniqueInput;
+};
+
+
+export type MutationUpdateOneReportArgs = {
+  data: ReportUpdateInput;
+  where: ReportWhereUniqueInput;
 };
 
 export type NestedDateTimeFilter = {
@@ -784,6 +814,18 @@ export enum ReportType {
   RoadHazard = 'RoadHazard'
 }
 
+export type ReportUpdateInput = {
+  city_project?: InputMaybe<CityProjectUpdateOneWithoutReportNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<StringFieldUpdateOperationsInput>;
+  incident?: InputMaybe<IncidentUpdateOneWithoutReportNestedInput>;
+  location?: InputMaybe<Location>;
+  report_id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  report_type?: InputMaybe<EnumReportTypeFieldUpdateOperationsInput>;
+  reporter?: InputMaybe<AccountUpdateOneWithoutReportsNestedInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
 export type ReportUpdateManyMutationInput = {
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -919,6 +961,21 @@ export type GetCountOfIncidentQueryVariables = Exact<{
 
 export type GetCountOfIncidentQuery = { __typename?: 'Query', aggregateReport: { __typename?: 'AggregateReport', _count?: { __typename?: 'ReportCountAggregate', report_type: number } | null } };
 
+export type DeleteOneReportMutationVariables = Exact<{
+  report_id?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type DeleteOneReportMutation = { __typename?: 'Mutation', deleteOneReport?: { __typename?: 'Report', report_id: string } | null };
+
+export type UpdateOneReportMutationVariables = Exact<{
+  report_id?: InputMaybe<Scalars['String']>;
+  data: ReportUpdateInput;
+}>;
+
+
+export type UpdateOneReportMutation = { __typename?: 'Mutation', updateOneReport?: { __typename?: 'Report', report_id: string } | null };
+
 export type GetOneReportQueryVariables = Exact<{
   reportId?: InputMaybe<Scalars['String']>;
 }>;
@@ -953,7 +1010,7 @@ export type CreateOneReportMutationVariables = Exact<{
 }>;
 
 
-export type CreateOneReportMutation = { __typename?: 'Mutation', createOneReport: { __typename?: 'Report', report_id: string, location: any, description: string } };
+export type CreateOneReportMutation = { __typename?: 'Mutation', createOneReport: { __typename?: 'Report', report_id: string, location: any, description: string, incident?: { __typename?: 'Incident', date_started: any, date_ended: any } | null } };
 
 export type GetAllReportsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1055,6 +1112,46 @@ export const useGetCountOfIncidentQuery = <
     useQuery<GetCountOfIncidentQuery, TError, TData>(
       variables === undefined ? ['GetCountOfIncident'] : ['GetCountOfIncident', variables],
       fetcher<GetCountOfIncidentQuery, GetCountOfIncidentQueryVariables>(client, GetCountOfIncidentDocument, variables, headers),
+      options
+    );
+export const DeleteOneReportDocument = `
+    mutation deleteOneReport($report_id: String) {
+  deleteOneReport(where: {report_id: $report_id}) {
+    report_id
+  }
+}
+    `;
+export const useDeleteOneReportMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      client: GraphQLClient,
+      options?: UseMutationOptions<DeleteOneReportMutation, TError, DeleteOneReportMutationVariables, TContext>,
+      headers?: RequestInit['headers']
+    ) =>
+    useMutation<DeleteOneReportMutation, TError, DeleteOneReportMutationVariables, TContext>(
+      ['deleteOneReport'],
+      (variables?: DeleteOneReportMutationVariables) => fetcher<DeleteOneReportMutation, DeleteOneReportMutationVariables>(client, DeleteOneReportDocument, variables, headers)(),
+      options
+    );
+export const UpdateOneReportDocument = `
+    mutation updateOneReport($report_id: String, $data: ReportUpdateInput!) {
+  updateOneReport(where: {report_id: $report_id}, data: $data) {
+    report_id
+  }
+}
+    `;
+export const useUpdateOneReportMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      client: GraphQLClient,
+      options?: UseMutationOptions<UpdateOneReportMutation, TError, UpdateOneReportMutationVariables, TContext>,
+      headers?: RequestInit['headers']
+    ) =>
+    useMutation<UpdateOneReportMutation, TError, UpdateOneReportMutationVariables, TContext>(
+      ['updateOneReport'],
+      (variables?: UpdateOneReportMutationVariables) => fetcher<UpdateOneReportMutation, UpdateOneReportMutationVariables>(client, UpdateOneReportDocument, variables, headers)(),
       options
     );
 export const GetOneReportDocument = `
@@ -1169,6 +1266,10 @@ export const CreateOneReportDocument = `
     report_id
     location
     description
+    incident {
+      date_started
+      date_ended
+    }
   }
 }
     `;

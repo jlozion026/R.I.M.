@@ -24,10 +24,13 @@ import { FaArrowLeft } from "react-icons/fa";
 
 import "./style.css";
 
+import {IoMdSettings} from 'react-icons/io';
+
 import { getToken } from "@/lib/auth";
 import { getPinIcon } from "@/lib/getIcon";
 import { fetchDirections } from "./utils";
 import Loader from "@/components/Loader";
+import DropDown from "./components/dropdown";
 
 const LogInfo: FC = () => {
   const { isLoaded, loadError } = useLoadScript({
@@ -49,12 +52,16 @@ const LogInfo: FC = () => {
 
   const [directions, setDirections] = useState<DirectionsResult>();
 
+  const [trigOption, setTrigOption ] = useState<boolean>(false);
+
   const markerOptions: MarkerOptions = {
     icon: {
       url: getPinIcon(report?.report?.report_type) as string,
       // scaledSize: new google.maps.Size(40, 40),
     },
   };
+
+
 
   const drawDirection = useMemo(() => {
     if (!isLoading) {
@@ -224,6 +231,11 @@ const LogInfo: FC = () => {
           ) : null}
         </GoogleMap>
         <>{drawDirection}</>
+      </div>
+
+      <div className="option-cont" >
+        <IoMdSettings className="option-icon"  onClick={(() => setTrigOption(!trigOption)) }/>
+        {trigOption? <DropDown report={report} setMenuTrig={() => setTrigOption(!trigOption) }/> : null}
       </div>
     </div>
   );

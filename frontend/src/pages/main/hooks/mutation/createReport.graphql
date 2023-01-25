@@ -3,5 +3,9 @@ mutation createOneReport($data: CustomReportCreateInput!){
     report_id
     location
     description
+    incident{
+        date_started
+        date_ended
+      }
   }
 }

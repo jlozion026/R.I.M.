@@ -169,12 +169,12 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
   };
 
   const handleStartDate = (date: Date) => {
-    setStartDate(format(date, "yyyy/MM/dd"));
+    setStartDate(format(date, "yyyy-MM-dd"));
     clickCalendar();
   };
 
   const handleEndDate = (date: Date) => {
-    setEndDate(format(date, "yyyy/MM/dd"));
+    setEndDate(format(date, "yyyy-MM-dd"));
     clickCalendar();
   };
 
