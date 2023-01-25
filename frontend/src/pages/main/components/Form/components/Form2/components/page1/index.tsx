@@ -45,7 +45,7 @@ const Page1: FC<IPage1> = ({
   });
   return (
     <>
-      <div className="location-container">
+    <div className="location-container">
         <Search
           Name={"Location"}
           PlaceHolder={"Search Location"}
@@ -54,6 +54,7 @@ const Page1: FC<IPage1> = ({
         />
       </div>
 
+      <div className="addresses-wrapper">
       <div className="addresses-container">
         <div className="address-flex-column">
           <div className="org-des-column">
@@ -94,8 +95,10 @@ const Page1: FC<IPage1> = ({
           </div>
         </div>
         <p className="eraser-icon">
-          <RiEraserFill size={25} color={"#205EFF"} onClick={resetMarkers} />
+          <RiEraserFill onClick={resetMarkers} />
         </p>
+      </div>
+  
       </div>
 
       <div className="date-container">
@@ -122,9 +125,9 @@ const Page1: FC<IPage1> = ({
             </div>
           ) : null}
         </div>
-        <p className="calendar-icon">
-          <FaCalendarAlt size={20} color={"#205EFF"} />
-        </p>
+        <div className="calendar-icon">
+        <span className="calendar-svg"><FaCalendarAlt /></span>
+        </div>
       </div>
 
       <div className="date-container">
@@ -150,24 +153,30 @@ const Page1: FC<IPage1> = ({
           ) : null}
         </div>
 
-        <p className="calendar-icon">
-          <FaCalendarAlt size={20} color={"#205EFF"} />
-        </p>
+        <div className="calendar-icon">
+        <span className="calendar-svg"><FaCalendarAlt/></span>
+        </div>
       </div>
 
-      <div className="description">
-        <p>
-          <label htmlFor="description">Description</label>
-        </p>
-        <textarea
-          id="description"
-          name="description"
-          onChange={GetFormData}
-          rows={7}
-          cols={51}
-        />
+      
+      <div className="description-wrapper">
+        <div className="description">
+            <p>
+              <label htmlFor="description">Description</label>
+            </p>
+            <textarea
+              id="description"
+              name="description"
+              onChange={GetFormData}
+              rows={7}
+              cols={51}
+            />
+          </div>
       </div>
 
+
+   
+      
       <div className="btn-container-next">
         <Button
           type={btnType.Submit}

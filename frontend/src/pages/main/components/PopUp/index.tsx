@@ -9,7 +9,7 @@ const PopUp: FC<PupUpProps> = ({ Trigger, popOut, children }) => {
   return Trigger ? (
     <div className="popup-container">
       <p className="btn-popup">
-        <FaTimes size={30} onClick={popOut} />
+        <FaTimes onClick={popOut} />
       </p>
       {children}
     </div>

@@ -1,37 +1,28 @@
-.location-container {
-  display: flex;
-  flex-direction: column;
-  width: 75%;
-  padding: 10px;
-  justify-content: space-between;
-  gap: 5px;
-}
 
 .location-container label {
   font-family: sans-serif;
   font-weight: 600;
-  font-size: 0.8em;
+  font-size: 1vw;
   margin-bottom: 0.3em;
-}
+  display: flex;
+  align-self: flex-start;
 
+}
 .autocomplete-wrapper {
   display: flex;
   flex-direction: column;
 }
 
 .date-container {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 0.5fr;
   width: 100%;
-  justify-content: center;
-  align-items: center;
-  margin-left: 1.2em;
 }
 
 .date-container label {
   font-family: sans-serif;
   font-weight: 600;
-  font-size: 0.8em;
+  font-size: 1vw;
   margin-bottom: 0.3em;
 }
 
@@ -40,7 +31,7 @@
   display: flex;
   flex-direction: column;
   width: 75%;
-  padding: 0.5rem;
+  padding: 0;
   justify-content: space-between;
   gap: 5px;
 }
@@ -48,32 +39,36 @@
 .date-wrapper {
   display: flex;
   flex-direction: column;
-}
-
-.calendar-icon {
-  display: flex;
-  flex-direction: row;
-  margin-top: 1.2rem;
-  justify-content: center;
-  align-items: center;
+  margin-top: 0.8vw;
+  width: 100%;
 }
 
 .description {
   display: flex;
   flex-direction: column;
-  width: 75%;
-  padding: 10px;
-  justify-content: space-between;
+  justify-content: center;
   gap: 5px;
   font-family: sans-serif;
   font-weight: 500;
-  font-size: 13px;
+  font-size: 1.2vw;
+  margin-top: 1vw;
+}
+.form-wrapper{
+padding-left: 5vw;
+display: flex;
+flex-direction: column;
+width: 100%;
+
+}
+.description-wrapper{
+  display: flex;
+  width: 100%;
 }
 
 .description label {
   font-family: sans-serif;
   font-weight: 600;
-  font-size: 1em;
+  font-size: 1vw;
   margin-bottom: 0.3em;
 }
 
@@ -89,10 +84,10 @@
 .btn-container-next {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  padding: 0px;
-  gap: 10px;
-  width: 70%;
+  align-items: center;
+  width: 27vw;
+  margin-top: 2vh;
+  height: 7vh;
 }
 
 @media all and (max-width: 600px) {
@@ -110,14 +105,6 @@
     flex-direction: column;
   }
 
-  .date-container {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    margin-left: 1.2em;
-  }
 
   .date-group {
     position: relative;
@@ -132,14 +119,6 @@
   .date-wrapper {
     display: flex;
     flex-direction: column;
-  }
-
-  .calendar-icon {
-    display: flex;
-    flex-direction: row;
-    margin-top: 1.2em;
-    justify-content: center;
-    align-items: center;
   }
 
   .description {

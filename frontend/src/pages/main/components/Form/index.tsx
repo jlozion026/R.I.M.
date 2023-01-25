@@ -207,8 +207,8 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
           <Steps page={page} />
         </div>
       ) : null}
-
-      {!FormType ? (
+      
+          {!FormType ? (
         <DefaultForm
           setGenAdd={setGenAdd}
           GetFormData={getDefaultFormData}
@@ -245,6 +245,7 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
           Submit={SubmitForm2Data}
         />
       )}
+    
     </form>
   );
 };
