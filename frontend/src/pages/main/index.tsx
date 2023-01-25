@@ -39,7 +39,7 @@ import Loader from "@/components/Loader";
 
 import { getToken } from "@/lib/auth";
 
-import {  getPinIcon } from "@/lib/getIcon";
+import { getPinIcon } from "@/lib/getIcon";
 
 import "./style.css";
 
@@ -257,22 +257,18 @@ const Main: FC = () => {
                 <div className="iw-description">
                   <p>{selectedMarker.description}</p>
                 </div>
-                <p className="address-title">
+                <div className="address-title">
                   <span className="txt-cw"> Address:</span>
-                </p>
-                <p className="info-details">{selectedMarker?.addr}</p>
-                <p className="ds-container">
-                  <span className="txt-cw"> Date Started: </span>
-                  <p className="info-details">
-                    {selectedMarker.date_started.split("T")[0]}
-                  </p>
-                </p>
-                <p className="de-container">
-                  <span className="txt-cw">Date Ended: </span>
-                  <p className="info-details">
-                    {selectedMarker.date_ended.split("T")[0]}
-                  </p>
-                </p>
+                </div>
+                <div className="info-details">{selectedMarker?.addr}</div>
+                <div className="ds-container">
+                  <p className="txt-cw"> Date Started: </p>
+                  {selectedMarker.date_started.split("T")[0]}
+                </div>
+                <div className="de-container">
+                  <p className="txt-cw">Date Ended: </p>
+                  {selectedMarker.date_ended.split("T")[0]}
+                </div>
               </div>
             </InfoWindow>
           ) : null}

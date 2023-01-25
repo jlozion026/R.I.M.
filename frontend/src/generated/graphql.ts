@@ -905,6 +905,13 @@ export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
 export type LogoutMutation = { __typename?: 'Mutation', logout: boolean };
 
+export type GetAllSearchResultQueryVariables = Exact<{
+  searchString?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetAllSearchResultQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', report_id: string, report_type: ReportType, description: string, location: any }> };
+
 export type GetCountOfIncidentQueryVariables = Exact<{
   reportType?: InputMaybe<ReportType>;
 }>;
@@ -919,7 +926,10 @@ export type GetOneReportQueryVariables = Exact<{
 
 export type GetOneReportQuery = { __typename?: 'Query', report?: { __typename?: 'Report', report_id: string, report_type: ReportType, location: any, description: string, incident?: { __typename?: 'Incident', date_started: any, date_ended: any } | null, city_project?: { __typename?: 'CityProject', project_name: string, contractor_name: string, date_started: any, date_ended: any, source_fund: string, project_ammount: number, contract_ammount: number } | null } | null };
 
-export type GetAllReportsByAscOrderQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetAllReportsByAscOrderQueryVariables = Exact<{
+  take?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}>;
 
 
 export type GetAllReportsByAscOrderQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', report_id: string, report_type: ReportType, location: any }> };
@@ -937,13 +947,6 @@ export type GetAllReportsByTypeQueryVariables = Exact<{
 
 
 export type GetAllReportsByTypeQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', report_id: string, location: any, report_type: ReportType }> };
-
-export type GetAllSearchResultQueryVariables = Exact<{
-  searchString?: InputMaybe<Scalars['String']>;
-}>;
-
-
-export type GetAllSearchResultQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', report_id: string, report_type: ReportType, description: string, location: any }> };
 
 export type CreateOneReportMutationVariables = Exact<{
   data: CustomReportCreateInput;
@@ -1003,6 +1006,32 @@ export const useLogoutMutation = <
     useMutation<LogoutMutation, TError, LogoutMutationVariables, TContext>(
       ['logout'],
       (variables?: LogoutMutationVariables) => fetcher<LogoutMutation, LogoutMutationVariables>(client, LogoutDocument, variables, headers)(),
+      options
+    );
+export const GetAllSearchResultDocument = `
+    query getAllSearchResult($searchString: String) {
+  reports(
+    where: {OR: [{location: {path: ["addresses", "general_address"], string_contains: $searchString}}, {description: {contains: $searchString}}]}
+  ) {
+    report_id
+    report_type
+    description
+    location
+  }
+}
+    `;
+export const useGetAllSearchResultQuery = <
+      TData = GetAllSearchResultQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: GetAllSearchResultQueryVariables,
+      options?: UseQueryOptions<GetAllSearchResultQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetAllSearchResultQuery, TError, TData>(
+      variables === undefined ? ['getAllSearchResult'] : ['getAllSearchResult', variables],
+      fetcher<GetAllSearchResultQuery, GetAllSearchResultQueryVariables>(client, GetAllSearchResultDocument, variables, headers),
       options
     );
 export const GetCountOfIncidentDocument = `
@@ -1066,8 +1095,8 @@ export const useGetOneReportQuery = <
       options
     );
 export const GetAllReportsByAscOrderDocument = `
-    query getAllReportsByAscOrder {
-  reports(orderBy: {createdAt: asc}) {
+    query getAllReportsByAscOrder($take: Int, $skip: Int) {
+  reports(orderBy: {createdAt: asc}, take: $take, skip: $skip) {
     report_id
     report_type
     location
@@ -1132,32 +1161,6 @@ export const useGetAllReportsByTypeQuery = <
     useQuery<GetAllReportsByTypeQuery, TError, TData>(
       variables === undefined ? ['GetAllReportsByType'] : ['GetAllReportsByType', variables],
       fetcher<GetAllReportsByTypeQuery, GetAllReportsByTypeQueryVariables>(client, GetAllReportsByTypeDocument, variables, headers),
-      options
-    );
-export const GetAllSearchResultDocument = `
-    query getAllSearchResult($searchString: String) {
-  reports(
-    where: {OR: [{location: {path: ["addresses", "general_address"], string_contains: $searchString}}, {description: {contains: $searchString}}]}
-  ) {
-    report_id
-    report_type
-    description
-    location
-  }
-}
-    `;
-export const useGetAllSearchResultQuery = <
-      TData = GetAllSearchResultQuery,
-      TError = unknown
-    >(
-      client: GraphQLClient,
-      variables?: GetAllSearchResultQueryVariables,
-      options?: UseQueryOptions<GetAllSearchResultQuery, TError, TData>,
-      headers?: RequestInit['headers']
-    ) =>
-    useQuery<GetAllSearchResultQuery, TError, TData>(
-      variables === undefined ? ['getAllSearchResult'] : ['getAllSearchResult', variables],
-      fetcher<GetAllSearchResultQuery, GetAllSearchResultQueryVariables>(client, GetAllSearchResultDocument, variables, headers),
       options
     );
 export const CreateOneReportDocument = `

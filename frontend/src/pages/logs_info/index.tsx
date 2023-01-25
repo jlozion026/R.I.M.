@@ -87,83 +87,116 @@ const LogInfo: FC = () => {
   return (
     <div className="logsInfo">
       <div className="info-cont">
-        <p className="bck-cont" onClick={() => navigate(-1)}>
-          <FaArrowLeft size={20} />
-        </p>
+        <div className="bck-cont">
+          <span className="fa-arrow-left" onClick={() => navigate(-1)}>
+            <FaArrowLeft />
+          </span>
+        </div>
         {!isLoaded && isLoading ? (
           <Loader />
         ) : (
           <>
-            <div className="info-title">
-              <h1>Project Title</h1>
-            </div>
-            <div className="info-title">
-              <h3>Project Details</h3>
-            </div>
 
             {report?.report?.report_type != ReportType.CityProject ? (
               <>
-                <div className="info-dates">
-                  <div className="date-title">DATES</div>
-                  <div className="li-dates">
-                    {report?.report?.incident?.date_started}
-                  </div>
-                  <div className="li-dates">
-                    {report?.report?.incident?.date_ended}
-                  </div>
-
-                  <div className="date-title">LOCATION</div>
-                  <div className="li-dates">
-                    origin: {report?.report?.location.addresses.from}
-                  </div>
-                  <div className="li-dates">
-                    destination: {report?.report?.location.addresses.to}
-                  </div>
+                <div className="info-title">
+                  <h1>{report?.report?.report_type.replace(/([A-Z])/g, " $1").trim()}</h1>
                 </div>
+                <div className="info-title">
+                  <p>Project Details</p>
+                </div>
+                <div className="default-li">
+                  <p className="sm-titles">DATES</p>
+                  <div className="li-d">
+                    <h5>Started:</h5>
+                    <div>
+                      {report?.report?.incident?.date_started.split("T")[0]}
+                    </div>
+                  </div>
 
-                <div className="info-dates">
-                  <div className="date-title">Description</div>
-                  <div className="li-dates">{report?.report?.description}</div>
+                  <div className="li-d">
+                    <h5>Ended:</h5>
+                    <div>
+                      {report?.report?.incident?.date_ended.split("T")[0]}
+                    </div>
+                  </div>
+
+                  <p className="sm-titles">LOCATION</p>
+                  <div className="li-d">
+                    <h5>Origin:</h5>
+                    <div>{report?.report?.location.addresses.from}</div>
+                  </div>
+                  <div className="li-d">
+                    <h5>Destination:</h5>
+                    <div>{report?.report?.location.addresses.to}</div>
+                  </div>
+                  <p className="sm-titles">DESCRIPTION</p>
+                  <div className="li-d">{report?.report?.description}</div>
                 </div>
               </>
             ) : (
               <>
-                <div className="info-dates">
-                  <div className="date-title">DATES</div>
-                  <div className="li-dates">
-                    {report?.report?.city_project?.date_started}
-                  </div>
-                  <div className="li-dates">
-                    {report?.report?.city_project?.date_ended}
-                  </div>
+                <div className="info-title">
+                  <h1>{report.report?.city_project?.project_name}</h1>
                 </div>
+                <div className="info-title">
+                  <p>Project Details</p>
+                </div>
+                <div className="default-li">
+                  <p className="sm-titles">DATES</p>
+                  <div className="li-d">
+                    <h5>Started:</h5>
+                    <div>
+                      {report?.report?.city_project?.date_started.split("T")[0]}
+                    </div>
+                  </div>
+                  <div className="li-d">
+                    <h5>Ended:</h5>
+                    <div>
+                      {report?.report?.city_project?.date_ended.split("T")[0]}
+                    </div>
+                  </div>
 
-                <div className="city-project-info">
-                  <div>LOCATION</div>
-                  <div className="li-dates">
-                    origin: {report?.report?.location.addresses.from}
+                  <p className="sm-titles">LOCATION</p>
+                  <div className="li-d">
+                    <h5>Origin:</h5>
+                    <div>{report?.report?.location.addresses.from}</div>
                   </div>
-                  <div className="li-dates">
-                    destination: {report?.report?.location.addresses.to}
+                  <div className="li-d">
+                    <h5>Destination:</h5>
+                    <div>{report?.report?.location.addresses.to}</div>
                   </div>
-                  <div>CONTRACTOR</div>
-                  <div className="li-dates">
-                    {report.report?.city_project?.contractor_name}
+
+                  <p className="sm-titles">CONTRACTOR</p>
+                  <div className="li-d">
+                    <span> {report.report?.city_project?.contractor_name}</span>
                   </div>
-                  <div>SOURCE FUND</div>
-                  <div className="li-dates">
-                    {report.report?.city_project?.source_fund}
+
+                  <p className="sm-titles">SOURCE FUND</p>
+                  <div className="li-d">
+                    <span>{report.report?.city_project?.source_fund}</span>
                   </div>
-                  <div>PROGRAM AMOUNT</div>
-                  <div className="li-dates">
-                    {report.report?.city_project?.project_ammount}
+
+                  <p className="sm-titles">PROGRAM AMOUNT</p>
+                  <div className="li-d">
+                    <span>
+                      <span className="peso-sign">&#8369;</span>
+                      {report.report?.city_project?.project_ammount}
+                    </span>
                   </div>
-                  <div>CONTRACTOR AMOUNT</div>
-                  <div className="li-dates">
-                    {report.report?.city_project?.contract_ammount}
+
+                  <p className="sm-titles">CONTRACTOR AMOUNT</p>
+                  <div className="li-d">
+                    <span>
+                      <span className="peso-sign">&#8369;</span>
+                      {report.report?.city_project?.contract_ammount}
+                    </span>
                   </div>
-                  <div className="date-title">Description</div>
-                  <div className="li-dates">{report?.report?.description}</div>
+
+                  <p className="sm-titles">DESCRIPTION</p>
+                  <div className="li-d">
+                    <span>{report?.report?.description}</span>
+                  </div>
                 </div>
               </>
             )}

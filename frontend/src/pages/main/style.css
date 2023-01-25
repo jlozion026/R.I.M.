@@ -112,17 +112,25 @@
   font-weight: 50;
   width: 100%;
   padding: 10px 5px 5px 0px;
+  color: #6f6f6f;
 }
 
 .de-container {
   font-weight: 50;
   width: 100%;
   padding: 2px 5px 5px 0px;
+  color: #6f6f6f;
 }
 
 .nav-container {
   z-index: 1;
 }
-.info-details{
+.info-details {
   color: #6f6f6f;
+}
+
+@media all and (max-width: 480px) {
+  .info-window-container {
+    width: 100%;
+  }
 }

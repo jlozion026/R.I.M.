@@ -18,48 +18,63 @@
 
 .bck-cont {
   width: 100%;
-  margin-bottom: 30px;
-  padding: 0px 20px 0px 0px;
+  padding: 0px 0px 20px 0px;
+}
+
+.fa-arrow-left {
+  font-size: 1.9vw;
   color: #9b959e;
   cursor: pointer;
 }
 
+.fa-arrow-left:hover {
+  color: rgb(210, 206, 206);
+}
+
 .info-title {
-  font-size: 1em;
+  font-size: 0.8vw;
   width: 100%;
   margin-bottom: 30px;
   border-bottom: 1px solid #7f7f82;
 }
 
-.info-title > h3 {
+.info-title > p {
+  font-size: 1.5vw;
   color: #464647;
 }
 
-.info-dates {
+.default-li {
   width: 100%;
   color: #464647;
+  text-align: justify;
+  overflow: hidden;
+  overflow-y: scroll;
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
-.info-dates .date-title {
-  font-size: 0.9em;
+.default-li::-webkit-scrollbar {
+  display: none;
+}
+
+.default-li .sm-titles {
+  padding: 10px 10px 10px 0px;
+  font-size: 1.1vw;
   list-style-type: none;
+  font-weight: bold;
 }
 
-.li-dates {
-  margin-top: 5px;
-  margin-left: 30px;
-  font-size: 0.8em;
-}
-
-.city-project-info {
+.li-d {
   display: flex;
   flex-direction: column;
-  margin-top: 25px;
-  width: 100%;
-  list-style-type: none;
-  font-size: 0.9em;
-  gap: 25px;
-  color: #464647;
+  font-size: 1vw;
+  padding: 5px 5px 5px 0px;
+}
+
+.peso-sign {
+  font-weight: 600;
+  font-size: 1.1vw;
 }
 
 .map-cont {
