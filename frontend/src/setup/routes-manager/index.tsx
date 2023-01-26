@@ -13,6 +13,8 @@ import { AuthContextType } from "../context-manager/model";
 
 import MainContextProvider from "../context-manager/mainContext";
 
+import LogsInfoContextProvider from "../context-manager/logsInfoContext";
+
 import Logs from "@/pages/logs_page";
 import LogInfo from "@/pages/logs_info";
 
@@ -54,7 +56,14 @@ export const Views: FC = () => {
         />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/logs" element={<Logs />} />
-        <Route path="/info" element={<LogInfo />} />
+        <Route
+          path="/info"
+          element={
+            <LogsInfoContextProvider>
+              <LogInfo />
+            </LogsInfoContextProvider>
+          }
+        />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
