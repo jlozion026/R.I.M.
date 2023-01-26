@@ -3,7 +3,7 @@ import { ChangeEvent, FC, useContext } from "react";
 import { MainContext } from "@/setup/context-manager/mainContext";
 import { MainContextType } from "@/setup/context-manager/model";
 
-import SearchResults from "@/components/SearchResults";
+import SearchResults from "./components/SearchResults";
 
 import usePlacesAutocomplete, {
   getGeocode,
@@ -125,7 +125,7 @@ const Search: FC<ISearch> = ({ Name, PlaceHolder, Label, SetGenAdd }) => {
         {/* We can use the "status" to decide whether we should display the dropdown or not */}
         {status === "OK" ? (
           <ul className="main-search-results">
-            <SearchResults searchData={searchResults?.reports} cbOnClick={SetGenAdd} setVal={setValue} />
+            <SearchResults searchData={searchResults?.reports} OnClick={SetGenAdd} setVal={setValue} />
             {renderSuggestions()}
           </ul>
         ) : null}

@@ -4,4 +4,6 @@ export type TSearchResults = Array<{ __typename?: 'Report', report_id: string, r
 
 export interface ISearchResults {
   searchData: TSearchResults|undefined;
+  setVal(arg0:string): void;
+  cbOnClick(arg0: string): void;
 }

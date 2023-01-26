@@ -9,7 +9,7 @@ import { getIcon } from '@/lib/getIcon'
 import './styles.css';
 import { truncateString } from '@/lib/truncateString';
 
-const SearchResults: FC<ISearchResults> = ({ searchData }) => {
+const SearchResults: FC<ISearchResults> = ({ searchData, setVal,  cbOnClick }) => {
 
   const { mapRef } = useContext(MainContext) as MainContextType;
 
@@ -21,10 +21,12 @@ const SearchResults: FC<ISearchResults> = ({ searchData }) => {
             () => {
               mapRef.current?.panTo(report.location.origin)
               mapRef.current?.setZoom(18);
+              setVal(report.location.addresses.general_address);
+              cbOnClick(report.location.addresses.general_address);
             }
           } >
-            <img src={getIcon(report.report_type)} alt="icon" />
-            {truncateString(report.location.addresses.general_address, 22)}
+            <img  className='search-item-icon' src={getIcon(report.report_type)} alt="icon" />
+            {truncateString(report.location.addresses.general_address, 30)}
           </li>
         );
 
