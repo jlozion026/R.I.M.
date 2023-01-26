@@ -23,8 +23,8 @@ export interface IUpdateForm2Data extends IDefaultUpdateData {
   projectName: string;
   contractor: string;
   sourceFund: string;
-  programAmount: string;
-  contractAmount: string;
+  programAmount: number;
+  contractAmount: number;
 }
 
 export interface IGetUpdatedData {
@@ -40,4 +40,6 @@ export interface Ipage2 extends ISubmitUpdatedForm, IGetUpdatedData {}
 
 export interface IUpdate{
   reportType: ReportType|undefined;
+  reportID: string|undefined;
+  setTrigger(): void;
 }

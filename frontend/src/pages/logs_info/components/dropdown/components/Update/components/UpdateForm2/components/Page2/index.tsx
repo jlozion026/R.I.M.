@@ -41,7 +41,7 @@ const Page2: FC<Ipage2> = ({ SubmitUpdatedForm, GetUpdatedData }) => {
 
       <div className="ui-field">
         <InputField
-          type={"text"}
+          type={"number"}
           name={"programAmount"}
           placeholder={"Program Ammount"}
           getData={GetUpdatedData}
@@ -50,7 +50,7 @@ const Page2: FC<Ipage2> = ({ SubmitUpdatedForm, GetUpdatedData }) => {
 
       <div className="ui-field">
         <InputField
-          type={"text"}
+          type={"number"}
           name={"contractAmount"}
           placeholder={"Contract Amount"}
           getData={GetUpdatedData}
