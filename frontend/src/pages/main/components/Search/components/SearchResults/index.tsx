@@ -25,7 +25,7 @@ const SearchResults: FC<ISearchResults> = ({ searchData, setVal,  cbOnClick }) =
               cbOnClick(report.location.addresses.general_address);
             }
           } >
-            <img  className='search-item-icon' src={getIcon(report.report_type)} alt="icon" />
+            <img  className='item-img' src={getIcon(report.report_type)} alt="icon" />
             {truncateString(report.location.addresses.general_address, 30)}
           </li>
         );

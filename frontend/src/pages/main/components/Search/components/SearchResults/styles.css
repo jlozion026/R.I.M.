@@ -7,4 +7,8 @@
   border: 2px solid #205eff;
 }
 
-
+.item-img{
+  font-size: 2vw;
+  margin-right: -0.8vw;
+  padding-right: 0.8vw;
+}

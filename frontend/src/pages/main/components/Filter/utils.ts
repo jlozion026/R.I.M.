@@ -1,4 +1,4 @@
-import roadclosure from "@/Assets/svg/roadclosure.svg";
+import RoadClosure from "@/Assets/svg/Roadclosure.svg";
 import Construction from "@/Assets/svg/Constructions.svg";
 import Hazzard from "@/Assets/svg/Hazzard.svg";
 import Accident from "@/Assets/svg/Accident.svg";
@@ -10,7 +10,7 @@ export const BtnFilterprops = [
 
     {
         type: "button",
-        svg: roadclosure,
+        svg: RoadClosure,
         reporttype:ReportType.RoadClosure
     },
     {

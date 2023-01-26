@@ -71,3 +71,46 @@
     width: 85%;
     height: 85%;
 }
+@media all and (max-width: 960px) {
+    .filter-container{
+        top: 23vw;
+        left: 2.5vw;
+        width: 95vw;
+        height: 25vh;
+        border-radius: 3vw;
+    }
+    .locate{
+        font-size:4vw ;
+    }
+    .btn-filter-img{
+        width: 13vw;
+        height: 8vh;
+   
+    }
+    .btn-filter {
+        padding-left: 2vw;
+        padding-right: 2vw;
+    }
+    .filter-calendar {
+        display: flex;
+        padding-left: 2vw;
+        width: 65vw;
+        height: 6vh;
+        border: solid 0.7vw;
+        border-radius: 2vw;
+        font-size: 3.5vw;
+    }
+    .calendar-svg{
+        font-size: 6vw;
+        padding-left: 1vw;
+        
+    }
+    .icon-container {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        border-radius: 1vw;
+    }
+}
+
+
