@@ -1,4 +1,4 @@
-import RoadClosure from "@/Assets/svg/Roadclosure.svg";
+import RoadClosure from "@/Assets/svg/RoadClosure.svg";
 import Construction from "@/Assets/svg/Constructions.svg";
 import Hazzard from "@/Assets/svg/Hazzard.svg";
 import Accident from "@/Assets/svg/Accident.svg";

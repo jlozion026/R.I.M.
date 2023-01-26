@@ -17,15 +17,22 @@ import {
 } from "./utils";
 
 
-import { GetAllReportsQuery, useGetAllReportsQuery } from "@/generated/graphql";
+import {
+  GetAllReportsQuery,
+  useGetAllReportsQuery,
+  GetAllReportsByTypeQuery,
+  useGetAllReportsByTypeQuery,
+  GetAllReportsWithDateQuery,
+  useGetAllReportsWithDateQuery,
+  ReportType,
+} from "@/generated/graphql";
+
 import graphqlRequestClient from "@/lib/client/graphqlRequestClient";
 
 import ReportsBtn from "./components/ReportsBtn";
 import Navbar from "@/components/Navbar";
 
-import { LatLngLiteral, MarkerData } from "./models";
-
-import pinRoadClosure from "@/Assets/svg/pinRoadClosure.svg";
+import { LatLngLiteral, MarkerData, IModArr } from "./models";
 
 import { MainContext } from "@/setup/context-manager/mainContext";
 
@@ -54,6 +61,7 @@ const Main: FC = () => {
   });
 
   const [trigger, setTrigger] = useState<boolean>(false);
+  const [modArr, setModArr] = useState<IModArr>();
 
   const formPopUp = () => {
     setTrigger(!trigger);
@@ -127,6 +135,14 @@ const Main: FC = () => {
     }
   };
 
+  const [trigFilter, setTrigFilter] = useState<boolean>(false);
+  const [filterType, setFilterType] = useState<ReportType | undefined>();
+  const [filterDate, setFilterDate] = useState<string>("2023-01-27T00:00:00.000Z");
+
+  const resetFilter = () => {
+    setFilterType(undefined);
+  }
+
   const [selectedMarker, setSelectedMarker] = useState<MarkerData | null>(null);
 
   // Zoom Control Button
@@ -146,6 +162,7 @@ const Main: FC = () => {
 
   graphqlRequestClient.setHeader("authorization", `bearer ${getToken()}`); //sets the authorization header
   // send queries for all reports to the gql endpoint
+
   const { isLoading, data } = useGetAllReportsQuery<GetAllReportsQuery, Error>(
     graphqlRequestClient,
     {},
@@ -153,6 +170,53 @@ const Main: FC = () => {
       refetchIntervalInBackground: true,
     }
   );
+
+  const {
+    isLoading: isLoadingByType,
+    data: dataByType,
+    refetch: refetchReportsByType
+  } = useGetAllReportsByTypeQuery<GetAllReportsByTypeQuery, Error>(
+    graphqlRequestClient,
+    {
+      reportType: filterType
+    },
+    {
+      enabled: false,
+      onSuccess: async (data: GetAllReportsByTypeQuery) => {
+        setModArr(data);
+      },
+      refetchIntervalInBackground: true,
+    }
+  );
+
+  const {
+    isLoading: isLoadingDate,
+    data: dataWithDate,
+    refetch: refetchReportsWithDate
+  } = useGetAllReportsWithDateQuery<GetAllReportsWithDateQuery, Error>(
+    graphqlRequestClient,
+    {
+      reportType: filterType,
+      date: filterDate
+    },
+    {
+      enabled: false,
+      onSuccess: async (data: GetAllReportsByTypeQuery) => {
+        console.log(data)
+        setModArr(data);
+      },
+      refetchIntervalInBackground: true,
+    }
+  );
+
+  useEffect(() => {
+    if(filterDate){
+      refetchReportsWithDate()
+    }
+    else{
+      refetchReportsByType()
+    }
+  },[filterType]);
 
   const hello = () => setPingPopUp(!pingPopUp);
 
@@ -240,7 +304,7 @@ const Main: FC = () => {
 
           {isLoaded && !isLoading ? (
             <MarkersClusterer
-              ReportsData={data}
+              ReportsData={modArr}
               SelectMarker={setSelectedMarker}
             />
           ) : null}
@@ -285,10 +349,19 @@ const Main: FC = () => {
           Name={"search"}
           PlaceHolder={"Search Location"}
           SetGenAdd={setSearchString}
+          setTrigFilter={() => setTrigFilter(!trigFilter)}
+          resetFilter={resetFilter}
         />
-        <Filter/>
 
-      
+        {trigFilter
+          ?
+          <Filter
+            setFilterType={setFilterType}
+          />
+          :
+          null
+
+        }
 
         <div className="nav-container">
           <Navbar cardSize="nav--bar" PingPopOut={hello} />

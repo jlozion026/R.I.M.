@@ -17,7 +17,7 @@ import { MdOutlinePinDrop } from "react-icons/md";
 import { ISearch } from "./models";
 
 import InputField from "@/components/InputField";
-import {GoSearch } from "react-icons/go";
+import { GoSearch } from "react-icons/go";
 import { FiFilter } from "react-icons/fi";
 
 import "./style.css";
@@ -25,7 +25,13 @@ import { GetAllSearchResultQuery, useGetAllSearchResultQuery } from "@/generated
 import graphqlRequestClient from "@/lib/client/graphqlRequestClient";
 import { truncateString } from "@/lib/truncateString";
 
-const Search: FC<ISearch> = ({ Name, PlaceHolder, Label, SetGenAdd }) => {
+const Search: FC<ISearch> = ({ Name,
+  PlaceHolder,
+  Label,
+  SetGenAdd,
+  setTrigFilter,
+  resetFilter
+}) => {
   const {
     value,
     suggestions: { status, data },
@@ -112,20 +118,28 @@ const Search: FC<ISearch> = ({ Name, PlaceHolder, Label, SetGenAdd }) => {
           value={value}
         />
 
-        <span className="main-search-icon">
+        <span className="main-search-icon" onClick={() => {
+          setTrigFilter()
+          resetFilter()
+          clearSuggestions()
+        }}>
           <p>
             <GoSearch />
           </p>
         </span>
-        <span className="main-filter-icon">
+        <span className="main-filter-icon" onClick={() => {
+          setTrigFilter()
+          resetFilter()
+          clearSuggestions()
+        }}>
           <p>
-            <FiFilter/>
+            <FiFilter />
           </p>
         </span>
         {/* We can use the "status" to decide whether we should display the dropdown or not */}
         {status === "OK" ? (
           <ul className="main-search-results">
-            <SearchResults searchData={searchResults?.reports} OnClick={SetGenAdd} setVal={setValue} />
+            <SearchResults searchData={searchResults?.reports} cbOnClick={SetGenAdd} setVal={setValue} />
             {renderSuggestions()}
           </ul>
         ) : null}

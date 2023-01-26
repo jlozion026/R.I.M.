@@ -8,4 +8,6 @@ export interface ISearch {
   Label: string;
   PlaceHolder: string;
   SetGenAdd(arg0: string): void
+  setTrigFilter(): void;
+  resetFilter(): void;
 }
