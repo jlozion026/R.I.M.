@@ -85,7 +85,7 @@ const Search: FC<ISearch> = ({ Name, PlaceHolder, Label, SetGenAdd }) => {
 
       return (
         <li
-          className="search-item"
+          className="main-search-item"
           key={place_id}
           onClick={handleSelect(suggestion)}
         >
@@ -114,12 +114,12 @@ const Search: FC<ISearch> = ({ Name, PlaceHolder, Label, SetGenAdd }) => {
 
         <span className="main-search-icon">
           <p>
-            <GoSearch size={25} />
+            <GoSearch />
           </p>
         </span>
         <span className="main-filter-icon">
           <p>
-            <FiFilter size={25} />
+            <FiFilter/>
           </p>
         </span>
         {/* We can use the "status" to decide whether we should display the dropdown or not */}

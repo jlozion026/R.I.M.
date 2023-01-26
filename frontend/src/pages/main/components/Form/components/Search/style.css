@@ -19,16 +19,7 @@
   box-shadow: 0 0 20px rgb(0 0 0 / 20%);
 }
 
-.search-item {
-  transition: background-color var(--speed);
-  height: 2.5em;
-  display: flex;
-  padding: 0.5em;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.search-item:hover {
+.main-search-item:hover {
   background-color: #f0f0f9;
 }
 

@@ -84,7 +84,7 @@ const Search: FC<ISearch> = ({ Name, PlaceHolder, Label, SetGenAdd  }) => {
 
       return (
         <li
-          className="search-item"
+          className="main-search-item"
           key={place_id}
           onClick={handleSelect(suggestion)}
         >

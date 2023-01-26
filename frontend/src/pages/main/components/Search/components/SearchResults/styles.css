@@ -7,18 +7,4 @@
   border: 2px solid #205eff;
 }
 
-.search-item {
-  transition: background-color var(--speed);
-  height: 2.5em;
-  display: flex;
-  padding: 0.5em;
-}
-
-.search-item > img{
-  margin-right: 10px;
-}
-
-.search-item:hover {
-  background-color: #f0f0f9;
-}
 

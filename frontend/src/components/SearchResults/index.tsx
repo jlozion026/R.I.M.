@@ -18,7 +18,7 @@ const SearchResults: FC<ISearchResults> = ({ searchData, cbOnClick, setVal }) =>
     <>
       {searchData ? searchData?.slice(0, 6).map((report, key) => {
         return (
-          <li className="search-item" key={key} onClick={
+          <li className="main-search-item" key={key} onClick={
             () => {
               mapRef.current?.panTo(report.location.origin);
               mapRef.current?.setZoom(18);
