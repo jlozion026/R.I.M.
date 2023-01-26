@@ -39,6 +39,7 @@ import Zoom from "./components/Zoom";
 import MarkersClusterer from "./components/MarkersClusterer";
 import Search from "./components/Search";
 import Loader from "@/components/Loader";
+import Filter from "./components/Filter";
 
 import { getToken } from "@/lib/auth";
 
@@ -285,6 +286,9 @@ const Main: FC = () => {
           PlaceHolder={"Search Location"}
           SetGenAdd={setSearchString}
         />
+        <Filter/>
+
+      
 
         <div className="nav-container">
           <Navbar cardSize="nav--bar" PingPopOut={hello} />
