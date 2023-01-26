@@ -5,7 +5,7 @@ import {
   UpdateOneReportMutation,
   useDeleteOneReportMutation,
   DeleteOneReportMutation,
-  ReportType
+  ReportType,
 } from "@/generated/graphql";
 
 import graphqlRequestClient from "@/lib/client/graphqlRequestClient";
@@ -14,35 +14,40 @@ import PopUp from "./components/PopUp";
 
 import { IDropDown } from "./models";
 
-import { AiTwotoneDelete } from 'react-icons/ai';
-import { RiEdit2Fill } from 'react-icons/ri';
-
+import { AiTwotoneDelete } from "react-icons/ai";
+import { RiEdit2Fill } from "react-icons/ri";
 
 import "./style.css";
+import Update from "./components/Update";
 
 const DropDown: FC<IDropDown> = ({ report, setMenuTrig }) => {
-
   const [trigger, setTrigger] = useState<boolean>(false);
 
-  const { mutate: updateMutate } = useUpdateOneReportMutation<Error>(graphqlRequestClient, {
-    onSuccess: (data: UpdateOneReportMutation) => {
-      console.log(data);
-    },
+  const { mutate: updateMutate } = useUpdateOneReportMutation<Error>(
+    graphqlRequestClient,
+    {
+      onSuccess: (data: UpdateOneReportMutation) => {
+        console.log(data);
+      },
 
-    onError: (error: Error) => {
-      console.log(error);
-    },
-  });
+      onError: (error: Error) => {
+        console.log(error);
+      },
+    }
+  );
 
-  const { mutate: deleteMutate } = useDeleteOneReportMutation<Error>(graphqlRequestClient, {
-    onSuccess: (data: DeleteOneReportMutation) => {
-      console.log(data);
-    },
+  const { mutate: deleteMutate } = useDeleteOneReportMutation<Error>(
+    graphqlRequestClient,
+    {
+      onSuccess: (data: DeleteOneReportMutation) => {
+        console.log(data);
+      },
 
-    onError: (error: Error) => {
-      console.log(error);
-    },
-  });
+      onError: (error: Error) => {
+        console.log(error);
+      },
+    }
+  );
 
   const popCreateAccount = () => {
     setTrigger(!trigger);
@@ -50,7 +55,6 @@ const DropDown: FC<IDropDown> = ({ report, setMenuTrig }) => {
   };
 
   const submitUpdateCPForm = () => {
-
     updateMutate({
       report_id: report?.report?.report_id,
       data: {
@@ -63,17 +67,14 @@ const DropDown: FC<IDropDown> = ({ report, setMenuTrig }) => {
             date_ended: { set: "2023-04-01" },
             source_fund: { set: "Melo" },
             project_ammount: { set: 1000000000 },
-            contract_ammount: { set: 1200000000 }
-          }
-        }
-      }
-
-    })
-
-  }
+            contract_ammount: { set: 1200000000 },
+          },
+        },
+      },
+    });
+  };
 
   const submitUpdateIncidentForm = () => {
-
     updateMutate({
       report_id: report?.report?.report_id,
       data: {
@@ -82,31 +83,29 @@ const DropDown: FC<IDropDown> = ({ report, setMenuTrig }) => {
           update: {
             date_started: { set: "2023-04-01" },
             date_ended: { set: "2023-04-01" },
-          }
-        }
-      }
-    })
-  }
-
+          },
+        },
+      },
+    });
+  };
 
   const submitUpdateForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (report?.report?.report_type !== ReportType.CityProject) {
       submitUpdateIncidentForm();
-    }
-    else {
+    } else {
       submitUpdateCPForm();
     }
-  }
+  };
 
-  const submitDeleteForm = (e: React.FormEvent<HTMLFormElement>) =>{
+  const submitDeleteForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     deleteMutate({
-        report_id: report?.report?.report_id
-      })
-  }
+      report_id: report?.report?.report_id,
+    });
+  };
 
   return (
     <>
@@ -126,10 +125,11 @@ const DropDown: FC<IDropDown> = ({ report, setMenuTrig }) => {
           </li>
         </ul>
       </div>
-
-      <PopUp Trigger={trigger} PopOut={popCreateAccount}>
-        <div className="ggaa">hello</div>
-      </PopUp>
+      <>
+        <PopUp Trigger={trigger} PopOut={popCreateAccount}>
+          <Update reportType={report?.report?.report_type}/>
+        </PopUp>
+      </>
     </>
   );
 };
