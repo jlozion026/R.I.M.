@@ -16,7 +16,6 @@ import {
   panToQC,
 } from "./utils";
 
-
 import {
   GetAllReportsQuery,
   useGetAllReportsQuery,
@@ -39,7 +38,6 @@ import { MainContext } from "@/setup/context-manager/mainContext";
 import { MainContextType } from "@/setup/context-manager/model";
 
 import { libraries, defaultCenter, options } from "@/utils";
-
 
 import Zoom from "./components/Zoom";
 
@@ -137,11 +135,11 @@ const Main: FC = () => {
 
   const [trigFilter, setTrigFilter] = useState<boolean>(false);
   const [filterType, setFilterType] = useState<ReportType | undefined>();
-  const [filterDate, setFilterDate] = useState<string>("2023-01-27T00:00:00.000Z");
+  const [filterDate, setFilterDate] = useState<string>("");
 
   const resetFilter = () => {
     setFilterType(undefined);
-  }
+  };
 
   const [selectedMarker, setSelectedMarker] = useState<MarkerData | null>(null);
 
@@ -174,11 +172,11 @@ const Main: FC = () => {
   const {
     isLoading: isLoadingByType,
     data: dataByType,
-    refetch: refetchReportsByType
+    refetch: refetchReportsByType,
   } = useGetAllReportsByTypeQuery<GetAllReportsByTypeQuery, Error>(
     graphqlRequestClient,
     {
-      reportType: filterType
+      reportType: filterType,
     },
     {
       enabled: false,
@@ -192,17 +190,17 @@ const Main: FC = () => {
   const {
     isLoading: isLoadingDate,
     data: dataWithDate,
-    refetch: refetchReportsWithDate
+    refetch: refetchReportsWithDate,
   } = useGetAllReportsWithDateQuery<GetAllReportsWithDateQuery, Error>(
     graphqlRequestClient,
     {
       reportType: filterType,
-      date: filterDate
+      date: filterDate,
     },
     {
       enabled: false,
       onSuccess: async (data: GetAllReportsByTypeQuery) => {
-        console.log(data)
+        console.log(data);
         setModArr(data);
       },
       refetchIntervalInBackground: true,
@@ -210,13 +208,12 @@ const Main: FC = () => {
   );
 
   useEffect(() => {
-    if(filterDate){
-      refetchReportsWithDate()
+    if (filterDate) {
+      refetchReportsWithDate();
+    } else {
+      refetchReportsByType();
     }
-    else{
-      refetchReportsByType()
-    }
-  },[filterType]);
+  }, [filterType]);
 
   const hello = () => setPingPopUp(!pingPopUp);
 
@@ -353,15 +350,13 @@ const Main: FC = () => {
           resetFilter={resetFilter}
         />
 
-        {trigFilter
-          ?
+        {trigFilter ? (
           <Filter
+            filterDate={filterDate}
+            setFilterDate={setFilterDate}
             setFilterType={setFilterType}
           />
-          :
-          null
-
-        }
+        ) : null}
 
         <div className="nav-container">
           <Navbar cardSize="nav--bar" PingPopOut={hello} />
