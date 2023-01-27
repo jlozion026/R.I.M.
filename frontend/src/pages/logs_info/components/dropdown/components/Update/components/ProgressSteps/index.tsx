@@ -9,12 +9,14 @@ const ProgressSteps: FC<IProgressSteps> = ({ page }) => {
       <div className="progress-update">
         <div className="stp">
           <div className={`crcle slected ${page ? "cmpleted " : "uncmplete"}`}>
-            1
+            <p className="progress-numb">1</p>
           </div>
           <div className="crcle-text">Basic Details</div>
         </div>
         <div className="stp">
-          <div className={`crcle ${page ? "crcle slected" : ""}`}>2</div>
+          <div className={`crcle ${page ? "crcle slected" : ""}`}>
+            <p className="progress-numb">2</p>
+          </div>
           <div className="crcle-text">Project Details</div>
         </div>
       </div>

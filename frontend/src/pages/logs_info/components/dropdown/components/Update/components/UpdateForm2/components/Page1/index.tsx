@@ -18,8 +18,6 @@ import useOnclickOutside from "react-cool-onclickoutside";
 
 const Page1: FC<IPage1> = ({ GetUpdatedData }) => {
   const {
-    startDate,
-    endDate,
     calendarStart,
     calendarEnd,
     setCalendarStart,
@@ -28,6 +26,7 @@ const Page1: FC<IPage1> = ({ GetUpdatedData }) => {
     handleStartDate,
     handleEndDate,
     next,
+    updateForm2Data,
   } = useContext(LogsInfoContext) as LogsInfoContextType;
 
   const ref = useOnclickOutside(() => {
@@ -38,7 +37,7 @@ const Page1: FC<IPage1> = ({ GetUpdatedData }) => {
       <div className="ui-field">
         <InputField
           label={"Date Started"}
-          value={startDate}
+          value={updateForm2Data.startDate.split("T")[0]}
           type={"text"}
           name={"StartDate"}
           placeholder={"YYYY/MM/DD"}
@@ -66,7 +65,7 @@ const Page1: FC<IPage1> = ({ GetUpdatedData }) => {
         <InputField
           label={"Date Ended"}
           type={"text"}
-          value={endDate}
+          value={updateForm2Data.endDate.split("T")[0]}
           name={"EndDate"}
           placeholder={"YYYY/MM/DD"}
           forinput={"calendar"}
@@ -91,20 +90,21 @@ const Page1: FC<IPage1> = ({ GetUpdatedData }) => {
         ) : null}
       </div>
 
-      <div className="update-description">
+      <div className="update-description f-gap">
         <p>
           <label htmlFor="up-description">Description</label>
         </p>
         <textarea
           id="description"
           name="description"
+          value={updateForm2Data.description}
           onChange={GetUpdatedData}
           rows={7}
           cols={51}
         />
       </div>
 
-      <div className="update-button">
+      <div className="update-button ub-gap">
         <Button
           type={btnType.Button}
           buttonStyle={"btn--superBlue"}

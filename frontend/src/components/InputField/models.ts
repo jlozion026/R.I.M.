@@ -11,7 +11,7 @@ export interface input {
   forinput?: string;
   id?: string;
   required?: boolean;
-  value?: string;
+  value?: string | number | undefined;
   onClick?(): void;
   getData?(e: React.ChangeEvent<HTMLInputElement>): any;
 }

@@ -20,11 +20,11 @@ export interface IDefaultUpdateData {
 }
 
 export interface IUpdateForm2Data extends IDefaultUpdateData {
-  projectName: string;
-  contractor: string;
-  sourceFund: string;
-  programAmount: number;
-  contractAmount: number;
+  projectName: string | undefined;
+  contractor: string | undefined;
+  sourceFund: string | undefined;
+  programAmount: number | undefined;
+  contractAmount: number | undefined;
 }
 
 export interface IGetUpdatedData {
@@ -38,8 +38,8 @@ export interface IGetUpdatedData {
 export interface IPage1 extends IDefaultUpdateForm, IGetUpdatedData {}
 export interface Ipage2 extends ISubmitUpdatedForm, IGetUpdatedData {}
 
-export interface IUpdate{
-  reportType: ReportType|undefined;
-  reportID: string|undefined;
+export interface IUpdate {
+  reportType: ReportType | undefined;
+  reportID: string | undefined;
   setTrigger(): void;
 }
