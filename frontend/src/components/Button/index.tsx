@@ -8,6 +8,7 @@ const STYLES = [
   "btn--categories",
   "btn--selector",
   "btn--superBlue",
+  "btn--logs-design",
 ];
 
 const SIZES = [
@@ -17,7 +18,7 @@ const SIZES = [
   "for-icons",
   "btn--next",
   "btn--logs",
-  "btn--active",
+  "btn--logs2",
   "btn--reports",
 ];
 

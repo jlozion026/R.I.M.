@@ -3,63 +3,63 @@ export const actLogsProps =[
     {
         cardIcon: RoadClosure,
         report_type: "roadClosure",
-        cardSize:"card",
+        cardSize:"logs--card",
         city:"Pasay Metro Manila",
         address:"Brgy 14, Zone 1, 123 Estrella St. Pasay City"
     },
     {
         cardIcon: RoadClosure,
         report_type: "roadClosure",
-        cardSize:"card",
+        cardSize:"logs--card",
         city:"Pasay Metro Manila",
         address:"Brgy 14, Zone 1, 123 Estrella St. Pasay City"
     },  
     {
         cardIcon: RoadClosure,
         report_type: "roadClosure",
-        cardSize:"card",
+        cardSize:"logs--card",
         city:"Pasay Metro Manila",
         address:"Brgy 14, Zone 1, 123 Estrella St. Pasay City"
     },
     {
         cardIcon: RoadClosure,
         report_type: "roadClosure",
-        cardSize:"card",
+        cardSize:"logs--card",
         city:"Pasay Metro Manila",
         address:"Brgy 14, Zone 1, 123 Estrella St. Pasay City"
     },
     {
         cardIcon: RoadClosure,
         report_type: "roadClosure",
-        cardSize:"card",
+        cardSize:"logs--card",
         city:"Pasay Metro Manila",
         address:"Brgy 14, Zone 1, 123 Estrella St. Pasay City"
     },
     {
         cardIcon: RoadClosure,
         report_type: "roadClosure",
-        cardSize:"card",
+        cardSize:"logs--card",
         city:"Pasay Metro Manila",
         address:"Brgy 14, Zone 1, 123 Estrella St. Pasay City"
     },
     {
         cardIcon: RoadClosure,
         report_type: "roadClosure",
-        cardSize:"card",
+        cardSize:"logs--card",
         city:"Pasay Metro Manila",
         address:"Brgy 14, Zone 1, 123 Estrella St. Pasay City"
     },
     {
         cardIcon: RoadClosure,
         report_type: "roadClosure",
-        cardSize:"card",
+        cardSize:"logs--card",
         city:"Pasay Metro Manila",
         address:"Brgy 14, Zone 1, 123 Estrella St. Pasay City"
     },
     {
         cardIcon: RoadClosure,
         report_type: "roadClosure",
-        cardSize:"card",
+        cardSize:"logs--card",
         city:"Pasay Metro Manila",
         address:"Brgy 14, Zone 1, 123 Estrella St. Pasay City"
     },
