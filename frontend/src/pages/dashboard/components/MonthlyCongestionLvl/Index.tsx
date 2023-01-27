@@ -9,6 +9,7 @@ const MonthlyCongestionLvl: FC<GraphItems>=({cardSize})=> {
   return (
 
     <Card cardSize={cardSize}>
+      <div className="monthly-wrapper">
       <div className="mcltitle">
         <p>MONTHLY CONGESTION LEVEL</p>
       </div>
@@ -24,8 +25,10 @@ const MonthlyCongestionLvl: FC<GraphItems>=({cardSize})=> {
         }
         )}
       </div>
-
-
+      <div className="monthly-graph-container">
+              INSERT GRAPH HERE 
+              </div>
+      </div>
     </Card>
 
   )

@@ -9,17 +9,22 @@ const YearCongestionlvl: FC<GraphItems>=({cardSize})=> {
         return(
            
           <Card cardSize={cardSize}>
-            <p className="medCardTitle">CONGESTION LEVEL 2021</p>
-            <div className="medCardData">
-              <p className="percentLevel">43%</p>
-              <div className="decreaseLevel">
-                <div className="decreaseIcon">
-                  <img className="arrow"src={arrowdown} alt="arrow"/>
-                  <p className="pLevel">10%</p>
+             <div className="year-wrapper">
+                <p className="medCardTitle">CONGESTION LEVEL 2021</p>
+                <div className="medCardData">
+                  <p className="percentLevel">43%</p>
+                  <div className="decreaseLevel">
+                    <div className="decreaseIcon">
+                      <img className="arrow"src={arrowdown} alt="arrow"/>
+                      <p className="pLevel">10%</p>
+                    </div>
+                  <p className="pLeveltitle">Decrease since 2020</p>
+                  </div>
                 </div>
-              <p className="pLeveltitle">Decrease since 2020</p>
+                <div className="year-graph-container">
+              INSERT GRAPH HERE 
               </div>
-            </div>
+             </div>
           </Card> 
 
   )

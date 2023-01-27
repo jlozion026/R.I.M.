@@ -3,3 +3,21 @@
     justify-content: space-evenly;
     flex-direction: column;
 }
+.hourly-wrapper,
+.monthly-wrapper,
+.year-wrapper{
+    width: 100%;
+    height: 60vh;
+    display: grid;
+    grid-template-rows: 0.1fr 0.1fr 1fr;
+}
+.hourly-graph-container,
+.monthly-graph-container,
+.year-graph-container
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
