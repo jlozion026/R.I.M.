@@ -1,3 +1,5 @@
+import { GetAllReportsQuery } from "@/generated/graphql";
+
 export type MapOptions = google.maps.MapOptions;
 export type LatLngLiteral = google.maps.LatLngLiteral;
 
@@ -11,3 +13,5 @@ export interface MarkerData {
   lat: number;
   lng: number;
 }
+
+export type IModArr= Pick<GetAllReportsQuery, "reports">;

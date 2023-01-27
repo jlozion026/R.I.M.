@@ -996,14 +996,14 @@ export type GetAllReportsByDescOrderQueryVariables = Exact<{ [key: string]: neve
 
 export type GetAllReportsByDescOrderQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', report_id: string, report_type: ReportType, location: any }> };
 
-export type GetAllReportsByTypeQueryVariables = Exact<{
+export type PaginatedGetAllReportsByTypeQueryVariables = Exact<{
   take?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
   reportType?: InputMaybe<ReportType>;
 }>;
 
 
-export type GetAllReportsByTypeQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', report_id: string, location: any, report_type: ReportType }> };
+export type PaginatedGetAllReportsByTypeQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', report_id: string, location: any, report_type: ReportType }> };
 
 export type CreateOneReportMutationVariables = Exact<{
   data: CustomReportCreateInput;
@@ -1012,10 +1012,33 @@ export type CreateOneReportMutationVariables = Exact<{
 
 export type CreateOneReportMutation = { __typename?: 'Mutation', createOneReport: { __typename?: 'Report', report_id: string, location: any, description: string, incident?: { __typename?: 'Incident', date_started: any, date_ended: any } | null } };
 
+export type GetAllReportsWithDateCpQueryVariables = Exact<{
+  reportType?: InputMaybe<ReportType>;
+  date: Scalars['DateTime'];
+}>;
+
+
+export type GetAllReportsWithDateCpQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', location: any, report_id: string, report_type: ReportType, description: string, incident?: { __typename?: 'Incident', date_started: any, date_ended: any } | null, city_project?: { __typename?: 'CityProject', date_started: any, date_ended: any } | null }> };
+
+export type GetAllReportsByTypeQueryVariables = Exact<{
+  reportType?: InputMaybe<ReportType>;
+}>;
+
+
+export type GetAllReportsByTypeQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', location: any, report_id: string, report_type: ReportType, description: string, incident?: { __typename?: 'Incident', date_started: any, date_ended: any } | null, city_project?: { __typename?: 'CityProject', date_started: any, date_ended: any } | null }> };
+
 export type GetAllReportsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetAllReportsQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', location: any, report_id: string, report_type: ReportType, description: string, incident?: { __typename?: 'Incident', date_started: any, date_ended: any } | null, city_project?: { __typename?: 'CityProject', date_started: any, date_ended: any } | null }> };
+
+export type GetAllReportsWithDateQueryVariables = Exact<{
+  reportType?: InputMaybe<ReportType>;
+  date: Scalars['DateTime'];
+}>;
+
+
+export type GetAllReportsWithDateQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', location: any, report_id: string, report_type: ReportType, description: string, incident?: { __typename?: 'Incident', date_started: any, date_ended: any } | null, city_project?: { __typename?: 'CityProject', date_started: any, date_ended: any } | null }> };
 
 export type LoginMutationVariables = Exact<{
   where?: InputMaybe<AccountWhereInput>;
@@ -1237,8 +1260,8 @@ export const useGetAllReportsByDescOrderQuery = <
       fetcher<GetAllReportsByDescOrderQuery, GetAllReportsByDescOrderQueryVariables>(client, GetAllReportsByDescOrderDocument, variables, headers),
       options
     );
-export const GetAllReportsByTypeDocument = `
-    query GetAllReportsByType($take: Int, $skip: Int, $reportType: ReportType) {
+export const PaginatedGetAllReportsByTypeDocument = `
+    query PaginatedGetAllReportsByType($take: Int, $skip: Int, $reportType: ReportType) {
   reports(where: {report_type: {equals: $reportType}}, take: $take, skip: $skip) {
     report_id
     location
@@ -1246,18 +1269,18 @@ export const GetAllReportsByTypeDocument = `
   }
 }
     `;
-export const useGetAllReportsByTypeQuery = <
-      TData = GetAllReportsByTypeQuery,
+export const usePaginatedGetAllReportsByTypeQuery = <
+      TData = PaginatedGetAllReportsByTypeQuery,
       TError = unknown
     >(
       client: GraphQLClient,
-      variables?: GetAllReportsByTypeQueryVariables,
-      options?: UseQueryOptions<GetAllReportsByTypeQuery, TError, TData>,
+      variables?: PaginatedGetAllReportsByTypeQueryVariables,
+      options?: UseQueryOptions<PaginatedGetAllReportsByTypeQuery, TError, TData>,
       headers?: RequestInit['headers']
     ) =>
-    useQuery<GetAllReportsByTypeQuery, TError, TData>(
-      variables === undefined ? ['GetAllReportsByType'] : ['GetAllReportsByType', variables],
-      fetcher<GetAllReportsByTypeQuery, GetAllReportsByTypeQueryVariables>(client, GetAllReportsByTypeDocument, variables, headers),
+    useQuery<PaginatedGetAllReportsByTypeQuery, TError, TData>(
+      variables === undefined ? ['PaginatedGetAllReportsByType'] : ['PaginatedGetAllReportsByType', variables],
+      fetcher<PaginatedGetAllReportsByTypeQuery, PaginatedGetAllReportsByTypeQueryVariables>(client, PaginatedGetAllReportsByTypeDocument, variables, headers),
       options
     );
 export const CreateOneReportDocument = `
@@ -1284,6 +1307,72 @@ export const useCreateOneReportMutation = <
     useMutation<CreateOneReportMutation, TError, CreateOneReportMutationVariables, TContext>(
       ['createOneReport'],
       (variables?: CreateOneReportMutationVariables) => fetcher<CreateOneReportMutation, CreateOneReportMutationVariables>(client, CreateOneReportDocument, variables, headers)(),
+      options
+    );
+export const GetAllReportsWithDateCpDocument = `
+    query GetAllReportsWithDateCP($reportType: ReportType, $date: DateTime!) {
+  reports(
+    where: {AND: [{city_project: {is: {date_started: {equals: $date}}}}, {report_type: {equals: $reportType}}]}
+  ) {
+    location
+    report_id
+    report_type
+    description
+    incident {
+      date_started
+      date_ended
+    }
+    city_project {
+      date_started
+      date_ended
+    }
+  }
+}
+    `;
+export const useGetAllReportsWithDateCpQuery = <
+      TData = GetAllReportsWithDateCpQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetAllReportsWithDateCpQueryVariables,
+      options?: UseQueryOptions<GetAllReportsWithDateCpQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetAllReportsWithDateCpQuery, TError, TData>(
+      ['GetAllReportsWithDateCP', variables],
+      fetcher<GetAllReportsWithDateCpQuery, GetAllReportsWithDateCpQueryVariables>(client, GetAllReportsWithDateCpDocument, variables, headers),
+      options
+    );
+export const GetAllReportsByTypeDocument = `
+    query GetAllReportsByType($reportType: ReportType) {
+  reports(where: {report_type: {equals: $reportType}}) {
+    location
+    report_id
+    report_type
+    description
+    incident {
+      date_started
+      date_ended
+    }
+    city_project {
+      date_started
+      date_ended
+    }
+  }
+}
+    `;
+export const useGetAllReportsByTypeQuery = <
+      TData = GetAllReportsByTypeQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: GetAllReportsByTypeQueryVariables,
+      options?: UseQueryOptions<GetAllReportsByTypeQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetAllReportsByTypeQuery, TError, TData>(
+      variables === undefined ? ['GetAllReportsByType'] : ['GetAllReportsByType', variables],
+      fetcher<GetAllReportsByTypeQuery, GetAllReportsByTypeQueryVariables>(client, GetAllReportsByTypeDocument, variables, headers),
       options
     );
 export const GetAllReportsDocument = `
@@ -1316,6 +1405,40 @@ export const useGetAllReportsQuery = <
     useQuery<GetAllReportsQuery, TError, TData>(
       variables === undefined ? ['getAllReports'] : ['getAllReports', variables],
       fetcher<GetAllReportsQuery, GetAllReportsQueryVariables>(client, GetAllReportsDocument, variables, headers),
+      options
+    );
+export const GetAllReportsWithDateDocument = `
+    query GetAllReportsWithDate($reportType: ReportType, $date: DateTime!) {
+  reports(
+    where: {AND: [{incident: {is: {date_started: {equals: $date}}}}, {report_type: {equals: $reportType}}]}
+  ) {
+    location
+    report_id
+    report_type
+    description
+    incident {
+      date_started
+      date_ended
+    }
+    city_project {
+      date_started
+      date_ended
+    }
+  }
+}
+    `;
+export const useGetAllReportsWithDateQuery = <
+      TData = GetAllReportsWithDateQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetAllReportsWithDateQueryVariables,
+      options?: UseQueryOptions<GetAllReportsWithDateQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetAllReportsWithDateQuery, TError, TData>(
+      ['GetAllReportsWithDate', variables],
+      fetcher<GetAllReportsWithDateQuery, GetAllReportsWithDateQueryVariables>(client, GetAllReportsWithDateDocument, variables, headers),
       options
     );
 export const LoginDocument = `

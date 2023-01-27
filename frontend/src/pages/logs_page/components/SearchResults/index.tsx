@@ -23,7 +23,7 @@ const SearchResults: FC<ISearchResults> = ({ searchData }) => {
     <>
       {searchData ? searchData?.slice(0, 6).map((report, key) => {
         return (
-          <li className="search-item" key={key} onClick={() => change_page(report.report_id)}>
+          <li className="main-search-item" key={key} onClick={() => change_page(report.report_id)}>
             <img src={getIcon(report.report_type)} alt="icon" />
             {truncateString(report.location.addresses.general_address, 22)}
           </li>

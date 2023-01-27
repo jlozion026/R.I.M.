@@ -16,23 +16,30 @@ import {
   panToQC,
 } from "./utils";
 
+import {
+  GetAllReportsQuery,
+  useGetAllReportsQuery,
+  GetAllReportsByTypeQuery,
+  useGetAllReportsByTypeQuery,
+  GetAllReportsWithDateQuery,
+  useGetAllReportsWithDateQuery,
+  GetAllReportsWithDateCpQuery,
+  useGetAllReportsWithDateCpQuery,
+  ReportType,
+} from "@/generated/graphql";
 
-import { GetAllReportsQuery, useGetAllReportsQuery } from "@/generated/graphql";
 import graphqlRequestClient from "@/lib/client/graphqlRequestClient";
 
 import ReportsBtn from "./components/ReportsBtn";
 import Navbar from "@/components/Navbar";
 
-import { LatLngLiteral, MarkerData } from "./models";
-
-import pinRoadClosure from "@/Assets/svg/pinRoadClosure.svg";
+import { LatLngLiteral, MarkerData, IModArr } from "./models";
 
 import { MainContext } from "@/setup/context-manager/mainContext";
 
 import { MainContextType } from "@/setup/context-manager/model";
 
 import { libraries, defaultCenter, options } from "@/utils";
-
 
 import Zoom from "./components/Zoom";
 
@@ -54,6 +61,7 @@ const Main: FC = () => {
   });
 
   const [trigger, setTrigger] = useState<boolean>(false);
+  const [modArr, setModArr] = useState<IModArr>();
 
   const formPopUp = () => {
     setTrigger(!trigger);
@@ -127,6 +135,14 @@ const Main: FC = () => {
     }
   };
 
+  const [trigFilter, setTrigFilter] = useState<boolean>(false);
+  const [filterType, setFilterType] = useState<ReportType | undefined>();
+  const [filterDate, setFilterDate] = useState<string>("");
+
+  const resetFilter = () => {
+    setFilterType(undefined);
+  };
+
   const [selectedMarker, setSelectedMarker] = useState<MarkerData | null>(null);
 
   // Zoom Control Button
@@ -146,6 +162,7 @@ const Main: FC = () => {
 
   graphqlRequestClient.setHeader("authorization", `bearer ${getToken()}`); //sets the authorization header
   // send queries for all reports to the gql endpoint
+
   const { isLoading, data } = useGetAllReportsQuery<GetAllReportsQuery, Error>(
     graphqlRequestClient,
     {},
@@ -153,6 +170,81 @@ const Main: FC = () => {
       refetchIntervalInBackground: true,
     }
   );
+
+  const {
+    isLoading: isLoadingByType,
+    data: dataByType,
+    refetch: refetchReportsByType,
+  } = useGetAllReportsByTypeQuery<GetAllReportsByTypeQuery, Error>(
+    graphqlRequestClient,
+    {
+      reportType: filterType,
+    },
+    {
+      enabled: false,
+      onSuccess: async (data: GetAllReportsByTypeQuery) => {
+        setModArr(data);
+      },
+      refetchIntervalInBackground: true,
+    }
+  );
+
+  const {
+    isLoading: isLoadingDate,
+    data: dataWithDate,
+    refetch: refetchReportsWithDate,
+  } = useGetAllReportsWithDateQuery<GetAllReportsWithDateQuery, Error>(
+    graphqlRequestClient,
+    {
+      reportType: filterType,
+      date: filterDate,
+    },
+    {
+      enabled: false,
+      onSuccess: async (data: GetAllReportsByTypeQuery) => {
+        console.log(data);
+        setModArr(data);
+      },
+      refetchIntervalInBackground: true,
+    }
+  );
+
+  const {
+    isLoading: isLoadingDateCP,
+    data: dataWithDateCP,
+    refetch: refetchReportsWithDateCP,
+  } = useGetAllReportsWithDateCpQuery<GetAllReportsWithDateCpQuery, Error>(
+    graphqlRequestClient,
+    {
+      reportType: filterType,
+      date: filterDate,
+    },
+    {
+      enabled: false,
+      onSuccess: async (data: GetAllReportsWithDateCpQuery) => {
+        console.log(data);
+        setModArr(data);
+      },
+      refetchIntervalInBackground: true,
+    }
+  );
+
+  useEffect(() => {
+    if (filterType !== ReportType.CityProject) {
+      if (filterDate) {
+        refetchReportsWithDate();
+      } else {
+        refetchReportsByType();
+      }
+    }
+    else {
+      if (filterDate) {
+        refetchReportsWithDateCP()
+      } else {
+        refetchReportsByType();
+      }
+    }
+  }, [filterType]);
 
   const hello = () => setPingPopUp(!pingPopUp);
 
@@ -240,7 +332,7 @@ const Main: FC = () => {
 
           {isLoaded && !isLoading ? (
             <MarkersClusterer
-              ReportsData={data}
+              ReportsData={modArr}
               SelectMarker={setSelectedMarker}
             />
           ) : null}
@@ -285,10 +377,18 @@ const Main: FC = () => {
           Name={"search"}
           PlaceHolder={"Search Location"}
           SetGenAdd={setSearchString}
+          setTrigFilter={() => setTrigFilter(!trigFilter)}
+          setFilterDate={setFilterDate}
+          resetFilter={resetFilter}
         />
-        <Filter/>
 
-      
+        {trigFilter ? (
+          <Filter
+            filterDate={filterDate}
+            setFilterDate={setFilterDate}
+            setFilterType={setFilterType}
+          />
+        ) : null}
 
         <div className="nav-container">
           <Navbar cardSize="nav--bar" PingPopOut={hello} />

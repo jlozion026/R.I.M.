@@ -3,8 +3,8 @@ import { FC, ChangeEvent, useEffect, useState } from "react";
 import useDebounce from '@/lib/useDebounce';
 
 import {
-  GetAllReportsByTypeQuery,
-  useGetAllReportsByTypeQuery,
+  PaginatedGetAllReportsByTypeQuery,
+  usePaginatedGetAllReportsByTypeQuery,
   GetAllReportsByAscOrderQuery,
   useGetAllReportsByAscOrderQuery,
   GetAllSearchResultQuery,
@@ -67,7 +67,7 @@ const Logs: FC = () => {
 
   graphqlRequestClient.setHeader('authorization', `bearer ${getToken()}`) // set authorization token
 
-  const { data: reportData, isLoading, isFetching } = useGetAllReportsByTypeQuery<GetAllReportsByTypeQuery, Error>(
+  const { data: reportData, isLoading, isFetching } = usePaginatedGetAllReportsByTypeQuery<PaginatedGetAllReportsByTypeQuery, Error>(
     graphqlRequestClient, {
     reportType: stringToEnum(reportTypeQuery, ReportType),
     take: 5,
@@ -75,7 +75,7 @@ const Logs: FC = () => {
   }, {
     refetchOnWindowFocus: false,
     keepPreviousData: true,
-    onSuccess: async (data: GetAllReportsByTypeQuery) => {
+    onSuccess: async (data: PaginatedGetAllReportsByTypeQuery) => {
       const report_arr = data.reports;
       setLoadAddr(false);
       setModReports(report_arr as INewReports);
@@ -103,7 +103,7 @@ const Logs: FC = () => {
         //staleTime: 1 * (60 * 1000), // 1 min refresh time
         refetchOnWindowFocus: false,
         keepPreviousData: true,
-        onSuccess: async (data: GetAllReportsByTypeQuery) => {
+        onSuccess: async (data: GetAllReportsByAscOrderQuery) => {
           const report_arr = data.reports;
           setLoadAddr(false);
           if (typeOrder === "Recent") {

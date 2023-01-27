@@ -1,0 +1,28 @@
+query GetAllReportsWithDateCP($reportType: ReportType, $date: DateTime!){
+  reports(
+  where:{
+    AND: [
+      {
+        city_project: {is: {
+          date_started: {equals: $date}
+        }}
+      },
+      
+      {report_type: {equals: $reportType}}
+    ]
+  }
+  ){
+    location
+    report_id
+    report_type
+    description
+    incident{
+      date_started
+      date_ended
+    }
+    city_project{
+      date_started
+      date_ended
+    }
+  }
+}

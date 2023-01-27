@@ -1,4 +1,4 @@
-query GetAllReportsByType($take: Int, $skip: Int, $reportType: ReportType){
+query PaginatedGetAllReportsByType($take: Int, $skip: Int, $reportType: ReportType){
   reports(
   where:{
     report_type: {

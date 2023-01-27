@@ -1,0 +1,22 @@
+query GetAllReportsByType($reportType: ReportType){
+  reports(
+  where:{
+    report_type: {
+      equals: $reportType
+    }
+  }
+  ){
+    location
+    report_id
+    report_type
+    description
+    incident{
+      date_started
+      date_ended
+    }
+    city_project{
+      date_started
+      date_ended
+    }
+  }
+}
