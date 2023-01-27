@@ -1,4 +1,5 @@
 import { ReportType } from "@/generated/graphql";
+import { IDefaultUpdateData, IUpdateForm2Data } from "@/models";
 import { format } from "date-fns";
 import { FC, useState, createContext } from "react";
 import { LogsInfoContextType, Props } from "./model";
@@ -19,13 +20,33 @@ const LogsInfoContextProvider: FC<Props> = ({ children }) => {
   const [calendarStart, setCalendarStart] = useState<boolean>(false);
   const [calendarEnd, setCalendarEnd] = useState<boolean>(false);
 
+  const [defaultUpdateData, setDefaultUpdateData] =
+    useState<IDefaultUpdateData>({
+      startDate: "",
+      endDate: "",
+      description: "",
+    });
+
+  const [updateForm2Data, setUpdateForm2Data] = useState<IUpdateForm2Data>({
+    startDate: "",
+    endDate: "",
+    description: "",
+    projectName: "",
+    contractor: "",
+    sourceFund: "",
+    programAmount: 0,
+    contractAmount: 0,
+  });
+
   const handleStartDate = (date: Date) => {
-    setStartDate(format(date, "yyyy-MM-dd"));
+    defaultUpdateData["startDate"] = format(date, "yyyy-MM-dd");
+    updateForm2Data["startDate"] = format(date, "yyyy-MM-dd");
     clickCalendar();
   };
 
   const handleEndDate = (date: Date) => {
-    setEndDate(format(date, "yyyy-MM-dd"));
+    defaultUpdateData["endDate"] = format(date, "yyyy-MM-dd");
+    updateForm2Data["endDate"] = format(date, "yyyy-MM-dd");
     clickCalendar();
   };
 
@@ -61,6 +82,10 @@ const LogsInfoContextProvider: FC<Props> = ({ children }) => {
         setReportType,
         handleStartDate,
         handleEndDate,
+        defaultUpdateData,
+        setDefaultUpdateData,
+        updateForm2Data,
+        setUpdateForm2Data,
       }}
     >
       {children}

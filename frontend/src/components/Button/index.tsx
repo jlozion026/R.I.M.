@@ -9,6 +9,8 @@ const STYLES = [
   "btn--selector",
   "btn--superBlue",
   "btn--logs-design",
+  "btn--grey",
+  "btn--red",
 ];
 
 const SIZES = [
@@ -20,6 +22,8 @@ const SIZES = [
   "btn--logs",
   "btn--logs2",
   "btn--reports",
+  "btn--cancel",
+  "btn--delete",
 ];
 
 const COLORS = [
@@ -58,17 +62,17 @@ const Button: FC<ButtonProps> = ({
       onClick={onClick}
       type={type}
     >
-    <>
-      {svg ? (
-        <div className={`icon-bg ${checkIconBackGround}`}>
-          <img src={svg} alt="icon" className="btn-img " />
-        </div>
-      ) : (
-        ""
-      )}
-      {icon}
-      {children}
-    </>
+      <>
+        {svg ? (
+          <div className={`icon-bg ${checkIconBackGround}`}>
+            <img src={svg} alt="icon" className="btn-img " />
+          </div>
+        ) : (
+          ""
+        )}
+        {icon}
+        {children}
+      </>
     </button>
   );
 };

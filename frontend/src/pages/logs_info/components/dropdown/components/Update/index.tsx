@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useContext, useState } from "react";
+import { ChangeEvent, FC, useContext } from "react";
 
 import {
   useUpdateOneReportMutation,
@@ -20,20 +20,26 @@ import ProgressSteps from "./components/ProgressSteps";
 
 import { FaArrowLeft } from "react-icons/fa";
 
+import { IUpdate } from "./models";
+
 import "./style.css";
-import { IDefaultUpdateData, IUpdate, IUpdateForm2Data } from "./models";
 
 const Update: FC<IUpdate> = ({ reportID, setTrigger, reportType }) => {
-  const { page, setPage, startDate, endDate } = useContext(
-    LogsInfoContext
-  ) as LogsInfoContextType;
+  const {
+    page,
+    setPage,
+    defaultUpdateData,
+    setDefaultUpdateData,
+    updateForm2Data,
+    setUpdateForm2Data,
+  } = useContext(LogsInfoContext) as LogsInfoContextType;
 
   const queryClient = useQueryClient();
   const { mutate: updateMutate } = useUpdateOneReportMutation<Error>(
     graphqlRequestClient,
     {
       onSuccess: (data: UpdateOneReportMutation) => {
-        queryClient.invalidateQueries(["GetOneReport",{"reportId":reportID}]);
+        queryClient.invalidateQueries(["GetOneReport", { reportId: reportID }]);
         console.log(data);
       },
 
@@ -42,24 +48,6 @@ const Update: FC<IUpdate> = ({ reportID, setTrigger, reportType }) => {
       },
     }
   );
-
-  const [defaultUpdateData, setDefaultUpdateData] =
-    useState<IDefaultUpdateData>({
-      startDate: "",
-      endDate: "",
-      description: "",
-    });
-
-  const [updateForm2Data, setUpdateForm2Data] = useState<IUpdateForm2Data>({
-    startDate: "",
-    description: "",
-    endDate: "",
-    projectName: "",
-    contractor: "",
-    sourceFund: "",
-    programAmount: 0,
-    contractAmount: 0
-  });
 
   const GetDefaultUpdateData = (
     val: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
@@ -83,8 +71,6 @@ const Update: FC<IUpdate> = ({ reportID, setTrigger, reportType }) => {
   const SubmitDefaultUpdateData = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    defaultUpdateData["startDate"] = startDate;
-    defaultUpdateData["endDate"] = endDate;
     console.table(defaultUpdateData);
 
     updateMutate({
@@ -105,9 +91,6 @@ const Update: FC<IUpdate> = ({ reportID, setTrigger, reportType }) => {
   const SubmitUpdateForm2Data = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    updateForm2Data["startDate"] = startDate;
-    updateForm2Data["endDate"] = endDate;
-
     updateMutate({
       report_id: reportID,
       data: {
@@ -119,8 +102,8 @@ const Update: FC<IUpdate> = ({ reportID, setTrigger, reportType }) => {
             date_started: { set: updateForm2Data.startDate },
             date_ended: { set: updateForm2Data.endDate },
             source_fund: { set: updateForm2Data.sourceFund },
-            project_ammount: { set: updateForm2Data.programAmount },
-            contract_ammount: { set: updateForm2Data.contractAmount },
+            project_ammount: { set: Number(updateForm2Data.programAmount) },
+            contract_ammount: { set: Number(updateForm2Data.contractAmount) },
           },
         },
       },
@@ -132,16 +115,18 @@ const Update: FC<IUpdate> = ({ reportID, setTrigger, reportType }) => {
 
   return (
     <form className="update-report-form">
-      <div className="header-form">
+      <div className="header-f">
         {page ? (
           <p className="back-btn" onClick={() => setPage(false)}>
             <FaArrowLeft />
           </p>
         ) : null}
-        <div className="up-title">UPDATE</div>
+        <h1 className="up-title">Update</h1>
       </div>
 
-      {reportType === ReportType.CityProject ? <ProgressSteps page={page} /> : null}
+      {reportType === ReportType.CityProject ? (
+        <ProgressSteps page={page} />
+      ) : null}
       {reportType !== ReportType.CityProject ? (
         <DefaultUpdateForm
           GetUpdatedData={GetDefaultUpdateData}

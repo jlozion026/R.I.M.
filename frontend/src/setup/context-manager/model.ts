@@ -1,5 +1,5 @@
 import { ReportType } from "@/generated/graphql";
-import { LatLngLiteral } from "@/models";
+import { IDefaultUpdateData, IUpdateForm2Data, LatLngLiteral } from "@/models";
 
 export type Props = {
   children: React.ReactNode;
@@ -35,8 +35,8 @@ export type MainContextType = {
 };
 
 export type LogsInfoContextType = {
-  startDate: string;
-  endDate: string;
+  startDate: string | any;
+  endDate: string | any;
   setStartDate: (arg0: string) => void;
   setEndDate: (arg0: string) => void;
   calendarStart: boolean;
@@ -51,4 +51,8 @@ export type LogsInfoContextType = {
   setReportType: (arg0: ReportType | undefined) => void;
   handleStartDate: (date: Date) => void;
   handleEndDate: (date: Date) => void;
+  defaultUpdateData: IDefaultUpdateData;
+  setDefaultUpdateData: (arg0: IDefaultUpdateData) => void;
+  updateForm2Data: IUpdateForm2Data;
+  setUpdateForm2Data: (arg0: IUpdateForm2Data) => void;
 };

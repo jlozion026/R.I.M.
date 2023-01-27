@@ -24,7 +24,7 @@ import { FaArrowLeft } from "react-icons/fa";
 
 import "./style.css";
 
-import {IoMdSettings} from 'react-icons/io';
+import { IoMdSettings } from "react-icons/io";
 
 import { getToken } from "@/lib/auth";
 import { getPinIcon } from "@/lib/getIcon";
@@ -52,7 +52,7 @@ const LogInfo: FC = () => {
 
   const [directions, setDirections] = useState<DirectionsResult>();
 
-  const [trigOption, setTrigOption ] = useState<boolean>(false);
+  const [trigOption, setTrigOption] = useState<boolean>(false);
 
   const markerOptions: MarkerOptions = {
     icon: {
@@ -60,8 +60,6 @@ const LogInfo: FC = () => {
       // scaledSize: new google.maps.Size(40, 40),
     },
   };
-
-
 
   const drawDirection = useMemo(() => {
     if (!isLoading) {
@@ -103,11 +101,14 @@ const LogInfo: FC = () => {
           <Loader />
         ) : (
           <>
-
             {report?.report?.report_type != ReportType.CityProject ? (
               <>
                 <div className="info-title">
-                  <h1>{report?.report?.report_type.replace(/([A-Z])/g, " $1").trim()}</h1>
+                  <h1>
+                    {report?.report?.report_type
+                      .replace(/([A-Z])/g, " $1")
+                      .trim()}
+                  </h1>
                 </div>
                 <div className="info-title">
                   <p>Project Details</p>
@@ -233,9 +234,17 @@ const LogInfo: FC = () => {
         <>{drawDirection}</>
       </div>
 
-      <div className="option-cont" >
-        <IoMdSettings className="option-icon"  onClick={(() => setTrigOption(!trigOption)) }/>
-        {trigOption? <DropDown report={report} setMenuTrig={() => setTrigOption(!trigOption) }/> : null}
+      <div className="option-cont">
+        <IoMdSettings
+          className="option-icon"
+          onClick={() => setTrigOption(!trigOption)}
+        />
+        {trigOption ? (
+          <DropDown
+            report={report}
+            setMenuTrig={() => setTrigOption(!trigOption)}
+          />
+        ) : null}
       </div>
     </div>
   );

@@ -6,5 +6,19 @@ export type DirectionsResult = google.maps.DirectionsResult;
 // interface for the returned object of coord to addr function
 export interface IAddress {
   form_addr: string;
-  plus_code: string|undefined;
+  plus_code: string | undefined;
+}
+
+export interface IDefaultUpdateData {
+  startDate: string;
+  endDate: string;
+  description: string | undefined;
+}
+
+export interface IUpdateForm2Data extends IDefaultUpdateData {
+  projectName: string | undefined;
+  contractor: string | undefined;
+  sourceFund: string | undefined;
+  programAmount: number | undefined;
+  contractAmount: number | undefined;
 }

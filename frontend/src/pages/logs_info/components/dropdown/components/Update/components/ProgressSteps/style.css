@@ -2,28 +2,35 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  width: 150px;
-  margin: 0 auto;
+  width: 10.8vw;
+}
+
+.progress-numb {
+  font-size: 1.2vw;
 }
 
 .stp {
   text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 5vw;
 }
 
 .crcle {
   border: 1px solid #d1d3d6;
-  height: 24px;
-  width: 24px;
-  border-radius: 100%;
+  height: 2vw;
+  width: 2vw;
+  border-radius: 1vw;
   color: #205eff;
   font-family: "Poppins";
   font-weight: 700;
-  font-size: 15px;
+  font-size: 1vw;
   background: #d1d3d6;
   display: inline-block;
   position: relative;
   transition: background-color 500ms;
-  line-height: 20px;
+  line-height: 2vw;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -31,7 +38,7 @@
   color: white;
   background-color: #205eff;
   border: 1px solid #205eff;
-  transition: all 1s ease-out;
+  transition: all 0.1s ease-out;
 }
 
 .cmpleted.crcle {
@@ -42,30 +49,31 @@
 .uncmplete.crcle::after {
   content: "";
   position: absolute;
-  right: -48px;
-  bottom: 10px;
-  height: 2px;
-  width: 45px;
+  right: -3.7vw;
+  bottom: 0.8vw;
+  height: 0.16vw;
+  width: 3.4vw;
   background-color: #d1d3d6;
 }
 
 .cmpleted.crcle::after {
   content: "";
   position: absolute;
-  right: -48px;
-  bottom: 10px;
-  height: 2px;
-  width: 45px;
+  right: -3.7vw;
+  bottom: 0.8vw;
+  height: 0.16vw;
+  width: 3.4vw;
   background-color: #205eff;
   transition: all 1s ease-out;
 }
 
 .crcle-text {
-  margin-top: 10px;
+  margin-top: 1vw;
   color: #8e939a;
   font-family: sans-serif;
   font-weight: 500;
-  font-size: 13px;
+  font-size: 1.1vw;
+  width: 6vw;
 }
 
 @media all and (max-width: 600px) {

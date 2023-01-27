@@ -21,8 +21,6 @@ const DefaultUpdateForm: FC<IDefaultUpdateForm> = ({
   GetUpdatedData,
 }) => {
   const {
-    startDate,
-    endDate,
     calendarStart,
     calendarEnd,
     setCalendarStart,
@@ -30,6 +28,7 @@ const DefaultUpdateForm: FC<IDefaultUpdateForm> = ({
     clickCalendar,
     handleStartDate,
     handleEndDate,
+    defaultUpdateData,
   } = useContext(LogsInfoContext) as LogsInfoContextType;
 
   const ref = useOnclickOutside(() => {
@@ -38,10 +37,10 @@ const DefaultUpdateForm: FC<IDefaultUpdateForm> = ({
 
   return (
     <>
-      <div className="ui-field">
+      <div className="ui-field spce-gap">
         <InputField
           label={"Date Started"}
-          value={startDate}
+          value={defaultUpdateData.startDate.split("T")[0]}
           type={"text"}
           name={"StartDate"}
           placeholder={"YYYY/MM/DD"}
@@ -71,7 +70,7 @@ const DefaultUpdateForm: FC<IDefaultUpdateForm> = ({
         <InputField
           label={"Date Ended"}
           type={"text"}
-          value={endDate}
+          value={defaultUpdateData.endDate.split("T")[0]}
           name={"EndDate"}
           placeholder={"YYYY/MM/DD"}
           forinput={"calendar"}
@@ -96,20 +95,21 @@ const DefaultUpdateForm: FC<IDefaultUpdateForm> = ({
         ) : null}
       </div>
 
-      <div className="update-description">
+      <div className="update-description f-gap">
         <p>
           <label htmlFor="up-description">Description</label>
         </p>
         <textarea
           id="description"
           name="description"
+          value={defaultUpdateData.description}
           onChange={GetUpdatedData}
           rows={7}
           cols={51}
         />
       </div>
 
-      <div className="update-button">
+      <div className="update-button ub-gap">
         <Button
           type={btnType.Submit}
           buttonStyle={"btn--superBlue"}
