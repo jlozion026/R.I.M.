@@ -20,8 +20,6 @@ import useOnclickOutside from "react-cool-onclickoutside";
 const Filter: FC<IFilter> = ({ setFilterType, setFilterDate, filterDate }) => {
   const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
 
-  const [fDate, setFDate] = useState<string>("");
-
   // When you Click the number inside the Calendar
   const openCalendarFilter = () => {
     if (calendarOpen) {

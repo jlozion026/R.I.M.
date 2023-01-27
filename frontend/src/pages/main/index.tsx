@@ -23,6 +23,8 @@ import {
   useGetAllReportsByTypeQuery,
   GetAllReportsWithDateQuery,
   useGetAllReportsWithDateQuery,
+  GetAllReportsWithDateCpQuery,
+  useGetAllReportsWithDateCpQuery,
   ReportType,
 } from "@/generated/graphql";
 
@@ -207,11 +209,40 @@ const Main: FC = () => {
     }
   );
 
+  const {
+    isLoading: isLoadingDateCP,
+    data: dataWithDateCP,
+    refetch: refetchReportsWithDateCP,
+  } = useGetAllReportsWithDateCpQuery<GetAllReportsWithDateCpQuery, Error>(
+    graphqlRequestClient,
+    {
+      reportType: filterType,
+      date: filterDate,
+    },
+    {
+      enabled: false,
+      onSuccess: async (data: GetAllReportsWithDateCpQuery) => {
+        console.log(data);
+        setModArr(data);
+      },
+      refetchIntervalInBackground: true,
+    }
+  );
+
   useEffect(() => {
-    if (filterDate) {
-      refetchReportsWithDate();
-    } else {
-      refetchReportsByType();
+    if (filterType !== ReportType.CityProject) {
+      if (filterDate) {
+        refetchReportsWithDate();
+      } else {
+        refetchReportsByType();
+      }
+    }
+    else {
+      if (filterDate) {
+        refetchReportsWithDateCP()
+      } else {
+        refetchReportsByType();
+      }
     }
   }, [filterType]);
 
@@ -347,6 +378,7 @@ const Main: FC = () => {
           PlaceHolder={"Search Location"}
           SetGenAdd={setSearchString}
           setTrigFilter={() => setTrigFilter(!trigFilter)}
+          setFilterDate={setFilterDate}
           resetFilter={resetFilter}
         />
 

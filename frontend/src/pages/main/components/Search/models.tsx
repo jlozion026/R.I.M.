@@ -10,4 +10,5 @@ export interface ISearch {
   SetGenAdd(arg0: string): void
   setTrigFilter(): void;
   resetFilter(): void;
+  setFilterDate(date: string): void;
 }

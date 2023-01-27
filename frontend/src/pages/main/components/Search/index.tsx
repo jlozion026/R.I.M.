@@ -30,6 +30,7 @@ const Search: FC<ISearch> = ({ Name,
   Label,
   SetGenAdd,
   setTrigFilter,
+  setFilterDate,
   resetFilter
 }) => {
   const {
@@ -129,6 +130,7 @@ const Search: FC<ISearch> = ({ Name,
         </span>
         <span className="main-filter-icon" onClick={() => {
           setTrigFilter()
+          setFilterDate("")
           resetFilter()
           clearSuggestions()
         }}>

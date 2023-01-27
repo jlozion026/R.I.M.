@@ -1012,6 +1012,14 @@ export type CreateOneReportMutationVariables = Exact<{
 
 export type CreateOneReportMutation = { __typename?: 'Mutation', createOneReport: { __typename?: 'Report', report_id: string, location: any, description: string, incident?: { __typename?: 'Incident', date_started: any, date_ended: any } | null } };
 
+export type GetAllReportsWithDateCpQueryVariables = Exact<{
+  reportType?: InputMaybe<ReportType>;
+  date: Scalars['DateTime'];
+}>;
+
+
+export type GetAllReportsWithDateCpQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', location: any, report_id: string, report_type: ReportType, description: string, incident?: { __typename?: 'Incident', date_started: any, date_ended: any } | null, city_project?: { __typename?: 'CityProject', date_started: any, date_ended: any } | null }> };
+
 export type GetAllReportsByTypeQueryVariables = Exact<{
   reportType?: InputMaybe<ReportType>;
 }>;
@@ -1299,6 +1307,40 @@ export const useCreateOneReportMutation = <
     useMutation<CreateOneReportMutation, TError, CreateOneReportMutationVariables, TContext>(
       ['createOneReport'],
       (variables?: CreateOneReportMutationVariables) => fetcher<CreateOneReportMutation, CreateOneReportMutationVariables>(client, CreateOneReportDocument, variables, headers)(),
+      options
+    );
+export const GetAllReportsWithDateCpDocument = `
+    query GetAllReportsWithDateCP($reportType: ReportType, $date: DateTime!) {
+  reports(
+    where: {AND: [{city_project: {is: {date_started: {equals: $date}}}}, {report_type: {equals: $reportType}}]}
+  ) {
+    location
+    report_id
+    report_type
+    description
+    incident {
+      date_started
+      date_ended
+    }
+    city_project {
+      date_started
+      date_ended
+    }
+  }
+}
+    `;
+export const useGetAllReportsWithDateCpQuery = <
+      TData = GetAllReportsWithDateCpQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetAllReportsWithDateCpQueryVariables,
+      options?: UseQueryOptions<GetAllReportsWithDateCpQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetAllReportsWithDateCpQuery, TError, TData>(
+      ['GetAllReportsWithDateCP', variables],
+      fetcher<GetAllReportsWithDateCpQuery, GetAllReportsWithDateCpQueryVariables>(client, GetAllReportsWithDateCpDocument, variables, headers),
       options
     );
 export const GetAllReportsByTypeDocument = `
