@@ -60,7 +60,7 @@ const DefaultUpdateForm: FC<IDefaultUpdateForm> = ({
             <Calendar
               date={new Date()}
               onChange={handleStartDate}
-              className="calendarElement"
+              className="calendarUpdate"
             />
           </div>
         ) : null}
@@ -89,7 +89,7 @@ const DefaultUpdateForm: FC<IDefaultUpdateForm> = ({
             <Calendar
               date={new Date()}
               onChange={handleEndDate}
-              className="calendarElement"
+              className="calendarUpdate"
             />
           </div>
         ) : null}
