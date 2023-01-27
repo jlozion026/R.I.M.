@@ -1,8 +1,9 @@
-import roadclosure from "@/Assets/svg/roadclosure.svg";
+import RoadClosure from "@/Assets/svg/RoadClosure.svg";
 import Construction from "@/Assets/svg/Constructions.svg";
 import Hazzard from "@/Assets/svg/Hazzard.svg";
 import Accident from "@/Assets/svg/Accident.svg";
 import Event from "@/Assets/svg/Event.svg";
+import Cityproject from "@/Assets/svg/Cityproject.svg"
 
 export const LogsReportsBtnProps = [
   
@@ -12,8 +13,8 @@ export const LogsReportsBtnProps = [
     svg: "",
     icon: "",
     children: "Recent",
-    buttonStyle: "btn--categories",
-    buttonSize: "btn--logs",
+    buttonStyle: "btn--logs-design",
+    buttonSize: "btn--logs2",
     onclick: () => {},
   },
   {
@@ -22,17 +23,17 @@ export const LogsReportsBtnProps = [
     svg: "",
     icon: "",
     children: "Oldest",
-    buttonStyle: "btn--categories",
-    buttonSize: "btn--logs",
+    buttonStyle: "btn--logs-design",
+    buttonSize: "btn--logs2",
     onclick: () => {},
   },
   {
     id: "CityProject",
     type: "button",
-    svg: Hazzard,
+    svg: Cityproject,
     icon: "",
-    children: "City Project btn",
-    buttonStyle: "btn--categories",
+    children: "City Project",
+    buttonStyle: "btn--logs-design",
     buttonSize: "btn--logs",
     onclick: () => {},
   },
@@ -40,11 +41,11 @@ export const LogsReportsBtnProps = [
   {
     id: "RoadClosure",
     type: "button",
-    svg: roadclosure,
+    svg: RoadClosure,
     icon: "",
     children: "Road Closure",
-    buttonStyle: "btn--categories",
-    buttonSize: "btn--active",
+    buttonStyle: "btn--logs-design",
+    buttonSize: "btn--logs",
     onclick: () => {},
   },
 
@@ -54,7 +55,7 @@ export const LogsReportsBtnProps = [
     svg: Construction,
     icon: "",
     children: "Road Construction",
-    buttonStyle: "btn--categories",
+    buttonStyle: "btn--logs-design",
     buttonSize: "btn--logs",
     onclick: () => {},
   },
@@ -65,7 +66,7 @@ export const LogsReportsBtnProps = [
     svg: Accident,
     icon: "",
     children: "Road Accident",
-    buttonStyle: "btn--categories",
+    buttonStyle: "btn--logs-design",
     buttonSize: "btn--logs",
     onclick: () => {},
   },
@@ -76,7 +77,7 @@ export const LogsReportsBtnProps = [
     svg: Event,
     icon: "",
     children: "Road Event",
-    buttonStyle: "btn--categories",
+    buttonStyle: "btn--logs-design",
     buttonSize: "btn--logs",
     onclick: () => {},
   },
@@ -87,7 +88,7 @@ export const LogsReportsBtnProps = [
     svg: Hazzard,
     icon: "",
     children: "Road Hazzard",
-    buttonStyle: "btn--categories",
+    buttonStyle: "btn--logs-design",
     buttonSize: "btn--logs",
     onclick: () => {},
   },

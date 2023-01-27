@@ -1,38 +1,51 @@
-.logsmainGrid{
+.logsmainGrid {
     display: grid;
     width: 100vw;
     height: 100vh;
-    padding: 10px 8px;
-    grid-template-columns: 0.2fr  2fr ;
-    grid-template-rows:0.55fr 2fr;
-    grid-template-areas: 
-    "nav categories"
-    "nav card ";
-    gap: 1em;
+    grid-template-columns: 0.2fr 1fr 1fr;
+    grid-template-rows: 0.55fr 2fr 0.3fr;
+    grid-template-areas:
+        "logs-nav logs-categories"
+        "logs-nav logs-card "
+        "logs-nav logs-pages";
+    gap: 1vw;
 }
-.mobilesearchwrapper{
-    display: none;
+.backIcon{
+    display: none; 
 }
 
 .logs-warning{
   color: #717073;
+  font-size: 2.3vw;
+  padding-top: 3vw;
 }
-
-
 .MapCards{
     display: flex;
     flex-direction: column;
     align-items: center;
-    grid-area: card;
-    padding: 45px 50px 10px;
-    overflow-y: scroll;
+    grid-area: logs-card;
+    overflow-y: hidden;
+    padding-top: 0.5vw;
 }
+
+   /* hiding scroll bar */
+   .MapCards::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+    .MapCards{
+        scrollbar-width:none;
+        -ms-overflow-style: none;
+
+    }
 
 .logsnavContainer{
     display: flex;
-    grid-area: nav;
+    grid-area: logs-nav;
     justify-content: center;
     align-items: center;
+    width: 10vw;
+
 
 }
 
@@ -44,8 +57,12 @@
 
 }
 
-.categorieswrap{
-    grid-area: categories;
+.logscategorieswrap{
+    grid-area: logs-categories;
+    display: flex;
+    flex-direction: column;
+    width: 85vw;
+
 }
 
 .categoriesContainer{
@@ -53,48 +70,70 @@ display: flex;
 flex-direction: column;
 align-items: center ;
 
-
 }
 .logstopwrapper{
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    height:5em;
-    padding-right: 55px;
+    height:6.5vw;
     justify-content: center;
-}
-.searchBarCon{
-    display: flex;
-    flex-direction:row;
-    align-items: center;
-    gap: 10px;
-    background: #fefeff;
-    width:17.5em;
-    height: 2em;
-    border-radius:0.8em;
-    box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.25);   
-    position:relative;
+    padding-right: 2vw;
+    padding-top: 2vw;
+    padding-bottom: 2vw;
 }
 
+.searchBarCon {
+    display: flex;
+    align-items: center;
+    background: #fefeff;
+    width: 20vw;
+    height: 5vh;
+    justify-content: center;
+    border-radius: 0.5vw;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    box-shadow: 0px 5px 4px rgb(0 0 0 / 25%);
+    border: 0.1vw solid #9B959E;
+}
+
+.logsbuttons{
+    width: 100%;
+    height: fit-content;
+    overflow: visible;
+}
 
 .searchBarCon>input{
     display: flex;
     align-items: flex-end;
-    height: 2em;
-    width: 17em;
+    height: 1em;
+    width: 16.5vw;
     border-color: white;
-    border-radius: 10px;
+    border-radius: 2px;
     border-style: hidden;
     flex: none;
     order: 0;
     flex-grow: 0;
     outline: 0;
-    
-        
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1vw;
+    color: #000000;
+
+     
 }
 .searchIcon{
-    height: 1.5em;
-    width: 1.5em;
+  
+    height: 100%;
+    width: 1.7vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:#9B959E;
+}
+
+.searchIcon :hover {
+    color: #205eff;
+    cursor: pointer;
 }
 
 .actLogContainer{
@@ -104,159 +143,414 @@ align-items: center ;
     flex-direction: column;
     align-items: center;
     gap: 5em;
+    height: 13vh;
     padding-bottom: 1em;
     width: 70vw;
 
 }
+.logswrapper{
+    width: 15vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 .page-btns{
   display: flex;
+  grid-area: logs-pages;
   justify-content: center;
   align-items: center;
   flex-direction: row;
   width: 100%;
-  height: 30%;
-  gap: 5em;
+  height: 100%;
+  gap: 1.5em;
 }
 
+.search-item {
+    transition: background-color var(--speed);
+    height: 2.5em;
+    display: flex;
+    padding: 0.5em;
+}
 
-@media all and (max-width: 480px) {
+@media all and (max-width: 960px) {
+
     .logsmainGrid{
         display: grid;
         width: 100vw;
-        height: 200vh;
+        height: 100vh;
         grid-template-columns:1fr;
-        grid-template-rows:0.11fr 1fr 0.1fr;
+        grid-template-rows:0.21fr 1fr 0.1fr 0.1fr;
         grid-template-areas: 
-        "categories"
-        "card"
-        "nav";
-        gap: 1em;
+        "logs-categories"
+        "logs-card"
+        "logs-pages"
+        "logs-nav";
+        gap: 0.5vw;
+        overflow:-moz-hidden-unscrollable;
           
     }
-    .categorieswrap{
-        grid-area: categories;
+    .page-btns{
+        height: 60%;
+    }
+
+    .searchBarCon>ul.search-results {
+        border: none;
+    }
+
+    .logsnavContainer{
+        flex-direction: row;
+        height: fit-content;
+    }
+    .logscategorieswrap{
         background-color: #F0F0F9;
         height: fit-content;
-        padding-top: 25px;
+        width: 100vw;
+        position: fixed;
+        padding-top: 2vw;
         
+    }
 
-        
-       
+    .logs-warning{
+        font-size: 4.5vw;
     }
-    .logsnavContainer{
-        display: flex;
-        flex-direction: column;
+
     
-    
+    .logsnavCont{
+        height: fit-content;
     }
+
     .logstopwrapper{
-        display: none;  
-    }
-    .mobiletopwrapper{
-        overflow: scroll;
         display:flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        min-height: 100%;
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding: 0%;
+        padding-top: 2vw;
+        padding-bottom: 2vw;
 
-        justify-content: center;
     }
-    .mobilesearchIcon{
-  
-        height: 1.5em;
-        width: 1.5em;
-        
-    }
+
     .backIcon{
-        height: 1.3em;
-        width: 1.3em;
+        height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
+        color: #9B959E;
     }
-    .mobilesearchBarCon{
+ 
+    .searchBarCon{
         display: flex;
         flex-direction:row;
         align-items: center;
         justify-content: center;
         gap: 8px;
         background: #fefeff;
-        width:22.5em;
-        height: 3.2em;
-        border-radius:0.8em;
-        box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.25);   
+        padding-right: 1vw;
+        padding-left: 1vw;
+        box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.25);  
         position: fixed;
-    }
-
-    .mobilesearchwrapper{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    
-
-        
         
     }
 
-    .mobilesearchBarCon>input{
+    .searchBarCon>input{
         outline: 0;
         display: flex;
         align-items:center;
-        height:3.2em;
-        width: 20.5em;
+        height:100%;
         border-color: white;
         border-radius: 10px;
         border-style: hidden;
         flex: none;
         order: 0;
         flex-grow: 0;
-        outline: 0;
+        font-style: normal;
+        font-weight: 500;
+        color: #000000;
+
+    }
+    
+    .actLogContainer{
+    
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 1em;
+        width: 85vw;
+    }
+   
+
+}
+
+@media all and (max-width: 429px) {
+
+    .logsmainGrid{
+        grid-template-rows: 0.29fr 1fr 0.15fr 0.1fr;
+    }
+    .logstopwrapper{
+        min-height: 20vw;
     }
 
-    .logsbuttons{
-    overflow-x: scroll;
-    position:static;
+    .searchBarCon>input{
+        width: 58vw;
+        font-size: 4.5vw;
+    }
+
+    .searchBarCon{
+        width:90vw;
+        height: 6.5vh;
+        border-radius:3.5vw;
+        border: 0.4vw solid #9B959E;
+    }
+
+    .backIcon{
+        width: 8vw;
+    }
+
+    .searchIcon{
+        width: 8vw;
+    }
+
+     .MapCards{
+        padding-top: 3vw;
+        padding-bottom: 0%;
+    }
+    .logswrapper{
+        width: 60vw;
+    }
+    .actLogContainer{
+        min-height: 12vh;
+
+    }
+    
+}
+
+ @media all and (min-width: 430px) and (max-width: 480px) {
+
+
+
+    .logstopwrapper{
+        min-height: 16vw;
+    }
+
+    .searchBarCon>input{
+        width: 70vw;
+        font-size: 3vw;
+    }
+
+    .searchBarCon{
+        width:95vw;
+        height: 6.5vh;
+        border-radius:3.5vw;
+        border: 0.4vw solid #9B959E;
+    }
+
+    .backIcon{
+        width: 5.5vw;
+    }
+
+    .searchIcon{
+        width: 5.5vw;
+    }
+
+     .MapCards{
+        padding-top: 9vw;
+        padding-bottom: 0%;
+    }
+    .logswrapper{
+        width: 60vw;
+    }
+    .actLogContainer{
+        height: 12vh;
+
+    }
+    .page-btns{
+    height: 18%;
+    }
+
+ }
+ 
+
+ 
+/* reports button for Mobile View to Tablet */
+@media all and (min-width: 481px) and (max-width: 490px) {
+
+    .logsmainGrid{
+
+ 
+        grid-template-rows: 0.29fr 1fr 0.15fr 0.1fr;
+     
+    }
+
+
+
+    .logstopwrapper{
+        min-height: 12vw;
+        padding-bottom: 0.5vw;
+    }
+
+    .searchBarCon>input{
+        width: 71vw;
+        font-size: 2.8vw;
+    }
+
+    .searchBarCon{
+        width:91vw;
+        height: 6.5vh;
+        border-radius:2.5vw;
+        border: 0.3vw solid #9B959E;
+    }
+
+    .backIcon{
+        width: 5vw;
+    }
+
+    .searchIcon{
+        width: 5vw;
+    }
+
+     .MapCards{
+       
+        padding-top: 2vw;
+    }
+    .logswrapper{
+        width: 45vw;
+    }
+    .actLogContainer{
+        height: 12vh;
+
+    }
+
+
+}
+
+
+@media all and (min-width: 491px) and (max-width: 768px) { 
+
+    .logsmainGrid{
+
+ 
+        grid-template-rows: 0.29fr 1fr 0.3fr 0.05fr
+     
+    }
+
+    .logstopwrapper{
+        min-height: 10vw;
     }
 
     .MapCards{
-        display: flex;
-        flex-direction: column;
-        grid-area: card;
-        padding: 10px 50px 2px;
-        overflow-x: 
-        scroll;
-        box-sizing: content-box;
-        
-    }   
-    .logsbtncontainer {
-        overflow-x: scroll;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        gap: 1em;
-        padding-top: 30px;
-        padding-bottom: 1em;
-        
+       
+        padding-top: 2vw;
+    
+    }
+
+    .page-btns{
+        height: 50%;
+    }
+
+    
+    .searchBarCon>input{
+        width: 72vw;
+        font-size: 2vw;
+    }
+
+  
+    .searchBarCon {
+        width: 91vw;
+        height: 6.5vh;
+        border-radius: 1.5vw;
+        border: 0.2vw solid #9B959E;
+    }
+
+    .backIcon{
+        width: 3vw;
+    }
+
+    .searchIcon{
+        width: 3vw;
+    }
+  
+    .logswrapper{
+        width: 45vw;
+       
+    }
+    .actLogContainer{
+        height: 11.5vh;
+        padding-bottom: 1.5vw;
+    }
+    .logscategorieswrap{
+        padding: 0%;
+    }
+ 
+} 
+/* reports button Tablet View */
+@media all and (min-width: 769px) and (max-width: 960px) { 
+
+    .logsmainGrid{
+
+ 
+        grid-template-rows: 0.23fr 0.7fr 0.1fr 0.18fr;
+     
+    }
+
+    .logstopwrapper{
+        min-height: 7vw;
+        padding-top: 1vw;
+        padding-bottom: 1vw;
+    }
+
+    .MapCards{
+       
+        padding-top: 0.5vw;
+    }
+    .page-btns{
+        height: 100%;
+    }
+
+
+    .searchBarCon>input{
+        width: 74vw;
+        font-size: 2vw;
+    }
+
+  
+    .searchBarCon {
+        width: 91vw;
+        height: 6.5vh;
+        border-radius: 1.5vw;
+        border: 0.2vw solid #9B959E;
+    }
+
+    .backIcon{
+        width: 3.5vw;
+    }
+
+    .searchIcon{
+        width: 3.5vw;
+    }
+  
+    .logswrapper{
+        width: 45vw;
+       
+    }
+    .actLogContainer{
+        height: 11vh;
+    }
+    .logscategorieswrap{
+        padding: 0%;
     }
     .logsbuttons{
-        position: fixed;
-        top: 7%;
-        bottom:5%;
-        width: 100vw; /* viewport width */
-        height: 100vh; /* viewport height */
-        overflow-y: scroll;
-        overflow-x: hidden;
+    padding-top: 0%;
+    
     }
-    
-    .logsbuttons>.sidebar{
-        position: sticky;
-        top: 0;
-        }
-
-   
-    
+ 
 }
+
+
+
+
+
+
+

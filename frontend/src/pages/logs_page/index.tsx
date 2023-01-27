@@ -161,15 +161,24 @@ const Logs: FC = () => {
         </div>
       </div>
 
-      <div className="categorieswrap">
+     
+
+      <div className="logscategorieswrap">
         <div className="logstopwrapper">
           <div
             className="searchBarCon"
             onClick={() => setSearchClick(true)}
             ref={ref} >
+              
+          <span >
+              
+                <Link to="/Dashboard">
+                  <BiArrowBack className="backIcon" /></Link>
+                  
+              </span>
 
             <InputField
-              placeholder={"Search"}
+              placeholder={"Search here"}
               type={"text"}
               auto={false}
               name={"searchBar"}
@@ -179,7 +188,9 @@ const Logs: FC = () => {
               value={searchString}
               readonly={false} />
             <span >
+              
               <IoIosSearch className="searchIcon" />
+              
             </span>
             {searchClick ?
               <ul className="logs-search-results">
@@ -187,33 +198,6 @@ const Logs: FC = () => {
               </ul>
                 : null
               }
-          </div>
-        </div>
-
-
-        <div className="mobilesearchwrapper">
-          <div className="mobiletopwrapper">
-            <div className="mobilesearchBarCon">
-              <span >
-                <Link to="/Dashboard">
-                  <BiArrowBack className="backIcon" /></Link>
-              </span>
-              <InputField
-                placeholder="Search here"
-                label={""}
-                type={"text"}
-                auto={false}
-                name={"searchBar"}
-                forinput={""}
-                id={"searchBar"}
-                required={false}
-                getData={getSearch}
-                readonly={false} />
-              <span >
-                <IoIosSearch className="mobilesearchIcon" />
-              </span>
-
-            </div>
           </div>
         </div>
 
@@ -244,6 +228,7 @@ const Logs: FC = () => {
             :
             <h1 className="logs-warning">No {reportTypeQuery.replace(/([A-Z])/g, " $1").trim()} Reports Available</h1>
         }
+        </div>
         <div className="page-btns">
           <PageButtons
             orderPage={orderPage}
@@ -256,7 +241,7 @@ const Logs: FC = () => {
 
         </div>
         {isFetching}
-      </div>
+      
     </div>)
 }
 export default Logs;

@@ -20,8 +20,8 @@ button {
 }
 
 .btn-img {
-  height: 30px;
-  width: 30px;
+  height: 100%;
+  width: 2vw;
 }
 
 .btn {
@@ -41,8 +41,8 @@ button {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 3vw;
+  height: 100%;
 }
 
 /* Icon Background Colors */
@@ -85,7 +85,7 @@ button {
   border: none;
 }
 
-.btn--categories {
+.btn--categories,.btn--logs-design{
   background-color: var(--white);
   color: var(--grey);
   border: none;
@@ -114,8 +114,11 @@ button {
 }
 
 .btn--medium {
-  padding: 10px;
-  font-size: 18px;
+  padding: 0.4vw;
+  font-size: 1.2vw;
+  border-radius: 0.5vw;
+  min-width: 6vw;
+  min-height:3vw ;
 }
 
 .btn--small {
@@ -125,21 +128,29 @@ button {
   font-size: 12px;
   font-weight: bold;
 }
-.btn--logs {
-  padding: 5px;
-  font-size: 12px;
-  min-height: 100%;
+
+.btn--logs,.btn--logs2{
+  font-size: .74vw;
+  min-height: 5vh;
   min-width: 100%;
   font-weight: bold;
+  border-radius: 1em;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  color: #9b959e;
+  white-space: nowrap;
+  color: #9B959E;
+
 }
-.btn--active {
-  padding: 5px;
-  font-size: 12px;
-  font-weight: bold;
-  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
-  color: #205eff;
+.btn--logs2{
+  padding-right:2.35vw;
+  padding-left: 2.35vw;
+  padding-top: 1vw;
+  padding-bottom: 1vw;
+  width: 100%;
+  height: 100%;
+ }
+ 
+.btn--logs{
+  padding-right: 0.4vw;
 }
 
 .for-icons {
@@ -171,9 +182,82 @@ button {
   margin-right: 0px;
 }
 
-/* report buttons for small mobile view */
-@media all and (max-width: 480px) {
+/* Tablet View */
+@media all and (max-width: 960px) {
+  .btn--reports {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 5px;
+    font-size: 0.6em;
+    color: #626060;
+    font-weight: bold;
+  }
   /* forms next button for mobile view */
+  .btn--next {
+    width: 100%;
+    height: 100%;
+    padding-left: 120px;
+    padding-right: 120px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  .btn--secondary {
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+  }
+  .btn--logs,.btn--logs2{
+      min-height: 100%;
+      min-width: 100%; 
+  
+    }
+
+  .icon-bg{
+      width: 10vw;;
+  }
+  .btn--medium {
+    border-radius: 1.5vw;
+  }
+    
+  }
+
+  @media all and (max-width: 420px) {
+    .btn--logs2,.btn--logs{
+      font-size: 3.5vw;
+      border-radius: 3vw;
+     }
+     .btn--logs2 {
+    padding-right: 10vw;
+    padding-left: 10vw;
+    padding-top: 2.5vw;
+    padding-bottom: 2.5vw;
+
+  }
+     .btn--logs{
+      padding: 0.5vw;
+     }
+  
+     .btn--medium {
+      padding: 2.5vw;
+      font-size: 3.5vw;
+      min-width: 19vw;
+      min-height:3vw ;
+}
+    }
+  
+    .btn-img{
+      width: 9vw;
+  }
+  
+/* report buttons for small mobile view */
+@media all and (min-width: 421px) and (max-width: 480px) {
+ 
+   /* forms next button for mobile view */
   .btn--next {
     padding-left: 120px;
     padding-right: 120px;
@@ -182,10 +266,37 @@ button {
     font-size: 15px;
     font-weight: bold;
   }
+  .btn--logs2,.btn--logs{
+    font-size: 2vw;
+    border-radius: 3vw;
+   }
+   .btn--logs2 {
+    padding-right: 8.5vw;
+    padding-left: 8.5vw;
+    padding-top: 3vw;
+    padding-bottom: 3vw;
+}
+   .btn--logs{
+    padding: 1vw;
+   }
+
+   .btn--medium {
+    padding: 2vw;
+    font-size: 2.5vw;
+    min-height: 7vw;
+    min-width: 17vw;
+  }
+
+  .btn-img{
+    width: 7vw;
 }
 
+
+}
+
+
 /* report buttons for Mobile View */
-@media all and (min-width: 481px) and (max-width: 768px) {
+@media all and (min-width: 481px) and (max-width: 599px) {
   .btn--categories {
     background-color: var(--none);
     color: var(--grey);
@@ -214,43 +325,95 @@ button {
     padding-bottom: 15px;
     font-size: 15px;
     font-weight: bold;
+   
   }
+  .btn--logs{
+    padding: 0.5vw;
+    
+  }
+  .btn--logs2,.btn--logs{
+    font-size: 2.3vw;
+    border-radius: 1.8vw;
+   }
+   .btn--logs2{
+    padding-right: 7.5vw;
+    padding-left: 7.5vw;
+    padding-top: 2vw;
+    padding-bottom: 2vw;
+   }
+   
+   .btn--medium {
+    padding: 1.5vw;
+    font-size: 2.5vw;
+    min-height: 7vw;
+    min-width: 17vw;
+  }
+
+  .btn-img{
+    width: 6.5vw;
 }
 
-/* Tablet View */
-@media all and (max-width: 960px) {
-  .btn-img {
-    height: 4.6em;
-    width: 4.6em;
-    margin-right: 0px;
-  }
-
-  .btn--reports {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    padding: 5px;
-    font-size: 0.6em;
-    color: #626060;
-    font-weight: bold;
-  }
-
-  /* forms next button for mobile view */
-  .btn--next {
-    width: 100%;
-    height: 100%;
-    padding-left: 120px;
-    padding-right: 120px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    font-size: 15px;
-    font-weight: bold;
-  }
-
-  .btn--secondary {
-    background-color: var(--primary);
-    color: var(--white);
-    border: none;
-  }
 }
+  @media all and (min-width: 600px) and (max-width: 768px) { 
+    .btn--logs2,.btn--logs{
+      font-size: 2vw;
+      border-radius: 1.8vw;
+     }
+     .btn--logs2{
+      padding-right: 7.1vw;
+      padding-left: 7.1vw;
+      padding-top: 1.2vw;
+      padding-bottom: 1.2vw;
+  }
+     .btn--logs{
+      padding: 0.5vw;
+     }
+  
+     .btn--medium {
+      padding: 1vw;
+      font-size: 2.5vw;
+      min-height: 5vw;
+      min-width: 13vw;
+    }
+  
+    .btn-img{
+      width: 4vw;
+  }
+    .icon-bg{
+      width: 7vw;
+    }
+  }
+
+
+@media all and (min-width: 769px) and (max-width: 960px) { 
+   .btn--logs2,.btn--logs{
+    font-size: 1.5vw;
+    border-radius: 1vw;
+   }
+   .btn--logs2{
+    padding-right: 5vw;
+    padding-left: 5vw;
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+   }
+   .btn--logs{
+    padding: 0.2vw;
+   }
+
+   .btn-img{
+    width: 3.5vw;
+  }
+  .btn--medium {
+    padding: 1vw;
+    font-size: 2vw;
+    min-height: 2vw;
+    min-width: 10vw;
+  }
+  .icon-bg{
+    width: 5vw;;
+  }
+
+}
+
+
+

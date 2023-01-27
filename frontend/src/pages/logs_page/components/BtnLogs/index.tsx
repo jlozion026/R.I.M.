@@ -16,7 +16,7 @@ const BtnLogs: FC<IBtnLogs> = ({ TrigFetch }) => {
       <div className="logsbtncontainer">
         {LogsReportsBtnProps.map((val, key) => {
           return (
-            <div className="wrapper" key={key}>
+            <div className="logswrapper" key={key}>
               <Button
                 type={btnType.Submit}
                 svg={val.svg}
