@@ -44,7 +44,9 @@ const DropDown: FC<IDropDown> = ({ setMenuTrig }) => {
   });
   return (
     <>
-      <div className="dropdown">
+      <div
+        className={window.location.pathname == "/dashboard" ? "dropdown-left" : "dropdown"}
+      >
         <ul className="dropdown-card">
           <li className="menu-item" onClick={() => setTrigger(true)}>
             <p className="drop-icon">

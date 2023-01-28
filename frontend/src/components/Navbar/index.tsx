@@ -24,20 +24,27 @@ const Navbar: FC<navCardItems> = ({ cardSize, PingPopOut }) => {
 
   return (
     <Card cardSize={cardSize}>
-      <nav className="vectorContainer">
+      <nav className="vectorContainer" >
         <Link to="/" className="nav-icon">
-          <p onClick={PingPopOut}>
+          <p onClick={PingPopOut} id={window.location.pathname == "/" ? "active" : ""}>
             <MdOutlinePinDrop />
           </p>
         </Link>
-        <Link to="/dashboard" className="nav-icon">
-          <p>
+        <Link to="/dashboard" className="nav-icon" >
+          <p id={window.location.pathname == "/dashboard" ? "active" : ""}>
             <MdOutlineSpaceDashboard />
           </p>
         </Link>
 
         <div className="nav-icon" ref={ref}>
-          <p onClick={() => setMenuTrig(!menuTrig)}>
+          <p
+            onClick={() => {
+              setMenuTrig(!menuTrig)
+            }}
+
+            id={menuTrig? "active": ""}
+
+          >
             <CgProfile />
           </p>
           {menuTrig ? <DropDown setMenuTrig={handleTrigMenu} /> : null}
