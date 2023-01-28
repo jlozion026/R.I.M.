@@ -242,13 +242,14 @@ button {
     min-width: 100%;
   }
 
-  .icon-bg {
-    width: 10vw;
-  }
   .btn--medium {
     border-radius: 1.5vw;
   }
-}
+  .btn--logs{
+    padding-right: 0.3vw;
+  }
+    
+  }
 
 @media all and (max-width: 420px) {
   .btn--logs2,
@@ -262,22 +263,29 @@ button {
     padding-top: 2.5vw;
     padding-bottom: 2.5vw;
   }
-  .btn--logs {
-    padding: 0.5vw;
-  }
+     .btn--logs{
+      padding: 0.5vw;
+     }
+  
+     .btn--medium {
+      padding: 2.5vw;
+      font-size: 3.5vw;
+      min-width: 19vw;
+      min-height:3vw ;
 
-  .btn--medium {
-    padding: 2.5vw;
-    font-size: 3.5vw;
-    min-width: 19vw;
-    min-height: 3vw;
+    }
+  
+    .btn-img{
+      width: 9vw;
   }
+  .icon-bg{
+    width: 16vw;
+    
+
+}
 }
 
-.btn-img {
-  width: 9vw;
-}
-
+  
 /* report buttons for small mobile view */
 @media all and (min-width: 421px) and (max-width: 480px) {
   /* forms next button for mobile view */
@@ -313,7 +321,14 @@ button {
 
   .btn-img {
     width: 7vw;
-  }
+}
+.icon-bg{
+  width: 15vw;
+  
+
+}
+
+
 }
 
 /* report buttons for Mobile View */
@@ -371,7 +386,14 @@ button {
 
   .btn-img {
     width: 6.5vw;
-  }
+}
+
+.icon-bg{
+  width: 13vw;
+
+
+}
+
 }
 @media all and (min-width: 600px) and (max-width: 768px) {
   .btn--logs2,
@@ -385,40 +407,42 @@ button {
     padding-top: 1.2vw;
     padding-bottom: 1.2vw;
   }
-  .btn--logs {
-    padding: 0.5vw;
+     .btn--logs{
+      padding: 0.5vw;
+     }
+  
+     .btn--medium {
+      padding: 1vw;
+      font-size: 2.5vw;
+      min-height: 5vw;
+      min-width: 13vw;
+    }
+  
+    .btn-img{
+      width: 5vw;
+  }
+    .icon-bg{
+      width: 11vw;
+    }
   }
 
-  .btn--medium {
-    padding: 1vw;
-    font-size: 2.5vw;
-    min-height: 5vw;
-    min-width: 13vw;
-  }
-
-  .btn-img {
-    width: 4vw;
-  }
-  .icon-bg {
-    width: 7vw;
-  }
-}
 
 @media all and (min-width: 769px) and (max-width: 960px) {
   .btn--logs2,
   .btn--logs {
     font-size: 1.5vw;
     border-radius: 1vw;
-  }
-  .btn--logs2 {
-    padding-right: 5vw;
-    padding-left: 5vw;
+   }
+   .btn--logs2{
+    padding-right: 6vw;
+    padding-left: 6vw;
     padding-top: 1vw;
     padding-bottom: 1vw;
   }
   .btn--logs {
     padding: 0.2vw;
-  }
+    padding-right: 1vw;
+   }
 
   .btn-img {
     width: 3.5vw;
@@ -429,8 +453,8 @@ button {
     min-height: 2vw;
     min-width: 10vw;
   }
-  .icon-bg {
-    width: 5vw;
+  .icon-bg{
+    width: 9vw;;
   }
 }
 
