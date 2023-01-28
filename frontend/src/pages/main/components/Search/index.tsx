@@ -120,7 +120,6 @@ const Search: FC<ISearch> = ({ Name,
         />
 
         <span className="main-search-icon" onClick={() => {
-          setTrigFilter()
           resetFilter()
           clearSuggestions()
         }}>
@@ -128,6 +127,7 @@ const Search: FC<ISearch> = ({ Name,
             <GoSearch />
           </p>
         </span>
+
         <span className="main-filter-icon" onClick={() => {
           setTrigFilter()
           setFilterDate("")
@@ -138,6 +138,7 @@ const Search: FC<ISearch> = ({ Name,
             <FiFilter />
           </p>
         </span>
+
         {/* We can use the "status" to decide whether we should display the dropdown or not */}
         {status === "OK" ? (
           <ul className="main-search-results">

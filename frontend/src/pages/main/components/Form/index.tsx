@@ -2,7 +2,6 @@ import { ChangeEvent, FC, useState, useContext } from "react";
 
 import {
   useCreateOneReportMutation,
-  CreateOneReportMutation,
   ReportType,
 } from "@/generated/graphql";
 
@@ -77,8 +76,8 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
   graphqlRequestClient.setHeader("authorization", `bearer ${getToken()}`); //sets the authorization header
 
   const { mutate } = useCreateOneReportMutation<Error>(graphqlRequestClient, {
-    onSuccess: (data: CreateOneReportMutation) => {
-      queryClient.invalidateQueries(["getAllReports"]);
+    onSuccess: () => {
+      queryClient.invalidateQueries(["getAllReports",{}]);
     },
 
     onError: (error: Error) => {

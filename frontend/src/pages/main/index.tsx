@@ -163,17 +163,18 @@ const Main: FC = () => {
   graphqlRequestClient.setHeader("authorization", `bearer ${getToken()}`); //sets the authorization header
   // send queries for all reports to the gql endpoint
 
-  const { isLoading, data } = useGetAllReportsQuery<GetAllReportsQuery, Error>(
+  const { isLoading } = useGetAllReportsQuery<GetAllReportsQuery, Error>(
     graphqlRequestClient,
     {},
     {
+      onSuccess: async (data: GetAllReportsByTypeQuery) => {
+        setModArr(data);
+      },
       refetchIntervalInBackground: true,
     }
   );
 
   const {
-    isLoading: isLoadingByType,
-    data: dataByType,
     refetch: refetchReportsByType,
   } = useGetAllReportsByTypeQuery<GetAllReportsByTypeQuery, Error>(
     graphqlRequestClient,
@@ -190,8 +191,6 @@ const Main: FC = () => {
   );
 
   const {
-    isLoading: isLoadingDate,
-    data: dataWithDate,
     refetch: refetchReportsWithDate,
   } = useGetAllReportsWithDateQuery<GetAllReportsWithDateQuery, Error>(
     graphqlRequestClient,
@@ -210,8 +209,6 @@ const Main: FC = () => {
   );
 
   const {
-    isLoading: isLoadingDateCP,
-    data: dataWithDateCP,
     refetch: refetchReportsWithDateCP,
   } = useGetAllReportsWithDateCpQuery<GetAllReportsWithDateCpQuery, Error>(
     graphqlRequestClient,
@@ -230,18 +227,20 @@ const Main: FC = () => {
   );
 
   useEffect(() => {
-    if (filterType !== ReportType.CityProject) {
-      if (filterDate) {
-        refetchReportsWithDate();
-      } else {
-        refetchReportsByType();
+    if (filterType) {
+      if (filterType !== ReportType.CityProject) {
+        if (filterDate) {
+          refetchReportsWithDate();
+        } else {
+          refetchReportsByType();
+        }
       }
-    }
-    else {
-      if (filterDate) {
-        refetchReportsWithDateCP()
-      } else {
-        refetchReportsByType();
+      else {
+        if (filterDate) {
+          refetchReportsWithDateCP()
+        } else {
+          refetchReportsByType();
+        }
       }
     }
   }, [filterType]);
