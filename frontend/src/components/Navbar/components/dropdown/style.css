@@ -1,7 +1,5 @@
 .dropdown-card{
     width: 250px;
-    transform: translateX(-40);
-    overflow: hidden;
     background-color: #ffffff;
     box-shadow: 0 0 20px rgb(0 0 0 / 15%);
     padding: 1rem;
@@ -14,6 +12,24 @@
   top: 75%;
 }
 
+
+.dropdown-left{
+  position:absolute;
+  left: 7.5em;
+  top: 57%;
+}
+
+.dropdown-left::before{
+    position: absolute;
+    left: -1em;
+    top: 1.5em;
+    display: inline-block;
+    border-top: 9px solid transparent;
+    border-right: 9px solid #ffffff;
+    border-bottom: 9px solid transparent;
+    border-left: 9px solid transparent;
+    content: '';
+}
 
 .dropdown::before{
     position: absolute;
