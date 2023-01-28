@@ -60,13 +60,16 @@
   width: 100%;
 }
 
-.calendarElement {
+.calendarUpdate {
   position: absolute;
-  left: 66%;
+  left: 50%;
   transform: translate(-50%);
-  top: 100%;
-  border: 1px solid #205eff;
+  top: 90%;
+  border: 0.1vw solid #205eff;
   z-index: 10;
+  height: fit-content;
+  width: 95%;
+  font: 1vw;
 }
 
 .update-description {
