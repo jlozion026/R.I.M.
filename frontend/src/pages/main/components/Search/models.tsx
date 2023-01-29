@@ -11,4 +11,5 @@ export interface ISearch {
   setTrigFilter(): void;
   resetFilter(): void;
   setFilterDate(date: string): void;
+  fetchReport():void;
 }

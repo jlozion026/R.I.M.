@@ -31,7 +31,8 @@ const Search: FC<ISearch> = ({ Name,
   SetGenAdd,
   setTrigFilter,
   setFilterDate,
-  resetFilter
+  resetFilter,
+  fetchReport
 }) => {
   const {
     value,
@@ -133,6 +134,7 @@ const Search: FC<ISearch> = ({ Name,
           setFilterDate("")
           resetFilter()
           clearSuggestions()
+          fetchReport();
         }}>
           <p>
             <FiFilter />

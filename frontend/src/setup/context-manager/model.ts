@@ -1,4 +1,4 @@
-import { ReportType } from "@/generated/graphql";
+import { AccType, ReportType } from "@/generated/graphql";
 import { IDefaultUpdateData, IUpdateForm2Data, LatLngLiteral } from "@/models";
 
 export type Props = {
@@ -7,6 +7,8 @@ export type Props = {
 
 export type AuthContextType = {
   auth: boolean;
+  accType: AccType|undefined;
+  setAccType(acc_type:AccType): void ;
   signOut: () => void;
   setAccToken: () => void;
 };

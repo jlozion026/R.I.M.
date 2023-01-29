@@ -1,5 +1,8 @@
 mutation login($where: AccountWhereInput){
   login(where: $where){
     accessToken
+    account{
+        acc_type
+    }
   }
 }

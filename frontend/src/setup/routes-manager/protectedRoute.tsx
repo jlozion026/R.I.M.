@@ -1,5 +1,5 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { FC, useContext, useEffect, useState } from 'react'
+import { FC, useContext } from 'react'
 
 import { AuthContext } from "../context-manager/authContext";
 import { AuthContextType } from "../context-manager/model";

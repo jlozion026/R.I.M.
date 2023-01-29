@@ -8,15 +8,15 @@
 
 .dropdown{
   position:absolute;
-  right: 4.4em;
-  top: 75%;
+  right: 4.4vw;
+  top: 23vh;
 }
 
 
 .dropdown-left{
   position:absolute;
-  left: 7.5em;
-  top: 57%;
+  left: 8vw;
+  top: 57vh;
 }
 
 .dropdown-left::before{

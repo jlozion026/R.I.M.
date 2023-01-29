@@ -21,35 +21,42 @@ export async function createExpress() {
           credentials: true
         })
       )
-    
 
     app.use(cookieParser())
     app.post("/refresh_token", async (req, res) => {
     const token = req.cookies.auth_token
     if (!token) {
-        return res.send({ ok: false, accessToken: "" }) 
+      return res.send({ ok: false, accessToken: "" })
     }
-    
+
     let payload: any = null;
     try {
-        payload = verify(token, process.env.REFRESH_TOKEN_SECRET!)
+      payload = verify(token, process.env.REFRESH_TOKEN_SECRET!)
 
-    } catch(err) {
-        console.log(err)
-        return res.send({ok: false, accessToken: ""})
+    } catch (err) {
+      console.log(err)
+      return res.send({ ok: false, accessToken: "" })
     }
 
-    const account = await prisma.account.findFirst(payload.accId)
+    const account = await prisma.account.findFirst({
+      where:
+        { acc_id: { equals: payload.accId } }
+    })
 
     if (!account) {
-        return res.send({ ok: false, accessToken: "" }) 
+      return res.send({ ok: false, accessToken: "" })
+    }
+
+    const payloadData = {
+      accessToken: createAccessToken(account),
+      accType: account.acc_type
     }
 
     sendRefreshToken(res, createRefreshToken(account));
-    return res.send ({ok: true, accessToken: createAccessToken(account)})
+    return res.send({ ok: true, payloadData: payloadData })
 
-    });
-    return { app };
+  });
+  return { app };
 }
 
 

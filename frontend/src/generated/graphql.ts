@@ -991,7 +991,10 @@ export type GetAllReportsByAscOrderQueryVariables = Exact<{
 
 export type GetAllReportsByAscOrderQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', report_id: string, report_type: ReportType, location: any }> };
 
-export type GetAllReportsByDescOrderQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetAllReportsByDescOrderQueryVariables = Exact<{
+  take?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+}>;
 
 
 export type GetAllReportsByDescOrderQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', report_id: string, report_type: ReportType, location: any }> };
@@ -1045,7 +1048,7 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'LoginResponseSuccess', accessToken: string } | null };
+export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'LoginResponseSuccess', accessToken: string, account: { __typename?: 'Account', acc_type: AccType } } | null };
 
 
 export const RegisterOneAccountDocument = `
@@ -1238,8 +1241,8 @@ export const useGetAllReportsByAscOrderQuery = <
       options
     );
 export const GetAllReportsByDescOrderDocument = `
-    query getAllReportsByDescOrder {
-  reports(orderBy: {createdAt: desc}) {
+    query getAllReportsByDescOrder($take: Int, $skip: Int) {
+  reports(orderBy: {createdAt: desc}, take: $take, skip: $skip) {
     report_id
     report_type
     location
@@ -1262,7 +1265,12 @@ export const useGetAllReportsByDescOrderQuery = <
     );
 export const PaginatedGetAllReportsByTypeDocument = `
     query PaginatedGetAllReportsByType($take: Int, $skip: Int, $reportType: ReportType) {
-  reports(where: {report_type: {equals: $reportType}}, take: $take, skip: $skip) {
+  reports(
+    where: {report_type: {equals: $reportType}}
+    take: $take
+    skip: $skip
+    orderBy: {createdAt: desc}
+  ) {
     report_id
     location
     report_type
@@ -1445,6 +1453,9 @@ export const LoginDocument = `
     mutation login($where: AccountWhereInput) {
   login(where: $where) {
     accessToken
+    account {
+      acc_type
+    }
   }
 }
     `;

@@ -8,3 +8,12 @@ export interface INewReports extends Array<{
   location: any,
   report_type: ReportType
 }> { }
+
+export interface IPageButtons {
+  orderPage: number;
+  page: number;
+  setPage(arg0: number): void;
+  setOrderPage(arg0: number): void;
+  typeOrder: string;
+  length: number
+}

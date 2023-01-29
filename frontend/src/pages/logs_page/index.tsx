@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, useEffect, useState } from "react";
+import { FC, ChangeEvent, useEffect, useState, useCallback } from "react";
 
 import useDebounce from '@/lib/useDebounce';
 
@@ -7,6 +7,8 @@ import {
   usePaginatedGetAllReportsByTypeQuery,
   GetAllReportsByAscOrderQuery,
   useGetAllReportsByAscOrderQuery,
+  GetAllReportsByDescOrderQuery,
+  useGetAllReportsByDescOrderQuery,
   GetAllSearchResultQuery,
   useGetAllSearchResultQuery,
 
@@ -24,8 +26,6 @@ import PageButtons from "./components/PageBtn";
 
 import { IoIosSearch } from "react-icons/io";
 import { BiArrowBack } from "react-icons/bi";
-import { GiNextButton } from 'react-icons/gi';
-
 
 import Loader from "@/components/Loader";
 
@@ -39,8 +39,6 @@ import SearchResults from "./components/SearchResults";
 
 import { INewReports, ArrReports } from './models'
 
-
-import { useNavigate } from "react-router-dom";
 
 import useOnclickOutside from "react-cool-onclickoutside";
 
@@ -91,7 +89,7 @@ const Logs: FC = () => {
   );
 
   // query reports by ascending order
-  const { data: ascData } = useGetAllReportsByAscOrderQuery<
+  const { refetch: refetchAsc } = useGetAllReportsByAscOrderQuery<
     GetAllReportsByAscOrderQuery,
     Error>
     (
@@ -101,34 +99,64 @@ const Logs: FC = () => {
     },
       {
         //staleTime: 1 * (60 * 1000), // 1 min refresh time
+        enabled: false,
         refetchOnWindowFocus: false,
         keepPreviousData: true,
         onSuccess: async (data: GetAllReportsByAscOrderQuery) => {
+          console.log("hello");
           const report_arr = data.reports;
-          setLoadAddr(false);
-          if (typeOrder === "Recent") {
-
-            const reversed = [...ascData?.reports!].reverse();
-            setModReports(reversed as ArrReports);
-
-          } else if (typeOrder === "Oldest") {
-            setModReports(report_arr as INewReports);
-          }
+          console.table(report_arr);
+          setModReports(report_arr as INewReports);
 
         },
       });
+
+  // query reports by descending order
+  const { refetch: refetchDesc } = useGetAllReportsByDescOrderQuery<
+    GetAllReportsByDescOrderQuery,
+    Error>
+    (
+      graphqlRequestClient, {
+      take: 5,
+      skip: orderPage,
+    },
+      {
+        enabled: false,
+        refetchOnWindowFocus: false,
+        keepPreviousData: true,
+        onSuccess: async (data: GetAllReportsByDescOrderQuery) => {
+          setModReports(data.reports as INewReports);
+
+        },
+      });
+
+  useEffect(() => {
+    if(typeOrder == "Recent"){
+      refetchDesc()
+    }
+    else if(typeOrder == "Oldest"){
+      refetchAsc();
+    }
+  }, [orderPage])
 
 
   // call back function for buttons
   const trigFetch = async (btnID: string) => {
     if (btnID === "Recent") {
       setTypeOrder(btnID);
-      const reversed = [...ascData?.reports!].reverse();
-      setModReports(reversed as ArrReports);
+      console.log(btnID);
+      setLoadAddr(true);
+      refetchDesc();
+      setLoadAddr(false);
+      setOrderPage(0);
     }
     else if (btnID === "Oldest") {
       setTypeOrder(btnID);
-      setModReports(ascData?.reports as ArrReports);
+      console.log(btnID);
+      setLoadAddr(true);
+      refetchAsc();
+      setLoadAddr(false);
+      setOrderPage(0);
     }
     else {
       setTypeOrder("");
@@ -136,7 +164,6 @@ const Logs: FC = () => {
       setModReports(reportData?.reports as ArrReports);
     }
     setPage(0);
-    setOrderPage(0);
   }
 
   // sets the reportTypeQuery when the component mounted
@@ -162,7 +189,7 @@ const Logs: FC = () => {
         </div>
       </div>
 
-     
+
 
       <div className="logscategorieswrap">
         <div className="logstopwrapper">
@@ -170,13 +197,13 @@ const Logs: FC = () => {
             className="searchBarCon"
             onClick={() => setSearchClick(true)}
             ref={ref} >
-              
-          <span >
-              
-                <Link to="/Dashboard">
-                  <BiArrowBack className="backIcon" /></Link>
-                  
-              </span>
+
+            <span >
+
+              <Link to="/Dashboard">
+                <BiArrowBack className="backIcon" /></Link>
+
+            </span>
 
             <InputField
               placeholder={"Search here"}
@@ -189,16 +216,16 @@ const Logs: FC = () => {
               value={searchString}
               readonly={false} />
             <span >
-              
+
               <IoIosSearch className="searchIcon" />
-              
+
             </span>
             {searchClick ?
               <ul className="logs-search-results">
                 <SearchResults searchData={searchResults?.reports} />
               </ul>
-                : null
-              }
+              : null
+            }
           </div>
         </div>
 
@@ -229,20 +256,20 @@ const Logs: FC = () => {
             :
             <h1 className="logs-warning">No {reportTypeQuery.replace(/([A-Z])/g, " $1").trim()} Reports Available</h1>
         }
-        </div>
-        <div className="page-btns">
-          <PageButtons
-            orderPage={orderPage}
-            page={page}
-            setPage={setPage}
-            setOrderPage={setOrderPage}
-            typeOrder={typeOrder}
-            length={modReports.length}
-          />
+      </div>
+      <div className="page-btns">
+        <PageButtons
+          orderPage={orderPage}
+          page={page}
+          setPage={setPage}
+          setOrderPage={setOrderPage}
+          typeOrder={typeOrder}
+          length={modReports.length}
+        />
 
-        </div>
-        {isFetching}
-      
+      </div>
+      {isFetching}
+
     </div>)
 }
 export default Logs;
