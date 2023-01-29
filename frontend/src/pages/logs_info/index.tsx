@@ -31,6 +31,7 @@ import { getPinIcon } from "@/lib/getIcon";
 import { fetchDirections } from "./utils";
 import Loader from "@/components/Loader";
 import DropDown from "./components/dropdown";
+import Navbar from "@/components/Navbar";
 
 const LogInfo: FC = () => {
   const { isLoaded, loadError } = useLoadScript({
@@ -110,7 +111,7 @@ const LogInfo: FC = () => {
                       .trim()}
                   </h1>
                 </div>
-                <div className="info-title">
+                <div className="info-title b-line">
                   <p>Project Details</p>
                 </div>
                 <div className="default-li">
@@ -147,7 +148,7 @@ const LogInfo: FC = () => {
                 <div className="info-title">
                   <h1>{report.report?.city_project?.project_name}</h1>
                 </div>
-                <div className="info-title">
+                <div className="info-title b-line">
                   <p>Project Details</p>
                 </div>
                 <div className="default-li">
@@ -245,6 +246,9 @@ const LogInfo: FC = () => {
             setMenuTrig={() => setTrigOption(!trigOption)}
           />
         ) : null}
+      </div>
+      <div className="nav-li">
+        <Navbar cardSize="nav--bar" />
       </div>
     </div>
   );

@@ -76,39 +76,84 @@
   width: 6vw;
 }
 
-@media all and (max-width: 600px) {
+/* Mobile to tablet view */
+@media all and (max-width: 960px) {
   .progress-update {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    width: 140px;
-    margin: 0 auto;
+    width: 40vw;
   }
-  .crcle-text {
-    margin-top: 5px;
-    color: #8e939a;
-    font-family: Helvetica;
-    font-weight: 500;
-    font-size: 13px;
+
+  .progress-numb {
+    font-size: 5vw;
   }
+
+  .stp {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 40vw;
+  }
+
+  .crcle {
+    border: 1px solid #d1d3d6;
+    height: 8vw;
+    width: 8vw;
+    border-radius: 5vw;
+    color: #205eff;
+    font-family: "Poppins";
+    font-weight: 700;
+    font-size: 1vw;
+    background: #d1d3d6;
+    display: inline-block;
+    position: relative;
+    transition: background-color 500ms;
+    line-height: 8vw;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .slected.crcle {
+    color: white;
+    background-color: #205eff;
+    border: 1px solid #205eff;
+    transition: all 0.1s ease-out;
+  }
+
+  .cmpleted.crcle {
+    color: white;
+    background-color: #205eff;
+  }
+
   .uncmplete.crcle::after {
     content: "";
     position: absolute;
-    right: -44px;
-    bottom: 10px;
-    height: 2px;
-    width: 40px;
+    right: -11.6vw;
+    bottom: 3vw;
+    height: 0.6vw;
+    width: 11vw;
     background-color: #d1d3d6;
+    transition: all 1s ease-out;
   }
 
   .cmpleted.crcle::after {
     content: "";
     position: absolute;
-    right: -44px;
-    bottom: 10px;
-    height: 2px;
-    width: 40px;
+    right: -11.6vw;
+    bottom: 3vw;
+    height: 0.6vw;
+    width: 11vw;
     background-color: #205eff;
     transition: all 1s ease-out;
+  }
+
+  .crcle-text {
+    margin-top: 2vw;
+    color: #8e939a;
+    font-family: sans-serif;
+    font-weight: 500;
+    font-size: 3.5vw;
+    width: 12vw;
   }
 }

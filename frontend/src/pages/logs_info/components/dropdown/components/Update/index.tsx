@@ -117,7 +117,7 @@ const Update: FC<IUpdate> = ({ reportID, setTrigger, reportType }) => {
     <form className="update-report-form">
       <div className="header-f">
         {page ? (
-          <p className="back-btn" onClick={() => setPage(false)}>
+          <p className="back-b" onClick={() => setPage(false)}>
             <FaArrowLeft />
           </p>
         ) : null}

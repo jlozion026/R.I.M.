@@ -26,6 +26,14 @@
   gap: 1vw;
 }
 
+.back-b {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2vw;
+  color: #9b959e;
+}
+
 .ui-field {
   display: flex;
   flex-direction: column;
@@ -119,4 +127,85 @@
 
 .ub-gap {
   margin-top: 1.5vw;
+}
+
+@media all and (max-width: 960px) {
+  .update-report-form {
+    height: 100%;
+    width: 100%;
+    border-radius: 0px;
+  }
+
+  .header-f {
+    gap: 5vw;
+    padding-bottom: 5vw;
+  }
+
+  .up-title {
+    font-size: 8vw;
+  }
+
+  .back-b {
+    font-size: 7vw;
+  }
+
+  .ui-field {
+    gap: 1vw;
+    padding: 1vw 0vw 1vw 0vw;
+  }
+
+  .ui-field > input {
+    height: 12vw;
+    font-size: 3vw;
+    border-radius: 1.5vw;
+    padding-inline-start: 3vw;
+  }
+  .ui-field > label {
+    font-size: 3.5vw;
+  }
+
+  .update-description {
+    gap: 1vw;
+    /* padding: 0.2vw; */
+  }
+
+  .update-description > textarea {
+    border-radius: 1.5vw;
+    font-size: 3vw;
+    height: 35vw;
+    padding-top: 3.5vw;
+    padding-inline-start: 3.5vw;
+  }
+
+  .update-description > p {
+    font-size: 3.5vw;
+    font-weight: 600;
+    color: black;
+  }
+
+  .f-gap {
+    margin-top: 5vw;
+  }
+
+  .ub-gap {
+    margin-top: 12vw;
+  }
+
+  @media all and (min-height: 480px) {
+    .update-report-form {
+      overflow: hidden;
+      overflow-y: scroll;
+      /* Hide scrollbar for IE, Edge and Firefox */
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+
+    .update-report-form::-webkit-scrollbar {
+      display: none;
+    }
+
+    .update-button {
+      padding-bottom: 20vw;
+    }
+  }
 }

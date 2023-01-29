@@ -8,6 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 
 .btn-closed {
@@ -21,4 +22,10 @@
 
 .btn-closed:hover {
   color: #ffff;
+}
+
+@media all and (max-width: 960px) {
+  .btn-closed {
+    display: none;
+  }
 }
