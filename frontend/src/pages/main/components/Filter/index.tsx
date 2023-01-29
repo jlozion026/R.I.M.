@@ -25,7 +25,6 @@ const Filter: FC<IFilter> = ({ setFilterType, setFilterDate, filterDate }) => {
     if (calendarOpen) {
       setCalendarOpen(false);
     }
-    console.log("Click!");
   };
 
   const handleFDate = (date: Date) => {

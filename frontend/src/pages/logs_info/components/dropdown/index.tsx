@@ -26,7 +26,6 @@ const DropDown: FC<IDropDown> = ({ report, setMenuTrig }) => {
   ) as LogsInfoContextType;
 
   useEffect(() => {
-    console.log(report?.report?.report_type);
     if (report?.report?.report_type !== ReportType.CityProject) {
       defaultUpdateData["startDate"] = report?.report?.incident?.date_started;
       defaultUpdateData["endDate"] = report?.report?.incident?.date_ended;

@@ -10,6 +10,11 @@
     "nav graph graph";
 }
 
+.largeCard{
+  height: 100%;
+
+}
+
 .navContainer {
   grid-area: nav;
   display: flex;

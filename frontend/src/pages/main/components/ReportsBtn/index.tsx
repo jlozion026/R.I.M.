@@ -43,7 +43,6 @@ const ReportsBtn: FC<IReportsBtn> = ({
 
     popUp();
 
-    console.log(id);
   };
 
   return (

@@ -35,8 +35,7 @@ const CreateAccount: FC<ICreateAccount> = ({ popUp, setMenuTrig }) => {
   graphqlRequestClient.setHeader("authorization", `bearer ${getToken()}`); //sets the authorization header
 
   const { mutate } = useRegisterOneAccountMutation<Error>(graphqlRequestClient, {
-    onSuccess: (data: RegisterOneAccountMutation) => {
-      console.table(data);
+    onSuccess: () => {
       popUp();
       setMenuTrig();
     },
@@ -47,14 +46,12 @@ const CreateAccount: FC<ICreateAccount> = ({ popUp, setMenuTrig }) => {
       const errJSON = JSON.parse(jsonSubString);
 
       setErrMsg(errJSON.response.errors[0].constraints[0].message)
-      console.table(errJSON.response.errors[0]);
     },
   });
 
   const isRadioSelected = (value: string) => selectedRadioBtn === value;
 
   const getRadioVal = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     setSelectedRadioBtn(stringToEnum(e.target.value, AccType));
   }
 
@@ -70,11 +67,8 @@ const CreateAccount: FC<ICreateAccount> = ({ popUp, setMenuTrig }) => {
     e.preventDefault();
     const pass = createAccountData.designation.replace(/\s/g, '').toLowerCase();
     createAccountData["password"] = pass + "pass12345";
-    console.log(createAccountData.password);
 
     setErrMsg(""); // clear the error message state variable
-    console.log(selectedRadioBtn);
-    console.table(createAccountData);
 
     mutate({
       data: {

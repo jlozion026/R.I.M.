@@ -1,11 +1,16 @@
 import { FC } from "react";
 import Card from "@/components/Card";
-import './style.css';
 import { GraphItems } from "../../models";
 import { HrlyConProps } from "../utils";
-import Hazzard from "@/Assets/svg/Hazzard.svg";
 
+import CustomAreaChart from "../Charts/AreaChart";
 
+import {
+  data,
+  areas
+}from '../Charts/AreaChart/utils'
+
+import './style.css';
 
 const HourlyCongestionLvl: FC<GraphItems> =({cardSize}) => {
 
@@ -26,7 +31,11 @@ const HourlyCongestionLvl: FC<GraphItems> =({cardSize}) => {
             } )}
               </div>  
               <div className="hourly-graph-container">
-              INSERT GRAPH HERE 
+                <CustomAreaChart
+                  data={data}
+                  areas={areas}
+                />
+
               </div>
           </div>  
         </Card>

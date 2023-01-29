@@ -131,7 +131,6 @@ const Main: FC = () => {
         return "No results found";
       }
     } catch (error) {
-      console.log("Error!");
     }
   };
 
@@ -201,7 +200,6 @@ const Main: FC = () => {
     {
       enabled: false,
       onSuccess: async (data: GetAllReportsByTypeQuery) => {
-        console.log(data);
         setModArr(data);
       },
       refetchIntervalInBackground: true,
@@ -219,7 +217,6 @@ const Main: FC = () => {
     {
       enabled: false,
       onSuccess: async (data: GetAllReportsWithDateCpQuery) => {
-        console.log(data);
         setModArr(data);
       },
       refetchIntervalInBackground: true,

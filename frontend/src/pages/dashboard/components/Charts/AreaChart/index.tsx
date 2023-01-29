@@ -1,23 +1,27 @@
 import { FC } from "react";
-import {ICustomAreaChart} from './models'
+import { ICustomAreaChart } from '../models'
 
 import {
   Area,
   XAxis,
   YAxis,
+  Tooltip,
   CartesianGrid,
   ResponsiveContainer,
   AreaChart,
+  Legend,
 } from "recharts"
 
 
 const CustomAreaChart: FC<ICustomAreaChart> = ({ data, areas }) => {
   return (
     <ResponsiveContainer
-      width="100%"
-      height="100%"
+      width="85%"
+      height="85%"
     >
       <AreaChart
+        width={500}
+        height={400}
         data={data}
         margin={{
           top: 20,
@@ -26,28 +30,36 @@ const CustomAreaChart: FC<ICustomAreaChart> = ({ data, areas }) => {
           bottom: 5
         }}
       >
-        <CartesianGrid
-          vertical={false}
-          stroke="#222222"
-        />
+        <CartesianGrid strokeDasharray="3 3" />
         <XAxis
           axisLine={false}
           tickLine={false}
           dataKey="name"
         />
+
         <YAxis
           axisLine={false}
           tickLine={false}
         />
+        <Tooltip />
+        <Legend verticalAlign="top"
+          height={100}
+          iconType={'square'}
+          iconSize={30}
+        />
+
         {areas.map((area) => {
-          <Area
-            type="monotone"
-            key={area.key}
-            dataKey={area.key}
-            fill={area.fill}
-            stroke="0"
-          />
+          return (
+            <Area
+              type="monotone"
+              dataKey={area.key}
+              stroke={area.fill}
+              fill={area.fill}
+              key={area.key}
+            />
+          );
         })}
+
       </AreaChart>
     </ResponsiveContainer>
   );
