@@ -83,11 +83,13 @@
   }
   .fi-container {
   padding-bottom: 2vw;
+  align-items: start;
   }
   .fi-container label {
     margin-bottom: 1vw;
   }
   .programAmount-container {
   padding-bottom: 2.4vw;
+  align-items: start;
   }
 }

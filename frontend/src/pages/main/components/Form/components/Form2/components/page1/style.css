@@ -172,6 +172,7 @@ width: 100%;
   }
   .form-wrapper{
     padding-bottom: 30%;
+    overflow: scroll;
     }
 }
 

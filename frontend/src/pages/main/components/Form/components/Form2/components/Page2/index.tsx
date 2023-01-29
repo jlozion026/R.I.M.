@@ -11,7 +11,8 @@ import { btnType } from "@/components/Button/models";
 const Page2: FC<Ipage2> = ({ GetFormData, Submit }) => {
   return (
     <>
-      <div className="fi-container pn-container">
+    <div className="form-wrapper">
+    <div className="fi-container pn-container">
         <InputField
           label={"Project Name"}
           type={"text"}
@@ -58,7 +59,6 @@ const Page2: FC<Ipage2> = ({ GetFormData, Submit }) => {
           getData={GetFormData}
         />
       </div>
-
       <div className="btn-container-submit">
         <Button
           type={btnType.Submit}
@@ -69,6 +69,8 @@ const Page2: FC<Ipage2> = ({ GetFormData, Submit }) => {
           Submit
         </Button>
       </div>
+      </div>
+    
     </>
   );
 };
