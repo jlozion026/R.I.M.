@@ -2,7 +2,7 @@ import { ResolverActionsConfig } from "prisma/generated/type-graphql";
 
 import { UseMiddleware } from "type-graphql";
 
-import { isAuth } from "../../customResolver/account/middleware/isAuth"
+import { isAuth } from "../../customResolver/account/middleware/isAuth";
 
 export const accountsActionsConfig: ResolverActionsConfig<"Account"> = {
   accounts: [UseMiddleware(isAuth)],
@@ -10,8 +10,8 @@ export const accountsActionsConfig: ResolverActionsConfig<"Account"> = {
 };
 
 export const reportActionsConfig: ResolverActionsConfig<"Report"> = {
-  report: [UseMiddleware(isAuth)],
-  reports: [UseMiddleware(isAuth)],
+  // report: [UseMiddleware(isAuth)],
+  // reports: [UseMiddleware(isAuth)],
   createOneReport: [UseMiddleware(isAuth)],
   aggregateReport: [UseMiddleware(isAuth)],
 };
@@ -27,4 +27,3 @@ export const cityProjectActionsConfig: ResolverActionsConfig<"CityProject"> = {
   cityProjects: [UseMiddleware(isAuth)],
   createOneCityProject: [UseMiddleware(isAuth)],
 };
-

@@ -1,0 +1,155 @@
+.public-page {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+.mapContainerStylePublic {
+  width: 100%;
+  height: 100%;
+}
+
+.info-window-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  width: 300px;
+}
+
+.Road.Accident,
+.Road.Closure,
+.Road.Construction,
+.Road.Event,
+.Road.Hazard,
+.City.Project {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+}
+.Road.Accident {
+  background-color: #cbcf0b;
+}
+.Road.Closure {
+  background-color: #f95415;
+}
+.Road.Construction {
+  background-color: #fcb712;
+}
+.Road.Event {
+  background-color: #0096a6;
+}
+.Road.Hazard {
+  background-color: #f5cf38;
+}
+.City.Project {
+  background-color: #ffd800;
+}
+
+.window-icons {
+  width: 100%;
+  height: 3em;
+}
+
+.window-title {
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  padding: 0px 0px 10px 0px;
+}
+
+.iw-description {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: justify;
+  background-color: #f1f1f1;
+  padding: 30px 15px 30px 15px;
+  border-radius: 15px;
+  width: 100%;
+  line-height: 1.2em;
+  letter-spacing: 0.016em;
+  color: #484751;
+}
+
+.iw-line {
+  height: 1px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.address-title {
+  margin-bottom: 5px;
+  font-weight: 100;
+  color: #272626;
+  width: 100%;
+  padding: 12px 10px 0px 0px;
+}
+
+.txt-cw {
+  font-size: small;
+  font-weight: 600;
+  color: #686868;
+}
+
+.ds-container {
+  font-weight: 50;
+  width: 100%;
+  padding: 10px 5px 5px 0px;
+  color: #6f6f6f;
+}
+
+.de-container {
+  font-weight: 50;
+  width: 100%;
+  padding: 2px 5px 5px 0px;
+  color: #6f6f6f;
+}
+
+.nav-container {
+  z-index: 1;
+}
+
+.info-details {
+  color: #6f6f6f;
+}
+
+.login-text {
+  position: absolute;
+  top: 1%;
+  left: 89%;
+  padding: 1vw 2vw 1vw 2vw;
+  border-radius: 0.1vw;
+  color: #7b7b7b;
+  font-size: 3.5vw;
+  text-shadow: 0px 0px 30px rgb(4, 3, 3);
+  font-weight: bolder;
+}
+
+.login-text:hover {
+  font-size: 5vw;
+  font-weight: 600;
+  color: #205eff;
+  text-shadow: none;
+}
+
+@media all and (max-width: 480px) {
+  .info-window-container {
+    width: 100%;
+  }
+}
+.main-search {
+  position: absolute;
+  background: white;
+  display: flex;
+  width: 25em;
+  height: 4em;
+  top: 3%;
+  left: 2%;
+  z-index: 10;
+}
