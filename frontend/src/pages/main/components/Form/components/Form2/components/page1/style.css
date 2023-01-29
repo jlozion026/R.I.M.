@@ -72,15 +72,7 @@ width: 100%;
   margin-bottom: 0.3em;
 }
 
-.calendarElement {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%);
-  top: 100%;
-  border: 1px solid #205eff;
-  z-index: 10;
-}
-  .rdrCalendarWrapper {
+.rdrCalendarWrapper {
   font-size: 0.8vw;
   }
 .rdrMonthAndYearPickers select {
@@ -98,75 +90,89 @@ width: 100%;
   width: 100%;
   font-size: 0.8vw;
 }
-
-@media all and (max-width: 600px) {
-  .location-container {
-    display: flex;
-    flex-direction: column;
-    width: 95%;
-    padding: 10px;
-    justify-content: space-between;
-    gap: 5px;
+@media all and (max-width: 480px) {
+  .location-container label, 
+  .date-container label,
+  .description label {
+    font-size: 3.5vw;
   }
-
-  .autocomplete-wrapper {
-    display: flex;
-    flex-direction: column;
-  }
-.rdrMonthAndYearPickers select {
+  .description > textarea {
     font-size: 4vw;
+  }
+  .btn-container-next > .btn--large{
+    font-size: 7vw;
+    border-radius: 2vw;
+    height: 7vh;
+  }
+
 }
 
-  .date-group {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 0.5em;
-    justify-content: space-between;
-    gap: 5px;
+@media all and (min-width: 481px) and (max-width: 768px) {
+  .location-container label, 
+  .date-container label,
+  .description label {
+    font-size: 3vw;
   }
+  .description > textarea {
+    font-size: 3.5vw;
+  }
+  .btn-container-next > .btn--large{
+    font-size: 5vw;
+    border-radius: 1.5vw;
+    height: 8vh;
+  }
+}
 
-  .date-wrapper {
-    display: flex;
-    flex-direction: column;
+@media all and (min-width: 769px) and (max-width: 960px) {
+  .location-container label, 
+  .date-container label,
+  .description label {
+    font-size: 2.5vw;
   }
+  .description > textarea {
+    font-size: 3vw;
+  }
+  .btn-container-next > .btn--large{
+    font-size: 5vw;
+    border-radius: 1vw;
+    height: 10vh;
+  }
+}
 
-  .description {
-    display: flex;
-    flex-direction: column;
-    width: 95%;
-    padding: 10px;
-    justify-content: space-between;
-    gap: 5px;
-    font-family: sans-serif;
-    font-weight: 600;
-    font-size: 12px;
-  }
-
-  .calendarElement {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-    top: 100%;
-    border: 1px solid #205eff;
-    z-index: 10;
-  }
-  .rdrCalendarWrapper {
-    font-size: 3.2vw;
-    height: 22.5em;
-  }
-
-  .btn-container-next {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-    gap: 10px;
-    width: 100%;
-  }
+@media all and (max-width: 960px) {
+ 
   .rdrMonth{
   width: 100%;
   font-size: 3.5vw;
+  }
+  .rdrMonthAndYearPickers select {
+    font-size: 4vw;
+  }
+  .autocomplete-wrapper {
+  flex-direction: column;
+  }
+  .rdrCalendarWrapper {
+    font-size: 3.3vw;
+    height: 22.5em;
+    width: 80vw;
+
+  }
+  .description > textarea {
+    width: 100%;
+  }
+  .date-wrapper {
+  display: flex;
+  flex-direction: column;
+  }
+  .description {
+    width:80vw;
+  }
+  .btn-container-next {
+    width: 80vw;
+  }
+  .form-wrapper{
+    padding-bottom: 30%;
+    overflow: scroll;
+    }
 }
-}
+
