@@ -43,39 +43,51 @@
   margin-top: 2vh;
   height: 7vh;
 }
+@media all and (max-width: 480px) {
 
+  .fi-container label {
+  font-size: 3.5vw;
+  }
+  .btn-container-submit > .btn--large {
+  font-size: 7vw;
+  border-radius: 2vw;
+  height: 7vh;
+  }
+ 
+}
 
-@media all and (max-width: 600px) {
+@media all and (min-width: 481px) and (max-width: 768px) {
+  .fi-container label {
+  font-size: 3vw;
+  }
+  .btn-container-submit > .btn--large {
+  font-size: 5vw;
+  border-radius: 1.5vw;
+  height: 10vh;
+  }
+}
+
+@media all and (min-width: 769px) and (max-width: 960px) {
+  .fi-container label {
+    font-size: 2.5vw;
+  }
+  .btn-container-submit > .btn--large {
+    font-size: 3vw;
+    border-radius: 1vw;
+    height: 12vh;
+  }
+}
+@media all and (max-width: 960px) {
+  .btn-container-submit{
+  width: 80vw;
+  }
   .fi-container {
-    display: flex;
-    flex-direction: column;
-    width: 95%;
-    padding: 0.5em;
-    justify-content: space-between;
-    font-family: sans-serif;
-    font-weight: 500;
-    font-size: 13px;
+  padding-bottom: 2vw;
   }
-  .contractor-container {
-    margin-bottom: 20%;
+  .fi-container label {
+    margin-bottom: 1vw;
   }
-
   .programAmount-container {
-    display: flex;
-    flex-direction: column;
-    width: 95%;
-    justify-content: space-between;
-  }
-
-  .contractorAmount-container {
-    margin-bottom: 6em;
-  }
-
-  .btn-container-submit {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1em;
-    width: 100%;
+  padding-bottom: 2.4vw;
   }
 }

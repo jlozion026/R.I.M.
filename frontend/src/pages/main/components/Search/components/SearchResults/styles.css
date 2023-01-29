@@ -7,8 +7,28 @@
   border: 2px solid #205eff;
 }
 
-.item-img{
-  font-size: 2vw;
-  margin-right: -0.8vw;
-  padding-right: 0.8vw;
+.main-search-item img{
+  margin-right: -0.2vw;
+  height: 2vw;
+}
+
+@media all and (max-width: 480px) {
+.main-search-item img{
+height: 9vw;
+padding-right: 1.2vw;
+}
+}
+
+@media all and (min-width: 481px) and (max-width: 768px) {
+.main-search-item img{
+height: 7.5vw;
+padding-right: 1.4vw;
+}
+}
+
+@media all and (min-width: 769px) and (max-width: 960px) {
+.main-search-item img{
+height: 6.5vw;
+padding-right: 1.6vw;
+}
 }

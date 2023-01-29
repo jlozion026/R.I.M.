@@ -117,10 +117,6 @@
     border: solid 0.7vw;
     border-radius: 2vw;
   }
-  .calendar-svg {
-    font-size: 6vw;
-    padding-left: 1vw;
-  }
   .icon-container {
     display: flex;
     width: 100%;
@@ -128,6 +124,6 @@
     border-radius: 1vw;
   }
   .calendarFilter {
-    width: 86%;
+    width: 100%;
   }
 }
