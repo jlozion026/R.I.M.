@@ -29,8 +29,6 @@ export const Views: FC = () => {
   useEffect(() => {
     setLoading(true);
 
-    console.log("tingnan");
-
     fetch("http://localhost:4000/refresh_token", {
       method: "POST",
       credentials: "include",

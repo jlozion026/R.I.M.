@@ -173,8 +173,12 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
   };
 
   const handleEndDate = (date: Date) => {
-    setEndDate(format(date, "yyyy-MM-dd"));
-    clickCalendar();
+    if(date > new Date(startDate)){
+      setEndDate(format(date, "yyyy-MM-dd"));
+      clickCalendar();
+    } else{
+        console.log("invalid");
+      }
   };
 
   //Calendar Pop-Up

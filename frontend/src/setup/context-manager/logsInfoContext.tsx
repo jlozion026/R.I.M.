@@ -45,9 +45,13 @@ const LogsInfoContextProvider: FC<Props> = ({ children }) => {
   };
 
   const handleEndDate = (date: Date) => {
-    defaultUpdateData["endDate"] = format(date, "yyyy-MM-dd");
-    updateForm2Data["endDate"] = format(date, "yyyy-MM-dd");
-    clickCalendar();
+    if (date > new Date(startDate)) {
+      defaultUpdateData["endDate"] = format(date, "yyyy-MM-dd");
+      updateForm2Data["endDate"] = format(date, "yyyy-MM-dd");
+      clickCalendar();
+    } else {
+      console.log("invalid");
+    }
   };
 
   //Calendar StartDate and Calendar EndDate Pop-Up!!!

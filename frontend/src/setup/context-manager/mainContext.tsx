@@ -38,8 +38,6 @@ const MainContextProvider: FC<Props> = ({ children }) => {
     });
 
     setMarkerCount(0);
-
-    console.log("reset marker!");
   };
 
   return (

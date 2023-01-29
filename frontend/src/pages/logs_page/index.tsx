@@ -103,9 +103,7 @@ const Logs: FC = () => {
         refetchOnWindowFocus: false,
         keepPreviousData: true,
         onSuccess: async (data: GetAllReportsByAscOrderQuery) => {
-          console.log("hello");
           const report_arr = data.reports;
-          console.table(report_arr);
           setModReports(report_arr as INewReports);
 
         },
@@ -144,7 +142,6 @@ const Logs: FC = () => {
   const trigFetch = async (btnID: string) => {
     if (btnID === "Recent") {
       setTypeOrder(btnID);
-      console.log(btnID);
       setLoadAddr(true);
       refetchDesc();
       setLoadAddr(false);
@@ -152,7 +149,6 @@ const Logs: FC = () => {
     }
     else if (btnID === "Oldest") {
       setTypeOrder(btnID);
-      console.log(btnID);
       setLoadAddr(true);
       refetchAsc();
       setLoadAddr(false);
@@ -169,7 +165,6 @@ const Logs: FC = () => {
   // sets the reportTypeQuery when the component mounted
   useEffect(() => {
     setReportTypeQuery(state.type)
-    console.log("logs_page", state.type);
   }, []);
 
   const getSearch = (e: ChangeEvent<HTMLInputElement>) => {

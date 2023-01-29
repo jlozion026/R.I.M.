@@ -55,8 +55,6 @@ const SignIn: FC = () => {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    //console.log(signInData.email + "\n" + signInData.password);
-
     mutate({
       where: {
         email: { equals: signInData.email },

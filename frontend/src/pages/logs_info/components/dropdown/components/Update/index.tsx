@@ -38,9 +38,8 @@ const Update: FC<IUpdate> = ({ reportID, setTrigger, reportType }) => {
   const { mutate: updateMutate } = useUpdateOneReportMutation<Error>(
     graphqlRequestClient,
     {
-      onSuccess: (data: UpdateOneReportMutation) => {
+      onSuccess: () => {
         queryClient.invalidateQueries(["GetOneReport", { reportId: reportID }]);
-        console.log(data);
       },
 
       onError: (error: Error) => {
@@ -61,7 +60,6 @@ const Update: FC<IUpdate> = ({ reportID, setTrigger, reportType }) => {
   const GetUpdateForm2Data = (
     val: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ) => {
-    console.log(val.target.name);
     setUpdateForm2Data({
       ...updateForm2Data,
       [val.target.name]: val.target.value,
@@ -70,8 +68,6 @@ const Update: FC<IUpdate> = ({ reportID, setTrigger, reportType }) => {
 
   const SubmitDefaultUpdateData = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    console.table(defaultUpdateData);
 
     updateMutate({
       report_id: reportID,
@@ -109,7 +105,6 @@ const Update: FC<IUpdate> = ({ reportID, setTrigger, reportType }) => {
       },
     });
 
-    console.table(updateForm2Data);
     setTrigger();
   };
 

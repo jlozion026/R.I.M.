@@ -30,12 +30,11 @@ const Delete: FC<IDelete> = ({ PopOut, reportType, reportID }) => {
   const { mutate: deleteMutate } = useDeleteOneReportMutation<Error>(
     graphqlRequestClient,
     {
-      onSuccess: (data: DeleteOneReportMutation) => {
+      onSuccess: () => {
         queryClient.invalidateQueries([
           "PaginatedGetAllReportsByType",
           { "reportType": reportType, "skip": 0, "take": 5 }
         ]);
-        console.log(data);
       },
 
       onError: (error: Error) => {

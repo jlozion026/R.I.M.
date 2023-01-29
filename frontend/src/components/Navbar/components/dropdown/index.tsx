@@ -35,10 +35,8 @@ const DropDown: FC<IDropDown> = ({ setMenuTrig }) => {
   };
 
   const queryClient = useQueryClient();
-  console.log(getToken())
   const { mutate } = useLogoutMutation<Error>(graphqlRequestClient, {
     onSuccess: (data: LogoutMutation) => {
-      console.log(data);
       if (data) {
         queryClient.clear()
         setToken("");
