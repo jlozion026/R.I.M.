@@ -3,16 +3,10 @@ import { FC } from "react";
 import Button from "@/components/Button";
 import { btnType } from '@/components/Button/models';
 
-interface PageButtons {
-  orderPage: number;
-  page: number;
-  setPage(arg0: number): void;
-  setOrderPage(arg0: number): void;
-  typeOrder: string;
-  length: number
-}
+import {IPageButtons} from "../../models";
 
-const PageButtons: FC<PageButtons> = ({
+
+const PageButtons: FC<IPageButtons> = ({
   orderPage,
   page,
   setPage,

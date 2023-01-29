@@ -6,6 +6,9 @@ query PaginatedGetAllReportsByType($take: Int, $skip: Int, $reportType: ReportTy
     }
   }
   take: $take skip: $skip
+  orderBy:{
+      createdAt: desc
+  }
   ){
     report_id
     location

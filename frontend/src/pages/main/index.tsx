@@ -163,7 +163,7 @@ const Main: FC = () => {
   graphqlRequestClient.setHeader("authorization", `bearer ${getToken()}`); //sets the authorization header
   // send queries for all reports to the gql endpoint
 
-  const { isLoading } = useGetAllReportsQuery<GetAllReportsQuery, Error>(
+  const { isLoading, refetch: refetchAllReport } = useGetAllReportsQuery<GetAllReportsQuery, Error>(
     graphqlRequestClient,
     {},
     {
@@ -379,6 +379,7 @@ const Main: FC = () => {
           setTrigFilter={() => setTrigFilter(!trigFilter)}
           setFilterDate={setFilterDate}
           resetFilter={resetFilter}
+          fetchReport={refetchAllReport}
         />
 
         {trigFilter ? (

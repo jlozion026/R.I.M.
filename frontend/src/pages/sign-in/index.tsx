@@ -15,7 +15,7 @@ import wave2 from "@/Assets/svg/wave2.svg";
 import { credentials } from "./models";
 import { LoginProps } from "./utils";
 
-import {setToken} from '@/lib/auth'
+import { setToken } from '@/lib/auth'
 
 import "./style.css";
 import { Navigate } from "react-router-dom";
@@ -23,7 +23,11 @@ import { AuthContext } from "@/setup/context-manager/authContext";
 import { AuthContextType } from "@/setup/context-manager/model";
 
 const SignIn: FC = () => {
-  const { auth, setAccToken } = useContext(AuthContext) as AuthContextType;
+  const {
+    auth,
+    setAccType,
+    setAccToken
+  } = useContext(AuthContext) as AuthContextType;
 
   const [errMsg, setErrMsg] = useState("");
   const [signInData, setData] = useState<credentials>({
@@ -36,6 +40,7 @@ const SignIn: FC = () => {
 
       if (data.login?.accessToken) {
         setAccToken();
+        setAccType(data.login.account.acc_type);
         setToken(data?.login.accessToken);
       }
     },
@@ -68,7 +73,7 @@ const SignIn: FC = () => {
   };
 
   if (auth) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/main" replace />;
   }
 
   return (

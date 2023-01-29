@@ -1,0 +1,11 @@
+query getAllReportsByDescOrder($take: Int, $skip: Int){
+  reports(orderBy:{
+      createdAt: desc
+  }
+  take: $take skip: $skip
+  ){
+    report_id
+    report_type
+    location
+  }
+}

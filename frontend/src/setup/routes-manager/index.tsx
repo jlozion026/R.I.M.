@@ -18,22 +18,27 @@ import LogsInfoContextProvider from "../context-manager/logsInfoContext";
 import Logs from "@/pages/logs_page";
 import LogInfo from "@/pages/logs_info";
 
-import { setToken, getToken } from "@/lib/auth";
+import { setToken } from "@/lib/auth";
+import Public from "@/pages/public";
+import { AdminRoute } from "./adminRoute";
 
 export const Views: FC = () => {
-  const { setAccToken } = useContext(AuthContext) as AuthContextType;
+  const { setAccToken, setAccType } = useContext(AuthContext) as AuthContextType;
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
 
+    console.log("tingnan");
+
     fetch("http://localhost:4000/refresh_token", {
       method: "POST",
       credentials: "include",
     }).then(async (res) => {
-      const { accessToken } = await res.json();
-      if (accessToken) {
-        setToken(accessToken);
+      const { ok, payloadData } = await res.json();
+      if (ok) {
+        setToken(payloadData.accessToken);
+        setAccType(payloadData.accType);
         setAccToken();
       }
     });
@@ -45,25 +50,28 @@ export const Views: FC = () => {
   return (
     <Routes>
       <Route path="/signin" element={<SignIn />} />
+      <Route path="/" element={<Public />} />
       <Route element={<ProtectedRoutes />}>
         <Route
-          path="/"
+          path="/main"
           element={
             <MainContextProvider>
               <Main />
             </MainContextProvider>
           }
         />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/logs" element={<Logs />} />
-        <Route
-          path="/info"
-          element={
-            <LogsInfoContextProvider>
-              <LogInfo />
-            </LogsInfoContextProvider>
-          }
-        />
+        <Route element={<AdminRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/logs" element={<Logs />} />
+          <Route
+            path="/info"
+            element={
+              <LogsInfoContextProvider>
+                <LogInfo />
+              </LogsInfoContextProvider>
+            }
+          />
+        </Route>
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>

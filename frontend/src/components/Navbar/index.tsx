@@ -1,4 +1,7 @@
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
+
+import { AuthContext } from "@/setup/context-manager/authContext";
+import { AuthContextType } from "@/setup/context-manager/model";
 
 import Card from "@/components/Card";
 import DropDown from "./components/dropdown/index";
@@ -12,9 +15,14 @@ import "./style.css";
 import { Link } from "react-router-dom";
 
 import useOnclickOutside from "react-cool-onclickoutside";
+import { AccType } from "@/generated/graphql";
 
 const Navbar: FC<navCardItems> = ({ cardSize, PingPopOut }) => {
   const [menuTrig, setMenuTrig] = useState<boolean>(false);
+
+  const {
+    accType
+  } = useContext(AuthContext) as AuthContextType;
 
   const handleTrigMenu = () => setMenuTrig(!menuTrig);
 
@@ -25,16 +33,23 @@ const Navbar: FC<navCardItems> = ({ cardSize, PingPopOut }) => {
   return (
     <Card cardSize={cardSize}>
       <nav className="vectorContainer" >
-        <Link to="/" className="nav-icon">
-          <p onClick={PingPopOut} id={window.location.pathname == "/" ? "active" : ""}>
+        <Link to="/main" className="nav-icon">
+          <p onClick={PingPopOut} id={window.location.pathname == "/main" ? "active" : ""}>
             <MdOutlinePinDrop />
           </p>
         </Link>
-        <Link to="/dashboard" className="nav-icon" >
-          <p id={window.location.pathname == "/dashboard" ? "active" : ""}>
-            <MdOutlineSpaceDashboard />
-          </p>
-        </Link>
+
+        {
+          accType === AccType.Admin
+            ?
+              <Link to="/dashboard" className="nav-icon" >
+                <p id={window.location.pathname == "/dashboard" ? "active" : ""}>
+                  <MdOutlineSpaceDashboard />
+                </p>
+              </Link>
+            :
+              null
+        }
 
         <div className="nav-icon" ref={ref}>
           <p
@@ -42,7 +57,7 @@ const Navbar: FC<navCardItems> = ({ cardSize, PingPopOut }) => {
               setMenuTrig(!menuTrig)
             }}
 
-            id={menuTrig? "active": ""}
+            id={menuTrig ? "active" : ""}
 
           >
             <CgProfile />
