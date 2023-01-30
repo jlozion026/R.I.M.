@@ -128,8 +128,8 @@
     width: 100%;
   }
 
-  .bck-cont {
-    display: none;
+  .fa-arrow-left {
+    font-size: 5vw;
   }
 
   .option-cont {
@@ -191,6 +191,10 @@
 
   .default-li {
     height: 29%;
+  }
+
+  .pad-d {
+    padding-bottom: 20vw;
   }
 
   @media all and (max-height: 960px) {
