@@ -16,9 +16,15 @@
   color:#717073;
 }
 
+
 .nav-icon>p:active{
   color:#3B71FF;
 }
+
+.nav-icon{
+  position: relative;
+}
+
 
 a:hover {
   opacity: 0.7;

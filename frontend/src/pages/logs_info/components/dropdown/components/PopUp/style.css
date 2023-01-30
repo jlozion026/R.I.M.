@@ -25,6 +25,32 @@
 }
 
 @media all and (max-width: 960px) {
+  .pop-up {
+    height: 90%;
+
+ 
+}
+}
+
+@media all and (min-width: 599px) and (max-width: 768px) {
+
+  .pop-up {
+    height: 88%;
+}
+}
+@media all and (min-width: 712px) and (max-width: 852px) { 
+  .pop-up {
+    height: 85%;
+}
+}
+@media all and (min-width: 853px) and (max-width: 960px) {
+  .pop-up {
+    height: 87%;
+    
+}
+}
+
+@media all and (max-width: 960px) {
   .btn-closed {
     display: none;
   }
