@@ -9,6 +9,7 @@
   height: 100%;
 }
 
+
 .nav-container {
   position: absolute;
   display: flex;
@@ -129,7 +130,8 @@
   color: #6f6f6f;
 }
 
-@media all and (max-width: 480px) {
+@media all and (min-width: 480px) {
+
   .info-window-container {
     width: 100%;
   }

@@ -1,6 +1,5 @@
 .cardBox {
   background-color: #ffffff;
-  overflow: hidden;
   box-shadow: 0px 0px 4px -5px;
   transition: 0.3s;
   animation: ease-in;

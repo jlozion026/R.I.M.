@@ -248,10 +248,9 @@ button {
   .btn--logs{
     padding-right: 0.3vw;
   }
-    
   }
 
-@media all and (max-width: 420px) {
+@media all and (max-width: 429px) {
   .btn--logs2,
   .btn--logs {
     font-size: 3.5vw;
@@ -260,11 +259,12 @@ button {
   .btn--logs2 {
     padding-right: 10vw;
     padding-left: 10vw;
-    padding-top: 2.5vw;
-    padding-bottom: 2.5vw;
+    padding-top: 2.6vw;
+    padding-bottom: 2.6vw;
   }
      .btn--logs{
       padding: 0.5vw;
+      padding-right: 1.5vw;
      }
   
      .btn--medium {
@@ -275,11 +275,18 @@ button {
 
     }
   
+    .btn-img{
+      width: 9vw;
+  }
+  .icon-bg{
+    width: 16vw;
+}
+
 }
 
   
 /* report buttons for small mobile view */
-@media all and (min-width: 421px) and (max-width: 480px) {
+@media all and (min-width: 430px) and (max-width: 480px) {
   /* forms next button for mobile view */
   .btn--next {
     padding-left: 120px;
@@ -302,6 +309,8 @@ button {
   }
   .btn--logs {
     padding: 1vw;
+    padding-right: 2vw;
+    
   }
 
   .btn--medium {
@@ -311,12 +320,10 @@ button {
     min-width: 17vw;
   }
 
-
-
 }
 
 /* report buttons for Mobile View */
-@media all and (min-width: 481px) and (max-width: 599px) {
+@media all and (min-width: 481px) and (max-width: 598px) {
   .btn--categories {
     background-color: var(--none);
     color: var(--grey);
@@ -348,6 +355,7 @@ button {
   }
   .btn--logs {
     padding: 0.5vw;
+    padding-right: 1.5vw;
   }
   .btn--logs2,
   .btn--logs {
@@ -368,8 +376,15 @@ button {
     min-width: 17vw;
   }
 
-
+  .btn-img {
+    width: 6.5vw;
 }
+
+.icon-bg{
+  width: 13vw;
+}
+}
+
 @media all and (min-width: 600px) and (max-width: 768px) {
   .btn--logs2,
   .btn--logs {
@@ -377,13 +392,14 @@ button {
     border-radius: 1.8vw;
   }
   .btn--logs2 {
-    padding-right: 7.1vw;
-    padding-left: 7.1vw;
-    padding-top: 1.2vw;
-    padding-bottom: 1.2vw;
+    padding-right: 7.2vw;
+    padding-left: 7.2vw;
+    padding-top: 1.5vw;
+    padding-bottom: 1.5vw;
   }
      .btn--logs{
       padding: 0.5vw;
+      padding-right: 1.5vw;
      }
   
      .btn--medium {
@@ -392,7 +408,7 @@ button {
       min-height: 5vw;
       min-width: 13vw;
     }
-  
+
   }
 
 
@@ -405,13 +421,14 @@ button {
    .btn--logs2{
     padding-right: 6vw;
     padding-left: 6vw;
-    padding-top: 1vw;
-    padding-bottom: 1vw;
+    padding-top: 1.3vw;
+    padding-bottom: 1.3vw;
   }
   .btn--logs {
     padding: 0.2vw;
     padding-right: 1vw;
    }
+
 
   .btn--medium {
     padding: 1vw;
@@ -419,7 +436,7 @@ button {
     min-height: 2vw;
     min-width: 10vw;
   }
- 
+
 }
 
 /* Putangina wag gagalawin tong breakpoint na to 

@@ -5,6 +5,7 @@ import {
   RegisterOneAccountMutation,
   AccType
 } from "@/generated/graphql";
+import { BiArrowBack } from "react-icons/bi";
 
 import InputField from "@/components/InputField";
 import Button from "@/components/Button";
@@ -88,7 +89,13 @@ const CreateAccount: FC<ICreateAccount> = ({ popUp, setMenuTrig }) => {
       }}
     >
       {errMsg ? <div className="err">{errMsg}</div> : ""}
-      <div className="ca-title">Create Account</div>
+      
+     
+      <div className="ca-title">
+      <span> <BiArrowBack className="form-backIcon" /> </span>
+        Create Account 
+      </div>
+      
       {InputProps.map((val, key) => {
         return (
           <div className={val.style} key={key}>
