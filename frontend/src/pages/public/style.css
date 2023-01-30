@@ -154,3 +154,12 @@
   left: 2%;
   z-index: 10;
 }
+
+@media all and (max-width: 980px) {
+  .login-text {
+    position: absolute;
+    top: 90%;
+    left: 83%;
+    font-size: 10vw;
+  }
+}

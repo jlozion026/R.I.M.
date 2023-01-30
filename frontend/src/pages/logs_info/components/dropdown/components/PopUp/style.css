@@ -52,6 +52,7 @@
 
 @media all and (max-width: 960px) {
   .btn-closed {
-    display: none;
+    top: 3%;
+    right: 8%;
   }
 }

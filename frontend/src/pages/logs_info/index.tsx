@@ -140,7 +140,9 @@ const LogInfo: FC = () => {
                     <div>{report?.report?.location.addresses.to}</div>
                   </div>
                   <p className="sm-titles">DESCRIPTION</p>
-                  <div className="li-d">{report?.report?.description}</div>
+                  <div className="li-d pad-d">
+                    {report?.report?.description}
+                  </div>
                 </div>
               </>
             ) : (
@@ -203,7 +205,7 @@ const LogInfo: FC = () => {
                   </div>
 
                   <p className="sm-titles">DESCRIPTION</p>
-                  <div className="li-d">
+                  <div className="li-d pad-d">
                     <span>{report?.report?.description}</span>
                   </div>
                 </div>
