@@ -29,12 +29,13 @@ export const Views: FC = () => {
   useEffect(() => {
     setLoading(true);
 
-    fetch("http://localhost:4000/refresh_token", {
+    fetch("https://shielded-depths-04850.herokuapp.com/graphql", {
       method: "POST",
       credentials: "include",
     }).then(async (res) => {
       const { ok, payloadData } = await res.json();
       if (ok) {
+        console.log("hello")
         setToken(payloadData.accessToken);
         setAccType(payloadData.accType);
         setAccToken();

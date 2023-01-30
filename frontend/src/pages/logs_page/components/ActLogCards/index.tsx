@@ -1,9 +1,10 @@
-import React, { FC, useState } from "react";
+import { FC } from "react";
 import Card from "../../../../components/Card";
-import './style.css';
+
 import { logsItems } from "./models";
 import { useNavigate } from "react-router-dom";
 
+import './style.css';
 
 const ActLogsCategories: FC<logsItems> = ({ reportID, cardSize, cardIcon, city, address }) => {
 

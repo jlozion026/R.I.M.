@@ -56,6 +56,9 @@ import { Navigate } from "react-router-dom";
 import { AuthContext } from "@/setup/context-manager/authContext";
 import { AuthContextType } from "@/setup/context-manager/model";
 
+
+import { useNavigate } from "react-router-dom";
+
 import "./style.css";
 
 const Public: FC = () => {
@@ -83,6 +86,10 @@ const Public: FC = () => {
     mapRefPublic.current?.setZoom(mapRefPublic.current.getZoom()! - 1);
     setZoom(mapRefPublic.current?.getZoom());
   };
+
+
+  const navigate = useNavigate();
+
 
   const [searchString, setSearchString] = useState<string>("");
 
@@ -315,8 +322,7 @@ const Public: FC = () => {
         PanTo={() => panToQC(mapRefPublic, defaultCenter)}
       />
 
-      <div className="login-text">
-        <SlLogin />
+      <div className="login-text" onClick={() => navigate("/signin") }> <SlLogin />
       </div>
     </div>
   );
