@@ -136,6 +136,7 @@
   font-weight: 600;
   color: #205eff;
   text-shadow: none;
+  cursor: pointer;
 }
 
 @media all and (max-width: 480px) {
