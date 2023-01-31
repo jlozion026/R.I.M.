@@ -1,11 +1,11 @@
 .create-account-form {
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: 40vw;
   align-items: center;
   background-color: #ffffff;
-  padding: 30px;
-  border-radius: 15px;
+  padding: 3vw 5vw 3vw 5vw;
+  border-radius: 2vw;
 }
 
 .err {
@@ -19,25 +19,30 @@
   display: flex;
   align-items: flex-start;
   font-weight: 600;
-  font-size: x-large;
-  padding: 20px;
+  font-size: 2.1vw;
+  padding: 2vw 2vw 2vw 0vw;
+}
+
+.ca-bck-btn {
+  display: none;
 }
 
 .ca-input-field {
   display: flex;
   flex-direction: column;
   width: 90%;
-  gap: 5px;
-  padding: 5px;
+  gap: 0.3vw;
+  padding: 0.5vw;
 }
 
 .ca-input-field > input {
   width: 100%;
-  height: 3rem;
+  height: 3.5vw;
   resize: none;
-  border-radius: 5px;
+  border-radius: 0.4vw;
   border: 1.7px solid #605f5f;
-  padding-inline-start: 10px;
+  padding-inline-start: 1vw;
+  font-size: 1vw;
 }
 
 .ca-input-field > input:focus {
@@ -46,15 +51,15 @@
 }
 
 .ca-input-field > label {
-  font-size: small;
+  font-size: 1vw;
   font-weight: 600;
 }
 
 .ca-account-type {
   display: flex;
   flex-direction: column;
-  width: 95%;
-  padding: 15px;
+  width: 100%;
+  padding: 2vw;
 }
 
 .at-title {
@@ -62,6 +67,7 @@
   display: flex;
   align-items: flex-start;
   font-weight: 600;
+  font-size: 1.2vw;
 }
 
 .radio-btn-group {
@@ -74,26 +80,27 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  width: 40%;
-  padding-top: 20px;
-  gap: 10px;
+  width: 45%;
+  padding-top: 2vw;
+  gap: 1vw;
+  font-size: 1.3vw;
 }
 
 .custom-rb {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
-  border: 2px solid;
+  width: 2.1vw;
+  height: 2.1vw;
+  border: 0.1vw solid;
   border-color: #648df5;
-  border-radius: 50%;
+  border-radius: 1.5vw;
   cursor: pointer;
 }
 
 .custom-rb .checkmark {
-  width: calc(100% - 6px);
-  height: calc(100% - 6px);
+  width: calc(100% - 0.6vw);
+  height: calc(100% - 0.6vw);
   border-radius: 50%;
   background-color: #205eff;
   display: inline-block;
@@ -115,87 +122,99 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 20px;
+  padding: 2vw;
 }
- .form-backIcon {
+
+.form-backIcon {
   display: none;
 }
+
 @media all and (max-width: 960px) {
-  .btn-closed{
+  .create-account-form {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    overflow: hidden;
+    overflow-y: scroll;
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .create-account-form::-webkit-scrollbar {
     display: none;
   }
-  .form-backIcon{
+
+  .ca-title {
+    font-size: 8vw;
+    margin-bottom: 10vw;
+    gap: 3vw;
     display: flex;
-    padding-right: 10px;
-    width: 12vw;
+    justify-content: space-between;
   }
 
-.create-account-form {
-  width: 100%;
-  height:100%;
-  align-self: flex-start;
-  border-radius: 0%;
-}
-.ca-title .span {
-  padding-top: 1.5vw;
-}
+  .ca-input-field {
+    width: 100%;
+    gap: 1vw;
+    padding: 2vw 2vw 2vw 2vw;
+  }
 
-.ca-title{
-  padding-bottom: 68px;
-}
-.at-title{
-  font-size: larger;
-}
-.ca-button{
-  padding-top: 40px;
-}
-.radio-btn span {
-  font-weight: 600;
-}
-
-.ca-input-field > label {
-  font-size: larger;
-  font-weight: 600;
-}
-
-.ca-button .btn--large {
+  .ca-input-field > input {
+    height: 14vw;
+    border-radius: 1vw;
+    padding-inline-start: 3vw;
     font-size: 4vw;
-    border-radius: 2vw;
-}
-.radio-btn-group{
-  justify-content: space-around;
-}
-}
-
-
-
-
-/* reports button for Mobile View to Tablet */
-@media all and (min-width: 599px) and (max-width: 768px) {
-
-  .create-account-form {
- height: 100%;
-
   }
-}
 
-@media all and (min-width: 712px) and (max-width: 852px) { 
-  .ca-button .btn--large {
-    
-      font-size: 2.5vw;
-      padding: 2.5vw;
-    }
-  .create-account-form{
-    height: 88vh;
+  .ca-input-field > label {
+    font-size: 4vw;
   }
-}
-@media all and (min-width: 853px) and (max-width: 960px) {
-  
-.create-account-form{
-padding-bottom: 2vw;
-}
-.ca-button .btn--large {
-  font-size: 2.5vw;
-  padding: 2.5vw;
-}
+
+  .ca-account-type {
+    padding: 10vw 5vw 5vw 2vw;
+    margin-bottom: 10vw;
+  }
+
+  .at-title {
+    font-size: 5vw;
+  }
+
+  .radio-btn {
+    padding-top: 10vw;
+    gap: 4vw;
+    font-size: 4.4vw;
+  }
+
+  .radio-btn-group {
+    gap: 5vw;
+  }
+
+  .custom-rb {
+    width: 8vw;
+    height: 8vw;
+    border: 0.5vw solid;
+    border-color: #648df5;
+    border-radius: 4vw;
+  }
+
+  .custom-rb .checkmark {
+    width: calc(100% - 2vw);
+    height: calc(100% - 2vw);
+  }
+
+  .ca-button {
+    margin-bottom: 10vw;
+  }
+
+  .ca-bck-btn {
+    display: flex;
+    font-size: 8.5vw;
+    color: #9b959e;
+    border-radius: 50%;
+  }
+
+  .ca-bck-btn:hover {
+    color: white;
+    background-color: #605f5f;
+  }
 }

@@ -3,9 +3,8 @@ import { FC, ChangeEvent, useState } from "react";
 import {
   useRegisterOneAccountMutation,
   RegisterOneAccountMutation,
-  AccType
+  AccType,
 } from "@/generated/graphql";
-import { BiArrowBack } from "react-icons/bi";
 
 import InputField from "@/components/InputField";
 import Button from "@/components/Button";
@@ -13,18 +12,20 @@ import { btnType } from "@/components/Button/models";
 
 import { ICreateAccountData, ICreateAccount } from "./models";
 
-
-import { RadioProps, InputProps } from './utils';
+import { RadioProps, InputProps } from "./utils";
 
 import { getToken } from "@/lib/auth";
 
 import "./style.css";
 import { stringToEnum } from "@/lib/stringToEnum";
 import graphqlRequestClient from "@/lib/client/graphqlRequestClient";
+import { FaTimes } from "react-icons/fa";
 
 const CreateAccount: FC<ICreateAccount> = ({ popUp, setMenuTrig }) => {
   const [errMsg, setErrMsg] = useState("");
-  const [selectedRadioBtn, setSelectedRadioBtn] = useState<AccType | undefined>();
+  const [selectedRadioBtn, setSelectedRadioBtn] = useState<
+    AccType | undefined
+  >();
   const [createAccountData, setCreateAccountData] =
     useState<ICreateAccountData>({
       email: "",
@@ -32,30 +33,31 @@ const CreateAccount: FC<ICreateAccount> = ({ popUp, setMenuTrig }) => {
       designation: "",
     });
 
-
   graphqlRequestClient.setHeader("authorization", `bearer ${getToken()}`); //sets the authorization header
 
-  const { mutate } = useRegisterOneAccountMutation<Error>(graphqlRequestClient, {
-    onSuccess: () => {
-      popUp();
-      setMenuTrig();
-    },
+  const { mutate } = useRegisterOneAccountMutation<Error>(
+    graphqlRequestClient,
+    {
+      onSuccess: () => {
+        popUp();
+        setMenuTrig();
+      },
 
-    onError: (error: Error) => {
-      const err = error.message.indexOf(":") + 2;
-      const jsonSubString = error.message.substring(err) // convert error message to JSON 
-      const errJSON = JSON.parse(jsonSubString);
+      onError: (error: Error) => {
+        const err = error.message.indexOf(":") + 2;
+        const jsonSubString = error.message.substring(err); // convert error message to JSON
+        const errJSON = JSON.parse(jsonSubString);
 
-      setErrMsg(errJSON.response.errors[0].constraints[0].message)
-    },
-  });
+        setErrMsg(errJSON.response.errors[0].constraints[0].message);
+      },
+    }
+  );
 
   const isRadioSelected = (value: string) => selectedRadioBtn === value;
 
   const getRadioVal = (e: ChangeEvent<HTMLInputElement>) => {
     setSelectedRadioBtn(stringToEnum(e.target.value, AccType));
-  }
-
+  };
 
   const getCreateAccountData = (e: ChangeEvent<HTMLInputElement>) => {
     setCreateAccountData({
@@ -66,7 +68,7 @@ const CreateAccount: FC<ICreateAccount> = ({ popUp, setMenuTrig }) => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const pass = createAccountData.designation.replace(/\s/g, '').toLowerCase();
+    const pass = createAccountData.designation.replace(/\s/g, "").toLowerCase();
     createAccountData["password"] = pass + "pass12345";
 
     setErrMsg(""); // clear the error message state variable
@@ -76,9 +78,9 @@ const CreateAccount: FC<ICreateAccount> = ({ popUp, setMenuTrig }) => {
         email: createAccountData.email,
         password: createAccountData.password,
         designation: createAccountData.designation,
-        acc_type: selectedRadioBtn!
-      }
-    })
+        acc_type: selectedRadioBtn!,
+      },
+    });
   };
 
   return (
@@ -89,13 +91,14 @@ const CreateAccount: FC<ICreateAccount> = ({ popUp, setMenuTrig }) => {
       }}
     >
       {errMsg ? <div className="err">{errMsg}</div> : ""}
-      
-     
+
       <div className="ca-title">
-      <span> <BiArrowBack className="form-backIcon" /> </span>
-        Create Account 
+        Create Account
+        <span className="ca-bck-btn" onClick={() => popUp()}>
+          <FaTimes />
+        </span>
       </div>
-      
+
       {InputProps.map((val, key) => {
         return (
           <div className={val.style} key={key}>
@@ -130,8 +133,7 @@ const CreateAccount: FC<ICreateAccount> = ({ popUp, setMenuTrig }) => {
                 </label>
               </div>
             );
-          })
-          }
+          })}
         </div>
       </div>
       <div className="ca-button">
