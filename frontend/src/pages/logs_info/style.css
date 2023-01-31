@@ -16,6 +16,14 @@
   font-family: "Inter";
 }
 
+.arrows-down {
+  display: none;
+}
+
+.arrows-up {
+  display: none;
+}
+
 .bck-cont {
   width: 100%;
   padding: 0vw 0vw 1vw 0vw;
@@ -169,9 +177,35 @@
   .peso-sign {
     font-size: 3vw;
   }
-}
 
-@media all and (max-width: 481px) {
+  .arrows-down {
+    font-size: 6vw;
+    display: flex;
+    position: fixed;
+    top: 35%;
+    animation: animationArrow 2s infinite;
+    color: #b2b2ba;
+  }
+
+  .arrows-down:hover {
+    color: #000000;
+  }
+
+  .arrows-up:hover {
+    color: #000000;
+  }
+
+  .arrows-up {
+    font-size: 6vw;
+    display: flex;
+    position: absolute;
+    top: 85%;
+    right: 47%;
+    z-index: 1;
+    animation: animationArrow 2s infinite;
+    color: #b2b2ba;
+  }
+
   .info-cont {
     z-index: 1;
     position: absolute;
@@ -181,12 +215,17 @@
     top: 50%;
     width: 100%;
     background-color: #ffff;
-    padding: 8vw;
+    padding: 5vw 8vw 8vw 8vw;
     font-family: "Inter";
 
-    margin-bottom: 100vw;
     border-top-left-radius: 5vw;
     border-top-right-radius: 5vw;
+  }
+}
+
+@media all and (max-width: 481px) {
+  .info-cont {
+    top: 50%;
   }
 
   .default-li {
@@ -211,20 +250,11 @@
 
 @media all and (min-width: 481px) and (max-width: 768px) {
   .info-cont {
-    z-index: 1;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     top: 30%;
-    width: 100%;
-    background-color: #ffff;
-    padding: 8vw;
-    font-family: "Inter";
+  }
 
-    margin-bottom: 100vw;
-    border-top-left-radius: 5vw;
-    border-top-right-radius: 5vw;
+  .arrows-down {
+    top: 20%;
   }
 
   .default-li {
@@ -234,19 +264,8 @@
 
 @media all and (min-width: 769px) and (max-width: 960px) {
   .info-cont {
-    z-index: 1;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     top: 35%;
     width: 100%;
-    background-color: #ffff;
-    padding: 8vw;
-    font-family: "Inter";
-
-    border-top-left-radius: 5vw;
-    border-top-right-radius: 5vw;
   }
 
   .default-li {
@@ -255,7 +274,7 @@
 
   @media all and (min-height: 961px) {
     .info-cont {
-      top: 40%;
+      top: 30%;
 
       border-top-left-radius: 5vw;
       border-top-right-radius: 5vw;
@@ -264,11 +283,29 @@
     .default-li {
       height: 35%;
     }
+
+    .arrows-down {
+      top: 25%;
+    }
   }
 }
 
 @media all and (min-width: 961px) {
   .nav-li {
     display: none;
+  }
+}
+
+@keyframes animationArrow {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.25);
+  }
+
+  100% {
+    transform: scale(1);
   }
 }
