@@ -26,6 +26,10 @@
   gap: 1vw;
 }
 
+.upd-bck-btn {
+  display: none;
+}
+
 .back-b {
   display: flex;
   align-items: center;
@@ -139,6 +143,8 @@
   .header-f {
     gap: 5vw;
     padding-bottom: 5vw;
+    display: flex;
+    justify-content: space-between;
   }
 
   .up-title {
@@ -189,6 +195,18 @@
 
   .ub-gap {
     margin-top: 12vw;
+  }
+
+  .upd-bck-btn {
+    display: flex;
+    font-size: 8.5vw;
+    color: #9b959e;
+    border-radius: 50%;
+  }
+
+  .upd-bck-btn:hover {
+    color: white;
+    background-color: #605f5f;
   }
 
   @media all and (min-height: 480px) {

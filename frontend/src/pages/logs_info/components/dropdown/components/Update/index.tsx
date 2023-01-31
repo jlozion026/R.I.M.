@@ -18,7 +18,7 @@ import UpdateForm2 from "./components/UpdateForm2";
 
 import ProgressSteps from "./components/ProgressSteps";
 
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaTimes } from "react-icons/fa";
 
 import { IUpdate } from "./models";
 
@@ -117,6 +117,9 @@ const Update: FC<IUpdate> = ({ reportID, setTrigger, reportType }) => {
           </p>
         ) : null}
         <h1 className="up-title">Update</h1>
+        <span className="upd-bck-btn" onClick={() => setTrigger()}>
+          <FaTimes />
+        </span>
       </div>
 
       {reportType === ReportType.CityProject ? (

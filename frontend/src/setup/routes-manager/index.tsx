@@ -23,19 +23,21 @@ import Public from "@/pages/public";
 import { AdminRoute } from "./adminRoute";
 
 export const Views: FC = () => {
-  const { setAccToken, setAccType } = useContext(AuthContext) as AuthContextType;
+  const { setAccToken, setAccType } = useContext(
+    AuthContext
+  ) as AuthContextType;
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
 
-    fetch("https://shielded-depths-04850.herokuapp.com/graphql", {
+    fetch("http:localhost:4000/refresh_token", {
       method: "POST",
       credentials: "include",
     }).then(async (res) => {
       const { ok, payloadData } = await res.json();
       if (ok) {
-        console.log("hello")
+        console.log("hello");
         setToken(payloadData.accessToken);
         setAccType(payloadData.accType);
         setAccToken();
