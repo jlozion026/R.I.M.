@@ -22,6 +22,8 @@ import { defaultCenter, libraries, options } from "@/utils";
 
 import { FaArrowLeft } from "react-icons/fa";
 
+import { BsChevronDoubleDown, BsChevronDoubleUp } from "react-icons/bs";
+
 import "./style.css";
 
 import { IoMdSettings } from "react-icons/io";
@@ -54,6 +56,12 @@ const LogInfo: FC = () => {
   const [directions, setDirections] = useState<DirectionsResult>();
 
   const [trigOption, setTrigOption] = useState<boolean>(false);
+
+  const [slide, setSlide] = useState<boolean>(false);
+
+  const slideUp = () => {
+    setSlide(!slide);
+  };
 
   const markerOptions: MarkerOptions = {
     icon: {
@@ -92,128 +100,144 @@ const LogInfo: FC = () => {
 
   return (
     <div className="logsInfo">
-      <div className="info-cont">
-        <div className="bck-cont">
-          <span className="fa-arrow-left" onClick={() => navigate(-1)}>
-            <FaArrowLeft />
+      {!slide ? (
+        <div className="info-cont">
+          <span className="arrows-down" onClick={() => setSlide(!slide)}>
+            <BsChevronDoubleDown />
           </span>
+          <div className="bck-cont">
+            <span className="fa-arrow-left" onClick={() => navigate(-1)}>
+              <FaArrowLeft />
+            </span>
+          </div>
+          {!isLoaded && isLoading ? (
+            <Loader />
+          ) : (
+            <>
+              {report?.report?.report_type != ReportType.CityProject ? (
+                <>
+                  <div className="info-title">
+                    <h1>
+                      {report?.report?.report_type
+                        .replace(/([A-Z])/g, " $1")
+                        .trim()}
+                    </h1>
+                  </div>
+                  <div className="info-title b-line">
+                    <p>Project Details</p>
+                  </div>
+                  <div className="default-li">
+                    <p className="sm-titles">DATES</p>
+                    <div className="li-d">
+                      <h5>Started:</h5>
+                      <div>
+                        {report?.report?.incident?.date_started.split("T")[0]}
+                      </div>
+                    </div>
+
+                    <div className="li-d">
+                      <h5>Ended:</h5>
+                      <div>
+                        {report?.report?.incident?.date_ended.split("T")[0]}
+                      </div>
+                    </div>
+
+                    <p className="sm-titles">LOCATION</p>
+                    <div className="li-d">
+                      <h5>Origin:</h5>
+                      <div>{report?.report?.location.addresses.from}</div>
+                    </div>
+                    <div className="li-d">
+                      <h5>Destination:</h5>
+                      <div>{report?.report?.location.addresses.to}</div>
+                    </div>
+                    <p className="sm-titles">DESCRIPTION</p>
+                    <div className="li-d pad-d">
+                      {report?.report?.description}
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="info-title">
+                    <h1>{report.report?.city_project?.project_name}</h1>
+                  </div>
+                  <div className="info-title b-line">
+                    <p>Project Details</p>
+                  </div>
+                  <div className="default-li">
+                    <p className="sm-titles">DATES</p>
+                    <div className="li-d">
+                      <h5>Started:</h5>
+                      <div>
+                        {
+                          report?.report?.city_project?.date_started.split(
+                            "T"
+                          )[0]
+                        }
+                      </div>
+                    </div>
+                    <div className="li-d">
+                      <h5>Ended:</h5>
+                      <div>
+                        {report?.report?.city_project?.date_ended.split("T")[0]}
+                      </div>
+                    </div>
+
+                    <p className="sm-titles">LOCATION</p>
+                    <div className="li-d">
+                      <h5>Origin:</h5>
+                      <div>{report?.report?.location.addresses.from}</div>
+                    </div>
+                    <div className="li-d">
+                      <h5>Destination:</h5>
+                      <div>{report?.report?.location.addresses.to}</div>
+                    </div>
+
+                    <p className="sm-titles">CONTRACTOR</p>
+                    <div className="li-d">
+                      <span>
+                        {" "}
+                        {report.report?.city_project?.contractor_name}
+                      </span>
+                    </div>
+
+                    <p className="sm-titles">SOURCE FUND</p>
+                    <div className="li-d">
+                      <span>{report.report?.city_project?.source_fund}</span>
+                    </div>
+
+                    <p className="sm-titles">PROGRAM AMOUNT</p>
+                    <div className="li-d">
+                      <span>
+                        <span className="peso-sign">&#8369;</span>
+                        {report.report?.city_project?.project_ammount}
+                      </span>
+                    </div>
+
+                    <p className="sm-titles">CONTRACTOR AMOUNT</p>
+                    <div className="li-d">
+                      <span>
+                        <span className="peso-sign">&#8369;</span>
+                        {report.report?.city_project?.contract_ammount}
+                      </span>
+                    </div>
+
+                    <p className="sm-titles">DESCRIPTION</p>
+                    <div className="li-d pad-d">
+                      <span>{report?.report?.description}</span>
+                    </div>
+                  </div>
+                </>
+              )}
+            </>
+          )}
         </div>
-        {!isLoaded && isLoading ? (
-          <Loader />
-        ) : (
-          <>
-            {report?.report?.report_type != ReportType.CityProject ? (
-              <>
-                <div className="info-title">
-                  <h1>
-                    {report?.report?.report_type
-                      .replace(/([A-Z])/g, " $1")
-                      .trim()}
-                  </h1>
-                </div>
-                <div className="info-title b-line">
-                  <p>Project Details</p>
-                </div>
-                <div className="default-li">
-                  <p className="sm-titles">DATES</p>
-                  <div className="li-d">
-                    <h5>Started:</h5>
-                    <div>
-                      {report?.report?.incident?.date_started.split("T")[0]}
-                    </div>
-                  </div>
-
-                  <div className="li-d">
-                    <h5>Ended:</h5>
-                    <div>
-                      {report?.report?.incident?.date_ended.split("T")[0]}
-                    </div>
-                  </div>
-
-                  <p className="sm-titles">LOCATION</p>
-                  <div className="li-d">
-                    <h5>Origin:</h5>
-                    <div>{report?.report?.location.addresses.from}</div>
-                  </div>
-                  <div className="li-d">
-                    <h5>Destination:</h5>
-                    <div>{report?.report?.location.addresses.to}</div>
-                  </div>
-                  <p className="sm-titles">DESCRIPTION</p>
-                  <div className="li-d pad-d">
-                    {report?.report?.description}
-                  </div>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="info-title">
-                  <h1>{report.report?.city_project?.project_name}</h1>
-                </div>
-                <div className="info-title b-line">
-                  <p>Project Details</p>
-                </div>
-                <div className="default-li">
-                  <p className="sm-titles">DATES</p>
-                  <div className="li-d">
-                    <h5>Started:</h5>
-                    <div>
-                      {report?.report?.city_project?.date_started.split("T")[0]}
-                    </div>
-                  </div>
-                  <div className="li-d">
-                    <h5>Ended:</h5>
-                    <div>
-                      {report?.report?.city_project?.date_ended.split("T")[0]}
-                    </div>
-                  </div>
-
-                  <p className="sm-titles">LOCATION</p>
-                  <div className="li-d">
-                    <h5>Origin:</h5>
-                    <div>{report?.report?.location.addresses.from}</div>
-                  </div>
-                  <div className="li-d">
-                    <h5>Destination:</h5>
-                    <div>{report?.report?.location.addresses.to}</div>
-                  </div>
-
-                  <p className="sm-titles">CONTRACTOR</p>
-                  <div className="li-d">
-                    <span> {report.report?.city_project?.contractor_name}</span>
-                  </div>
-
-                  <p className="sm-titles">SOURCE FUND</p>
-                  <div className="li-d">
-                    <span>{report.report?.city_project?.source_fund}</span>
-                  </div>
-
-                  <p className="sm-titles">PROGRAM AMOUNT</p>
-                  <div className="li-d">
-                    <span>
-                      <span className="peso-sign">&#8369;</span>
-                      {report.report?.city_project?.project_ammount}
-                    </span>
-                  </div>
-
-                  <p className="sm-titles">CONTRACTOR AMOUNT</p>
-                  <div className="li-d">
-                    <span>
-                      <span className="peso-sign">&#8369;</span>
-                      {report.report?.city_project?.contract_ammount}
-                    </span>
-                  </div>
-
-                  <p className="sm-titles">DESCRIPTION</p>
-                  <div className="li-d pad-d">
-                    <span>{report?.report?.description}</span>
-                  </div>
-                </div>
-              </>
-            )}
-          </>
-        )}
-      </div>
+      ) : (
+        <span className="arrows-up" onClick={slideUp}>
+          <BsChevronDoubleUp />
+        </span>
+      )}
 
       <div className="map-cont">
         <GoogleMap
