@@ -16,7 +16,7 @@ import {data} from './utils'
 
 const CustomBarChart: FC = () => {
   return (
-    <ResponsiveContainer width="100%" height="85%">
+    <ResponsiveContainer width="100%" height="90%">
       <BarChart
         width={500}
         height={300}
@@ -34,9 +34,10 @@ const CustomBarChart: FC = () => {
         <Tooltip />
         <Legend 
           verticalAlign='top'
-          height={100}
+          height={60}
           iconType={'rect'}
-          iconSize={35}
+          iconSize={20}
+        
         />
 
         <Bar dataKey="2021" stackId="a" fill="#5594f3" />

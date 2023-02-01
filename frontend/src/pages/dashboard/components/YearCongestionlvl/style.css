@@ -1,0 +1,16 @@
+.year-graph-container .recharts-surface{
+    display: flex;
+    margin-left: 1.5vw;
+    margin-top: -12vh;
+    overflow: visible;
+}
+
+@media all and (max-width:950px){
+
+.year-graph-container .recharts-surface{
+    display: flex;
+    margin-left: 12vw;
+    margin-top: -13vh;
+    overflow: visible;
+}
+}

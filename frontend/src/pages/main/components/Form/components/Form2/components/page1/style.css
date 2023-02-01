@@ -58,7 +58,6 @@ padding-left: 5vw;
 display: flex;
 flex-direction: column;
 width: 100%;
-
 }
 .description-wrapper{
   display: flex;
@@ -94,16 +93,12 @@ width: 100%;
   .location-container label, 
   .date-container label,
   .description label {
-    font-size: 3.5vw;
+    font-size: 4vw;
   }
   .description > textarea {
     font-size: 4vw;
   }
-  .btn-container-next > .btn--large{
-    font-size: 7vw;
-    border-radius: 2vw;
-    height: 7vh;
-  }
+
 
 }
 
@@ -116,11 +111,6 @@ width: 100%;
   .description > textarea {
     font-size: 3.5vw;
   }
-  .btn-container-next > .btn--large{
-    font-size: 5vw;
-    border-radius: 1.5vw;
-    height: 8vh;
-  }
 }
 
 @media all and (min-width: 769px) and (max-width: 960px) {
@@ -132,14 +122,14 @@ width: 100%;
   .description > textarea {
     font-size: 3vw;
   }
-  .btn-container-next > .btn--large{
-    font-size: 5vw;
-    border-radius: 1vw;
-    height: 10vh;
-  }
 }
 
 @media all and (max-width: 960px) {
+  .btn-container-next > .btn--large{
+    font-size: 5vw;
+    border-radius: 2vw;
+    padding: 5vw;
+  }
  
   .rdrMonth{
   width: 100%;
@@ -171,8 +161,14 @@ width: 100%;
     width: 80vw;
   }
   .form-wrapper{
-    padding-bottom: 30%;
+    padding-bottom: 40%;
     overflow: scroll;
     }
+  .form2-wrapper{
+  overflow: scroll;
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+  }
+  
 }
 

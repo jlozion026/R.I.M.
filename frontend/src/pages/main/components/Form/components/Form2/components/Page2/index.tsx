@@ -11,7 +11,7 @@ import { btnType } from "@/components/Button/models";
 const Page2: FC<Ipage2> = ({ GetFormData, Submit }) => {
   return (
     <>
-    <div className="form-wrapper">
+    <div className="form2-wrapper">
     <div className="fi-container pn-container">
         <InputField
           label={"Project Name"}

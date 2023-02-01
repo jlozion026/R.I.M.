@@ -99,6 +99,9 @@ width: 100%;
 margin-left: 0.5em;
 font-size: 1vw;
 }
+.main-search-item svg{
+  font-size: 2vw;
+}
 
 @media all and (max-width: 480px) {
   .main-search-item {
