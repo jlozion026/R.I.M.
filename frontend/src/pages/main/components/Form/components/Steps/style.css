@@ -84,9 +84,11 @@
     bottom: 3vw;
   }
 
-  .circle-text,
   .progress-number {
     font-size: 4.5vw;
+  }
+  .circle-text{
+    font-size: 3.5vw;
   }
 
   .circle {
@@ -95,7 +97,7 @@
     border-radius: 4vw;
 }
 .progress-container {
-  width: 50vw;
+  width: 40vw;
 }
 }
 
@@ -109,9 +111,12 @@
     bottom: 3vw;
   }
 
-  .circle-text,
+
   .progress-number {
     font-size: 3.5vw;
+  }
+  .circle-text{
+    font-size: 3vw;
   }
 
   .circle {
@@ -120,7 +125,7 @@
     border-radius: 3.25vw;
 }
 .progress-container {
-  width: 40vw;
+  width: 33vw;
 }
 
 }
@@ -132,8 +137,11 @@
     right: -9vw;
     bottom: 2vw;
   }
-  .circle-text,
+ 
   .progress-number {
+    font-size: 2.5vw;
+  }
+  .circle-text{
     font-size: 2.5vw;
   }
 
@@ -143,10 +151,7 @@
     border-radius: 2.5vw;
 }
   .progress-container {
-    width: 28vw;
+    width: 23vw;
 }
 }
 
-@media all and (max-width: 960px) {
-
-}

@@ -3,7 +3,7 @@ import Card from "@/components/Card";
 import '../../../dashboard/style.css';
 import { GraphItems } from "../../models";
 import arrowdown from "@/Assets/svg/arrowdown.svg";
-
+import './style.css';
 
 import CustomPieChart from "../Charts/PieChart/index"
 

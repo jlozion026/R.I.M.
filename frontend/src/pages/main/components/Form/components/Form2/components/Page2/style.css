@@ -16,7 +16,6 @@
   font-family: sans-serif;
   font-weight: 600;
   font-size: 1vw;
-  margin-left: 4.6vw;
   margin-bottom: 0.3vw;
 }
 
@@ -48,11 +47,6 @@
   .fi-container label {
   font-size: 3.5vw;
   }
-  .btn-container-submit > .btn--large {
-  font-size: 7vw;
-  border-radius: 2vw;
-  height: 7vh;
-  }
  
 }
 
@@ -60,33 +54,32 @@
   .fi-container label {
   font-size: 3vw;
   }
-  .btn-container-submit > .btn--large {
-  font-size: 5vw;
-  border-radius: 1.5vw;
-  height: 10vh;
-  }
+
 }
 
 @media all and (min-width: 769px) and (max-width: 960px) {
   .fi-container label {
     font-size: 2.5vw;
   }
-  .btn-container-submit > .btn--large {
-    font-size: 3vw;
-    border-radius: 1vw;
-    height: 12vh;
-  }
+
 }
 @media all and (max-width: 960px) {
-  .btn-container-submit{
-  width: 80vw;
+  .btn-container-submit {
+    width: 100%;
+    margin-bottom: 20vh;
   }
+  .btn-container-submit > .btn--large {
+    font-size: 5vw;
+    border-radius: 2vw;
+    padding: 5vw;
+    }
   .fi-container {
   padding-bottom: 2vw;
   align-items: start;
   }
   .fi-container label {
     margin-bottom: 1vw;
+    margin-left: 0;
   }
   .programAmount-container {
   padding-bottom: 2.4vw;

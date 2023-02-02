@@ -43,9 +43,9 @@ const CustomAreaChart: FC<ICustomAreaChart> = ({ data, areas }) => {
         />
         <Tooltip />
         <Legend verticalAlign="top"
-          height={100}
+          height={70}
           iconType={'square'}
-          iconSize={30}
+          iconSize={20}
         />
 
         {areas.map((area) => {

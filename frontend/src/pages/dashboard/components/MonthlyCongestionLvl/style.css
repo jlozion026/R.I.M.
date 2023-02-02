@@ -59,6 +59,7 @@
     width: 1vw;
 }
 
+
 @media only screen and (max-width:60em){
     .mcltitle,.medCardTitle,.hcltitle{
         font-size: 4vw;

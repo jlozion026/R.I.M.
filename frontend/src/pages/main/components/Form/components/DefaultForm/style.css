@@ -226,5 +226,10 @@
   .org-des-column {
     width: 50vw;
   }
+  .addresses-wrapper,
+  .date-wrapper,
+  .description-wrapper{
+    padding-bottom: 1.2vw;
+  }
 }
 
