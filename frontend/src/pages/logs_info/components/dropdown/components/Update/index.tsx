@@ -22,9 +22,17 @@ import { FaArrowLeft, FaTimes } from "react-icons/fa";
 
 import { IUpdate } from "./models";
 
+import { toast } from "react-toastify";
+
 import "./style.css";
 
 const Update: FC<IUpdate> = ({ reportID, setTrigger, reportType }) => {
+  //Toastify Message!
+  const Success = () => toast.success("Updated Successfully!");
+  const NoUpdate = () => {
+    toast.warn("No update has occurred!");
+  };
+
   const {
     page,
     setPage,
@@ -40,10 +48,12 @@ const Update: FC<IUpdate> = ({ reportID, setTrigger, reportType }) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["GetOneReport", { reportId: reportID }]);
+        Success();
       },
 
       onError: (error: Error) => {
         console.log(error);
+        NoUpdate();
       },
     }
   );
