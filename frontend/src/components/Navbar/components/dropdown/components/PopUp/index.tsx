@@ -7,8 +7,8 @@ import "./style.css";
 
 const PopUp: FC<IPopUp> = ({ Trigger, PopOut, children }) => {
   return Trigger ? (
-    <div className="pop-up">
-      <p className="btn-closed">
+    <div className="Navbar-pop-up">
+      <p className="CreateUser-closed">
         <FaTimes size={30} onClick={PopOut} />
       </p>
       {children}

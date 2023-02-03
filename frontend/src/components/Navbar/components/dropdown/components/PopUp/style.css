@@ -1,4 +1,4 @@
-.pop-up {
+.Navbar-pop-up {
   position: fixed;
   top: 0;
   left: 0;
@@ -10,7 +10,7 @@
   align-items: center;
 }
 
-.btn-closed {
+.CreateUser-closed {
   position: absolute;
   top: 10%;
   right: 19%;
@@ -19,12 +19,20 @@
   color: #d1d3d6;
 }
 
-.btn-closed:hover {
+.CreateUser-closed:hover {
   color: #ffff;
 }
 
 @media all and (max-width: 960px) {
-  .btn-closed {
+  .CreateUser-closed {
     display: none;
   }
+  .Navbar-pop-up{
+    height: 90%;
+    z-index: -1;
+  }
+  
+  .nav-container .cardBox {
+    height: 10%;
+}
 }
