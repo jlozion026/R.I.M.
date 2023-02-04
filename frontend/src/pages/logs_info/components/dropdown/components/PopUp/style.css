@@ -34,5 +34,6 @@
   .btn-closed {
     top: 3%;
     right: 8%;
+    display: none;
   }
 }
