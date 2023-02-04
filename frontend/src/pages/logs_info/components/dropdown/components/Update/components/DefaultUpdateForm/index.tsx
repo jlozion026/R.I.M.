@@ -104,6 +104,7 @@ const DefaultUpdateForm: FC<IDefaultUpdateForm> = ({
           <label htmlFor="up-description">Description</label>
         </p>
         <textarea
+          data-testid="areatext-desc"
           id="description"
           name="description"
           value={defaultUpdateData.description}

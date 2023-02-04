@@ -15,9 +15,33 @@ import { ReportType } from '@/generated/graphql';
 
 const queryClient = new QueryClient();
 
-const test_data =
-  { "report": { "report_id": "cldfoluk8000u8n50g12gjvjg", "report_type": ReportType.RoadClosure, "location": { "addresses": { "general_address": "Muñoz, Quezon City, Metro Manila, Philippines", "from": "85 San Antonio, Quezon City, 1105 Metro Manila, Philippines", "to": "189 San Antonio, Quezon City, Metro Manila, Philippines" }, "origin": { "lat": 14.656515072116497, "lng": 121.01852405486727 }, "destination": { "lat": 14.65657308857938, "lng": 121.01812364194504 } }, "description": "gsadgasg", "incident": { "date_started": "2023-01-28T00:00:00.000Z", "date_ended": "2023-01-29T00:00:00.000Z" }, "city_project": null } }
-
+const test_data = {
+  "report": {
+    "report_id": "cldfoluk8000u8n50g12gjvjg",
+    "report_type": ReportType.RoadClosure,
+    "location": {
+      "addresses": {
+        "general_address": "Muñoz, Quezon City, Metro Manila, Philippines",
+        "from": "85 San Antonio, Quezon City, 1105 Metro Manila, Philippines",
+        "to": "189 San Antonio, Quezon City, Metro Manila, Philippines"
+      },
+      "origin": {
+        "lat": 14.656515072116497,
+        "lng": 121.01852405486727
+      },
+      "destination": {
+        "lat": 14.65657308857938,
+        "lng": 121.01812364194504
+      }
+    },
+    "description": "gsadgasg",
+    "incident": {
+      "date_started": "2023-01-28T00:00:00.000Z",
+      "date_ended": "2023-01-29T00:00:00.000Z"
+    },
+    "city_project": null
+  }
+}
 
 
 describe('render the component', () => {

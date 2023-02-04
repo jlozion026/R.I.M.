@@ -45,8 +45,9 @@ const Page1: FC<IPage1> = ({ GetUpdatedData }) => {
           type={"text"}
           name={"StartDate"}
           placeholder={"YYYY/MM/DD"}
-          forinput={"calendar"}
+          forinput={"start-date"}
           id={"start-date"}
+          data-testid="start-date"
           readonly={true}
           onClick={() => setCalendarStart(true)}
           getData={GetUpdatedData}
@@ -72,7 +73,7 @@ const Page1: FC<IPage1> = ({ GetUpdatedData }) => {
           value={format(endDate, "yyyy-MM-dd")}
           name={"EndDate"}
           placeholder={"YYYY/MM/DD"}
-          forinput={"calendar"}
+          forinput={"end-date"}
           id={"end-date"}
           readonly={true}
           onClick={() => {
@@ -100,6 +101,7 @@ const Page1: FC<IPage1> = ({ GetUpdatedData }) => {
         </p>
         <textarea
           id="description"
+          data-testid="areatext-desc"
           name="description"
           value={updateForm2Data.description}
           onChange={GetUpdatedData}
