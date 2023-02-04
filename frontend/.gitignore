@@ -33,6 +33,10 @@ dist-ssr
 # production
 /build
 
+.env
+
+test_reports/
+
 # misc
 .DS_Store
 *.local

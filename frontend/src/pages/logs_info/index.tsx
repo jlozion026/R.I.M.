@@ -70,7 +70,8 @@ const LogInfo: FC = () => {
     },
   };
 
-  const drawDirection = useMemo(() => {
+  // set direction
+  useMemo(() => {
     if (!isLoading) {
       fetchDirections(
         report?.report?.location.origin,
@@ -258,7 +259,6 @@ const LogInfo: FC = () => {
             />
           ) : null}
         </GoogleMap>
-        <>{drawDirection}</>
       </div>
 
       <div className="option-cont">

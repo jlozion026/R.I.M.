@@ -36,8 +36,8 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
   const [genAdd, setGenAdd] = useState<string>("");
 
   //Calendar
-  const [startDate, setStartDate] = useState("YYYY/MM/DD");
-  const [endDate, setEndDate] = useState("YYYY/MM/DD");
+  const [startDate, setStartDate] = useState<Date>(new Date());
+  const [endDate, setEndDate] = useState<Date>(new Date());
 
   //Toastify Message!
   const Success = () => toast.success("Successfully Created!");
@@ -51,8 +51,8 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
       destination: { lat: 0, lng: 0 },
     },
     projectName: "",
-    startDate: "",
-    endDate: "",
+    startDate: startDate,
+    endDate: endDate,
     description: "",
     contractor: "",
     sourceFund: "",
@@ -66,8 +66,8 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
       origin: { lat: 0, lng: 0 },
       destination: { lat: 0, lng: 0 },
     },
-    startDate: "",
-    endDate: "",
+    startDate: startDate,
+    endDate: endDate,
     description: "",
   });
 
@@ -92,8 +92,6 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
   });
 
   const SubmitForm2Data = () => {
-    form2Data["startDate"] = startDate;
-    form2Data["endDate"] = endDate;
     mutate({
       data: {
         location: {
@@ -111,8 +109,8 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
           create: {
             project_name: form2Data.projectName,
             contractor_name: form2Data.contractor,
-            date_started: form2Data.startDate,
-            date_ended: form2Data.endDate,
+            date_started:format(defaultFormData.startDate!, "yyyy-MM-dd"),
+            date_ended: format(defaultFormData.endDate!, "yyyy-MM-dd"),
             source_fund: form2Data.sourceFund,
             project_ammount: parseFloat(form2Data.programAmount),
             contract_ammount: parseFloat(form2Data.contractAmount),
@@ -145,8 +143,8 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
         report_type: TypeOfReport as ReportType,
         incident: {
           create: {
-            date_started: defaultFormData.startDate,
-            date_ended: defaultFormData.endDate,
+            date_started:format(defaultFormData.startDate!, "yyyy-MM-dd"),
+            date_ended: format(defaultFormData.endDate!, "yyyy-MM-dd"),
           },
         },
       },
@@ -174,13 +172,13 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
   };
 
   const handleStartDate = (date: Date) => {
-    setStartDate(format(date, "yyyy-MM-dd"));
+    setStartDate(date);
     clickCalendar();
   };
 
   const handleEndDate = (date: Date) => {
-    if (date > new Date(startDate)) {
-      setEndDate(format(date, "yyyy-MM-dd"));
+    if(date >= startDate!){
+      setEndDate(date);
       clickCalendar();
     } else {
       console.log("invalid");
@@ -254,6 +252,7 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
           Submit={SubmitForm2Data}
         />
       )}
+
     </form>
   );
 };

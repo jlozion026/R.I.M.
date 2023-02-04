@@ -53,6 +53,7 @@ const Navbar: FC<navCardItems> = ({ cardSize, PingPopOut }) => {
 
         <div className="nav-icon" ref={ref}>
           <p
+            data-testid="createAccBtn"
             onClick={() => {
               setMenuTrig(!menuTrig)
             }}

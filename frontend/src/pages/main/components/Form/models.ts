@@ -13,8 +13,8 @@ export interface ILocation {
 
 export interface IDefaultFormData {
   location: ILocation;
-  startDate: string;
-  endDate: string;
+  startDate: Date|undefined;
+  endDate: Date|undefined;
   description: string;
 }
 
@@ -56,9 +56,9 @@ export interface IPage extends IGetFormData {
   ClickCalendarEnd(): void;
   CalendarStart: boolean;
   CalendarEnd: boolean;
-  StartDate: string;
+  StartDate: Date;
   setGenAdd(arg0:string): void;
-  EndDate: string;
+  EndDate: Date;
 }
 
 export interface IPage1 extends IPage, OnClickOutSide {

@@ -27,12 +27,12 @@ const DropDown: FC<IDropDown> = ({ report, setMenuTrig }) => {
 
   useEffect(() => {
     if (report?.report?.report_type !== ReportType.CityProject) {
-      defaultUpdateData["startDate"] = report?.report?.incident?.date_started;
-      defaultUpdateData["endDate"] = report?.report?.incident?.date_ended;
+      defaultUpdateData["startDate"] = new Date(report?.report?.incident?.date_started);
+      defaultUpdateData["endDate"] = new Date(report?.report?.incident?.date_ended);
       defaultUpdateData["description"] = report?.report?.description;
     } else {
-      updateForm2Data["startDate"] = report.report.city_project?.date_started;
-      updateForm2Data["endDate"] = report.report.city_project?.date_ended;
+      defaultUpdateData["startDate"] = new Date(report?.report?.incident?.date_started);
+      defaultUpdateData["endDate"] = new Date(report?.report?.incident?.date_ended);
       updateForm2Data["description"] = report.report.description;
       updateForm2Data["projectName"] = report.report.city_project?.project_name;
       updateForm2Data["contractor"] =
@@ -49,9 +49,12 @@ const DropDown: FC<IDropDown> = ({ report, setMenuTrig }) => {
   const [trigger, setTrigger] = useState<boolean>(false);
   const [deleteTrig, setDeleteTrig] = useState<boolean>(false);
 
-
-  const formTrig = () => {
+  const updateTrig = () => {
     setTrigger(!trigger);
+    setMenuTrig();
+  }
+
+  const delTrig = () => {
     setDeleteTrig(!deleteTrig);
     setMenuTrig();
   };
@@ -59,7 +62,7 @@ const DropDown: FC<IDropDown> = ({ report, setMenuTrig }) => {
 
   return (
     <>
-      <div className="dropdown-logs-info">
+      <div data-testid="infoDrop" className="dropdown-logs-info">
         <ul className="dropdown-card-logs-info">
           <li className="menu-item-logs-info" onClick={() => setTrigger(true)}>
             <p className="drop-icon-logs-info">
@@ -68,6 +71,7 @@ const DropDown: FC<IDropDown> = ({ report, setMenuTrig }) => {
             <p>Edit Report</p>
           </li>
           <li
+            data-testid="deleteBtn"
             className="menu-item-logs-info"
             onClick={() => setDeleteTrig(true)}
           >
@@ -80,19 +84,19 @@ const DropDown: FC<IDropDown> = ({ report, setMenuTrig }) => {
       </div>
       <>
 
-        <PopUp Trigger={trigger} PopOut={formTrig} >
+        <PopUp Trigger={trigger} PopOut={updateTrig} >
           <Update
             reportID={report?.report?.report_id}
-            setTrigger={formTrig}
+            setTrigger={updateTrig}
             reportType={report?.report?.report_type}
           />
         </PopUp>
 
-        <PopUp Trigger={deleteTrig} PopOut={formTrig}>
+        <PopUp Trigger={deleteTrig} PopOut={delTrig}>
           <Delete
             reportID={report?.report?.report_id}
             reportType={report?.report?.report_type}
-            PopOut={formTrig}
+            PopOut={delTrig}
           />
         </PopUp>
 

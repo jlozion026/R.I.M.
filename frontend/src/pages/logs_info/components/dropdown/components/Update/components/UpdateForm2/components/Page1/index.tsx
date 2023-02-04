@@ -14,6 +14,8 @@ import { Calendar } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 
+import format from "date-fns/format";
+
 import useOnclickOutside from "react-cool-onclickoutside";
 
 const Page1: FC<IPage1> = ({ GetUpdatedData }) => {
@@ -37,7 +39,7 @@ const Page1: FC<IPage1> = ({ GetUpdatedData }) => {
       <div className="ui-field">
         <InputField
           label={"Date Started"}
-          value={updateForm2Data.startDate.split("T")[0]}
+          value={format(updateForm2Data.startDate, "yyyy-MM-dd")}
           type={"text"}
           name={"StartDate"}
           placeholder={"YYYY/MM/DD"}
@@ -65,7 +67,7 @@ const Page1: FC<IPage1> = ({ GetUpdatedData }) => {
         <InputField
           label={"Date Ended"}
           type={"text"}
-          value={updateForm2Data.endDate.split("T")[0]}
+          value={format(updateForm2Data.endDate, "yyyy-MM-dd")}
           name={"EndDate"}
           placeholder={"YYYY/MM/DD"}
           forinput={"calendar"}

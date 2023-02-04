@@ -2,7 +2,6 @@ import { ChangeEvent, FC, useContext } from "react";
 
 import {
   useUpdateOneReportMutation,
-  UpdateOneReportMutation,
   ReportType,
 } from "@/generated/graphql";
 

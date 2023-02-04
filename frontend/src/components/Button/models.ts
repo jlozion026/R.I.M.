@@ -7,6 +7,8 @@ export enum btnType {
 export interface ButtonProps {
   icon?: string;
   svg?: string;
+  id?: string;
+  disabled?: boolean;
   children: string;
   type: btnType;
   buttonStyle?: string;

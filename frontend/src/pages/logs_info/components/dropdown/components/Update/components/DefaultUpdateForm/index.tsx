@@ -14,6 +14,8 @@ import { Calendar } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 
+import format from "date-fns/format";
+
 import useOnclickOutside from "react-cool-onclickoutside";
 
 const DefaultUpdateForm: FC<IDefaultUpdateForm> = ({
@@ -40,7 +42,7 @@ const DefaultUpdateForm: FC<IDefaultUpdateForm> = ({
       <div className="ui-field spce-gap">
         <InputField
           label={"Date Started"}
-          value={defaultUpdateData.startDate.split("T")[0]}
+          value={format(defaultUpdateData.startDate, "yyyy-MM-dd")}
           type={"text"}
           name={"StartDate"}
           placeholder={"YYYY/MM/DD"}
@@ -70,7 +72,8 @@ const DefaultUpdateForm: FC<IDefaultUpdateForm> = ({
         <InputField
           label={"Date Ended"}
           type={"text"}
-          value={defaultUpdateData.endDate.split("T")[0]}
+
+          value={format(defaultUpdateData.endDate, "yyyy-MM-dd")}
           name={"EndDate"}
           placeholder={"YYYY/MM/DD"}
           forinput={"calendar"}

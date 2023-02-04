@@ -37,10 +37,10 @@ export type MainContextType = {
 };
 
 export type LogsInfoContextType = {
-  startDate: string | any;
-  endDate: string | any;
-  setStartDate: (arg0: string) => void;
-  setEndDate: (arg0: string) => void;
+  startDate: Date;
+  endDate: Date;
+  setStartDate: (arg0: Date) => void;
+  setEndDate: (arg0: Date) => void;
   calendarStart: boolean;
   setCalendarStart: (arg0: boolean) => void;
   calendarEnd: boolean;

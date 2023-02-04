@@ -42,7 +42,9 @@ const Button: FC<ButtonProps> = ({
   children,
   onClick,
   type,
+  id,
   buttonStyle,
+  disabled,
   buttonSize,
   svgBackGround,
 }) => {
@@ -58,9 +60,11 @@ const Button: FC<ButtonProps> = ({
 
   return (
     <button
+      data-testid={id}
       className={`btn ${checkButtonStyle} ${checkButtonSize}`}
       onClick={onClick}
       type={type}
+      disabled={disabled}
     >
       <>
         {svg ? (
