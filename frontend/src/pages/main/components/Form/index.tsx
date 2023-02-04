@@ -109,8 +109,8 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
           create: {
             project_name: form2Data.projectName,
             contractor_name: form2Data.contractor,
-            date_started:format(defaultFormData.startDate!, "yyyy-MM-dd"),
-            date_ended: format(defaultFormData.endDate!, "yyyy-MM-dd"),
+            date_started:format(startDate, "yyyy-MM-dd"),
+            date_ended: format(endDate, "yyyy-MM-dd"),
             source_fund: form2Data.sourceFund,
             project_ammount: parseFloat(form2Data.programAmount),
             contract_ammount: parseFloat(form2Data.contractAmount),
@@ -143,8 +143,8 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
         report_type: TypeOfReport as ReportType,
         incident: {
           create: {
-            date_started:format(defaultFormData.startDate!, "yyyy-MM-dd"),
-            date_ended: format(defaultFormData.endDate!, "yyyy-MM-dd"),
+            date_started:format(startDate, "yyyy-MM-dd"),
+            date_ended: format(endDate, "yyyy-MM-dd"),
           },
         },
       },

@@ -22,6 +22,8 @@ const Page1: FC<IPage1> = ({ GetUpdatedData }) => {
   const {
     calendarStart,
     calendarEnd,
+    startDate,
+    endDate,
     setCalendarStart,
     setCalendarEnd,
     clickCalendar,
@@ -39,7 +41,7 @@ const Page1: FC<IPage1> = ({ GetUpdatedData }) => {
       <div className="ui-field">
         <InputField
           label={"Date Started"}
-          value={format(updateForm2Data.startDate, "yyyy-MM-dd")}
+          value={format(startDate, "yyyy-MM-dd")}
           type={"text"}
           name={"StartDate"}
           placeholder={"YYYY/MM/DD"}
@@ -67,7 +69,7 @@ const Page1: FC<IPage1> = ({ GetUpdatedData }) => {
         <InputField
           label={"Date Ended"}
           type={"text"}
-          value={format(updateForm2Data.endDate, "yyyy-MM-dd")}
+          value={format(endDate, "yyyy-MM-dd")}
           name={"EndDate"}
           placeholder={"YYYY/MM/DD"}
           forinput={"calendar"}

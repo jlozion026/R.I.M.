@@ -17,6 +17,8 @@ import UpdateForm2 from "./components/UpdateForm2";
 
 import ProgressSteps from "./components/ProgressSteps";
 
+import format from "date-fns/format";
+
 import { FaArrowLeft, FaTimes } from "react-icons/fa";
 
 import { IUpdate } from "./models";
@@ -35,6 +37,8 @@ const Update: FC<IUpdate> = ({ reportID, setTrigger, reportType }) => {
   const {
     page,
     setPage,
+    startDate,
+    endDate,
     defaultUpdateData,
     setDefaultUpdateData,
     updateForm2Data,
@@ -84,8 +88,8 @@ const Update: FC<IUpdate> = ({ reportID, setTrigger, reportType }) => {
         description: { set: defaultUpdateData.description },
         incident: {
           update: {
-            date_started: { set: defaultUpdateData.startDate },
-            date_ended: { set: defaultUpdateData.endDate },
+            date_started: { set: format(startDate, "yyyy-MM-dd")},
+            date_ended: { set: format(endDate, "yyyy-MM-dd")},
           },
         },
       },
@@ -104,8 +108,8 @@ const Update: FC<IUpdate> = ({ reportID, setTrigger, reportType }) => {
           update: {
             project_name: { set: updateForm2Data.projectName },
             contractor_name: { set: updateForm2Data.contractor },
-            date_started: { set: updateForm2Data.startDate },
-            date_ended: { set: updateForm2Data.endDate },
+            date_started: { set: format(startDate, "yyyy-MM-dd")},
+            date_ended: { set: format(endDate, "yyyy-MM-dd")},
             source_fund: { set: updateForm2Data.sourceFund },
             project_ammount: { set: Number(updateForm2Data.programAmount) },
             contract_ammount: { set: Number(updateForm2Data.contractAmount) },
@@ -118,7 +122,7 @@ const Update: FC<IUpdate> = ({ reportID, setTrigger, reportType }) => {
   };
 
   return (
-    <form className="update-report-form">
+    <form data-testid="updateForm" className="update-report-form">
       <div className="header-f">
         {page ? (
           <p className="back-b" onClick={() => setPage(false)}>
