@@ -1,30 +1,40 @@
 import { FC } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { DeleteOneReportMutation, useDeleteOneReportMutation } from "@/generated/graphql";
+import {
+  DeleteOneReportMutation,
+  useDeleteOneReportMutation,
+} from "@/generated/graphql";
 import graphqlRequestClient from "@/lib/client/graphqlRequestClient";
-
 
 import Button from "@/components/Button";
 import { btnType } from "@/components/Button/models";
 
 import { TbTrashX } from "react-icons/tb";
 
-import { IDelete } from './models'
+import { IDelete } from "./models";
+
+import { toast } from "react-toastify";
 
 import "./style.css";
 import { useQueryClient } from "@tanstack/react-query";
 const Delete: FC<IDelete> = ({ PopOut, reportType, reportID }) => {
+  //Toastify Message!
+  const Success = () => toast.success("Deleted Successfully!");
+  const Cancel = () => {
+    toast.info("Cancel!");
+    PopOut();
+  };
 
   const navigate = useNavigate();
 
   const change_page = () => {
     navigate("/logs", {
       state: {
-        type: reportType
-      }
-    })
-  }
+        type: reportType,
+      },
+    });
+  };
 
   const queryClient = useQueryClient();
   const { mutate: deleteMutate } = useDeleteOneReportMutation<Error>(
@@ -33,8 +43,10 @@ const Delete: FC<IDelete> = ({ PopOut, reportType, reportID }) => {
       onSuccess: () => {
         queryClient.invalidateQueries([
           "PaginatedGetAllReportsByType",
-          { "reportType": reportType, "skip": 0, "take": 5 }
+          { reportType: reportType, skip: 0, take: 5 },
         ]);
+
+        Success();
       },
 
       onError: (error: Error) => {
@@ -45,11 +57,11 @@ const Delete: FC<IDelete> = ({ PopOut, reportType, reportID }) => {
 
   const onDelete = () => {
     deleteMutate({
-      report_id: reportID
+      report_id: reportID,
     });
 
     change_page();
-  }
+  };
 
   return (
     <div className="delete-report">
@@ -68,7 +80,7 @@ const Delete: FC<IDelete> = ({ PopOut, reportType, reportID }) => {
             type={btnType.Button}
             buttonStyle={"btn--grey"}
             buttonSize={"btn--cancel"}
-            onClick={PopOut}
+            onClick={Cancel}
           >
             Cancel
           </Button>

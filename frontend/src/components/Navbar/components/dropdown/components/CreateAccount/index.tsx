@@ -16,12 +16,18 @@ import { RadioProps, InputProps } from "./utils";
 
 import { getToken } from "@/lib/auth";
 
+import { toast } from "react-toastify";
+
 import "./style.css";
+
 import { stringToEnum } from "@/lib/stringToEnum";
 import graphqlRequestClient from "@/lib/client/graphqlRequestClient";
 import { FaTimes } from "react-icons/fa";
 
 const CreateAccount: FC<ICreateAccount> = ({ popUp, setMenuTrig }) => {
+  //Toastify Message!
+  const Success = () => toast.success("Successfully Created!");
+
   const [errMsg, setErrMsg] = useState("");
   const [selectedRadioBtn, setSelectedRadioBtn] = useState<
     AccType | undefined
@@ -41,6 +47,7 @@ const CreateAccount: FC<ICreateAccount> = ({ popUp, setMenuTrig }) => {
       onSuccess: () => {
         popUp();
         setMenuTrig();
+        Success();
       },
 
       onError: (error: Error) => {

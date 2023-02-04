@@ -1,9 +1,6 @@
 import { ChangeEvent, FC, useState, useContext } from "react";
 
-import {
-  useCreateOneReportMutation,
-  ReportType,
-} from "@/generated/graphql";
+import { useCreateOneReportMutation, ReportType } from "@/generated/graphql";
 
 import { MainContext } from "@/setup/context-manager/mainContext";
 import { MainContextType } from "@/setup/context-manager/model";
@@ -23,6 +20,8 @@ import { IDefaultFormData, IForm, IForm2Data } from "./models";
 
 import { getToken } from "@/lib/auth";
 
+import { toast } from "react-toastify";
+
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 
@@ -39,6 +38,11 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
   //Calendar
   const [startDate, setStartDate] = useState("YYYY/MM/DD");
   const [endDate, setEndDate] = useState("YYYY/MM/DD");
+
+  //Toastify Message!
+  const Success = () => toast.success("Successfully Created!");
+  const Errors = () =>
+    toast.error("Report not created. Please complete all fields!");
 
   //Todo state of origin and destination Form2Data.
   const [form2Data, setForm2Data] = useState<IForm2Data>({
@@ -77,11 +81,13 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
 
   const { mutate } = useCreateOneReportMutation<Error>(graphqlRequestClient, {
     onSuccess: () => {
-      queryClient.invalidateQueries(["getAllReports",{}]);
+      queryClient.invalidateQueries(["getAllReports", {}]);
+      Success();
     },
 
     onError: (error: Error) => {
       console.log(error);
+      Errors();
     },
   });
 
@@ -94,7 +100,7 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
           addresses: {
             general_address: genAdd,
             to: addresses.addOrigin,
-            from: addresses.addDestination
+            from: addresses.addDestination,
           },
           origin: coordinates.origin,
           destination: coordinates.destination,
@@ -130,7 +136,7 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
           addresses: {
             general_address: genAdd,
             to: addresses.addOrigin,
-            from: addresses.addDestination
+            from: addresses.addDestination,
           },
           origin: coordinates.origin,
           destination: coordinates.destination,
@@ -173,12 +179,12 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
   };
 
   const handleEndDate = (date: Date) => {
-    if(date > new Date(startDate)){
+    if (date > new Date(startDate)) {
       setEndDate(format(date, "yyyy-MM-dd"));
       clickCalendar();
-    } else{
-        console.log("invalid");
-      }
+    } else {
+      console.log("invalid");
+    }
   };
 
   //Calendar Pop-Up
@@ -210,8 +216,8 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
           <Steps page={page} />
         </div>
       ) : null}
-      
-          {!FormType ? (
+
+      {!FormType ? (
         <DefaultForm
           setGenAdd={setGenAdd}
           GetFormData={getDefaultFormData}
@@ -248,7 +254,6 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
           Submit={SubmitForm2Data}
         />
       )}
-    
     </form>
   );
 };
