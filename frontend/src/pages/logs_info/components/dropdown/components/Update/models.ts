@@ -2,7 +2,9 @@ import { ReportType } from "@/generated/graphql";
 
 export interface IDefaultUpdateForm
   extends ISubmitUpdatedForm,
-    IGetUpdatedData {}
+    IGetUpdatedData {
+  Disabled: boolean;
+}
 
 export interface IUpdateForm2
   extends IGetUpdatedData,
@@ -36,7 +38,9 @@ export interface IGetUpdatedData {
 }
 
 export interface IPage1 extends IDefaultUpdateForm, IGetUpdatedData {}
-export interface Ipage2 extends ISubmitUpdatedForm, IGetUpdatedData {}
+export interface Ipage2 extends ISubmitUpdatedForm, IGetUpdatedData {
+  Disabled: boolean;
+}
 
 export interface IUpdate {
   reportType: ReportType | undefined;

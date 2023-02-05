@@ -21,6 +21,7 @@ import useOnclickOutside from "react-cool-onclickoutside";
 const DefaultUpdateForm: FC<IDefaultUpdateForm> = ({
   SubmitUpdatedForm,
   GetUpdatedData,
+  Disabled,
 }) => {
   const {
     calendarStart,
@@ -120,6 +121,7 @@ const DefaultUpdateForm: FC<IDefaultUpdateForm> = ({
           buttonStyle={"btn--superBlue"}
           onClick={SubmitUpdatedForm}
           buttonSize={"btn--large"}
+          disabled={Disabled}
         >
           Update
         </Button>

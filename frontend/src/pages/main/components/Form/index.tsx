@@ -109,7 +109,7 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
           create: {
             project_name: form2Data.projectName,
             contractor_name: form2Data.contractor,
-            date_started:format(startDate, "yyyy-MM-dd"),
+            date_started: format(startDate, "yyyy-MM-dd"),
             date_ended: format(endDate, "yyyy-MM-dd"),
             source_fund: form2Data.sourceFund,
             project_ammount: parseFloat(form2Data.programAmount),
@@ -121,6 +121,20 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
 
     PopUp();
   };
+
+  // if all input fields empty from "City Project" the Next button is Disabled
+  const DisabledForm2 =
+    !genAdd ||
+    !addresses.addOrigin ||
+    !addresses.addDestination ||
+    form2Data.description.length <= 0;
+
+  // if all input fields empty from "City Project" the Submit button is Disabled
+  const DisabledForm2Sumbit =
+    form2Data.projectName.length <= 0 ||
+    form2Data.contractor.length <= 0 ||
+    !form2Data.programAmount ||
+    !form2Data.contractAmount;
 
   const SubmitDefaultFormData = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -143,7 +157,7 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
         report_type: TypeOfReport as ReportType,
         incident: {
           create: {
-            date_started:format(startDate, "yyyy-MM-dd"),
+            date_started: format(startDate, "yyyy-MM-dd"),
             date_ended: format(endDate, "yyyy-MM-dd"),
           },
         },
@@ -162,6 +176,13 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
     });
   };
 
+  // if all input fields empty the submit button from "Incidents" is Disabled
+  const DisabledDefaultForm =
+    !genAdd ||
+    defaultFormData.description.length! <= 0 ||
+    !addresses.addOrigin ||
+    !addresses.addDestination;
+
   const getForm2Data = (
     val: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ) => {
@@ -177,7 +198,7 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
   };
 
   const handleEndDate = (date: Date) => {
-    if(date >= startDate!){
+    if (date >= startDate!) {
       setEndDate(date);
       clickCalendar();
     } else {
@@ -230,6 +251,7 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
           }
           ClickCalendarEnd={() => setCalendarEnd((calendarEnd) => !calendarEnd)}
           ClickCalendar={clickCalendar}
+          Disabled={DisabledDefaultForm}
           Submit={(e) => SubmitDefaultFormData(e)}
         />
       ) : (
@@ -249,10 +271,11 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
           }
           ClickCalendarEnd={() => setCalendarEnd((calendarEnd) => !calendarEnd)}
           ClickCalendar={clickCalendar}
+          Disabled={DisabledForm2}
+          DisabledSumbit={DisabledForm2Sumbit}
           Submit={SubmitForm2Data}
         />
       )}
-
     </form>
   );
 };

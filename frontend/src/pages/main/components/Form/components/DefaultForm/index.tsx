@@ -38,6 +38,7 @@ const DefaultForm: FC<IDefaultForm> = ({
   StartDate,
   EndDate,
   ClickCalendar,
+  Disabled,
 }) => {
   const { coordinates, addresses, resetMarkers } = useContext(
     MainContext
@@ -49,118 +50,128 @@ const DefaultForm: FC<IDefaultForm> = ({
 
   return (
     <>
-        <div className="form-wrapper">
+      <div className="form-wrapper">
         <div className="location-container">
-        <Search
-          Name={"location"}
-          PlaceHolder={"Search Location"}
-          Label={"Location"}
-          SetGenAdd={setGenAdd}
-        />
-      </div>
+          <Search
+            Name={"location"}
+            PlaceHolder={"Search Location"}
+            Label={"Location"}
+            SetGenAdd={setGenAdd}
+          />
+        </div>
 
-      <div className="addresses-container">
-        <div className="address-flex-column">
-          <div className="org-des-column">
-            <div>
-              <span className="label-styles">From:</span>
-              <span className="address-styles">{addresses.addOrigin}</span>
-            </div>
-            <div className="lat-lng-row">
+        <div className="addresses-container">
+          <div className="address-flex-column">
+            <div className="org-des-column">
               <div>
-                <span className="label-styles">Lat:</span>
-                <span className="lat-lng-color">{coordinates.origin.lat}</span>
+                <span className="label-styles">From:</span>
+                <span className="address-styles">{addresses.addOrigin}</span>
               </div>
-              <div>
-                <span className="label-styles">Lng:</span>
-                <span className="lat-lng-color">{coordinates.origin.lng}</span>
+              <div className="lat-lng-row">
+                <div>
+                  <span className="label-styles">Lat:</span>
+                  <span className="lat-lng-color">
+                    {coordinates.origin.lat}
+                  </span>
+                </div>
+                <div>
+                  <span className="label-styles">Lng:</span>
+                  <span className="lat-lng-color">
+                    {coordinates.origin.lng}
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="org-des-column">
-            <div>
-              <span className="label-styles">To:</span>
-              <span className="address-styles">{addresses.addDestination}</span>
-            </div>
-            <div className="lat-lng-row">
+            <div className="org-des-column">
               <div>
-                <span className="label-styles">Lat:</span>
-                <span className="lat-lng-color">
-                  {coordinates.destination.lat}
+                <span className="label-styles">To:</span>
+                <span className="address-styles">
+                  {addresses.addDestination}
                 </span>
               </div>
-              <div>
-                <span className="label-styles">Lng:</span>
-                <span className="lat-lng-color">
-                  {coordinates.destination.lng}
-                </span>
+              <div className="lat-lng-row">
+                <div>
+                  <span className="label-styles">Lat:</span>
+                  <span className="lat-lng-color">
+                    {coordinates.destination.lat}
+                  </span>
+                </div>
+                <div>
+                  <span className="label-styles">Lng:</span>
+                  <span className="lat-lng-color">
+                    {coordinates.destination.lng}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
+          <p className="eraser-icon">
+            <RiEraserFill onClick={resetMarkers} />
+          </p>
         </div>
-        <p className="eraser-icon">
-          <RiEraserFill onClick={resetMarkers} />
-        </p>
-      </div>
 
-      <div className="date-container">
-        <div className="date-group">
-          <div className="date-wrapper" onClick={ClickCalendarStart}>
-            <InputField
-              label={"Date Started"}
-              type={"text"}
-              name={"StartDate"}
-              placeholder={format(StartDate as Date, "yyyy-MM-dd")}
-              forinput={"calendar"}
-              id={"start-date"}
-              readonly={true}
-            />
-          </div>
-          {CalendarStart ? (
-            <div ref={ref}>
-              <Calendar
-                date={new Date()}
-                onChange={HandleStartDate}
-                className="calendarElement"
+        <div className="date-container">
+          <div className="date-group">
+            <div className="date-wrapper" onClick={ClickCalendarStart}>
+              <InputField
+                label={"Date Started"}
+                type={"text"}
+                name={"StartDate"}
+                placeholder={format(StartDate as Date, "yyyy-MM-dd")}
+                forinput={"calendar"}
+                id={"start-date"}
+                readonly={true}
               />
             </div>
-          ) : null}
-        </div>
-        <div className="calendar-icon">
-        <span className="calendar-svg"><FaCalendarAlt/></span>
-        </div>
-      </div>
-
-      <div className="date-container">
-        <div className="date-group">
-          <div className="date-wrapper" onClick={ClickCalendarEnd}>
-            <InputField
-              label={"Date Ended"}
-              type={"text"}
-              name={"EndDate"}
-              placeholder={format(EndDate as Date,"yyyy-MM-dd")}
-              forinput={"end-date"}
-              readonly={true}
-            />
+            {CalendarStart ? (
+              <div ref={ref}>
+                <Calendar
+                  date={new Date()}
+                  onChange={HandleStartDate}
+                  className="calendarElement"
+                />
+              </div>
+            ) : null}
           </div>
-          {CalendarEnd ? (
-            <div ref={ref}>
-              <Calendar
-                date={new Date()}
-                onChange={HandleEndDate}
-                className="calendarElement"
+          <div className="calendar-icon">
+            <span className="calendar-svg">
+              <FaCalendarAlt />
+            </span>
+          </div>
+        </div>
+
+        <div className="date-container">
+          <div className="date-group">
+            <div className="date-wrapper" onClick={ClickCalendarEnd}>
+              <InputField
+                label={"Date Ended"}
+                type={"text"}
+                name={"EndDate"}
+                placeholder={format(EndDate as Date, "yyyy-MM-dd")}
+                forinput={"end-date"}
+                readonly={true}
               />
             </div>
-          ) : null}
+            {CalendarEnd ? (
+              <div ref={ref}>
+                <Calendar
+                  date={new Date()}
+                  onChange={HandleEndDate}
+                  className="calendarElement"
+                />
+              </div>
+            ) : null}
+          </div>
+
+          <div className="calendar-icon">
+            <span className="calendar-svg">
+              <FaCalendarAlt />
+            </span>
+          </div>
         </div>
 
-        <div className="calendar-icon">
-        <span className="calendar-svg"><FaCalendarAlt/></span>
-        </div>
-      </div>
-
-      <div className="description-wrapper">
-        <div className="description">
+        <div className="description-wrapper">
+          <div className="description">
             <p>
               <label htmlFor="description">Description</label>
             </p>
@@ -172,20 +183,20 @@ const DefaultForm: FC<IDefaultForm> = ({
               cols={51}
             />
           </div>
-      </div>
+        </div>
 
-      <div className="default-btn-container">
-        <Button
-          type={btnType.Submit}
-          buttonStyle={"btn--superBlue"}
-          onClick={Submit}
-          buttonSize={"btn--large"}
-        >
-          Submit
-        </Button>
+        <div className="default-btn-container">
+          <Button
+            type={btnType.Submit}
+            buttonStyle={"btn--superBlue"}
+            onClick={Submit}
+            buttonSize={"btn--large"}
+            disabled={Disabled}
+          >
+            Submit
+          </Button>
+        </div>
       </div>
-      </div>
-     
     </>
   );
 };

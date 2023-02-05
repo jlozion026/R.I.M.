@@ -1,9 +1,6 @@
-import { FC, ChangeEvent, useState } from "react";
+import { FC, ChangeEvent, useState, useMemo } from "react";
 
-import {
-  useRegisterOneAccountMutation,
-  AccType
-} from "@/generated/graphql";
+import { useRegisterOneAccountMutation, AccType } from "@/generated/graphql";
 
 import InputField from "@/components/InputField";
 import Button from "@/components/Button";
@@ -29,54 +26,58 @@ const CreateAccount: FC<ICreateAccount> = ({ popUp, setMenuTrig }) => {
   const Success = () => toast.success("Successfully Created!");
 
   const [errMsg, setErrMsg] = useState("");
-  const [isEmail, setIsEmail] = useState<boolean>(false);
+
   const [createAccountData, setCreateAccountData] =
     useState<ICreateAccountData>({
       email: "",
       password: "",
       designation: "",
-      radio: undefined
+      radio: undefined,
     });
 
   graphqlRequestClient.setHeader("authorization", `bearer ${getToken()}`); //sets the authorization header
 
-  const { mutate } = useRegisterOneAccountMutation<Error>(graphqlRequestClient, {
-    onSuccess: () => {
-      popUp();
-      setMenuTrig();
-      Success();
-    },
+  const { mutate } = useRegisterOneAccountMutation<Error>(
+    graphqlRequestClient,
+    {
+      onSuccess: () => {
+        popUp();
+        setMenuTrig();
+        Success();
+      },
 
-    onError: (error: Error) => {
-      const err = error.message.indexOf(":") + 2;
-      console.log(err);
-      const jsonSubString = error.message.substring(err) // convert error message to JSON 
-      console.log(jsonSubString);
-      const errJSON = JSON.parse(jsonSubString);
+      onError: (error: Error) => {
+        const err = error.message.indexOf(":") + 2;
+        console.log(err);
+        const jsonSubString = error.message.substring(err); // convert error message to JSON
+        console.log(jsonSubString);
+        const errJSON = JSON.parse(jsonSubString);
 
-      setErrMsg(errJSON.response.errors[0].constraints[0].message)
-    },
-  });
+        setErrMsg(errJSON.response.errors[0].constraints[0].message);
+      },
+    }
+  );
 
   const isRadioSelected = (value: string) => createAccountData.radio === value;
 
   const getRadioVal = (e: ChangeEvent<HTMLInputElement>) => {
     setCreateAccountData({
       ...createAccountData,
-      radio: stringToEnum(e.target.value, AccType)
-    })
-  }
-
+      radio: stringToEnum(e.target.value, AccType),
+    });
+  };
 
   const getCreateAccountData = (e: ChangeEvent<HTMLInputElement>) => {
     setCreateAccountData({
       ...createAccountData,
       [e.target.name]: e.target.value,
     });
-    if (e.target.name === "email") {
-      isValidEmail(createAccountData.email, setIsEmail);
-    }
   };
+
+  const isEmail = useMemo(
+    () => isValidEmail(createAccountData.email),
+    [createAccountData.email]
+  );
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -90,9 +91,9 @@ const CreateAccount: FC<ICreateAccount> = ({ popUp, setMenuTrig }) => {
         email: createAccountData.email,
         password: createAccountData.password,
         designation: createAccountData.designation,
-        acc_type: createAccountData.radio!
-      }
-    })
+        acc_type: createAccountData.radio!,
+      },
+    });
   };
 
   return (
@@ -127,20 +128,13 @@ const CreateAccount: FC<ICreateAccount> = ({ popUp, setMenuTrig }) => {
             />
 
             <div data-testid={val.error} className="validation">
-              {
-                val.type === "email" ?
-
-                  !isEmail ?
-                    "*Required"
-                    :
-                    null
-
-                  :
-                  !createAccountData.designation.length ?
-                    "*Required"
-                    :
-                    null
-              }
+              {val.type === "email"
+                ? !isEmail
+                  ? "*Required"
+                  : null
+                : !createAccountData.designation.length
+                ? "*Required"
+                : null}
             </div>
           </div>
         );
@@ -175,9 +169,10 @@ const CreateAccount: FC<ICreateAccount> = ({ popUp, setMenuTrig }) => {
           onClick={onSubmit}
           buttonSize={"btn--large"}
           disabled={
-            !isEmail
-            || !(createAccountData.designation.length > 1)
-            || !createAccountData.radio}
+            !isEmail ||
+            !(createAccountData.designation.length > 1) ||
+            !createAccountData.radio
+          }
         >
           Create
         </Button>
