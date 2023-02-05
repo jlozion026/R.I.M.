@@ -10,30 +10,19 @@ import {
 import {
   GoogleMap,
   useLoadScript,
-  Marker,
-  Circle,
   InfoWindow,
+  Polygon,
 } from "@react-google-maps/api";
 
 import {
-  closeOptions,
-  defaultOptions,
-  farOptions,
-  middleOptions,
   panToQC,
 } from "./utils";
 
 import {
-  GetAllActiveReportsByTypeQueryVariables,
   useGetAllActiveReportsByTypeQuery,
   GetAllActiveReportsQuery,
   useGetAllActiveReportsQuery,
   GetAllReportsByTypeQuery,
-  useGetAllReportsByTypeQuery,
-  GetAllReportsWithDateQuery,
-  useGetAllReportsWithDateQuery,
-  GetAllReportsWithDateCpQuery,
-  useGetAllReportsWithDateCpQuery,
   ReportType,
 } from "@/generated/graphql";
 
@@ -41,7 +30,7 @@ import graphqlRequestClient from "@/lib/client/graphqlRequestClient";
 
 import { MarkerData, IModArr } from "./models";
 
-import { libraries, defaultCenter, options } from "@/utils";
+import { libraries, defaultCenter, options, polyOnLoad, qCpaths, polyOptions } from "@/utils";
 
 import Zoom from "./components/Zoom";
 import MarkersClusterer from "./components/MarkersClusterer";
@@ -78,7 +67,7 @@ const Public: FC = () => {
   });
 
   // Zoom Control Button
-  const [zoom, setZoom] = useState<number | undefined>(13);
+  const [zoom, setZoom] = useState<number | undefined>(12.3);
 
   const [modArr, setModArr] = useState<IModArr>();
 
@@ -190,27 +179,16 @@ const Public: FC = () => {
         onLoad={onMapLoad}
         onUnmount={onUnMount}
       >
-        {zoom! <= 14 ? (
-          <>
-            <Marker position={defaultCenter} />
-            <Circle
-              center={defaultCenter}
-              radius={2500}
-              options={defaultOptions}
-            />
-            <Circle
-              center={defaultCenter}
-              radius={4500}
-              options={closeOptions}
-            />
-            <Circle
-              center={defaultCenter}
-              radius={6500}
-              options={middleOptions}
-            />
-            <Circle center={defaultCenter} radius={8000} options={farOptions} />
-          </>
-        ) : null}
+        {zoom! <= 14 ?
+          <Polygon
+            onLoad={polyOnLoad}
+            paths={qCpaths}
+            options={polyOptions}
+            visible={true}
+          />
+          :
+          null
+        }
 
         {isLoaded && !isLoading ? (
           <MarkersClusterer

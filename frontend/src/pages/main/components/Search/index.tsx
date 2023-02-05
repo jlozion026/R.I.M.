@@ -34,6 +34,7 @@ const Search: FC<ISearch> = ({ Name,
   resetFilter,
   fetchReport
 }) => {
+
   const {
     value,
     suggestions: { status, data },
@@ -62,6 +63,7 @@ const Search: FC<ISearch> = ({ Name,
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
+
 
   const handleSelect =
     ({ description }: google.maps.places.AutocompletePrediction) =>
