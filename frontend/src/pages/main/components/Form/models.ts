@@ -13,8 +13,8 @@ export interface ILocation {
 
 export interface IDefaultFormData {
   location: ILocation;
-  startDate: Date|undefined;
-  endDate: Date|undefined;
+  startDate: Date | undefined;
+  endDate: Date | undefined;
   description: string;
 }
 
@@ -57,18 +57,26 @@ export interface IPage extends IGetFormData {
   CalendarStart: boolean;
   CalendarEnd: boolean;
   StartDate: Date;
-  setGenAdd(arg0:string): void;
+  setGenAdd(arg0: string): void;
   EndDate: Date;
 }
 
 export interface IPage1 extends IPage, OnClickOutSide {
   Next(): void;
+  Disabled: boolean;
 }
 
-export interface Ipage2 extends IGetFormData, ISubmit {}
+export interface Ipage2 extends IGetFormData, ISubmit {
+  Disabled: boolean;
+  DisabledSumbit: boolean;
+}
 
-export interface IDefaultForm extends IPage, ISubmit, OnClickOutSide {}
+export interface IDefaultForm extends IPage, ISubmit, OnClickOutSide {
+  Disabled: boolean;
+}
 
 export interface IForm2 extends IPage1, ISubmit {
   page: boolean;
+  Disabled: boolean;
+  DisabledSumbit: boolean;
 }

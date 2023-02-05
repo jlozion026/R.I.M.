@@ -8,7 +8,7 @@ import { Ipage2 } from "../../../../models";
 import { LogsInfoContext } from "@/setup/context-manager/logsInfoContext";
 import { LogsInfoContextType } from "@/setup/context-manager/model";
 
-const Page2: FC<Ipage2> = ({ SubmitUpdatedForm, GetUpdatedData }) => {
+const Page2: FC<Ipage2> = ({ SubmitUpdatedForm, GetUpdatedData, Disabled }) => {
   const { updateForm2Data } = useContext(
     LogsInfoContext
   ) as LogsInfoContextType;
@@ -84,6 +84,7 @@ const Page2: FC<Ipage2> = ({ SubmitUpdatedForm, GetUpdatedData }) => {
           buttonStyle={"btn--superBlue"}
           onClick={SubmitUpdatedForm}
           buttonSize={"btn--large"}
+          disabled={Disabled}
         >
           Update
         </Button>

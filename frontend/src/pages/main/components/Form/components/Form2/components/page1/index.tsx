@@ -35,7 +35,7 @@ const Page1: FC<IPage1> = ({
   CalendarStart,
   EndDate,
   CalendarEnd,
-
+  Disabled,
   ClickCalendar,
 }) => {
   const { coordinates, addresses, resetMarkers } = useContext(
@@ -47,7 +47,7 @@ const Page1: FC<IPage1> = ({
   });
   return (
     <>
-    <div className="location-container">
+      <div className="location-container">
         <Search
           Name={"Location"}
           PlaceHolder={"Search Location"}
@@ -57,50 +57,55 @@ const Page1: FC<IPage1> = ({
       </div>
 
       <div className="addresses-wrapper">
-      <div className="addresses-container">
-        <div className="address-flex-column">
-          <div className="org-des-column">
-            <div>
-              <span className="label-styles">From:</span>
-              <span className="address-styles">{addresses.addOrigin}</span>
-            </div>
-            <div className="lat-lng-row">
+        <div className="addresses-container">
+          <div className="address-flex-column">
+            <div className="org-des-column">
               <div>
-                <span className="label-styles">Lat:</span>
-                <span className="lat-lng-color">{coordinates.origin.lat}</span>
+                <span className="label-styles">From:</span>
+                <span className="address-styles">{addresses.addOrigin}</span>
               </div>
+              <div className="lat-lng-row">
+                <div>
+                  <span className="label-styles">Lat:</span>
+                  <span className="lat-lng-color">
+                    {coordinates.origin.lat}
+                  </span>
+                </div>
+                <div>
+                  <span className="label-styles">Lng:</span>
+                  <span className="lat-lng-color">
+                    {coordinates.origin.lng}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="org-des-column">
               <div>
-                <span className="label-styles">Lng:</span>
-                <span className="lat-lng-color">{coordinates.origin.lng}</span>
+                <span className="label-styles">To:</span>
+                <span className="address-styles">
+                  {addresses.addDestination}
+                </span>
+              </div>
+              <div className="lat-lng-row">
+                <div>
+                  <span className="label-styles">Lat:</span>
+                  <span className="lat-lng-color">
+                    {coordinates.destination.lat}
+                  </span>
+                </div>
+                <div>
+                  <span className="label-styles">Lng:</span>
+                  <span className="lat-lng-color">
+                    {coordinates.destination.lng}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-          <div className="org-des-column">
-            <div>
-              <span className="label-styles">To:</span>
-              <span className="address-styles">{addresses.addDestination}</span>
-            </div>
-            <div className="lat-lng-row">
-              <div>
-                <span className="label-styles">Lat:</span>
-                <span className="lat-lng-color">
-                  {coordinates.destination.lat}
-                </span>
-              </div>
-              <div>
-                <span className="label-styles">Lng:</span>
-                <span className="lat-lng-color">
-                  {coordinates.destination.lng}
-                </span>
-              </div>
-            </div>
-          </div>
+          <p className="eraser-icon">
+            <RiEraserFill onClick={resetMarkers} />
+          </p>
         </div>
-        <p className="eraser-icon">
-          <RiEraserFill onClick={resetMarkers} />
-        </p>
-      </div>
-  
       </div>
 
       <div className="date-container">
@@ -128,7 +133,9 @@ const Page1: FC<IPage1> = ({
           ) : null}
         </div>
         <div className="calendar-icon">
-        <span className="calendar-svg"><FaCalendarAlt /></span>
+          <span className="calendar-svg">
+            <FaCalendarAlt />
+          </span>
         </div>
       </div>
 
@@ -140,7 +147,7 @@ const Page1: FC<IPage1> = ({
               type={"text"}
               name={"EndDate"}
               forinput={"end-date"}
-              placeholder={format(EndDate!,"yyyy-MM-dd")}
+              placeholder={format(EndDate!, "yyyy-MM-dd")}
               readonly={true}
             />
           </div>
@@ -156,35 +163,34 @@ const Page1: FC<IPage1> = ({
         </div>
 
         <div className="calendar-icon">
-        <span className="calendar-svg"><FaCalendarAlt/></span>
+          <span className="calendar-svg">
+            <FaCalendarAlt />
+          </span>
         </div>
       </div>
 
-      
       <div className="description-wrapper">
         <div className="description">
-            <p>
-              <label htmlFor="description">Description</label>
-            </p>
-            <textarea
-              id="description"
-              name="description"
-              onChange={GetFormData}
-              rows={7}
-              cols={51}
-            />
-          </div>
+          <p>
+            <label htmlFor="description">Description</label>
+          </p>
+          <textarea
+            id="description"
+            name="description"
+            onChange={GetFormData}
+            rows={7}
+            cols={51}
+          />
+        </div>
       </div>
 
-
-   
-      
       <div className="btn-container-next">
         <Button
           type={btnType.Submit}
           buttonStyle={"btn--superBlue"}
           onClick={Next}
           buttonSize={"btn--large"}
+          disabled={Disabled}
         >
           Next
         </Button>

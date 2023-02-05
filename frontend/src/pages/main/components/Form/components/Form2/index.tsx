@@ -22,6 +22,8 @@ const Form2: FC<IForm2> = ({
   StartDate,
   EndDate,
   page,
+  Disabled,
+  DisabledSumbit,
   ClickCalendar,
 }) => {
   return (
@@ -41,11 +43,16 @@ const Form2: FC<IForm2> = ({
             EndDate={EndDate}
             Next={Next}
             ClickCalendar={ClickCalendar}
+            Disabled={Disabled}
           />
         </div>
-
       ) : (
-        <Page2 GetFormData={GetFormData} Submit={Submit} />
+        <Page2
+          GetFormData={GetFormData}
+          Submit={Submit}
+          Disabled={Disabled}
+          DisabledSumbit={DisabledSumbit}
+        />
       )}
     </>
   );

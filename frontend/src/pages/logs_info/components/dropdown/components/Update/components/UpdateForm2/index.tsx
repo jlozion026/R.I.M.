@@ -11,6 +11,7 @@ import { LogsInfoContextType } from "@/setup/context-manager/model";
 const UpdateForm2: FC<IUpdateForm2> = ({
   GetUpdatedData,
   SubmitUpdatedForm,
+  Disabled,
 }) => {
   const { page } = useContext(LogsInfoContext) as LogsInfoContextType;
   return (
@@ -19,11 +20,13 @@ const UpdateForm2: FC<IUpdateForm2> = ({
         <Page1
           GetUpdatedData={GetUpdatedData}
           SubmitUpdatedForm={SubmitUpdatedForm}
+          Disabled={Disabled}
         />
       ) : (
         <Page2
           GetUpdatedData={GetUpdatedData}
           SubmitUpdatedForm={SubmitUpdatedForm}
+          Disabled={Disabled}
         />
       )}
     </>

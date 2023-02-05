@@ -1,9 +1,6 @@
-import { ChangeEvent, FC, useContext } from "react";
+import { ChangeEvent, FC, useContext, useMemo } from "react";
 
-import {
-  useUpdateOneReportMutation,
-  ReportType,
-} from "@/generated/graphql";
+import { useUpdateOneReportMutation, ReportType } from "@/generated/graphql";
 
 import graphqlRequestClient from "@/lib/client/graphqlRequestClient";
 
@@ -26,6 +23,7 @@ import { IUpdate } from "./models";
 import { toast } from "react-toastify";
 
 import "./style.css";
+import { isNullableType } from "graphql";
 
 const Update: FC<IUpdate> = ({ reportID, setTrigger, reportType }) => {
   //Toastify Message!
@@ -79,6 +77,15 @@ const Update: FC<IUpdate> = ({ reportID, setTrigger, reportType }) => {
     });
   };
 
+  // if the input is lessthan or = 0 the button is Disabled!
+  const isDisabled =
+    updateForm2Data.description?.length! <= 0 ||
+    updateForm2Data.projectName?.length! <= 0 ||
+    updateForm2Data.contractor?.length! <= 0 ||
+    updateForm2Data.sourceFund?.length! <= 0 ||
+    !updateForm2Data.programAmount ||
+    !updateForm2Data.contractAmount;
+
   const SubmitDefaultUpdateData = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -88,8 +95,8 @@ const Update: FC<IUpdate> = ({ reportID, setTrigger, reportType }) => {
         description: { set: defaultUpdateData.description },
         incident: {
           update: {
-            date_started: { set: format(startDate, "yyyy-MM-dd")},
-            date_ended: { set: format(endDate, "yyyy-MM-dd")},
+            date_started: { set: format(startDate, "yyyy-MM-dd") },
+            date_ended: { set: format(endDate, "yyyy-MM-dd") },
           },
         },
       },
@@ -108,8 +115,8 @@ const Update: FC<IUpdate> = ({ reportID, setTrigger, reportType }) => {
           update: {
             project_name: { set: updateForm2Data.projectName },
             contractor_name: { set: updateForm2Data.contractor },
-            date_started: { set: format(startDate, "yyyy-MM-dd")},
-            date_ended: { set: format(endDate, "yyyy-MM-dd")},
+            date_started: { set: format(startDate, "yyyy-MM-dd") },
+            date_ended: { set: format(endDate, "yyyy-MM-dd") },
             source_fund: { set: updateForm2Data.sourceFund },
             project_ammount: { set: Number(updateForm2Data.programAmount) },
             contract_ammount: { set: Number(updateForm2Data.contractAmount) },
@@ -142,11 +149,13 @@ const Update: FC<IUpdate> = ({ reportID, setTrigger, reportType }) => {
         <DefaultUpdateForm
           GetUpdatedData={GetDefaultUpdateData}
           SubmitUpdatedForm={SubmitDefaultUpdateData}
+          Disabled={defaultUpdateData.description?.length! <= 0}
         />
       ) : (
         <UpdateForm2
           GetUpdatedData={GetUpdateForm2Data}
           SubmitUpdatedForm={SubmitUpdateForm2Data}
+          Disabled={isDisabled}
         />
       )}
     </form>

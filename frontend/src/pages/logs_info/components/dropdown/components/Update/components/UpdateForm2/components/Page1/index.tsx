@@ -18,7 +18,7 @@ import format from "date-fns/format";
 
 import useOnclickOutside from "react-cool-onclickoutside";
 
-const Page1: FC<IPage1> = ({ GetUpdatedData }) => {
+const Page1: FC<IPage1> = ({ GetUpdatedData, Disabled }) => {
   const {
     calendarStart,
     calendarEnd,
@@ -118,6 +118,7 @@ const Page1: FC<IPage1> = ({ GetUpdatedData }) => {
             next();
           }}
           buttonSize={"btn--large"}
+          disabled={Disabled}
         >
           Next
         </Button>
