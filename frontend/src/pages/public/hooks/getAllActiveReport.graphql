@@ -1,0 +1,29 @@
+query GetAllActiveReports($currDate: DateTime!){
+  reports(where: {
+    AND: [
+      {
+        OR: [
+          {AND: [
+              {incident: {is: {date_ended: {gte: $currDate}}}}
+          ]},     
+          {AND: [
+              {city_project: {is: {date_ended: {gte: $currDate}}}}
+          ]},
+        ]
+      }
+    ]    
+  }) {
+    location
+    report_id
+    report_type
+    description
+    incident{
+      date_started
+      date_ended
+    }
+    city_project{
+      date_started
+      date_ended
+    }
+  }
+}

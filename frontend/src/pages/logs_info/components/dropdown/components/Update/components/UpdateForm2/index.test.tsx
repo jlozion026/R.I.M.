@@ -260,9 +260,16 @@ describe('render the component', () => {
         const btnElement = screen.getByRole('button');
         expect(btnElement).not.toBeDisabled();
       });
-      test('button should be disabled when description is empty', () => {
+      test('next button should be disabled when description is empty', () => {
         const textArea = screen.getByTestId("areatext-desc");
         fireEvent.change(textArea, { target: { value: "" } });
+
+        const nextBtn = screen.getByRole('button');
+        fireEvent.click(nextBtn);
+
+      });
+
+      test('submit  button should be desiabled when input fields is empty', () => {
 
         const nextBtn = screen.getByRole('button');
         fireEvent.click(nextBtn);

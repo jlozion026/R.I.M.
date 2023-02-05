@@ -24,8 +24,10 @@ import {
 } from "./utils";
 
 import {
-  GetAllReportsQuery,
-  useGetAllReportsQuery,
+  GetAllActiveReportsByTypeQueryVariables,
+  useGetAllActiveReportsByTypeQuery,
+  GetAllActiveReportsQuery,
+  useGetAllActiveReportsQuery,
   GetAllReportsByTypeQuery,
   useGetAllReportsByTypeQuery,
   GetAllReportsWithDateQuery,
@@ -56,6 +58,8 @@ import { Navigate } from "react-router-dom";
 import { AuthContext } from "@/setup/context-manager/authContext";
 import { AuthContextType } from "@/setup/context-manager/model";
 
+
+import format from "date-fns/format";
 
 import { useNavigate } from "react-router-dom";
 
@@ -102,12 +106,17 @@ const Public: FC = () => {
   graphqlRequestClient.setHeader("authorization", `bearer ${getToken()}`); //sets the authorization header
   // send queries for all reports to the gql endpoint
 
-  const { isLoading, refetch: refetchAllReport } = useGetAllReportsQuery<
-    GetAllReportsQuery,
+  const dateNow = format(new Date(), "yyyy-MM-dd") + "T00:00:00.000Z";
+
+
+  const { isLoading, refetch: refetchAllReport } = useGetAllActiveReportsQuery<
+    GetAllActiveReportsQuery,
     Error
   >(
     graphqlRequestClient,
-    {},
+    {
+      currDate: dateNow,
+    },
     {
       onSuccess: async (data: GetAllReportsByTypeQuery) => {
         setModArr(data);
@@ -116,13 +125,14 @@ const Public: FC = () => {
     }
   );
 
-  const { refetch: refetchReportsByType } = useGetAllReportsByTypeQuery<
+  const { refetch: refetchReportsByType } = useGetAllActiveReportsByTypeQuery<
     GetAllReportsByTypeQuery,
     Error
   >(
     graphqlRequestClient,
     {
       reportType: filterType,
+      currDate: dateNow,
     },
     {
       enabled: false,
@@ -133,58 +143,13 @@ const Public: FC = () => {
     }
   );
 
-  const { refetch: refetchReportsWithDate } = useGetAllReportsWithDateQuery<
-    GetAllReportsWithDateQuery,
-    Error
-  >(
-    graphqlRequestClient,
-    {
-      reportType: filterType,
-      date: filterDate,
-    },
-    {
-      enabled: false,
-      onSuccess: async (data: GetAllReportsByTypeQuery) => {
-        console.log(data);
-        setModArr(data);
-      },
-      refetchIntervalInBackground: true,
-    }
-  );
-
-  const { refetch: refetchReportsWithDateCP } = useGetAllReportsWithDateCpQuery<
-    GetAllReportsWithDateCpQuery,
-    Error
-  >(
-    graphqlRequestClient,
-    {
-      reportType: filterType,
-      date: filterDate,
-    },
-    {
-      enabled: false,
-      onSuccess: async (data: GetAllReportsWithDateCpQuery) => {
-        console.log(data);
-        setModArr(data);
-      },
-      refetchIntervalInBackground: true,
-    }
-  );
 
   useEffect(() => {
     if (filterType) {
       if (filterType !== ReportType.CityProject) {
-        if (filterDate) {
-          refetchReportsWithDate();
-        } else {
-          refetchReportsByType();
-        }
+        refetchReportsByType();
       } else {
-        if (filterDate) {
-          refetchReportsWithDateCP();
-        } else {
-          refetchReportsByType();
-        }
+        refetchReportsByType();
       }
     }
   }, [filterType]);
@@ -322,10 +287,9 @@ const Public: FC = () => {
         PanTo={() => panToQC(mapRefPublic, defaultCenter)}
       />
 
-      <div className="login-text" onClick={() => navigate("/signin") }> <SlLogin />
+      <div className="login-text" onClick={() => navigate("/signin")}> <SlLogin />
       </div>
     </div>
   );
 };
-
 export default Public;
