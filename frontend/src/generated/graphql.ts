@@ -1043,6 +1043,21 @@ export type GetAllReportsWithDateQueryVariables = Exact<{
 
 export type GetAllReportsWithDateQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', location: any, report_id: string, report_type: ReportType, description: string, incident?: { __typename?: 'Incident', date_started: any, date_ended: any } | null, city_project?: { __typename?: 'CityProject', date_started: any, date_ended: any } | null }> };
 
+export type GetAllActiveReportsQueryVariables = Exact<{
+  currDate: Scalars['DateTime'];
+}>;
+
+
+export type GetAllActiveReportsQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', location: any, report_id: string, report_type: ReportType, description: string, incident?: { __typename?: 'Incident', date_started: any, date_ended: any } | null, city_project?: { __typename?: 'CityProject', date_started: any, date_ended: any } | null }> };
+
+export type GetAllActiveReportsByTypeQueryVariables = Exact<{
+  reportType?: InputMaybe<ReportType>;
+  currDate: Scalars['DateTime'];
+}>;
+
+
+export type GetAllActiveReportsByTypeQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', location: any, report_id: string, report_type: ReportType, description: string, incident?: { __typename?: 'Incident', date_started: any, date_ended: any } | null, city_project?: { __typename?: 'CityProject', date_started: any, date_ended: any } | null }> };
+
 export type LoginMutationVariables = Exact<{
   where?: InputMaybe<AccountWhereInput>;
 }>;
@@ -1447,6 +1462,74 @@ export const useGetAllReportsWithDateQuery = <
     useQuery<GetAllReportsWithDateQuery, TError, TData>(
       ['GetAllReportsWithDate', variables],
       fetcher<GetAllReportsWithDateQuery, GetAllReportsWithDateQueryVariables>(client, GetAllReportsWithDateDocument, variables, headers),
+      options
+    );
+export const GetAllActiveReportsDocument = `
+    query GetAllActiveReports($currDate: DateTime!) {
+  reports(
+    where: {AND: [{OR: [{AND: [{incident: {is: {date_ended: {gte: $currDate}}}}]}, {AND: [{city_project: {is: {date_ended: {gte: $currDate}}}}]}]}]}
+  ) {
+    location
+    report_id
+    report_type
+    description
+    incident {
+      date_started
+      date_ended
+    }
+    city_project {
+      date_started
+      date_ended
+    }
+  }
+}
+    `;
+export const useGetAllActiveReportsQuery = <
+      TData = GetAllActiveReportsQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetAllActiveReportsQueryVariables,
+      options?: UseQueryOptions<GetAllActiveReportsQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetAllActiveReportsQuery, TError, TData>(
+      ['GetAllActiveReports', variables],
+      fetcher<GetAllActiveReportsQuery, GetAllActiveReportsQueryVariables>(client, GetAllActiveReportsDocument, variables, headers),
+      options
+    );
+export const GetAllActiveReportsByTypeDocument = `
+    query GetAllActiveReportsByType($reportType: ReportType, $currDate: DateTime!) {
+  reports(
+    where: {report_type: {equals: $reportType}, AND: [{OR: [{AND: [{incident: {is: {date_ended: {gte: $currDate}}}}]}, {AND: [{city_project: {is: {date_ended: {gte: $currDate}}}}]}]}]}
+  ) {
+    location
+    report_id
+    report_type
+    description
+    incident {
+      date_started
+      date_ended
+    }
+    city_project {
+      date_started
+      date_ended
+    }
+  }
+}
+    `;
+export const useGetAllActiveReportsByTypeQuery = <
+      TData = GetAllActiveReportsByTypeQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetAllActiveReportsByTypeQueryVariables,
+      options?: UseQueryOptions<GetAllActiveReportsByTypeQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetAllActiveReportsByTypeQuery, TError, TData>(
+      ['GetAllActiveReportsByType', variables],
+      fetcher<GetAllActiveReportsByTypeQuery, GetAllActiveReportsByTypeQueryVariables>(client, GetAllActiveReportsByTypeDocument, variables, headers),
       options
     );
 export const LoginDocument = `
