@@ -19,6 +19,8 @@ import useOnclickOutside from "react-cool-onclickoutside";
 
 import { btnType } from "@/components/Button/models";
 
+import format from "date-fns/format";
+
 import "./style.css";
 
 import { IDefaultForm } from "../../models";
@@ -44,6 +46,7 @@ const DefaultForm: FC<IDefaultForm> = ({
   const ref = useOnclickOutside(() => {
     ClickCalendar();
   });
+
   return (
     <>
         <div className="form-wrapper">
@@ -107,7 +110,7 @@ const DefaultForm: FC<IDefaultForm> = ({
               label={"Date Started"}
               type={"text"}
               name={"StartDate"}
-              placeholder={StartDate}
+              placeholder={format(StartDate as Date, "yyyy-MM-dd")}
               forinput={"calendar"}
               id={"start-date"}
               readonly={true}
@@ -135,7 +138,7 @@ const DefaultForm: FC<IDefaultForm> = ({
               label={"Date Ended"}
               type={"text"}
               name={"EndDate"}
-              placeholder={EndDate}
+              placeholder={format(EndDate as Date,"yyyy-MM-dd")}
               forinput={"end-date"}
               readonly={true}
             />

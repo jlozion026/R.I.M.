@@ -52,6 +52,7 @@ const DropDown: FC<IDropDown> = ({ setMenuTrig }) => {
   return (
     <>
       <div
+        data-testid="dropdown"
         className={
           window.location.pathname == "/dashboard" || window.location.pathname == "/logs"
           ?

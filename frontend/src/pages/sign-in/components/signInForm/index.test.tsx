@@ -1,15 +1,17 @@
 import { render, cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import SignIn from './';
-import { credentials } from './models';
+import { AuthContextProvider } from "@/setup/context-manager/authContext";
 
-interface ceredentials {
-  email?: string;
-  password?: string;
-}
 
-function typeInto({ email, password }: ceredentials): any {
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+import { credentials, ITypeInto } from '../../models';
+
+import SignInForm from "./index";
+
+
+function typeInto({ email, password }: ITypeInto): any {
   const emailInputElement = screen.getByLabelText("EMAIL ADDRESS");
   const passwordInputElement = screen.getByLabelText("PASSWORD")
   if (email) {
@@ -32,10 +34,18 @@ function clickLoginBtn() {
 
 }
 
+const queryClient = new QueryClient();
+
 describe('render the component', () => {
 
   beforeEach(() => {
-    render(<SignIn />);
+    render(
+      <AuthContextProvider>
+        <QueryClientProvider client={queryClient}>
+          <SignInForm />
+        </QueryClientProvider>
+      </AuthContextProvider>
+    );
   })
 
   afterEach(cleanup);
@@ -59,18 +69,18 @@ describe('render the component', () => {
 
     describe('field validation', () => {
       test('should show required message on invalid email', () => {
-        typeInto({ email: "testmail.com" });
-        const requiredTxt = screen.queryByText("*Required");
-        expect(requiredTxt).toBeInTheDocument();
+        typeInto({ email: ".com" });
+        const errDiv = screen.getByTestId("email-error");
+        const divTxt = errDiv.textContent
+        expect(divTxt).toBe("*Required");
       })
 
-      test('should not show required message on valid email', async () => {
+      test('should not show required message on valid email', () => {
         typeInto({ email: "test@mail.com" });
-        await waitFor(() => {
-          expect(screen.queryByText("*Required")).not.toBeInTheDocument();
-        })
+        const errDiv = screen.getByTestId("email-error");
+        const divTxt = errDiv.textContent
+        expect(divTxt).toBe("");
       })
-
     })
 
   });
@@ -88,15 +98,17 @@ describe('render the component', () => {
 
     describe('field validation', () => {
       test('should show required message on not filled up password field', () => {
-        const requiredTxt = screen.queryByText("*Required");
-        expect(requiredTxt).toBeInTheDocument();
+        const errDiv = screen.getByTestId("password-error");
+        const divTxt = errDiv.textContent
+        expect(divTxt).toBe("*Required");
+
       })
 
-      test('should not show required message on not filled up field', async () => {
+      test('should not show required message on filled up field', () => {
         typeInto({ password: "testpass123" });
-        await waitFor(() => {
-          expect(screen.queryByText("*Required")).not.toBeInTheDocument();
-        })
+        const errDiv = screen.getByTestId("password-error");
+        const divTxt = errDiv.textContent
+        expect(divTxt).toBe("");
       })
 
     })
@@ -129,42 +141,59 @@ describe('render the component', () => {
       expect(btnElement).toBeInTheDocument();
 
     })
-    test('should show error message on invalid credential', async () => {
-      const onSubmit = jest.fn();
+    test('button should not be disabled when input exists', () => {
       inputCredentials({ email: 'test@mail.com', password: 'testpass123' });
-      clickLoginBtn()
 
-      await waitFor(() => {
-        expect(onSubmit).toHaveBeenCalledWith({
-          email: 'test@mail.com',
-          password: 'testpass123'
-        })
+      const btnElement = screen.getByRole('button');
+      expect(btnElement).not.toBeDisabled();
+
+    })
+
+    describe('button shoud be disabled when', () => {
+      test('both input does not exists', () => {
+        inputCredentials({ email: '', password: '' });
+
+        const btnElement = screen.getByRole('button');
+        expect(btnElement).toBeDisabled();
       })
 
-      expect(onSubmit).toHaveBeenCalledTimes(1);
+      test('email input only exists', () => {
+        inputCredentials({ email: 'test@mail.com', password: '' });
 
-      const errMsg = screen.getByText("invalid user credential");
-      expect(errMsg).toBeInTheDocument();
-    });
-
-    test('should have correct credentials', async () => {
-      const onSubmit = jest.fn();
-      inputCredentials({ email: 'test@mail.com', password: 'testpass123' });
-      clickLoginBtn()
-
-      await waitFor(() => {
-        expect(onSubmit).toHaveBeenCalledWith({
-          email: 'test@mail.com',
-          password: 'testpass123'
-        })
+        const btnElement = screen.getByRole('button');
+        expect(btnElement).toBeDisabled();
       })
 
-      expect(onSubmit).toHaveBeenCalledTimes(1);
+      test('password input only exists', () => {
+        inputCredentials({ email: '', password: 'testpass123' });
 
-      const errMsg = screen.getByText("invalid user credential");
-      expect(errMsg).toBeInTheDocument();
-    });
+        const btnElement = screen.getByRole('button');
+        expect(btnElement).toBeDisabled();
+      })
+
+    })
   })
 
+  describe('form validation', () => {
+    test('should show error message on invalid credential', async () => {
+      inputCredentials({ email: 'test@mail.com', password: 'pass123' });
+      clickLoginBtn()
 
+      await waitFor(() => {
+        const errMsg = screen.getByText("Invalid Credentials");
+        expect(errMsg).toBeInTheDocument();
+      })
+    });
+
+    test('should not show error message on valid credentials', async () => {
+      inputCredentials({ email: 'test1@mail.com', password: 'testpass123' });
+      clickLoginBtn()
+
+      await waitFor(() => {
+        const errDiv = screen.getByTestId("email-error");
+        const divTxt = errDiv.textContent
+        expect(divTxt).toBe("");
+      })
+    });
+  })
 })

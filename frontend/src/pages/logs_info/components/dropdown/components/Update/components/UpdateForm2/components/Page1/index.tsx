@@ -14,12 +14,16 @@ import { Calendar } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 
+import format from "date-fns/format";
+
 import useOnclickOutside from "react-cool-onclickoutside";
 
 const Page1: FC<IPage1> = ({ GetUpdatedData }) => {
   const {
     calendarStart,
     calendarEnd,
+    startDate,
+    endDate,
     setCalendarStart,
     setCalendarEnd,
     clickCalendar,
@@ -37,12 +41,13 @@ const Page1: FC<IPage1> = ({ GetUpdatedData }) => {
       <div className="ui-field">
         <InputField
           label={"Date Started"}
-          value={updateForm2Data.startDate.split("T")[0]}
+          value={format(startDate, "yyyy-MM-dd")}
           type={"text"}
           name={"StartDate"}
           placeholder={"YYYY/MM/DD"}
-          forinput={"calendar"}
+          forinput={"start-date"}
           id={"start-date"}
+          data-testid="start-date"
           readonly={true}
           onClick={() => setCalendarStart(true)}
           getData={GetUpdatedData}
@@ -65,10 +70,10 @@ const Page1: FC<IPage1> = ({ GetUpdatedData }) => {
         <InputField
           label={"Date Ended"}
           type={"text"}
-          value={updateForm2Data.endDate.split("T")[0]}
+          value={format(endDate, "yyyy-MM-dd")}
           name={"EndDate"}
           placeholder={"YYYY/MM/DD"}
-          forinput={"calendar"}
+          forinput={"end-date"}
           id={"end-date"}
           readonly={true}
           onClick={() => {
@@ -96,6 +101,7 @@ const Page1: FC<IPage1> = ({ GetUpdatedData }) => {
         </p>
         <textarea
           id="description"
+          data-testid="areatext-desc"
           name="description"
           value={updateForm2Data.description}
           onChange={GetUpdatedData}

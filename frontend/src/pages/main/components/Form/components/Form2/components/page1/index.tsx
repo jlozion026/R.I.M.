@@ -13,6 +13,8 @@ import { FaCalendarAlt } from "react-icons/fa";
 
 import { IPage1 } from "../../../../models";
 
+import format from "date-fns/format";
+
 import useOnclickOutside from "react-cool-onclickoutside";
 
 import { btnType } from "@/components/Button/models";
@@ -108,7 +110,7 @@ const Page1: FC<IPage1> = ({
               label={"Date Started"}
               type={"text"}
               name={"StartDate"}
-              placeholder={StartDate}
+              placeholder={format(StartDate, "yyyy-MM-dd")}
               forinput={"calendar"}
               id={"start-date"}
               readonly={true}
@@ -137,8 +139,8 @@ const Page1: FC<IPage1> = ({
               label={"Date Ended"}
               type={"text"}
               name={"EndDate"}
-              placeholder={EndDate}
               forinput={"end-date"}
+              placeholder={format(EndDate!,"yyyy-MM-dd")}
               readonly={true}
             />
           </div>

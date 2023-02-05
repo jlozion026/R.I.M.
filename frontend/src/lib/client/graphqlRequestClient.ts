@@ -1,6 +1,6 @@
 import { GraphQLClient } from 'graphql-request';
 
-const graphqlRequestClient = new GraphQLClient(<string>import.meta.env.VITE_REACT_APP_GRAPHQL_ENDPOINT, {
+const graphqlRequestClient = new GraphQLClient("http://localhost:4000/graphql", {
   credentials: "include",
 });
 

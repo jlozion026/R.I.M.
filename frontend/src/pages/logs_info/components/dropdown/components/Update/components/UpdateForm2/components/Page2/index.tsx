@@ -18,6 +18,8 @@ const Page2: FC<Ipage2> = ({ SubmitUpdatedForm, GetUpdatedData }) => {
       <div className="ui-field">
         <InputField
           label={"Project Name"}
+          forinput="project-name"
+          id="project-name"
           type={"text"}
           value={updateForm2Data.projectName}
           name={"projectName"}
@@ -29,6 +31,8 @@ const Page2: FC<Ipage2> = ({ SubmitUpdatedForm, GetUpdatedData }) => {
       <div className="ui-field">
         <InputField
           label={"Contractor"}
+          forinput="contractor"
+          id="contractor"
           type={"text"}
           value={updateForm2Data.contractor}
           name={"contractor"}
@@ -41,6 +45,8 @@ const Page2: FC<Ipage2> = ({ SubmitUpdatedForm, GetUpdatedData }) => {
         <InputField
           label={"Finance"}
           type={"text"}
+          forinput="finance"
+          id="finance"
           value={updateForm2Data.sourceFund}
           name={"sourceFund"}
           placeholder={"Source Fund"}
@@ -51,6 +57,8 @@ const Page2: FC<Ipage2> = ({ SubmitUpdatedForm, GetUpdatedData }) => {
       <div className="ui-field">
         <InputField
           type={"number"}
+          forinput="pg-ammount"
+          id="pg-ammount"
           value={updateForm2Data.programAmount}
           name={"programAmount"}
           placeholder={"Program Ammount"}
@@ -61,6 +69,8 @@ const Page2: FC<Ipage2> = ({ SubmitUpdatedForm, GetUpdatedData }) => {
       <div className="ui-field">
         <InputField
           type={"number"}
+          forinput="contract"
+          id="contract"
           value={updateForm2Data.contractAmount}
           name={"contractAmount"}
           placeholder={"Contract Amount"}

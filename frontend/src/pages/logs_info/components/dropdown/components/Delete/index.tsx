@@ -1,10 +1,7 @@
 import { FC } from "react";
 
 import { useNavigate } from "react-router-dom";
-import {
-  DeleteOneReportMutation,
-  useDeleteOneReportMutation,
-} from "@/generated/graphql";
+import { useDeleteOneReportMutation } from "@/generated/graphql";
 import graphqlRequestClient from "@/lib/client/graphqlRequestClient";
 
 import Button from "@/components/Button";
@@ -55,7 +52,7 @@ const Delete: FC<IDelete> = ({ PopOut, reportType, reportID }) => {
     }
   );
 
-  const onDelete = () => {
+  const deleteFn= () => {
     deleteMutate({
       report_id: reportID,
     });
@@ -63,8 +60,13 @@ const Delete: FC<IDelete> = ({ PopOut, reportType, reportID }) => {
     change_page();
   };
 
+  const onDelete = () =>{
+      PopOut();
+      deleteFn();
+  }
+
   return (
-    <div className="delete-report">
+    <div data-testid="deleteForm" className="delete-report">
       <div className="trash-can">
         <TbTrashX />
       </div>
@@ -77,6 +79,7 @@ const Delete: FC<IDelete> = ({ PopOut, reportType, reportID }) => {
 
         <div className="bt-row">
           <Button
+            id={"cancel"}
             type={btnType.Button}
             buttonStyle={"btn--grey"}
             buttonSize={"btn--cancel"}
@@ -85,6 +88,7 @@ const Delete: FC<IDelete> = ({ PopOut, reportType, reportID }) => {
             Cancel
           </Button>
           <Button
+            id={"delete"}
             type={btnType.Button}
             buttonStyle={"btn--red"}
             buttonSize={"btn--delete"}

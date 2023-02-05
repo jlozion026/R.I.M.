@@ -28,22 +28,22 @@ const Form2: FC<IForm2> = ({
     <>
       {!page ? (
         <div className="form-wrapper">
-            <Page1
-          setGenAdd={setGenAdd}
-          GetFormData={GetFormData}
-          HandleStartDate={HandleStartDate}
-          HandleEndDate={HandleEndDate}
-          ClickCalendarStart={ClickCalendarStart}
-          ClickCalendarEnd={ClickCalendarEnd}
-          CalendarStart={CalendarStart}
-          CalendarEnd={CalendarEnd}
-          StartDate={StartDate}
-          EndDate={EndDate}
-          Next={Next}
-          ClickCalendar={ClickCalendar}
-        />
+          <Page1
+            setGenAdd={setGenAdd}
+            GetFormData={GetFormData}
+            HandleStartDate={HandleStartDate}
+            HandleEndDate={HandleEndDate}
+            ClickCalendarStart={ClickCalendarStart}
+            ClickCalendarEnd={ClickCalendarEnd}
+            CalendarStart={CalendarStart}
+            CalendarEnd={CalendarEnd}
+            StartDate={StartDate}
+            EndDate={EndDate}
+            Next={Next}
+            ClickCalendar={ClickCalendar}
+          />
         </div>
-      
+
       ) : (
         <Page2 GetFormData={GetFormData} Submit={Submit} />
       )}

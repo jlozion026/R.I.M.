@@ -68,6 +68,7 @@ const Main: FC = () => {
     resetMarkers();
   };
 
+
   const [searchString, setSearchString] = useState<string>("");
 
   const {

@@ -10,8 +10,8 @@ export interface IAddress {
 }
 
 export interface IDefaultUpdateData {
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
   description: string | undefined;
 }
 

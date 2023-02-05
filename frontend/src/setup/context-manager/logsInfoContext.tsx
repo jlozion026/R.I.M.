@@ -13,8 +13,8 @@ const LogsInfoContextProvider: FC<Props> = ({ children }) => {
   const [reportType, setReportType] = useState<ReportType | undefined>();
 
   //Calendar
-  const [startDate, setStartDate] = useState<string>("YYYY-MM-DD");
-  const [endDate, setEndDate] = useState<string>("YYYY-MM-DD");
+  const [startDate, setStartDate] = useState<Date>(new Date());
+  const [endDate, setEndDate] = useState<Date>(new Date());
 
   //Calendar Pop-Up
   const [calendarStart, setCalendarStart] = useState<boolean>(false);
@@ -22,14 +22,14 @@ const LogsInfoContextProvider: FC<Props> = ({ children }) => {
 
   const [defaultUpdateData, setDefaultUpdateData] =
     useState<IDefaultUpdateData>({
-      startDate: "",
-      endDate: "",
+      startDate: startDate,
+      endDate: endDate,
       description: "",
     });
 
   const [updateForm2Data, setUpdateForm2Data] = useState<IUpdateForm2Data>({
-    startDate: "",
-    endDate: "",
+    startDate: startDate,
+    endDate: endDate,
     description: "",
     projectName: "",
     contractor: "",
@@ -39,15 +39,13 @@ const LogsInfoContextProvider: FC<Props> = ({ children }) => {
   });
 
   const handleStartDate = (date: Date) => {
-    defaultUpdateData["startDate"] = format(date, "yyyy-MM-dd");
-    updateForm2Data["startDate"] = format(date, "yyyy-MM-dd");
+    setStartDate(date);
     clickCalendar();
   };
 
   const handleEndDate = (date: Date) => {
-    if (date > new Date(startDate)) {
-      defaultUpdateData["endDate"] = format(date, "yyyy-MM-dd");
-      updateForm2Data["endDate"] = format(date, "yyyy-MM-dd");
+    if (date >= new Date(startDate)) {
+      setEndDate(date);
       clickCalendar();
     } else {
       console.log("invalid");

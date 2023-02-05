@@ -21,6 +21,7 @@ const InputField: FC<input> = ({
     <>
       <label htmlFor={forinput}>{label}</label>
       <input
+        data-testid={id}
         readOnly={readonly}
         id={id}
         type={type}

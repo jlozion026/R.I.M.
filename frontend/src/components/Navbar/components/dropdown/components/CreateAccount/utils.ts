@@ -14,6 +14,7 @@ export  const InputProps = [
     type: "email",
     name: "email",
     placeholder: "Enter Email",
+    error: "email-error",
     required: true
   },
   {
@@ -22,6 +23,7 @@ export  const InputProps = [
     type: "text",
     name: "designation",
     placeholder: "Enter Designation",
+    error: "desig-error",
     required: true
   }
 ]

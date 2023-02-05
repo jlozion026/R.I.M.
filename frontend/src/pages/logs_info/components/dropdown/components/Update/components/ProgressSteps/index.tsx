@@ -6,7 +6,7 @@ import "./style.css";
 const ProgressSteps: FC<IProgressSteps> = ({ page }) => {
   return (
     <>
-      <div className="progress-update">
+      <div data-testid="stepbar" className="progress-update">
         <div className="stp">
           <div className={`crcle slected ${page ? "cmpleted " : "uncmplete"}`}>
             <p className="progress-numb">1</p>
