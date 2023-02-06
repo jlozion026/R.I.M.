@@ -10,4 +10,5 @@ export interface IFilter {
   setFilterType(reportType: ReportType): void;
   setFilterDate(date: string): void;
   filterDate: string | undefined;
+  fetchActiveReports(): void;
 }

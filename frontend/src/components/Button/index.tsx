@@ -11,6 +11,8 @@ const STYLES = [
   "btn--logs-design",
   "btn--grey",
   "btn--red",
+  "filter-style",
+  "filter-style2",
 ];
 
 const SIZES = [
@@ -24,6 +26,7 @@ const SIZES = [
   "btn--reports",
   "btn--cancel",
   "btn--delete",
+  "btn--filter",
 ];
 
 const COLORS = [

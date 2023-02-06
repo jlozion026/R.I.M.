@@ -12,7 +12,7 @@ import {
   qCpaths,
   polyOnLoad,
   polyOptions
-  } from "@/utils/";
+} from "@/utils/";
 
 import {
   panToQC,
@@ -28,6 +28,8 @@ import {
   GetAllReportsWithDateCpQuery,
   useGetAllReportsWithDateCpQuery,
   ReportType,
+  useGetAllActiveReportsQuery,
+  GetAllActiveReportsQuery,
 } from "@/generated/graphql";
 
 import graphqlRequestClient from "@/lib/client/graphqlRequestClient";
@@ -55,6 +57,8 @@ import { getToken } from "@/lib/auth";
 import { getPinIcon } from "@/lib/getIcon";
 
 import "./style.css";
+import { format } from "date-fns";
+import { getActiveElement } from "@testing-library/user-event/dist/utils";
 
 const Main: FC = () => {
   const { isLoaded, loadError } = useLoadScript({
@@ -134,7 +138,7 @@ const Main: FC = () => {
       } else {
         return "No results found";
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const [trigFilter, setTrigFilter] = useState<boolean>(false);
@@ -178,6 +182,28 @@ const Main: FC = () => {
       refetchIntervalInBackground: true,
     }
   );
+
+  const dateNow = format(new Date(), "yyyy-MM-dd") + "T00:00:00.000Z";
+
+  const { refetch: refetchActiveReports } = useGetAllActiveReportsQuery<
+    GetAllActiveReportsQuery,
+    Error
+  >(
+    graphqlRequestClient,
+    {
+      currDate: dateNow,
+    },
+    {
+      enabled:false,
+      onSuccess: async (data: GetAllReportsByTypeQuery) => {
+        setModArr(data);
+      },
+      refetchIntervalInBackground: true,
+    }
+  );
+
+  // call back function to fetch active reports
+  const getActiveReports = () => { refetchActiveReports(); }
 
   const { refetch: refetchReportsByType } = useGetAllReportsByTypeQuery<
     GetAllReportsByTypeQuery,
@@ -378,6 +404,7 @@ const Main: FC = () => {
             filterDate={filterDate}
             setFilterDate={setFilterDate}
             setFilterType={setFilterType}
+            fetchActiveReports={getActiveReports}
           />
         ) : null}
 

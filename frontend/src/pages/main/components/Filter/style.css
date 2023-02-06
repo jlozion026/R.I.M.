@@ -1,16 +1,16 @@
 .filter-container {
-  grid-template-rows: 0.5fr 1fr 2fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr; 
   display: grid;
   position: absolute;
   top: 6vw;
   left: 1vw;
   width: 23.9vw;
-  height: 11vw;
-  /* overflow: hidden; */
+  height: 14  vw;
   background-color: white;
   border-radius: 1vw;
   box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
   place-items: center;
+  padding: 0.8vw;
 }
 .icon-container {
   display: flex;
@@ -60,8 +60,6 @@
   height: 100%;
   display: flex;
   flex-direction: row;
-  padding-left: 0.8vw;
-  padding-right: 0.8vw;
   justify-content: space-between;
 }
 .calendarflt-container {
@@ -82,6 +80,13 @@
 .btn-filter-img {
   width: 85%;
   height: 85%;
+}
+.btn-filter2{
+  display: flex;
+  width: 60%;
+  height: 60%;
+  border: #205eff;
+
 }
 @media all and (max-width: 960px) {
   .filter-container {
@@ -105,10 +110,6 @@
   .btn-filter-img {
     width: 13vw;
     height: 8vh;
-  }
-  .btn-filter {
-    padding-left: 2vw;
-    padding-right: 2vw;
   }
   .filter-calendar {
     display: flex;
