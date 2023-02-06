@@ -57,7 +57,6 @@ export interface IPage extends IGetFormData {
   CalendarStart: boolean;
   CalendarEnd: boolean;
   StartDate: Date;
-  setGenAdd(arg0: string): void;
   EndDate: Date;
 }
 
@@ -67,7 +66,6 @@ export interface IPage1 extends IPage, OnClickOutSide {
 }
 
 export interface Ipage2 extends IGetFormData, ISubmit {
-  Disabled: boolean;
   DisabledSumbit: boolean;
 }
 

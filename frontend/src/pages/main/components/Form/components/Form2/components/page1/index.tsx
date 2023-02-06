@@ -29,7 +29,6 @@ const Page1: FC<IPage1> = ({
   ClickCalendarEnd,
   HandleEndDate,
   HandleStartDate,
-  setGenAdd,
   Next,
   StartDate,
   CalendarStart,
@@ -38,9 +37,8 @@ const Page1: FC<IPage1> = ({
   Disabled,
   ClickCalendar,
 }) => {
-  const { coordinates, addresses, resetMarkers } = useContext(
-    MainContext
-  ) as MainContextType;
+  const { coordinates, addresses, resetMarkers, form2Data, genAdd, setGenAdd } =
+    useContext(MainContext) as MainContextType;
 
   const ref = useOnclickOutside(() => {
     ClickCalendar();
@@ -50,7 +48,7 @@ const Page1: FC<IPage1> = ({
       <div className="location-container">
         <Search
           Name={"Location"}
-          PlaceHolder={"Search Location"}
+          PlaceHolder={genAdd}
           SetGenAdd={setGenAdd}
           Label={"Location"}
         />
@@ -180,6 +178,7 @@ const Page1: FC<IPage1> = ({
             onChange={GetFormData}
             rows={7}
             cols={51}
+            value={form2Data.description}
           />
         </div>
       </div>

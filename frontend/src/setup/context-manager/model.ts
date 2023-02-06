@@ -1,5 +1,6 @@
 import { AccType, ReportType } from "@/generated/graphql";
 import { IDefaultUpdateData, IUpdateForm2Data, LatLngLiteral } from "@/models";
+import { IForm2Data } from "@/pages/main/components/Form/models";
 
 export type Props = {
   children: React.ReactNode;
@@ -7,8 +8,8 @@ export type Props = {
 
 export type AuthContextType = {
   auth: boolean;
-  accType: AccType|undefined;
-  setAccType(acc_type:AccType): void ;
+  accType: AccType | undefined;
+  setAccType(acc_type: AccType): void;
   signOut: () => void;
   setAccToken: () => void;
 };
@@ -24,6 +25,11 @@ export interface IAddresses {
 }
 
 export type MainContextType = {
+  startDate: Date;
+  endDate: Date;
+  form2Data: IForm2Data;
+  setStartDate: (arg0: Date) => void;
+  setEndDate: (arg0: Date) => void;
   mapRef: React.MutableRefObject<google.maps.Map | null>;
   coordinates: ICoordinates;
   addresses: IAddresses;
@@ -34,6 +40,10 @@ export type MainContextType = {
   resetMarkers: () => void;
   reportType: ReportType | undefined;
   setReportType: (arg0: ReportType | undefined) => void;
+  genAdd: string;
+  setGenAdd(arg0: string): void;
+  setForm2Data: (arg0: IForm2Data) => void;
+  resetForm2Data: () => void;
 };
 
 export type LogsInfoContextType = {
