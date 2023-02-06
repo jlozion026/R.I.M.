@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 
+
 import { BtnFilterprops } from "./utils";
 import Button from "@/components/Button";
 
@@ -17,10 +18,11 @@ import format from "date-fns/format";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import useOnclickOutside from "react-cool-onclickoutside";
+import { btnType } from "@/components/Button/models";
 
-const Filter: FC<IFilter> = ({ setFilterType, setFilterDate, filterDate }) => {
+const Filter: FC<IFilter> = ({ setFilterType, setFilterDate, filterDate, fetchActiveReports }) => {
   const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
-
+ 
   // When you Click the number inside the Calendar
   const openCalendarFilter = () => {
     if (calendarOpen) {
@@ -48,26 +50,28 @@ const Filter: FC<IFilter> = ({ setFilterType, setFilterDate, filterDate }) => {
               <div className="icon-container" key={key}
               >
                 <Button
-                      type={val.type}
-                      svg={val.svg}
-                      children={val.children}
-                      buttonStyle={val.buttonStyle}
-                      buttonSize={val.buttonSize}
-                      svgBackGround={val.svgBackGround}
-                      onClick={() => setFilterType(val.reporttype) }
-                    ></Button>
+                  type={val.type}
+                  svg={val.svg}
+                  children={val.children}
+                  buttonStyle={val.buttonStyle}
+                  buttonSize={val.buttonSize}
+                  svgBackGround={val.svgBackGround}
+                  onClick={() => setFilterType(val.reporttype)}
+                ></Button>
               </div>
             );
           })}
         </div> <div className="btn-filter2">
-        <Button
-         buttonStyle={"filter-style2"}
-         buttonSize={"btn--small"}
-            >
-              Active and Incoming
-            </Button>
-       
-          </div>
+          <Button
+            type={btnType.Button}
+            onClick={() => fetchActiveReports()}
+            buttonStyle={"filter-style2"}
+            buttonSize={"btn--small"}
+          >
+            Active and Incoming
+          </Button>
+
+        </div>
         <div className="calendarflt-container">
           <div className="fdate">
             <div className="filter-calendar" onClick={openCalendarFilter}>
