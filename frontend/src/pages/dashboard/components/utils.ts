@@ -33,7 +33,7 @@ export const CardProps = [
   {
     id: 'RoadHazard',
     cardIcon: Hazzard,
-    cardTitle: "Hazzards",
+    cardTitle: "Hazards",
     cardValue: 0,
     cardSize: "card--small",
     imgColor: "hazColor",

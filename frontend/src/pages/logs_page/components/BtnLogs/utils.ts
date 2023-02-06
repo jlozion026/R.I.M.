@@ -87,7 +87,7 @@ export const LogsReportsBtnProps = [
     type: "button",
     svg: Hazzard,
     icon: "",
-    children: "Road Hazzard",
+    children: "Road Hazard",
     buttonStyle: "btn--logs-design",
     buttonSize: "btn--logs",
     onclick: () => {},

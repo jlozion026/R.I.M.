@@ -274,24 +274,20 @@ button {
     padding-top: 2.6vw;
     padding-bottom: 2.6vw;
   }
-  .btn--logs {
-    padding: 0.5vw;
-    padding-right: 1.5vw;
-  }
+     .btn--logs{
+      padding: 0.5vw;
+      padding-right: 1.5vw;
+     }
+  
+     .btn--medium {
+      padding: 2.5vw;
+      font-size: 3.5vw;
+      min-width: 19vw;
+      min-height:3vw ;
 
-  .btn--medium {
-    padding: 2.5vw;
-    font-size: 3.5vw;
-    min-width: 19vw;
-    min-height: 3vw;
-  }
+    }
+  
 
-  .btn-img {
-    width: 9vw;
-  }
-  .icon-bg {
-    width: 16vw;
-  }
 }
 
 /* report buttons for small mobile view */
@@ -381,14 +377,6 @@ button {
     font-size: 2.5vw;
     min-height: 7vw;
     min-width: 17vw;
-  }
-
-  .btn-img {
-    width: 6.5vw;
-  }
-
-  .icon-bg {
-    width: 13vw;
   }
 }
 

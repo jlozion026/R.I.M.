@@ -62,6 +62,7 @@ const DropDown: FC<IDropDown> = ({ setMenuTrig }) => {
         }
       >
         <ul className="dropdown-card">
+          <div className="wrapper-createAcount">
           {accType === AccType.Admin
             ?
             <li className="menu-item" onClick={() => setTrigger(true)}>
@@ -79,6 +80,7 @@ const DropDown: FC<IDropDown> = ({ setMenuTrig }) => {
             </p>
             <p>Logout</p>
           </li>
+          </div>
         </ul>
       </div>
 
