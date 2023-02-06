@@ -12,5 +12,4 @@ export interface IArea {
 
 export interface ICustomAreaChart {
   data: IData[];
-  areas: IArea[]
 }

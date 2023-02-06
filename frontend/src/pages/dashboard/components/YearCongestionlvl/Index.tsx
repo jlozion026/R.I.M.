@@ -14,10 +14,10 @@ const YearCongestionlvl: FC<GraphItems> = ({ cardSize }) => {
     <Card cardSize={cardSize}>
       <div className="year-wrapper">
         <p className="medCardTitle">CONGESTION LEVEL 2021</p>
-        <div className="medCardData">
+        <div className="cardFlex">
           <p className="percentLevel">43%</p>
           <div className="decreaseLevel">
-            <div className="decreaseIcon">
+            <div className="cardFlex">
               <img className="arrow" src={arrowdown} alt="arrow" />
               <p className="pLevel">10%</p>
             </div>

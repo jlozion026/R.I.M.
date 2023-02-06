@@ -1,0 +1,15 @@
+query GetCurrentClosedroads($currDate: DateTime!){
+  aggregateReport(
+    where: {
+      AND: [
+        { report_type: { equals:  RoadClosure} }
+        { incident: { is: { date_started: { lte: $currDate } } } }
+        { incident: { is: { date_ended: { gte: $currDate } } } }
+      ]
+    }
+  ) {
+    _count {
+      report_type
+    }
+  }
+}
