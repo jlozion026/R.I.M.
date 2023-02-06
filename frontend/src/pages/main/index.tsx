@@ -4,15 +4,17 @@ import {
   GoogleMap,
   useLoadScript,
   Marker,
-  Circle,
   InfoWindow,
+  Polygon,
 } from "@react-google-maps/api";
 
 import {
-  closeOptions,
-  defaultOptions,
-  farOptions,
-  middleOptions,
+  qCpaths,
+  polyOnLoad,
+  polyOptions
+  } from "@/utils/";
+
+import {
   panToQC,
 } from "./utils";
 
@@ -146,7 +148,7 @@ const Main: FC = () => {
   const [selectedMarker, setSelectedMarker] = useState<MarkerData | null>(null);
 
   // Zoom Control Button
-  const [zoom, setZoom] = useState<number | undefined>(13);
+  const [zoom, setZoom] = useState<number | undefined>(12.3);
 
   const zoomIn = () => {
     mapRef.current?.setZoom(mapRef.current.getZoom()! + 1);
@@ -301,31 +303,17 @@ const Main: FC = () => {
             />
           ) : null}
 
-          {zoom! <= 14 ? (
-            <>
-              <Marker position={defaultCenter} />
-              <Circle
-                center={defaultCenter}
-                radius={2500}
-                options={defaultOptions}
-              />
-              <Circle
-                center={defaultCenter}
-                radius={4500}
-                options={closeOptions}
-              />
-              <Circle
-                center={defaultCenter}
-                radius={6500}
-                options={middleOptions}
-              />
-              <Circle
-                center={defaultCenter}
-                radius={8000}
-                options={farOptions}
-              />
-            </>
-          ) : null}
+          {zoom! <= 14 ?
+            <Polygon
+              onLoad={polyOnLoad}
+              paths={qCpaths}
+              options={polyOptions}
+              visible={true}
+            />
+            :
+            null
+          }
+
 
           {isLoaded && !isLoading ? (
             <MarkersClusterer
