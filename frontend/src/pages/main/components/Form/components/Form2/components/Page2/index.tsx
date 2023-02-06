@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 
 import Button from "@/components/Button";
 import InputField from "@/components/InputField";
@@ -7,13 +7,11 @@ import { Ipage2 } from "../../../../models";
 
 import "./style.css";
 import { btnType } from "@/components/Button/models";
+import { MainContext } from "@/setup/context-manager/mainContext";
+import { MainContextType } from "@/setup/context-manager/model";
 
-const Page2: FC<Ipage2> = ({
-  GetFormData,
-  Submit,
-  Disabled,
-  DisabledSumbit,
-}) => {
+const Page2: FC<Ipage2> = ({ GetFormData, Submit, DisabledSumbit }) => {
+  const { form2Data } = useContext(MainContext) as MainContextType;
   return (
     <>
       <div className="form2-wrapper">
@@ -24,6 +22,7 @@ const Page2: FC<Ipage2> = ({
             name={"projectName"}
             placeholder={"Enter Project Name"}
             getData={GetFormData}
+            value={form2Data.projectName}
           />
         </div>
 
@@ -34,6 +33,7 @@ const Page2: FC<Ipage2> = ({
             name={"contractor"}
             placeholder={"Service Provider"}
             getData={GetFormData}
+            value={form2Data.contractor}
           />
         </div>
 
@@ -44,6 +44,7 @@ const Page2: FC<Ipage2> = ({
             name={"sourceFund"}
             placeholder={"Source Fund"}
             getData={GetFormData}
+            value={form2Data.sourceFund}
           />
         </div>
 
@@ -53,6 +54,7 @@ const Page2: FC<Ipage2> = ({
             name={"programAmount"}
             placeholder={"Program Amount"}
             getData={GetFormData}
+            value={form2Data.programAmount}
           />
         </div>
 
@@ -62,6 +64,7 @@ const Page2: FC<Ipage2> = ({
             name={"contractAmount"}
             placeholder={"Contract Amount"}
             getData={GetFormData}
+            value={form2Data.contractAmount}
           />
         </div>
         <div className="btn-container-submit">

@@ -68,8 +68,8 @@ const Main: FC = () => {
   const formPopUp = () => {
     setTrigger(!trigger);
     resetMarkers();
+    resetForm2Data();
   };
-
 
   const [searchString, setSearchString] = useState<string>("");
 
@@ -83,6 +83,7 @@ const Main: FC = () => {
     resetMarkers,
     reportType,
     mapRef,
+    resetForm2Data,
   } = useContext(MainContext) as MainContextType;
 
   const clickCoordinates = (event: google.maps.MapMouseEvent) => {
@@ -133,8 +134,7 @@ const Main: FC = () => {
       } else {
         return "No results found";
       }
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   const [trigFilter, setTrigFilter] = useState<boolean>(false);
@@ -165,7 +165,10 @@ const Main: FC = () => {
   graphqlRequestClient.setHeader("authorization", `bearer ${getToken()}`); //sets the authorization header
   // send queries for all reports to the gql endpoint
 
-  const { isLoading, refetch: refetchAllReport } = useGetAllReportsQuery<GetAllReportsQuery, Error>(
+  const { isLoading, refetch: refetchAllReport } = useGetAllReportsQuery<
+    GetAllReportsQuery,
+    Error
+  >(
     graphqlRequestClient,
     {},
     {
@@ -176,9 +179,10 @@ const Main: FC = () => {
     }
   );
 
-  const {
-    refetch: refetchReportsByType,
-  } = useGetAllReportsByTypeQuery<GetAllReportsByTypeQuery, Error>(
+  const { refetch: refetchReportsByType } = useGetAllReportsByTypeQuery<
+    GetAllReportsByTypeQuery,
+    Error
+  >(
     graphqlRequestClient,
     {
       reportType: filterType,
@@ -192,9 +196,10 @@ const Main: FC = () => {
     }
   );
 
-  const {
-    refetch: refetchReportsWithDate,
-  } = useGetAllReportsWithDateQuery<GetAllReportsWithDateQuery, Error>(
+  const { refetch: refetchReportsWithDate } = useGetAllReportsWithDateQuery<
+    GetAllReportsWithDateQuery,
+    Error
+  >(
     graphqlRequestClient,
     {
       reportType: filterType,
@@ -209,9 +214,10 @@ const Main: FC = () => {
     }
   );
 
-  const {
-    refetch: refetchReportsWithDateCP,
-  } = useGetAllReportsWithDateCpQuery<GetAllReportsWithDateCpQuery, Error>(
+  const { refetch: refetchReportsWithDateCP } = useGetAllReportsWithDateCpQuery<
+    GetAllReportsWithDateCpQuery,
+    Error
+  >(
     graphqlRequestClient,
     {
       reportType: filterType,
@@ -234,10 +240,9 @@ const Main: FC = () => {
         } else {
           refetchReportsByType();
         }
-      }
-      else {
+      } else {
         if (filterDate) {
-          refetchReportsWithDateCP()
+          refetchReportsWithDateCP();
         } else {
           refetchReportsByType();
         }

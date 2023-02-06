@@ -28,37 +28,26 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import "./style.css";
 
 const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
-  const { coordinates, addresses } = useContext(MainContext) as MainContextType;
+  const {
+    coordinates,
+    addresses,
+    genAdd,
+    setGenAdd,
+    startDate,
+    setStartDate,
+    endDate,
+    setEndDate,
+    form2Data,
+    setForm2Data,
+  } = useContext(MainContext) as MainContextType;
 
   //Form 2 conditional rendering and Progress Steps
   const [page, setPage] = useState(false);
-
-  const [genAdd, setGenAdd] = useState<string>("");
-
-  //Calendar
-  const [startDate, setStartDate] = useState<Date>(new Date());
-  const [endDate, setEndDate] = useState<Date>(new Date());
 
   //Toastify Message!
   const Success = () => toast.success("Successfully Created!");
   const Errors = () =>
     toast.error("Report not created. Please complete all fields!");
-
-  //Todo state of origin and destination Form2Data.
-  const [form2Data, setForm2Data] = useState<IForm2Data>({
-    location: {
-      origin: { lat: 0, lng: 0 },
-      destination: { lat: 0, lng: 0 },
-    },
-    projectName: "",
-    startDate: startDate,
-    endDate: endDate,
-    description: "",
-    contractor: "",
-    sourceFund: "",
-    programAmount: "",
-    contractAmount: "",
-  });
 
   //Todo state of origin and destination DefaultFromData.
   const [defaultFormData, setDefaultFormData] = useState<IDefaultFormData>({
@@ -238,7 +227,6 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
 
       {!FormType ? (
         <DefaultForm
-          setGenAdd={setGenAdd}
           GetFormData={getDefaultFormData}
           HandleStartDate={handleStartDate}
           HandleEndDate={handleEndDate}
@@ -256,7 +244,6 @@ const Form: FC<IForm> = ({ PopUp, FormType, Title, TypeOfReport }) => {
         />
       ) : (
         <Form2
-          setGenAdd={setGenAdd}
           GetFormData={getForm2Data}
           HandleStartDate={handleStartDate}
           HandleEndDate={handleEndDate}

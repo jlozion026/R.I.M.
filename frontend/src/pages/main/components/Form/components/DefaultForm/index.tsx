@@ -34,15 +34,13 @@ const DefaultForm: FC<IDefaultForm> = ({
   Submit,
   CalendarStart,
   CalendarEnd,
-  setGenAdd,
   StartDate,
   EndDate,
   ClickCalendar,
   Disabled,
 }) => {
-  const { coordinates, addresses, resetMarkers } = useContext(
-    MainContext
-  ) as MainContextType;
+  const { coordinates, addresses, resetMarkers, genAdd, setGenAdd } =
+    useContext(MainContext) as MainContextType;
 
   const ref = useOnclickOutside(() => {
     ClickCalendar();
@@ -54,7 +52,7 @@ const DefaultForm: FC<IDefaultForm> = ({
         <div className="location-container">
           <Search
             Name={"location"}
-            PlaceHolder={"Search Location"}
+            PlaceHolder={genAdd}
             Label={"Location"}
             SetGenAdd={setGenAdd}
           />

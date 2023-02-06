@@ -7,5 +7,5 @@ export interface ISearch {
   Name: string;
   Label: string;
   PlaceHolder: string;
-  SetGenAdd(arg0: string): void
+  SetGenAdd(arg0: string): void;
 }
