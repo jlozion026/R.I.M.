@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 
 import { BtnFilterprops } from "./utils";
+import Button from "@/components/Button";
 
 import { IFilter } from "./models";
 
@@ -25,6 +26,7 @@ const Filter: FC<IFilter> = ({ setFilterType, setFilterDate, filterDate }) => {
     if (calendarOpen) {
       setCalendarOpen(false);
     }
+    console.log("Click!");
   };
 
   const handleFDate = (date: Date) => {
@@ -43,18 +45,29 @@ const Filter: FC<IFilter> = ({ setFilterType, setFilterDate, filterDate }) => {
         <div className="btn-filter">
           {BtnFilterprops.map((val, key) => {
             return (
-              <div
-                className="icon-container"
-                onClick={() => {
-                  setFilterType(val.reporttype);
-                }}
-                key={key}
+              <div className="icon-container" key={key}
               >
-                <img src={val.svg} alt="icon" className="btn-filter-img" />
+                <Button
+                      type={val.type}
+                      svg={val.svg}
+                      children={val.children}
+                      buttonStyle={val.buttonStyle}
+                      buttonSize={val.buttonSize}
+                      svgBackGround={val.svgBackGround}
+                      onClick={() => setFilterType(val.reporttype) }
+                    ></Button>
               </div>
             );
           })}
-        </div>
+        </div> <div className="btn-filter2">
+        <Button
+         buttonStyle={"filter-style2"}
+         buttonSize={"btn--small"}
+            >
+              Active and Incoming
+            </Button>
+       
+          </div>
         <div className="calendarflt-container">
           <div className="fdate">
             <div className="filter-calendar" onClick={openCalendarFilter}>
@@ -67,6 +80,7 @@ const Filter: FC<IFilter> = ({ setFilterType, setFilterDate, filterDate }) => {
                 onClick={() => setCalendarOpen(true)}
               />
             </div>
+
             {calendarOpen ? (
               <div ref={ref}>
                 <Calendar

@@ -129,6 +129,27 @@ button {
   color: var(--white);
   border: none;
 }
+.filter-style {
+  background-color: var(--none);
+  color: var(--none);
+  border: none;
+}
+.filter-style:hover{
+  background-color: var(--superBlue);
+}
+.filter-style:active{
+  opacity: 0.6;
+}
+.filter-style:focus{
+  background-color: var(--superBlue);
+}
+.filter-style2{
+  background-color: var(--superBlue);
+  font-size: 2vw;
+  color: white;
+  border: snow;
+}
+
 
 /* Button Sizes */
 

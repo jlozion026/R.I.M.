@@ -11,3 +11,6 @@ export interface IFilter {
   setFilterDate(date: string): void;
   filterDate: string | undefined;
 }
+export interface IFilter2{
+  children:string;
+}

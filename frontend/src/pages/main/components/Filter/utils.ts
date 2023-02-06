@@ -5,40 +5,84 @@ import Accident from "@/Assets/svg/Accident.svg";
 import Event from "@/Assets/svg/Event.svg";
 import Cityproject from "@/Assets/svg/Cityproject.svg";
 import { ReportType } from "@/generated/graphql";
+import { btnType } from "@/components/Button/models";
+
 
 export const BtnFilterprops = [
 
     {
-        type: "button",
         svg: RoadClosure,
-        reporttype:ReportType.RoadClosure
+        reporttype:ReportType.RoadClosure,
+        id: "",
+        type: btnType.Button,
+        svgBackGround: "",
+        children: "",
+        buttonStyle: "filter-style",
+        buttonSize: "btn--filter",
+        onclick: () => {},
+
     },
     {
-        type: "button",
+   
         svg: Construction,
-        reporttype:ReportType. RoadConstruction
+        reporttype:ReportType. RoadConstruction,
+        id: "",
+        type: btnType.Button,
+        svgBackGround: "",
+        children: "",
+        buttonStyle: "filter-style",
+        buttonSize: "btn--filter",
+        onclick: () => {},
     },
     {
-        type: "button",
+      
         svg: Hazzard,
-        reporttype:ReportType. RoadHazard
+        reporttype:ReportType. RoadHazard,
+        id: "",
+        type: btnType.Button,
+        svgBackGround: "",
+        children: "",
+        buttonStyle: "filter-style",
+        buttonSize: "btn--filter",
+        onclick: () => {},
     },
     {
-        type: "button",
+    
         svg: Accident,
-        reporttype:ReportType. RoadAccident
+        reporttype:ReportType. RoadAccident,
+        id: "",
+        type: btnType.Button,
+        svgBackGround: "",
+        children: "",
+        buttonStyle:"filter-style",
+        buttonSize: "btn--filter",
+        onclick: () => {},
    
     },
     {
-        type: "button",
+     
         svg: Event,
-        reporttype:ReportType. RoadEvent
+        reporttype:ReportType. RoadEvent,
+        id: "",
+        type: btnType.Button,
+        svgBackGround: "",
+        children: "",
+        buttonStyle: "filter-style",
+        buttonSize: "btn--filter",
+        onclick: () => {},
        
     },
     {
-        type: "button",
+
         svg: Cityproject,
-        reporttype:ReportType. CityProject
+        reporttype:ReportType. CityProject,
+        id: "",
+        type: btnType.Button,
+        svgBackGround: "",
+        children: "",
+        buttonStyle: "filter-style",
+        buttonSize: "btn--filter",
+        onclick: () => {},
        
     }
 ]
