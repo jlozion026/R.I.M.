@@ -7,11 +7,14 @@ import {
   useRef,
 } from "react";
 
+import qcIcon from '@/Assets/svg/qcIcon.png';
+
 import {
   GoogleMap,
   useLoadScript,
   InfoWindow,
   Polygon,
+  Marker,
 } from "@react-google-maps/api";
 
 import {
@@ -53,6 +56,7 @@ import format from "date-fns/format";
 import { useNavigate } from "react-router-dom";
 
 import "./style.css";
+import { MarkerOptions } from "@/models";
 
 const Public: FC = () => {
   const { auth } = useContext(AuthContext) as AuthContextType;
@@ -161,6 +165,12 @@ const Public: FC = () => {
     mapRefPublic.current = map;
   };
 
+  const qcMarker: MarkerOptions = {
+    icon: {
+      url: qcIcon,
+    },
+  };
+
   if (loadError) return <div>"Error Loading Maps"</div>;
   if (!isLoaded)
     return (
@@ -179,6 +189,11 @@ const Public: FC = () => {
         onLoad={onMapLoad}
         onUnmount={onUnMount}
       >
+        <Marker
+          position={defaultCenter}
+          title={"Quezon City Hall"}
+          options={qcMarker}
+        />
         {zoom! <= 14 ?
           <Polygon
             onLoad={polyOnLoad}
