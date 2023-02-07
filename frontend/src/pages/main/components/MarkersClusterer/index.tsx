@@ -1,6 +1,6 @@
 import { FC, useMemo, useState } from "react";
 
-import { DirectionsResult, LatLngLiteral } from "@/models";
+import {fetchDirections} from "../../utils";
 
 import { MarkerClusterer, Marker, DirectionsRenderer } from "@react-google-maps/api";
 
@@ -10,12 +10,15 @@ import { IMakersClusterer, IClickedMark } from "./models";
 
 
 
+
 const MarkersClusterer: FC<IMakersClusterer> = ({
   ReportsData,
   SelectMarker,
+  setDirections,
+  directions
 }) => {
 
-  const [directions, setDirections] = useState<DirectionsResult>();
+  //const [directions, setDirections] = useState<DirectionsResult|undefined>();
   const [selectMarker, setSelectMarker] = useState<IClickedMark>({
     Destination: {
       lat: 0,
@@ -39,29 +42,29 @@ const MarkersClusterer: FC<IMakersClusterer> = ({
       end: report.city_project.date_ended,
     })
   }
-
-  const fetchDirections = (
-    origin: LatLngLiteral,
-    destination: LatLngLiteral,
-  ) => {
-    if (!origin && !destination) return;
-    const service = new google.maps.DirectionsService();
-    service.route(
-      {
-        origin: origin,
-        destination: destination,
-        travelMode: google.maps.TravelMode.DRIVING,
-      },
-      (result, status) => {
-        if (status === "OK" && result) {
-          setDirections(result);
-        }
-      }
-    );
-  };
+//
+//  const fetchDirections = (
+//    origin: LatLngLiteral,
+//    destination: LatLngLiteral,
+//  ) => {
+//    if (!origin && !destination) return;
+//    const service = new google.maps.DirectionsService();
+//    service.route(
+//      {
+//        origin: origin,
+//        destination: destination,
+//        travelMode: google.maps.TravelMode.DRIVING,
+//      },
+//      (result, status) => {
+//        if (status === "OK" && result) {
+//          setDirections(result);
+//        }
+//      }
+//    );
+//  };
 
   useMemo(() => {
-    fetchDirections(selectMarker.Origin, selectMarker.Destination)
+    fetchDirections(selectMarker.Origin, selectMarker.Destination, setDirections)
   },
     [selectMarker.Origin, selectMarker.Destination]
   )

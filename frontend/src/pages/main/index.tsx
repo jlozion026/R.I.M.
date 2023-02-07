@@ -1,4 +1,5 @@
 import { FC, memo, useCallback, useEffect, useState, useContext } from "react";
+import qcIcon from '@/Assets/svg/qcIcon.png';
 
 import {
   GoogleMap,
@@ -6,6 +7,7 @@ import {
   Marker,
   InfoWindow,
   Polygon,
+  DirectionsRenderer,
 } from "@react-google-maps/api";
 
 import {
@@ -16,6 +18,7 @@ import {
 
 import {
   panToQC,
+  fetchDirections
 } from "./utils";
 
 import {
@@ -58,13 +61,17 @@ import { getPinIcon } from "@/lib/getIcon";
 
 import "./style.css";
 import { format } from "date-fns";
-import { getActiveElement } from "@testing-library/user-event/dist/utils";
+import { DirectionsResult, MarkerOptions } from "@/models";
+
+import { toast } from "react-toastify";
+
 
 const Main: FC = () => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
+
 
   const [trigger, setTrigger] = useState<boolean>(false);
   const [modArr, setModArr] = useState<IModArr>();
@@ -76,6 +83,7 @@ const Main: FC = () => {
   };
 
   const [searchString, setSearchString] = useState<string>("");
+  const [directions, setDirections] = useState<DirectionsResult | undefined>();
 
   const {
     coordinates,
@@ -90,28 +98,39 @@ const Main: FC = () => {
     resetForm2Data,
   } = useContext(MainContext) as MainContextType;
 
-  const clickCoordinates = (event: google.maps.MapMouseEvent) => {
+
+  useEffect(() => {
+    if (isLoaded) {
+      fetchDirections(coordinates.origin, coordinates.destination, setDirections);
+    }
+  }, [coordinates.destination])
+
+  const clickCoordinates = async (event: google.maps.MapMouseEvent) => {
     if (trigger) {
       if (event.latLng) {
         const pin: LatLngLiteral = {
           lat: event.latLng.lat() as number,
           lng: event.latLng.lng() as number,
         };
-        if (markerCount === 0) {
-          setCoordinates({
-            ...coordinates,
-            origin: pin,
-          });
 
-          setMarkerCount(1);
-        } else if (markerCount === 1) {
-          setCoordinates({
-            ...coordinates,
-            destination: pin,
-          });
-          setMarkerCount(0);
+        if (await getAddresses(pin)) {
+          if (markerCount === 0) {
+            setCoordinates({
+              ...coordinates,
+              origin: pin,
+            });
+
+            setMarkerCount(1);
+          } else if (markerCount === 1) {
+            setCoordinates({
+              ...coordinates,
+              destination: pin,
+            });
+            setMarkerCount(0);
+          }
+        } else {
+          toast.error("Invalid pin! Please pin only inside Quezon City boundaries");
         }
-        getAddresses(pin);
       }
     } else {
       setTrigger(false);
@@ -123,6 +142,9 @@ const Main: FC = () => {
 
     try {
       const address = await geocoder.geocode({ location: position });
+      const formattd_addr = address.results[0].formatted_address;
+      if (!formattd_addr.includes("Quezon City")) return false;
+
       if (address.results && address.results[0]) {
         if (markerCount === 0) {
           setAddresses({
@@ -136,8 +158,11 @@ const Main: FC = () => {
           });
         }
       } else {
-        return "No results found";
+        return false;
       }
+      return true;
+
+
     } catch (error) { }
   };
 
@@ -194,7 +219,7 @@ const Main: FC = () => {
       currDate: dateNow,
     },
     {
-      enabled:false,
+      enabled: false,
       onSuccess: async (data: GetAllReportsByTypeQuery) => {
         setModArr(data);
       },
@@ -299,6 +324,12 @@ const Main: FC = () => {
     mapRef.current = map;
   };
 
+  const qcMarker: MarkerOptions = {
+    icon: {
+      url: qcIcon,
+    },
+  };
+
   if (loadError) return <div>"Error Loading Maps"</div>;
   if (!isLoaded)
     return (
@@ -319,6 +350,11 @@ const Main: FC = () => {
           onUnmount={onUnMount}
           onClick={clickCoordinates}
         >
+          <Marker
+            position={defaultCenter}
+            title={"Quezon City Hall"}
+            options={qcMarker}
+          />
           {coordinates.origin ? (
             <Marker
               position={coordinates.origin}
@@ -345,11 +381,19 @@ const Main: FC = () => {
             null
           }
 
+          <DirectionsRenderer
+            directions={directions}
+            options={{
+              suppressMarkers: true,
+            }}
+          />
 
           {isLoaded && !isLoading ? (
             <MarkersClusterer
               ReportsData={modArr}
               SelectMarker={setSelectedMarker}
+              directions={directions}
+              setDirections={setDirections}
             />
           ) : null}
 

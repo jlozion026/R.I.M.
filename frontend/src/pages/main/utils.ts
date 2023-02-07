@@ -1,3 +1,5 @@
+import { LatLngLiteral } from "@/models";
+
 export const defaultOptions = {
   strokeOpacity: 0.5,
   strokeWeight: 1,
@@ -30,6 +32,26 @@ export const farOptions = {
   fillColor: "#FF5252",
 };
 
+export const fetchDirections = (
+  origin: LatLngLiteral,
+  destination: LatLngLiteral,
+  setDirections:(result: google.maps.DirectionsResult) => void
+) => {
+  if (!origin && !destination) return;
+  const service = new google.maps.DirectionsService();
+  service.route(
+    {
+      origin: origin,
+      destination: destination,
+      travelMode: google.maps.TravelMode.DRIVING,
+    },
+    (result, status) => {
+      if (status === "OK" && result) {
+        setDirections(result);
+      }
+    }
+  );
+};
 //recenter the Map when we clicked the Target Sign in the Map
 export const panToQC = (
   mapRef: React.MutableRefObject<google.maps.Map | null>,
