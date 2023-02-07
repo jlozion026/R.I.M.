@@ -1,0 +1,15 @@
+query GetActiveCityProject($currDate: DateTime!){
+  aggregateReport(
+    where: {
+      AND: [
+        { report_type: { equals:  CityProject} }
+        { city_project: { is: { date_started: {lte: $currDate} } } }
+        { city_project: { is: { date_ended: {gte: $currDate} } } }
+      ]
+    }
+  ) {
+    _count {
+      report_type
+    }
+  }
+}

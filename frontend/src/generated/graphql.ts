@@ -954,12 +954,33 @@ export type GetAllSearchResultQueryVariables = Exact<{
 
 export type GetAllSearchResultQuery = { __typename?: 'Query', reports: Array<{ __typename?: 'Report', report_id: string, report_type: ReportType, description: string, location: any }> };
 
+export type GetActiveCityProjectQueryVariables = Exact<{
+  currDate: Scalars['DateTime'];
+}>;
+
+
+export type GetActiveCityProjectQuery = { __typename?: 'Query', aggregateReport: { __typename?: 'AggregateReport', _count?: { __typename?: 'ReportCountAggregate', report_type: number } | null } };
+
 export type GetCountOfIncidentQueryVariables = Exact<{
   reportType?: InputMaybe<ReportType>;
 }>;
 
 
 export type GetCountOfIncidentQuery = { __typename?: 'Query', aggregateReport: { __typename?: 'AggregateReport', _count?: { __typename?: 'ReportCountAggregate', report_type: number } | null } };
+
+export type GetCurrentAccidentQueryVariables = Exact<{
+  currDate: Scalars['DateTime'];
+}>;
+
+
+export type GetCurrentAccidentQuery = { __typename?: 'Query', aggregateReport: { __typename?: 'AggregateReport', _count?: { __typename?: 'ReportCountAggregate', report_type: number } | null } };
+
+export type GetCurrentClosedroadsQueryVariables = Exact<{
+  currDate: Scalars['DateTime'];
+}>;
+
+
+export type GetCurrentClosedroadsQuery = { __typename?: 'Query', aggregateReport: { __typename?: 'AggregateReport', _count?: { __typename?: 'ReportCountAggregate', report_type: number } | null } };
 
 export type DeleteOneReportMutationVariables = Exact<{
   report_id?: InputMaybe<Scalars['String']>;
@@ -1132,6 +1153,31 @@ export const useGetAllSearchResultQuery = <
       fetcher<GetAllSearchResultQuery, GetAllSearchResultQueryVariables>(client, GetAllSearchResultDocument, variables, headers),
       options
     );
+export const GetActiveCityProjectDocument = `
+    query GetActiveCityProject($currDate: DateTime!) {
+  aggregateReport(
+    where: {AND: [{report_type: {equals: CityProject}}, {city_project: {is: {date_started: {lte: $currDate}}}}, {city_project: {is: {date_ended: {gte: $currDate}}}}]}
+  ) {
+    _count {
+      report_type
+    }
+  }
+}
+    `;
+export const useGetActiveCityProjectQuery = <
+      TData = GetActiveCityProjectQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetActiveCityProjectQueryVariables,
+      options?: UseQueryOptions<GetActiveCityProjectQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetActiveCityProjectQuery, TError, TData>(
+      ['GetActiveCityProject', variables],
+      fetcher<GetActiveCityProjectQuery, GetActiveCityProjectQueryVariables>(client, GetActiveCityProjectDocument, variables, headers),
+      options
+    );
 export const GetCountOfIncidentDocument = `
     query GetCountOfIncident($reportType: ReportType) {
   aggregateReport(where: {report_type: {equals: $reportType}}) {
@@ -1153,6 +1199,56 @@ export const useGetCountOfIncidentQuery = <
     useQuery<GetCountOfIncidentQuery, TError, TData>(
       variables === undefined ? ['GetCountOfIncident'] : ['GetCountOfIncident', variables],
       fetcher<GetCountOfIncidentQuery, GetCountOfIncidentQueryVariables>(client, GetCountOfIncidentDocument, variables, headers),
+      options
+    );
+export const GetCurrentAccidentDocument = `
+    query GetCurrentAccident($currDate: DateTime!) {
+  aggregateReport(
+    where: {AND: [{report_type: {equals: RoadAccident}}, {incident: {is: {date_started: {lte: $currDate}}}}, {incident: {is: {date_ended: {gte: $currDate}}}}]}
+  ) {
+    _count {
+      report_type
+    }
+  }
+}
+    `;
+export const useGetCurrentAccidentQuery = <
+      TData = GetCurrentAccidentQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetCurrentAccidentQueryVariables,
+      options?: UseQueryOptions<GetCurrentAccidentQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetCurrentAccidentQuery, TError, TData>(
+      ['GetCurrentAccident', variables],
+      fetcher<GetCurrentAccidentQuery, GetCurrentAccidentQueryVariables>(client, GetCurrentAccidentDocument, variables, headers),
+      options
+    );
+export const GetCurrentClosedroadsDocument = `
+    query GetCurrentClosedroads($currDate: DateTime!) {
+  aggregateReport(
+    where: {AND: [{report_type: {equals: RoadClosure}}, {incident: {is: {date_started: {lte: $currDate}}}}, {incident: {is: {date_ended: {gte: $currDate}}}}]}
+  ) {
+    _count {
+      report_type
+    }
+  }
+}
+    `;
+export const useGetCurrentClosedroadsQuery = <
+      TData = GetCurrentClosedroadsQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetCurrentClosedroadsQueryVariables,
+      options?: UseQueryOptions<GetCurrentClosedroadsQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetCurrentClosedroadsQuery, TError, TData>(
+      ['GetCurrentClosedroads', variables],
+      fetcher<GetCurrentClosedroadsQuery, GetCurrentClosedroadsQueryVariables>(client, GetCurrentClosedroadsDocument, variables, headers),
       options
     );
 export const DeleteOneReportDocument = `

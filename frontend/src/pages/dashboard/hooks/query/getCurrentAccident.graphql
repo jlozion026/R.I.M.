@@ -1,0 +1,15 @@
+query GetCurrentAccident($currDate: DateTime!){
+  aggregateReport(
+    where: {
+      AND: [
+        { report_type: { equals:  RoadAccident} }
+        { incident: { is: { date_started: { lte: $currDate} } } }
+        { incident: { is: { date_ended: { gte: $currDate} } } }
+      ]
+    }
+  ) {
+    _count {
+      report_type
+    }
+  }
+}

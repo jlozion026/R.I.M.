@@ -28,12 +28,14 @@ const CustomPieChart: FC = () => {
           fill="#8884d8"
           paddingAngle={5}
           dataKey="value"
+          label
         >
-        <Tooltip/>
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
+
+        <Tooltip/>
       </PieChart>
     </ResponsiveContainer>
   )

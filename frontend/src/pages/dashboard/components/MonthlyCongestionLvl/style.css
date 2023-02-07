@@ -6,6 +6,9 @@
     margin-bottom: 2em;
 
 }
+.medCard{
+  height: 100%;
+}
 .cardFlex{
     display: flex;
     flex-direction: row;

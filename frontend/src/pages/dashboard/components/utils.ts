@@ -55,26 +55,6 @@ export const CardProps = [
     imgColor: "cprojColor",
   },
 ];
-export const SummaryProps = [
-  {
-    cnl: "CONGESTION LEVEL NOW",
-    data: "0%",
-    title: "",
-    ellipseColor: "color1",
-  },
-  {
-    cnl: "TRAFFIC JAMS NOW",
-    data: "0",
-    title: "Total Count",
-    ellipseColor: "color2",
-  },
-  {
-    cnl: "",
-    data: "0",
-    title: "Total Length",
-    ellipseColor: "color3",
-  },
-];
 
 export const MonthlyConProps = [
   {
