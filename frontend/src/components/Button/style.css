@@ -129,27 +129,6 @@ button {
   color: var(--white);
   border: none;
 }
-.filter-style {
-  background-color: var(--none);
-  color: var(--none);
-  border: none;
-}
-.filter-style:hover{
-  background-color: var(--superBlue);
-}
-.filter-style:active{
-  opacity: 0.6;
-}
-.filter-style:focus{
-  background-color: var(--superBlue);
-}
-.filter-style2{
-  background-color: var(--superBlue);
-  font-size: 2vw;
-  color: white;
-  border: snow;
-}
-
 
 /* Button Sizes */
 
@@ -200,6 +179,39 @@ button {
 .btn--logs {
   padding-right: 0.4vw;
 }
+.filter-style {
+  background-color: var(--none);
+  color: var(--none);
+  border: none;
+}
+.filter-style:hover{
+  background-color: var(--superBlue);
+}
+.filter-style:active{
+  opacity: 0.6;
+}
+.filter-style:focus{
+  background-color: var(--superBlue);
+}
+.filter-style2{
+  width: 100%;
+  height: 100%;
+  font-size: 1vw;
+  color: rgb(35, 35, 35);
+}
+.filter-style2:hover{
+  background-color: var(--superBlue);
+  color: white;
+}
+.filter-style2:active{
+  opacity: 0.8;
+}
+.filter-style2:focus{
+  background-color: var(--superBlue);
+  color: white;
+  border-color: #0c85ff;
+}
+
 
 .for-icons {
   margin: 0;
