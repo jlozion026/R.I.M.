@@ -61,7 +61,9 @@ const Filter: FC<IFilter> = ({ setFilterType, setFilterDate, filterDate, fetchAc
               </div>
             );
           })}
-        </div> <div className="btn-filter2">
+        </div> <div className="filter2-fit">
+              
+        <div className="btn-filter2">
           <Button
             type={btnType.Button}
             onClick={() => fetchActiveReports()}
@@ -71,6 +73,8 @@ const Filter: FC<IFilter> = ({ setFilterType, setFilterDate, filterDate, fetchAc
             Active and Incoming
           </Button>
 
+          </div>
+          
         </div>
         <div className="calendarflt-container">
           <div className="fdate">

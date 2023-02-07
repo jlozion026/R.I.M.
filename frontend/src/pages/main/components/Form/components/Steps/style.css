@@ -60,10 +60,10 @@
 .completed.circle::after {
   content: "";
   position: absolute;
-  right: -3.7vw;
+  right: -3.4vw;
   bottom: 0.8vw;
   height: 0.16vw;
-  width: 3.4vw;
+  width: 3.2vw;
   background-color: #205eff;
   transition: all 0.6s ease-out;
 }
@@ -79,8 +79,8 @@
   .uncomplete.circle::after,
   .completed.circle::after  {
     height: 0.8vw;
-    width: 15vw;
-    right: -16.5vw;
+    width: 11vw;
+    right: -12vw;
     bottom: 3vw;
   }
 

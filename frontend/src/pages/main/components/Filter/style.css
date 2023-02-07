@@ -5,12 +5,17 @@
   top: 6vw;
   left: 1vw;
   width: 23.9vw;
-  height: 14  vw;
+  height: 14vw;
   background-color: white;
   border-radius: 1vw;
   box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
   place-items: center;
   padding: 0.8vw;
+}
+.filter2-fit{
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 .icon-container {
   display: flex;
@@ -20,16 +25,12 @@
   align-items: center;
   border-radius: 0.4vw;
 }
-.icon-container:hover {
-  cursor: pointer;
-  background-color: #608cfa;
-}
-.icon-container:active {
-  opacity: 0.5;
-}
 .filter-img {
   width: 100%;
   height: 100%;
+}
+.btn-filter2 button{
+  border: solid 1px;
 }
 
 .filter-calendar > input {
@@ -82,18 +83,15 @@
   height: 85%;
 }
 .btn-filter2{
-  display: flex;
   width: 60%;
-  height: 60%;
-  border: #205eff;
-
+  height: 70%;
 }
 @media all and (max-width: 960px) {
   .filter-container {
     top: 23vw;
     left: 2.5vw;
     width: 95vw;
-    height: 25vh;
+    height: 28vh;
     border-radius: 3vw;
   }
   .filter-calendar > input {
@@ -111,9 +109,19 @@
     width: 13vw;
     height: 8vh;
   }
+  .btn-filter2{
+    width: 60%;
+    height: 100%;
+  }
+  .btn-filter2 button{
+    border-radius: 2vw;
+    font-size: 4vw;
+    height: 5vh;
+
+  }
   .filter-calendar {
     display: flex;
-    width: 65vw;
+    width: 75vw;
     height: 6vh;
     border: solid 0.7vw;
     border-radius: 2vw;
