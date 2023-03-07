@@ -44,3 +44,24 @@ cd server
 yarn watch
 yarn dev
 ```
+
+## Diagrams
+
+### Entity Realationship Diagram
+![erd](https://github.com/PaoGon/thesis/blob/pao/diagrams/erd.drawio.png)
+
+### Use Case Diagram
+![use_case](https://github.com/PaoGon/thesis/blob/pao/diagrams/use%20case.drawio.png)
+
+### System Design Pattern(MVC)
+![design_pattrn](https://github.com/PaoGon/thesis/blob/pao/diagrams/system_architecture.drawio.png)
+
+### Activity Diagram
+#### Admin Account
+![admin](https://github.com/PaoGon/thesis/blob/pao/diagrams/admin_activity_diagram.drawio.png)
+
+#### Normal Account
+![nomral](https://github.com/PaoGon/thesis/blob/pao/diagrams/normal_acc_activity_diagram.drawio.png)
+
+#### Public Account
+![pub](https://github.com/PaoGon/thesis/blob/pao/diagrams/gen_pub_activity_diagram.drawio.png)
