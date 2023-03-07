@@ -45,6 +45,9 @@ yarn watch
 yarn dev
 ```
 
+## Design
+[Figma link](https://www.figma.com/file/yOwgybj44o1c053tOC8VzC/CHAPTER-III-DESIGN?node-id=181%3A259&t=UThoCDPMjy5OfoGq-0)
+
 ## Diagrams
 
 ### Entity Realationship Diagram
